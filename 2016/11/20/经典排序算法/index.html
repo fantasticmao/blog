@@ -4,7 +4,7 @@
     <!-- Title -->
     
     <title>
-        Controller单元测试 | FantasticMao
+        经典排序算法 | FantasticMao
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://fantasticmao.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Controller单元测试 | FantasticMao">
+    <meta property="og:title" content="经典排序算法 | FantasticMao">
     <meta property="og:description" content="师傅领进门，修行在个人。">
     
      <!--[if lte IE 9]>
@@ -213,7 +213,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#冒泡排序"><span class="post-toc-number">1.</span> <span class="post-toc-text">冒泡排序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择排序"><span class="post-toc-number">2.</span> <span class="post-toc-text">选择排序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#插入排序"><span class="post-toc-number">3.</span> <span class="post-toc-text">插入排序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#希尔排序"><span class="post-toc-number">4.</span> <span class="post-toc-text">希尔排序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#快速排序"><span class="post-toc-number">5.</span> <span class="post-toc-text">快速排序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基数排序"><span class="post-toc-number">6.</span> <span class="post-toc-text">基数排序</span></a></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -231,11 +231,22 @@
                 
 	<!-- Paradox Post Header -->
 	
-		<!-- Custom Thumbnail -->
-		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/2.png)">
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
 	
         <p class="article-headline-p">
-            Controller单元测试
+            经典排序算法
         </p>
     </div>
 
@@ -253,7 +264,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>MaoMao</strong>
-        <span>11月 19, 2016</span>
+        <span>11月 20, 2016</span>
     </div>
     
     <div class="section-spacer"></div>
@@ -273,7 +284,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Java/">Java</a>
+        <a class="post_tag-link" href="/tags/Algorithms/">Algorithms</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Java/">Java</a>
     </ul>
     
     <!-- Share -->
@@ -288,21 +299,21 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Controller单元测试&url=http://fantasticmao.com//2016/11/19/Controller单元测试/index.html&via=MaoMao" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=经典排序算法&url=http://fantasticmao.com//2016/11/20/经典排序算法/index.html&via=MaoMao" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
     </a>
     
     <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://fantasticmao.com//2016/11/19/Controller单元测试/index.html" target="_blank">
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://fantasticmao.com//2016/11/20/经典排序算法/index.html" target="_blank">
         <li class="mdl-menu__item">
             分享到 Google+
         </li>
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Controller单元测试&url=http://fantasticmao.com//2016/11/19/Controller单元测试/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=经典排序算法&url=http://fantasticmao.com//2016/11/20/经典排序算法/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -314,35 +325,16 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<p>近期发现可以使用Mock对Controller层进行测试，相比平时不断地重启Tomcat，简单实用很多。</p>
-<p>先编写一个需被测试的Controller接口类。</p>
-<ol>
-<li>在IDEA中创建maven web项目，并且在pom.xml中加入如下必要依赖。<br> 注意：Spring4与servlet2.5存在不兼容问题，应选择2.5以上版本。<br> <img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/1.png" alt="image"></li>
-<li>编写Controller类。<br> <img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/2.png" alt="image"></li>
-<li>配置web.xml，添加Spring MVC的DispatcherServlet。<br> <img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/3.png" alt="image"></li>
-<li>编写Spring MVC的配置文件，开启相应的注解驱动、静态资源访问和组件扫描功能等。<br> <img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/4.png" alt="image"></li>
-</ol>
-<p>接口编写就到此为止。下面开始使用junit和Mock对这个Controller进行测试，校验其正确性。</p>
-<p>常规<a href="http://baike.baidu.com/link?url=XzAsp4SE4-J0TAhwe6H2aXsUKBPUq0VVJK5gwjJKcWAp2dnM4a7jKqaGMQ8JkgYwHLeoDIyFmetpxXk9UEK7Ka" target="_blank" rel="external">junit单元测试</a>时，可编写该类的单元测试类，并使用<code>@Test</code>注解标注单元测试方法，最终使用Assert断言执行结果，判断方法有没有被正确执行。</p>
-<p>而在Spring框架下，单元测试中往往需要获取IoC容器的bean。虽然可以在<code>@Before</code>注解下，读取Spring配置文件，再获取ApplicationContext，再获取容器中的bean。但这样过于麻烦，较方便的做法是使用整合了junit的Spring Test，步骤如下：</p>
-<ol>
-<li>在单元测试类上标注<code>@RunWith(SpringJUnit4ClassRunner.class)</code>，表示用以Spring提供的SpringJUnit4ClassRunner加载本类，执行单元测试。</li>
-<li>在单元测试类上标注<code>@ContextConfiguration({“…….xml”,”…….xml”})</code>，定义当前单元测试使用的配置文件，可以为多个。</li>
-<li>在类中正常注入IoC容器中的Bean，开始执行测试。</li>
-</ol>
-<p>使用Spring Test进行单元测试方便许多，不过依旧无法对Controller层进行单元测试。因为调度Controller接口的是浏览器请求，Spring Test无法做到模拟浏览器请求。Mock可以模拟浏览器请求，并直接在后端代码中调度Controller，观察Controller的具体响应。</p>
-<p>在Spring Test单元测试基础上使用Mock，模拟http请求，对Controller层编写单元测试。步骤如下：</p>
-<ol>
-<li>添加<code>@WebAppConfiguration</code>注解，表示当前的测试类的测试环境由默认的ApplicationContext转换为WebApplicationContext，也就是web应用的环境测试当前类。</li>
-<li>注入WebApplicationContext对象。构造MockMvc对象时需要Spring容器作为参数。</li>
-<li>执行MockMvc对象的方法，模拟http请求，对Controller进行测试。</li>
-</ol>
-<p>对上述say接口的单元测试类如下。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/5.png" alt="image"></p>
-<p>关于MockMvc对象，可以在源码中看到MockMvc类的描述。MockMvc为Spring MVC提供测试支持，并列举了使用demo。.perform()方法是设置请求的参数，.adnExcept()方法相当于Assert断言……<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/6.png" alt="image"></p>
-<p>如果接口对数据库操作可能产生异常的话，也可以对测试类加上事务控制注解@Transactional，并对测试方法加上事务回滚注解@Rollback。到此即可简单地对Spring MVC编写单元测试类并执行，可以看到执行结果。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/7.png" alt="image"></p>
-<p><img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/8.png" alt="image"></p>
-<p>MockMvc对象提供的测试接口还有很多，例如对Controller类的验证、对Controller类执行方法的验证，在源码中均可看到API，就不一一列举。</p>
-
+		<p>排序算法非常重要而且可能非常耗时，所以它已经成为一个计算机科学中广泛研究的话题。目前人们已经研究出一些非常成熟的方法，如三个简单的排序算法：<strong>冒泡排序</strong>、<strong>选择排序</strong>和<strong>插入排序</strong>，也有更为复杂有效的排序算法：<strong>希尔排序</strong>和<strong>快速排序</strong>等。</p>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>冒泡排序算法效率非常低，时间复杂度为O(N^2)，不过概念上却是非常简单的。遍历<code>a.length-1</code>次数组，每一次遍历都将再遍历<code>a.length-1-i</code>数组，将最大的元素“冒泡”到数组尾部。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 冒泡排序</div><div class="line"> * 1. 比较前后两个元素。</div><div class="line"> * 2. 如果前者元素大于后者，则交换它们位置。</div><div class="line"> * 3. 向后移动一位，重复1-2。</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] bubbleSort(<span class="keyword">int</span>[] A) &#123;</div><div class="line">    <span class="keyword">int</span>[] a = Arrays.copyOf(A, A.length);</div><div class="line">    <span class="keyword">int</span> temp;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; a.length - <span class="number">1</span> - i; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (a[j] &gt; a[j + <span class="number">1</span>]) &#123;</div><div class="line">                temp = a[j];</div><div class="line">                a[j] = a[j + <span class="number">1</span>];</div><div class="line">                a[j + <span class="number">1</span>] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其实循环条件可以更简洁<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = a.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">    	...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>选择排序改进了冒泡排序，将必要的交换次数从O(N^2)减少到O(N)，不过比较的次数依然是O(N^2)。进行选择排序时，遍历<code>a.length-1</code>数组，从中“选择”出最小的元素，并与数组前部未排序部分的首位元素交换。<br>示例：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/1.png" alt="image"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 选择排序</div><div class="line"> * 1. 记录初始下标min=i，遍历i~n元素，查找并记录最小元素下标min。</div><div class="line"> * 2. 若min!=i，则交换最小元素a[min]与初始元素a[i]。</div><div class="line"> * 3. i++，重复1-2步骤。</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] selectSort(<span class="keyword">int</span>[] A) &#123;</div><div class="line">    <span class="keyword">int</span>[] a = Arrays.copyOf(A, A.length);</div><div class="line">    <span class="keyword">int</span> temp;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="keyword">int</span> min = i;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; a.length - <span class="number">1</span>; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (a[min] &gt; a[j + <span class="number">1</span>]) &#123;</div><div class="line">                min = j + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (min != i) &#123;</div><div class="line">            temp = a[i];</div><div class="line">            a[i] = a[min];</div><div class="line">            a[min] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>大多数情况下，插入排序比冒泡排序、插入排序都要快。虽然插入排序时间复杂度依旧是O(N^2)，但在一般情况下，它比冒泡排序快一倍，比选择排序还要快一点。因此插入排序经常被用在比较复杂的排序算法最后，例如快速排序。</p>
+<blockquote>
+<p>插入排序法是类似我们打扑克时候理牌，拿到第一张，放在手里，第二张比较一下，是否大于第一张，大于就放在第一张的后面，这样第三张可能在扫描到第一张的时候就知道自己的位置，或者第二张，以此类推，第n张可能比较第一张牌，然后直接插到第一张前面，也可能比较到最后一张，插到最后面。</p>
+</blockquote>
+<p>示例：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/2.png" alt="image"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 插入排序</div><div class="line"> * 把无序区的第一个元素key插入到有序区的合适位置。</div><div class="line"> */</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] insertSort(<span class="keyword">int</span>[] A) &#123;</div><div class="line">    <span class="keyword">int</span>[] a = Arrays.copyOf(A, A.length);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length; i++) &#123;</div><div class="line">        <span class="keyword">int</span> key = a[i];</div><div class="line">        <span class="keyword">int</span> j = i - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; key &lt; a[j]) &#123;</div><div class="line">            a[j + <span class="number">1</span>] = a[j];</div><div class="line">            j--;</div><div class="line">        &#125;</div><div class="line">        a[j + <span class="number">1</span>] = key;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4>
 	
 	
 	
@@ -362,19 +354,19 @@
     
     <!-- Prev Nav -->
     
-        <a href="/2016/11/20/经典排序算法/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2016/11/19/Controller单元测试/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
         </div>
