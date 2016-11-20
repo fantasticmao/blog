@@ -314,7 +314,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Github mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<p>近期发现可以使用Mock对Controller层进行测试，相比平时不断重复地重启Tomcat，简单实用很多。</p>
+		<p>近期发现可以使用Mock对Controller层进行测试，相比平时不断地重启Tomcat，简单实用很多。</p>
 <p>先编写一个需被测试的Controller接口类。</p>
 <ol>
 <li>在IDEA中创建maven web项目，并且在pom.xml中加入如下必要依赖。<br> 注意：Spring4与servlet2.5存在不兼容问题，应选择2.5以上版本。<br> <img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/1.png" alt="image"></li>
@@ -341,7 +341,7 @@
 <p>关于MockMvc对象，可以在源码中看到MockMvc类的描述。MockMvc为Spring MVC提供测试支持，并列举了使用demo。.perform()方法是设置请求的参数，.adnExcept()方法相当于Assert断言……<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/6.png" alt="image"></p>
 <p>如果接口对数据库操作可能产生异常的话，也可以对测试类加上事务控制注解@Transactional，并对测试方法加上事务回滚注解@Rollback。到此即可简单地对Spring MVC编写单元测试类并执行，可以看到执行结果。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/7.png" alt="image"></p>
 <p><img src="http://ogvr8n3tg.bkt.clouddn.com/Controller%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/8.png" alt="image"></p>
-<p>MockMvc对象提供的测试接口还有很多，例如对Controller类的验证、对Controller类执行方法的验证，在源码中均可看到API接口，就不一一列举。</p>
+<p>MockMvc对象提供的测试接口还有很多，例如对Controller类的验证、对Controller类执行方法的验证，在源码中均可看到API，就不一一列举。</p>
 
 	
 	
