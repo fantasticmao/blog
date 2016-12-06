@@ -84,21 +84,21 @@
 
 
 
-<meta name="description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。三个步骤：1. 获取Shadowsocks账号；2. apt-get安装并配置Shadowsocks；3. 配合Chrome浏览器翻墙。">
+<meta name="description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu环境下Shadowsocks配置">
 <meta property="og:url" content="http://fantasticmao.com/2016/12/05/ubuntu环境下shadowsocks配置/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。三个步骤：1. 获取Shadowsocks账号；2. apt-get安装并配置Shadowsocks；3. 配合Chrome浏览器翻墙。">
+<meta property="og:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png">
-<meta property="og:updated_time" content="2016-12-06T16:42:57.266Z">
+<meta property="og:updated_time" content="2016-12-06T18:34:36.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu环境下Shadowsocks配置">
-<meta name="twitter:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。三个步骤：1. 获取Shadowsocks账号；2. apt-get安装并配置Shadowsocks；3. 配合Chrome浏览器翻墙。">
+<meta name="twitter:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。">
 <meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png">
 
 
@@ -306,13 +306,13 @@
       
 
       
-        <p>Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。<br>三个步骤：1. 获取Shadowsocks账号；2. apt-get安装并配置Shadowsocks；3. 配合Chrome浏览器翻墙。<a id="more"></a></p>
+        <p>Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。<a id="more"></a></p>
 <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Shadowsocks（影梭）是一个使用socks5协议的开源代理工具，分为服务端和客户端，访问墙外网络稳定且迅速。原作者<a href="https://github.com/clowwindy" target="_blank" rel="external">clowwindy</a>因在2015年8月受到某政府的要求，无奈停止维护并删除了项目代码。事件<a href="https://web.archive.org/web/20150822042959/https://github.com/shadowsocks/shadowsocks-iOS/issues/124#issuecomment-133630294" target="_blank" rel="external">传送门</a>。现在Shadowsocks由Github上的<a href="https://github.com/shadowsocks" target="_blank" rel="external">shadowsocks组织</a>维护，向无私且伟大的开源奉献者们致敬。</p>
-<h3 id="1-获取Shadowsocks账号"><a href="#1-获取Shadowsocks账号" class="headerlink" title="1. 获取Shadowsocks账号"></a>1. 获取Shadowsocks账号</h3><p>搜关键字“Shadowsocks账号”，搜索引擎会提供很多账号，不过账号的有效性不能保证。如大海捞针一般寻找账号，费心费神，不如自己付费，享受稳定服务（我只是分享……）。本人在 <a href="https://crola.xyz/" target="_blank" rel="external">https://crola.xyz/</a> 站点购买Shadowsocks服务端账号（不多说，免得有做广告嫌疑……）。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png" alt="image"></p>
-<h3 id="2-apt-get安装并配置Shadowsocks"><a href="#2-apt-get安装并配置Shadowsocks" class="headerlink" title="2. apt-get安装并配置Shadowsocks"></a>2. apt-get安装并配置Shadowsocks</h3><p>用傻瓜式命令<code>sudo apt-get install shadowsocks</code>安装Shadowsocks客户端。结束安装之后，编辑Shadowsocks配置文件<code>sudo vim /etc/shadowsocks/config.json</code>。将<strong>server</strong>、<strong>server_port</strong>、<strong>password</strong>匹配成Shadowsocks服务端账号。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png" alt="image"><br>使用命令<code>sslocal -c /etc/shadowsocks/config.json</code>开启Shadowsocks代理。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png" alt="image"></p>
-<h3 id="3-配合Chrome浏览器翻墙"><a href="#3-配合Chrome浏览器翻墙" class="headerlink" title="3. 配合Chrome浏览器翻墙"></a>3. 配合Chrome浏览器翻墙</h3><p>下面使用命令<code>google-chrome --proxy-server=&quot;socks5://127.0.0.1:1080&quot;</code>让Chrome代理本机请求，就可以翻墙了。<br><strong>注意：</strong>该命令应在Chrome未启动时执行，否则失败。若你还在看这篇博客，你应当完全退出Chrome，再执行此命令。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png" alt="image"></p>
+<h3 id="1-获取Shadowsocks账号"><a href="#1-获取Shadowsocks账号" class="headerlink" title="1. 获取Shadowsocks账号"></a>1. 获取Shadowsocks账号</h3><p>搜关键字“Shadowsocks账号”，搜索引擎会提供很多账号，不过账号的有效性不能保证。如大海捞针一般寻找账号，费心费神，不如自己付费，享受稳定服务（我只是分享……）。本人在 <a href="https://crola.xyz/" target="_blank" rel="external">https://crola.xyz/</a> 站点购买Shadowsocks服务端账号（我没有做广告……）。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png" alt="image"></p>
+<h3 id="2-apt-get安装并配置Shadowsocks"><a href="#2-apt-get安装并配置Shadowsocks" class="headerlink" title="2. apt-get安装并配置Shadowsocks"></a>2. apt-get安装并配置Shadowsocks</h3><p>用傻瓜式命令<code>sudo apt-get install shadowsocks</code>安装Shadowsocks客户端。结束安装之后，编辑Shadowsocks配置文件<code>sudo vim /etc/shadowsocks/config.json</code>，将<strong>server</strong>、<strong>server_port</strong>、<strong>password</strong>与Shadowsocks服务端配置相匹配。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png" alt="image"><br>使用命令<code>sslocal -c /etc/shadowsocks/config.json</code>开启Shadowsocks代理。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png" alt="image"></p>
+<h3 id="3-配合Chrome浏览器翻墙"><a href="#3-配合Chrome浏览器翻墙" class="headerlink" title="3. 配合Chrome浏览器翻墙"></a>3. 配合Chrome浏览器翻墙</h3><p>新开一个终端，使用命令<code>google-chrome --proxy-server=&quot;socks5://127.0.0.1:1080&quot;</code>让Chrome代理本机请求，就可以翻墙了。<br><strong>注意：</strong>该命令应在Chrome未启动时执行，否则失败。若你还在看这篇博客，你应当完全退出Chrome，再执行此命令。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png" alt="image"></p>
 <h3 id="附"><a href="#附" class="headerlink" title="#附"></a>#附</h3><ul>
-<li>如果你的Ubuntu还未安装Chrome，那么你可能需要使用Firefox插件代理，或者一个可以获取google-chrome-stable资源，或者一份我附件予你的邮件。</li>
+<li>如果你的Ubuntu还未安装Chrome，那么你可能需要Firefox以替换，或者一个可以获取google-chrome-stable资源，或者一份我附件予你deb包的邮件。</li>
 <li>记录一下自己在安装Chrome时遇到的问题。由依赖关系问题导致安装失败，应当使用<code>sudo apt-get -f install</code>修复。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png" alt="image"></li>
 </ul>
 
