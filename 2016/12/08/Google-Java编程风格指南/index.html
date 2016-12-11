@@ -86,13 +86,13 @@
 
 <meta name="description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Google Java编程规范">
-<meta property="og:url" content="http://fantasticmao.com/2016/12/08/Google-Java编程规范/index.html">
+<meta property="og:title" content="Google Java编程风格指南">
+<meta property="og:url" content="http://fantasticmao.com/2016/12/08/Google-Java编程风格指南/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
-<meta property="og:updated_time" content="2016-12-08T16:12:36.151Z">
+<meta property="og:updated_time" content="2016-12-11T08:53:52.102Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Google Java编程规范">
+<meta name="twitter:title" content="Google Java编程风格指南">
 <meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
 
 
@@ -111,7 +111,7 @@
   };
 </script>
 
-  <title> Google Java编程规范 | FantasticMao </title>
+  <title> Google Java编程风格指南 | FantasticMao </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -241,7 +241,7 @@
             
             
               
-                Google Java编程规范
+                Google Java编程风格指南
               
             
           </h1>
@@ -301,9 +301,49 @@
 
       
         <p>转载并翻译自 <a href="https://google.github.io/styleguide/javaguide.html" target="_blank" rel="external">https://google.github.io/styleguide/javaguide.html</a> 。<a id="more"></a></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href="#简介">简介</a></h2><h3 id="术语说明"><a href="#术语说明" class="headerlink" title="术语说明"></a>术语说明</h3><h3 id="规范说明"><a href="#规范说明" class="headerlink" title="规范说明"></a>规范说明</h3><hr>
-<h2 id="源文件准则"><a href="#源文件准则" class="headerlink" title="源文件准则"></a><a href="#源文件准则">源文件准则</a></h2><h3 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h3><h3 id="文件编码：UTF-8"><a href="#文件编码：UTF-8" class="headerlink" title="文件编码：UTF-8"></a>文件编码：UTF-8</h3><h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><hr>
-<h2 id="源代码结构"><a href="#源代码结构" class="headerlink" title="源代码结构"></a><a href="#源代码结构">源代码结构</a></h2><h3 id="许可或版权信息"><a href="#许可或版权信息" class="headerlink" title="许可或版权信息"></a>许可或版权信息</h3><h3 id="package语句"><a href="#package语句" class="headerlink" title="package语句"></a>package语句</h3><h3 id="import语句"><a href="#import语句" class="headerlink" title="import语句"></a>import语句</h3><h3 id="Class定义"><a href="#Class定义" class="headerlink" title="Class定义"></a>Class定义</h3><hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href="#简介">简介</a></h2><p>本文档是Google Java编程规范的完整定义。一个Java源文件当且仅当遵守本规范时，才可被称为Google风格。</p>
+<p>与其他编程规范类似，本文档讨论的不仅是（代码）对齐的美观问题，同时也包含其他类型约定和编码规范。然而，本文档注重于我们普遍遵循的规则，且对于非强制性要求的规则，我们避免给予建议。</p>
+<h3 id="术语说明"><a href="#术语说明" class="headerlink" title="术语说明"></a>术语说明</h3><p>在本文档中，除非另有说明：</p>
+<ol>
+<li><em>class</em> 可表示一个普通的类、枚举类、接口或注解类型。</li>
+<li><em>member</em> 可表示一个嵌套类、属性、方法或者构造方法，即除初始化和注释，类的所有最顶层内容。</li>
+<li><em>comment</em> 只表示实现的注释。我们不使用<em>documentation comments</em>，而是<em>javadoc</em>。</li>
+</ol>
+<p>其他术语将偶尔出现在整片文档中。</p>
+<h3 id="指南说明"><a href="#指南说明" class="headerlink" title="指南说明"></a>指南说明</h3><p>本文档中的示例代码是不规范的。也就是说，虽然示例代码是属于Google风格，但并不意味着这是实现代码的唯一优雅方式。示例中（代码）的格式化选择不应被强制规定。</p>
+<hr>
+<h2 id="源文件准则"><a href="#源文件准则" class="headerlink" title="源文件准则"></a><a href="#源文件准则">源文件准则</a></h2><h3 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h3><p>源文件名由其最顶层类的区分大小写的类名，加上<code>.java</code>扩展名组成。</p>
+<h3 id="文件编码：UTF-8"><a href="#文件编码：UTF-8" class="headerlink" title="文件编码：UTF-8"></a>文件编码：UTF-8</h3><p>源文件使用<strong>UTF-8</strong>编码。</p>
+<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><ol>
+<li>空格字符<br> 除行终止符，<strong>ASCII水平空格字符（0x20）</strong>是源文件中唯一允许出现的空格字符，这意味着：<ol>
+<li>所有其它字符串和字符文字中的空格字符都要进行转义。</li>
+<li>不允许使用制表符缩进。</li>
+</ol>
+</li>
+<li>特殊转义序列<br> 对于任何含有特殊转义序列（<code>\b</code>、<code>\t</code>、<code>\n</code>、<code>\f</code>、<code>\r</code>、<code>\&quot;</code>、<code>\&#39;</code>、<code>\\</code>）的字符，推荐使用转义序列，而非八进制或者Unicode转义。</li>
+<li><p>非ASCII字符<br> 对剩余的非ASCII字符，取决于<strong>更容易阅读和理解</strong>的方式，选择Unicode字符或等价的Unicode转义。强烈反对在字符串和注释之外使用Unicode转义。</p>
+<blockquote>
+<p>在Unicode转义或使用实际的Unicode字符时，添加注释是非常友好的。</p>
+</blockquote>
+<p> 例如：</p>
+ <table><thead><tr><th>Example</th><th>Discussion</th></tr></thead><tbody><tr><td>String unitAbbrev = “μs”;</td><td>最好：没有注释也十分清晰</td></tr><tr><td>String unitAbbrev = “\u03bcs”; // “μs”</td><td>允许：但没理由这么做</td></tr><tr><td>String unitAbbrev = “\u03bcs”; // Greek letter mu, “s”</td><td>允许：但比较笨拙和易出错</td></tr><tr><td>String unitAbbrev = “\u03bcs”;</td><td>最差：可读性太差</td></tr><tr><td>return ‘\ufeff’ + content; // byte order mark</td><td>一般：对非打印字符使用转义，和必要的注释</td></tr></tbody></table>
+
+<blockquote>
+<p>不要因为一些程序可能不能正确地处理非ASCII字符而使你的代码可读性变差。如果那真的发生了，程序会直接报错，并需要被修复。</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="源文件结构"><a href="#源文件结构" class="headerlink" title="源文件结构"></a><a href="#源文件结构">源文件结构</a></h2><p>一个Java源（代码）文件包含以下几点：</p>
+<ol>
+<li>可选的许可证或版权信息</li>
+<li>package语句</li>
+<li>import语句</li>
+<li>明确的一个最顶层类</li>
+</ol>
+<p>以上部分之间，间隔一个空行</p>
+<h3 id="可选的许可证或版权信息"><a href="#可选的许可证或版权信息" class="headerlink" title="可选的许可证或版权信息"></a>可选的许可证或版权信息</h3><p>如果文件中包含许可证和版权信息，应当至于此处。</p>
+<h3 id="package语句"><a href="#package语句" class="headerlink" title="package语句"></a>package语句</h3><h3 id="import语句"><a href="#import语句" class="headerlink" title="import语句"></a>import语句</h3><h3 id="Class定义"><a href="#Class定义" class="headerlink" title="Class定义"></a>Class定义</h3><hr>
 <h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a><a href="#格式">格式</a></h2><h3 id="大括号"><a href="#大括号" class="headerlink" title="大括号"></a>大括号</h3><h3 id="块缩进：2个空格"><a href="#块缩进：2个空格" class="headerlink" title="块缩进：2个空格"></a>块缩进：2个空格</h3><h3 id="一个语句占一行"><a href="#一个语句占一行" class="headerlink" title="一个语句占一行"></a>一个语句占一行</h3><h3 id="一行字符限制：100"><a href="#一行字符限制：100" class="headerlink" title="一行字符限制：100"></a>一行字符限制：100</h3><h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><h3 id="分组括号：推荐"><a href="#分组括号：推荐" class="headerlink" title="分组括号：推荐"></a>分组括号：推荐</h3><h3 id="特殊结构"><a href="#特殊结构" class="headerlink" title="特殊结构"></a>特殊结构</h3><hr>
 <h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a><a href="#命名">命名</a></h2><h3 id="标识符通用规则"><a href="#标识符通用规则" class="headerlink" title="标识符通用规则"></a>标识符通用规则</h3><h3 id="标识符类型规则"><a href="#标识符类型规则" class="headerlink" title="标识符类型规则"></a>标识符类型规则</h3><h3 id="骆驼峰式命名"><a href="#骆驼峰式命名" class="headerlink" title="骆驼峰式命名"></a>骆驼峰式命名</h3><hr>
 <h2 id="编程实战"><a href="#编程实战" class="headerlink" title="编程实战"></a><a href="#编程实战">编程实战</a></h2><h3 id="Override：尽量使用"><a href="#Override：尽量使用" class="headerlink" title="@Override：尽量使用"></a>@Override：尽量使用</h3><h3 id="exception捕获：不能忽视"><a href="#exception捕获：不能忽视" class="headerlink" title="exception捕获：不能忽视"></a>exception捕获：不能忽视</h3><h3 id="static成员：规范使用"><a href="#static成员：规范使用" class="headerlink" title="static成员：规范使用"></a>static成员：规范使用</h3><h3 id="finalize：禁用"><a href="#finalize：禁用" class="headerlink" title="finalize：禁用"></a>finalize：禁用</h3><hr>
@@ -465,7 +505,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#术语说明"><span class="nav-number">1.1.</span> <span class="nav-text">术语说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范说明"><span class="nav-number">1.2.</span> <span class="nav-text">规范说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源文件准则"><span class="nav-number">2.</span> <span class="nav-text">源文件准则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件名"><span class="nav-number">2.1.</span> <span class="nav-text">文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件编码：UTF-8"><span class="nav-number">2.2.</span> <span class="nav-text">文件编码：UTF-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊字符"><span class="nav-number">2.3.</span> <span class="nav-text">特殊字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码结构"><span class="nav-number">3.</span> <span class="nav-text">源代码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#许可或版权信息"><span class="nav-number">3.1.</span> <span class="nav-text">许可或版权信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package语句"><span class="nav-number">3.2.</span> <span class="nav-text">package语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import语句"><span class="nav-number">3.3.</span> <span class="nav-text">import语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class定义"><span class="nav-number">3.4.</span> <span class="nav-text">Class定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式"><span class="nav-number">4.</span> <span class="nav-text">格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大括号"><span class="nav-number">4.1.</span> <span class="nav-text">大括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块缩进：2个空格"><span class="nav-number">4.2.</span> <span class="nav-text">块缩进：2个空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个语句占一行"><span class="nav-number">4.3.</span> <span class="nav-text">一个语句占一行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一行字符限制：100"><span class="nav-number">4.4.</span> <span class="nav-text">一行字符限制：100</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#换行"><span class="nav-number">4.5.</span> <span class="nav-text">换行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空格"><span class="nav-number">4.6.</span> <span class="nav-text">空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组括号：推荐"><span class="nav-number">4.7.</span> <span class="nav-text">分组括号：推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊结构"><span class="nav-number">4.8.</span> <span class="nav-text">特殊结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名"><span class="nav-number">5.</span> <span class="nav-text">命名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符通用规则"><span class="nav-number">5.1.</span> <span class="nav-text">标识符通用规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符类型规则"><span class="nav-number">5.2.</span> <span class="nav-text">标识符类型规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#骆驼峰式命名"><span class="nav-number">5.3.</span> <span class="nav-text">骆驼峰式命名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程实战"><span class="nav-number">6.</span> <span class="nav-text">编程实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Override：尽量使用"><span class="nav-number">6.1.</span> <span class="nav-text">@Override：尽量使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exception捕获：不能忽视"><span class="nav-number">6.2.</span> <span class="nav-text">exception捕获：不能忽视</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static成员：规范使用"><span class="nav-number">6.3.</span> <span class="nav-text">static成员：规范使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize：禁用"><span class="nav-number">6.4.</span> <span class="nav-text">finalize：禁用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javadoc"><span class="nav-number">7.</span> <span class="nav-text">Javadoc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式-1"><span class="nav-number">7.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摘要片段"><span class="nav-number">7.2.</span> <span class="nav-text">摘要片段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量使用Javadoc"><span class="nav-number">7.3.</span> <span class="nav-text">尽量使用Javadoc</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#术语说明"><span class="nav-number">1.1.</span> <span class="nav-text">术语说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指南说明"><span class="nav-number">1.2.</span> <span class="nav-text">指南说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源文件准则"><span class="nav-number">2.</span> <span class="nav-text">源文件准则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件名"><span class="nav-number">2.1.</span> <span class="nav-text">文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件编码：UTF-8"><span class="nav-number">2.2.</span> <span class="nav-text">文件编码：UTF-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊字符"><span class="nav-number">2.3.</span> <span class="nav-text">特殊字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源文件结构"><span class="nav-number">3.</span> <span class="nav-text">源文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可选的许可证或版权信息"><span class="nav-number">3.1.</span> <span class="nav-text">可选的许可证或版权信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package语句"><span class="nav-number">3.2.</span> <span class="nav-text">package语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import语句"><span class="nav-number">3.3.</span> <span class="nav-text">import语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class定义"><span class="nav-number">3.4.</span> <span class="nav-text">Class定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式"><span class="nav-number">4.</span> <span class="nav-text">格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大括号"><span class="nav-number">4.1.</span> <span class="nav-text">大括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块缩进：2个空格"><span class="nav-number">4.2.</span> <span class="nav-text">块缩进：2个空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个语句占一行"><span class="nav-number">4.3.</span> <span class="nav-text">一个语句占一行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一行字符限制：100"><span class="nav-number">4.4.</span> <span class="nav-text">一行字符限制：100</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#换行"><span class="nav-number">4.5.</span> <span class="nav-text">换行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空格"><span class="nav-number">4.6.</span> <span class="nav-text">空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组括号：推荐"><span class="nav-number">4.7.</span> <span class="nav-text">分组括号：推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊结构"><span class="nav-number">4.8.</span> <span class="nav-text">特殊结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名"><span class="nav-number">5.</span> <span class="nav-text">命名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符通用规则"><span class="nav-number">5.1.</span> <span class="nav-text">标识符通用规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符类型规则"><span class="nav-number">5.2.</span> <span class="nav-text">标识符类型规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#骆驼峰式命名"><span class="nav-number">5.3.</span> <span class="nav-text">骆驼峰式命名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程实战"><span class="nav-number">6.</span> <span class="nav-text">编程实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Override：尽量使用"><span class="nav-number">6.1.</span> <span class="nav-text">@Override：尽量使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exception捕获：不能忽视"><span class="nav-number">6.2.</span> <span class="nav-text">exception捕获：不能忽视</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static成员：规范使用"><span class="nav-number">6.3.</span> <span class="nav-text">static成员：规范使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize：禁用"><span class="nav-number">6.4.</span> <span class="nav-text">finalize：禁用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javadoc"><span class="nav-number">7.</span> <span class="nav-text">Javadoc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式-1"><span class="nav-number">7.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摘要片段"><span class="nav-number">7.2.</span> <span class="nav-text">摘要片段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量使用Javadoc"><span class="nav-number">7.3.</span> <span class="nav-text">尽量使用Javadoc</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
