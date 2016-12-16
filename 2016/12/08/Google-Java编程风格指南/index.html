@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://fantasticmao.com/2016/12/08/Google-Java编程风格指南/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
-<meta property="og:updated_time" content="2016-12-11T15:02:53.724Z">
+<meta property="og:updated_time" content="2016-12-16T13:13:47.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Java编程风格指南">
 <meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
@@ -310,9 +310,9 @@
 <li><em>comment</em> 只表示实现的注释。我们不使用<em>documentation comments</em>，而是<em>javadoc</em>。</li>
 </ol>
 <p>其他术语将偶尔出现在本文档中。</p>
-<h3 id="指南说明"><a href="#指南说明" class="headerlink" title="指南说明"></a>指南说明</h3><p>本文档中的示例代码是不规范的。也就是说，虽然示例代码是属于Google风格，但并不意味着这是实现代码的唯一优雅方式。示例中（代码）的格式化选择不应被强制规定。</p>
+<h3 id="指南说明"><a href="#指南说明" class="headerlink" title="指南说明"></a>指南说明</h3><p>本文档中的示例代码不是完全规范的。也就是说，虽然示例代码是属于Google风格，但并不意味着这是实现代码的唯一优雅方式。示例中（代码）的格式化选择不应被强制规定。</p>
 <hr>
-<h2 id="源文件准则"><a href="#源文件准则" class="headerlink" title="源文件准则"></a><a href="#源文件准则">源文件准则</a></h2><h3 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h3><p>源文件名由其最顶层类的区分大小写的类名，加上<code>.java</code>扩展名组成。</p>
+<h2 id="源文件准则"><a href="#源文件准则" class="headerlink" title="源文件准则"></a><a href="#源文件准则">源文件准则</a></h2><h3 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h3><p>源文件名由其最顶层类的类名，区分大小写，再加上<code>.java</code>扩展名组成。</p>
 <h3 id="文件编码：UTF-8"><a href="#文件编码：UTF-8" class="headerlink" title="文件编码：UTF-8"></a>文件编码：UTF-8</h3><p>源文件使用<strong>UTF-8</strong>编码。</p>
 <h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><ol>
 <li>空格字符<br> 除行终止符，<strong>ASCII水平空格字符（0x20）</strong>是源文件中唯一允许出现的空格字符，这意味着：<ol>
@@ -339,11 +339,25 @@
 <li>许可证或版权信息，可选的</li>
 <li>package语句</li>
 <li>import语句</li>
-<li>明确的一个最顶层类</li>
+<li>明确的一个顶级类</li>
 </ol>
-<p>以上部分之间，间隔一个空行</p>
+<p>以上部分之间，只间隔一个空行</p>
 <h3 id="许可证或版权信息"><a href="#许可证或版权信息" class="headerlink" title="许可证或版权信息"></a>许可证或版权信息</h3><p>如果文件中包含许可证和版权信息，应当至于此处。</p>
-<h3 id="package语句"><a href="#package语句" class="headerlink" title="package语句"></a>package语句</h3><h3 id="import语句"><a href="#import语句" class="headerlink" title="import语句"></a>import语句</h3><h3 id="Class定义"><a href="#Class定义" class="headerlink" title="Class定义"></a>Class定义</h3><hr>
+<h3 id="package语句"><a href="#package语句" class="headerlink" title="package语句"></a>package语句</h3><p>package语句不允许换行。行字符限制（一行限制100字符）不适用于package语句。</p>
+<h3 id="import语句"><a href="#import语句" class="headerlink" title="import语句"></a>import语句</h3><ol>
+<li>不允许通配符<br> 不允许使用静态或其它方式的通配符导入。</li>
+<li>不允许换行<br> import语句不允许换行。且行字符限制（一行限制100字符）不适用于import语句。</li>
+<li>顺序和间隔</li>
+<li>不允许类的静态导入<br> 静态导入不用于静态嵌套类。静态嵌套类以常规方式导入。</li>
+</ol>
+<h3 id="Class定义"><a href="#Class定义" class="headerlink" title="Class定义"></a>Class定义</h3><ol>
+<li>有且仅有一个顶级类的定义</li>
+<li>类内容的顺序<ol>
+<li>使用Overloads</li>
+</ol>
+</li>
+</ol>
+<hr>
 <h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a><a href="#格式">格式</a></h2><h3 id="大括号"><a href="#大括号" class="headerlink" title="大括号"></a>大括号</h3><h3 id="块缩进：2个空格"><a href="#块缩进：2个空格" class="headerlink" title="块缩进：2个空格"></a>块缩进：2个空格</h3><h3 id="一个语句占一行"><a href="#一个语句占一行" class="headerlink" title="一个语句占一行"></a>一个语句占一行</h3><h3 id="一行字符限制：100"><a href="#一行字符限制：100" class="headerlink" title="一行字符限制：100"></a>一行字符限制：100</h3><h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><h3 id="分组括号：推荐"><a href="#分组括号：推荐" class="headerlink" title="分组括号：推荐"></a>分组括号：推荐</h3><h3 id="特殊结构"><a href="#特殊结构" class="headerlink" title="特殊结构"></a>特殊结构</h3><hr>
 <h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a><a href="#命名">命名</a></h2><h3 id="标识符通用规则"><a href="#标识符通用规则" class="headerlink" title="标识符通用规则"></a>标识符通用规则</h3><h3 id="标识符类型规则"><a href="#标识符类型规则" class="headerlink" title="标识符类型规则"></a>标识符类型规则</h3><h3 id="骆驼峰式命名"><a href="#骆驼峰式命名" class="headerlink" title="骆驼峰式命名"></a>骆驼峰式命名</h3><hr>
 <h2 id="编程实战"><a href="#编程实战" class="headerlink" title="编程实战"></a><a href="#编程实战">编程实战</a></h2><h3 id="Override：尽量使用"><a href="#Override：尽量使用" class="headerlink" title="@Override：尽量使用"></a>@Override：尽量使用</h3><h3 id="exception捕获：不能忽视"><a href="#exception捕获：不能忽视" class="headerlink" title="exception捕获：不能忽视"></a>exception捕获：不能忽视</h3><h3 id="static成员：规范使用"><a href="#static成员：规范使用" class="headerlink" title="static成员：规范使用"></a>static成员：规范使用</h3><h3 id="finalize：禁用"><a href="#finalize：禁用" class="headerlink" title="finalize：禁用"></a>finalize：禁用</h3><hr>
