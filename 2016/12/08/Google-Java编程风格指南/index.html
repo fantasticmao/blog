@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
+<meta name="description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Google Java编程风格指南">
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/08/Google-Java编程风格指南/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
-<meta property="og:updated_time" content="2016-12-16T14:30:47.018Z">
+<meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
+<meta property="og:updated_time" content="2016-12-17T17:50:44.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Java编程风格指南">
-<meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。">
+<meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
 
 
 
@@ -300,27 +300,27 @@
       
 
       
-        <p>转载并翻译自 <a href="https://google.github.io/styleguide/javaguide.html" target="_blank" rel="external">https://google.github.io/styleguide/javaguide.html</a> 。<a id="more"></a></p>
+        <p>转载并翻译自 <a href="https://google.github.io/styleguide/javaguide.html" target="_blank" rel="external">https://google.github.io/styleguide/javaguide.html</a> 。<br>个人英语水平有限，应以原文档为标准……<a id="more"></a></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href="#简介">简介</a></h2><p>本文档是Google Java编程规范的完整定义。一个Java源文件当且仅当遵守本规范时，才可被称为Google风格。</p>
-<p>与其他编程规范类似，本文档讨论的不仅是（代码）对齐的美观问题，同时也包含其他类型约定和编码规范。然而，本文档注重于我们普遍遵循的规则，且对于非强制性要求的规则，我们避免给予建议。</p>
+<p>与其他编程规范类似，本文档讨论的不仅是代码对齐的美观问题，同时也包含其他类型约定和编码标准。然而，本文档侧重于我们普遍遵循的准则，也避免建议那些还存在争议的规则。</p>
 <h3 id="术语说明"><a href="#术语说明" class="headerlink" title="术语说明"></a>术语说明</h3><p>在本文档中，除非另有说明：</p>
 <ol>
-<li><em>class</em> 可表示一个普通的类、枚举类、接口或注解类型。</li>
-<li><em>member</em> 可表示一个嵌套类、属性、方法或者构造方法，即除初始化和注释，类的所有最顶层内容。</li>
-<li><em>comment</em> 只表示实现的注释。我们不使用<em>documentation comments</em>，而是<em>javadoc</em>。</li>
+<li><em>class</em>类 可表示一个<em>ordinary class</em>普通的类、<em> enum class</em>枚举类、<em>interface</em>接口或<em>annotation</em>注解类型。</li>
+<li><em>member</em>成 员可表示一个<em>nested class</em>嵌套类、<em>field</em>属性、<em>method</em>方法或<em>constructor</em>者构造方法，即除初始化方法和注释，类的所有最顶层内容。</li>
+<li><em>comment</em>注释 只表示<em>implementation comments</em>实现注释（/* */）。我们不使用<em>documentation comments</em>文档注释，而是<em>javadoc</em>。</li>
 </ol>
-<p>其他术语将偶尔出现在本文档中。</p>
-<h3 id="指南说明"><a href="#指南说明" class="headerlink" title="指南说明"></a>指南说明</h3><p>本文档中的示例代码不是完全规范的。也就是说，虽然示例代码是属于Google风格，但并不意味着这是实现代码的唯一优雅方式。示例中（代码）的格式化选择不应被强制规定。</p>
+<p>其他术语出现在本文档中将另作说明。</p>
+<h3 id="指南说明"><a href="#指南说明" class="headerlink" title="指南说明"></a>指南说明</h3><p>本文档中的示例代不是完全规范的。也就是说，虽然示例代码是属于Google风格，但并不意味着这是实现代码的唯一优雅方式。示例中代码的风格不应被作为执行的准则。</p>
 <hr>
-<h2 id="源文件准则"><a href="#源文件准则" class="headerlink" title="源文件准则"></a><a href="#源文件准则">源文件准则</a></h2><h3 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h3><p>源文件名由其最顶层类的类名，区分大小写，再加上<code>.java</code>扩展名组成。</p>
+<h2 id="源文件准则"><a href="#源文件准则" class="headerlink" title="源文件准则"></a><a href="#源文件准则">源文件准则</a></h2><h3 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h3><p>源文件名由其顶级类的类名，区分大小写，再加上<code>.java</code>扩展名组成。</p>
 <h3 id="文件编码：UTF-8"><a href="#文件编码：UTF-8" class="headerlink" title="文件编码：UTF-8"></a>文件编码：UTF-8</h3><p>源文件使用<strong>UTF-8</strong>编码。</p>
 <h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><ol>
-<li>空格字符<br> 除行终止符，<strong>ASCII水平空格字符（0x20）</strong>是源文件中唯一允许出现的空格字符，这意味着：<ol>
+<li>空格字符<br> 除换行符，<strong>ASCII水平空格字符（0x20）</strong>是源文件中唯一允许出现的空格字符，这意味着：<ol>
 <li>所有其它字符串和字符文字中的空格字符都要进行转义。</li>
 <li>不允许使用制表符缩进。</li>
 </ol>
 </li>
-<li>特殊转义字符<br> 对任何含有特殊转义序列（<code>\b</code>、<code>\t</code>、<code>\n</code>、<code>\f</code>、<code>\r</code>、<code>\&quot;</code>、<code>\&#39;</code>、<code>\\</code>）的字符，推荐使用转义字符，而非八进制或者Unicode转义。</li>
+<li>特殊转义字符<br> 对任何需转义表示（<code>\b</code>、<code>\t</code>、<code>\n</code>、<code>\f</code>、<code>\r</code>、<code>\&quot;</code>、<code>\&#39;</code>、<code>\\</code>）的字符，推荐使用转义字符，而非对应八进制（例如<code>\012</code>）或者Unicode转义（例如<code>\u000a</code>）。</li>
 <li><p>非ASCII字符<br> 对剩余的非ASCII字符，取决于<strong>更容易阅读和理解</strong>的方式，选择Unicode字符或等价的Unicode转义。强烈反对在字符串和注释之外使用Unicode转义。</p>
 <blockquote>
 <p>在Unicode转义或使用实际的Unicode字符时，添加注释是非常友好的。</p>
@@ -329,31 +329,31 @@
  <table><thead><tr><th>Example</th><th>Discussion</th></tr></thead><tbody><tr><td>String unitAbbrev = “μs”;</td><td>最好：没有注释也十分清晰</td></tr><tr><td>String unitAbbrev = “\u03bcs”; // “μs”</td><td>允许：但没理由这么做</td></tr><tr><td>String unitAbbrev = “\u03bcs”; // Greek letter mu, “s”</td><td>允许：但比较笨拙和易出错</td></tr><tr><td>String unitAbbrev = “\u03bcs”;</td><td>最差：可读性太差</td></tr><tr><td>return ‘\ufeff’ + content; // byte order mark</td><td>一般：对非打印字符使用转义，和必要的注释</td></tr></tbody></table>
 
 <blockquote>
-<p>不要因为一些程序可能不能正确地处理非ASCII字符而使你的代码可读性变差。如果那真的发生了，程序会直接报错，并需要被修复。（与你代码的可读性无关）</p>
+<p>不要因为一些程序可能不能正确地处理非ASCII字符，而使你的代码可读性变差。如果那真的发生了，程序会直接报错，并需要被修复。（与你代码的可读性无关）</p>
 </blockquote>
 </li>
 </ol>
 <hr>
 <h2 id="源文件结构"><a href="#源文件结构" class="headerlink" title="源文件结构"></a><a href="#源文件结构">源文件结构</a></h2><p>一个Java源（代码）文件包含以下几点：</p>
 <ol>
-<li>许可证或版权信息，可选的</li>
+<li>License或Copyright，可选的</li>
 <li>package语句</li>
 <li>import语句</li>
-<li>明确的一个顶级类</li>
+<li>class声明，每个源文件仅能有一个顶级类</li>
 </ol>
 <p>以上部分之间，只间隔一个空行</p>
 <h3 id="许可证或版权信息"><a href="#许可证或版权信息" class="headerlink" title="许可证或版权信息"></a>许可证或版权信息</h3><p>如果文件中包含许可证和版权信息，应当至于此处。</p>
-<h3 id="package语句"><a href="#package语句" class="headerlink" title="package语句"></a>package语句</h3><p>package语句不允许换行。行字符限制（一行限制100字符）不适用于package语句。</p>
+<h3 id="package语句"><a href="#package语句" class="headerlink" title="package语句"></a>package语句</h3><p>package语句不允许换行。单行字符限制（一行限制100字符）不适用于package语句。</p>
 <h3 id="import语句"><a href="#import语句" class="headerlink" title="import语句"></a>import语句</h3><ol>
 <li>不允许通配符<br> 不允许使用静态或其它方式的通配符导入。</li>
-<li>不允许换行<br> import语句不允许换行。且行字符限制（一行限制100字符）不适用于import语句。</li>
-<li>顺序和间隔</li>
-<li>不允许类的静态导入<br> 静态导入不用于静态嵌套类。静态嵌套类以常规方式导入。</li>
+<li>不允许换行<br> import语句不允许换行。单行字符限制（一行限制100字符）不适用于import语句。</li>
+<li>顺序和间隔<br> import语句应按如下顺序分组：<br><ol><li>所有静态导入归一组。</li><li>所有非静态导入归一组。</li></ol>如果同时存在静态导入和非静态导入，则应使用空行分隔它们，且在这两组导入语句中，不允许存在其它空行。<br>每组中import语句按ASCII码排序。（<strong>注意</strong>：因<code>.</code>排在<code>;</code>之前，所以这与纯ASCII码排序略有不同）</li>
+<li>不允许类的静态导入<br> 静态嵌套类以其常规方式导入，而不是使用静态导入。</li>
 </ol>
 <h3 id="Class定义"><a href="#Class定义" class="headerlink" title="Class定义"></a>Class定义</h3><ol>
-<li>有且仅有一个顶级类的定义</li>
-<li>类内容的顺序<ol>
-<li>使用Overloads</li>
+<li>有且仅有一个顶级类的声明<br> 每个源文件仅能有一个顶级类</li>
+<li>类内容顺序<br> 类的成员或者初始化方法顺序对代码可读性有着很重要的影响。然而对此却没有一个统一正确的标准。不同的类可能有不同的排序方式。<br> 重要的是，每个类都应遵从维护者可解释清楚的<strong>逻辑顺序</strong>排序。例如，新方法可能不是简单地放置在类的最后，因为如此产生的“按时间顺序添加”不遵从逻辑顺序。<ol>
+<li>方法重载：不应被分离<br>当一个类拥有同名的多个构造器或者方法时，这些构造器或者方法不应被其他代码甚至是私有方法所分隔。</li>
 </ol>
 </li>
 </ol>
