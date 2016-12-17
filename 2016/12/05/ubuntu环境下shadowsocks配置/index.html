@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。">
+<meta name="description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu环境下Shadowsocks配置">
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/05/ubuntu环境下shadowsocks配置/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。">
+<meta property="og:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬。">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/6.png">
-<meta property="og:updated_time" content="2016-12-16T18:36:06.419Z">
+<meta property="og:updated_time" content="2016-12-17T12:34:23.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu环境下Shadowsocks配置">
-<meta name="twitter:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。">
+<meta name="twitter:description" content="Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬。">
 <meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png">
 
 
@@ -307,12 +307,12 @@
       
 
       
-        <p>Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬，也做一份记录。<a id="more"></a></p>
+        <p>Ubuntu环境下的Shadowsocks配置，翻越防火长城。向原作者clowwindy致敬。<a id="more"></a></p>
 <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Shadowsocks（影梭）是一个使用socks5协议的开源代理工具，分为服务端和客户端，访问墙外网络稳定且迅速。原作者<a href="https://github.com/clowwindy" target="_blank" rel="external">clowwindy</a>因在2015年8月受到某政府要求无奈停止维护并删除了项目代码。事件<a href="https://web.archive.org/web/20150822042959/https://github.com/shadowsocks/shadowsocks-iOS/issues/124#issuecomment-133630294" target="_blank" rel="external">传送门</a>。现在Shadowsocks由Github上的<a href="https://github.com/shadowsocks" target="_blank" rel="external">shadowsocks组织</a>维护，向无私且伟大的开源奉献者们致敬。</p>
 <h3 id="1-获取Shadowsocks账号"><a href="#1-获取Shadowsocks账号" class="headerlink" title="1. 获取Shadowsocks账号"></a>1. 获取Shadowsocks账号</h3><p>搜关键字“Shadowsocks账号”，搜索引擎会提供很多账号，不过账号的有效性不能保证。如大海捞针一般寻找账号，费心费神，不如自己付费，享受稳定服务（我只是分享……）。本人在 <a href="https://crola.xyz/" target="_blank" rel="external">https://crola.xyz/</a> 站点购买Shadowsocks服务端账号（我没有做广告……）。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png" alt="image"></p>
 <h3 id="2-安装并配置Shadowsocks"><a href="#2-安装并配置Shadowsocks" class="headerlink" title="2. 安装并配置Shadowsocks"></a>2. 安装并配置Shadowsocks</h3><p>使用<code>sudo apt-get install shadowsocks</code>安装Shadowsocks客户端。结束安装之后，编辑Shadowsocks配置文件<code>sudo vim /etc/shadowsocks/config.json</code>，将<strong>server</strong>、<strong>server_port</strong>、<strong>password</strong>与Shadowsocks服务端配置相匹配。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png" alt="image"><br>使用命令<code>sslocal -c /etc/shadowsocks/config.json</code>开启Shadowsocks代理。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png" alt="image"></p>
-<h3 id="3-使用Chrome浏览器翻墙"><a href="#3-使用Chrome浏览器翻墙" class="headerlink" title="3. 使用Chrome浏览器翻墙"></a>3. 使用Chrome浏览器翻墙</h3><p>新开一个终端，使用命令<code>google-chrome --proxy-server=&quot;socks5://127.0.0.1:1080&quot;</code>让Chrome代理本机请求，实现chrome浏览器翻墙。<br><strong>注意：</strong>该命令应在Chrome未启动时执行，否则失败。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png" alt="image"></p>
-<h3 id="4-配置全局Socks代理翻墙"><a href="#4-配置全局Socks代理翻墙" class="headerlink" title="4. 配置全局Socks代理翻墙"></a>4. 配置全局Socks代理翻墙</h3><p>第3步中只单独实现了Chrome翻墙，局限性很大。在系统设置–&gt;网络–&gt;网络代理中，填写Socks主机127.0.0.1和监听端口1080，并应用到整个系统，即可实现所有应用翻墙。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png" alt="image"></p>
+<h3 id="3-使用Chrome浏览器翻墙"><a href="#3-使用Chrome浏览器翻墙" class="headerlink" title="3. 使用Chrome浏览器翻墙"></a>3. 使用Chrome浏览器翻墙</h3><p>新开一个终端，使用命令<code>google-chrome --proxy-server=&quot;socks5://127.0.0.1:1080&quot;</code>让Chrome代理本机请求，实现Chrome浏览器翻墙。<br><strong>注意：</strong>该命令应在Chrome未启动时执行，否则失败。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png" alt="image"></p>
+<h3 id="4-配置全局Socks代理翻墙"><a href="#4-配置全局Socks代理翻墙" class="headerlink" title="4. 配置全局Socks代理翻墙"></a>4. 配置全局Socks代理翻墙</h3><p>第3步中仅单独实现了Chrome翻墙，局限性很大。在系统设置–&gt;网络–&gt;网络代理中，填写Socks主机127.0.0.1和监听端口1080，并应用到整个系统，即可实现所有应用翻墙。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png" alt="image"></p>
 <h3 id="附"><a href="#附" class="headerlink" title="#附"></a>#附</h3><ul>
 <li>安装Chrome时，若由依赖关系问题导致安装失败，应当使用<code>sudo apt-get -f install</code>修复。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/6.png" alt="image"></li>
 <li>开启全局网络代理之后，退出时应<strong>注意关闭</strong>，否则将无法联网。</li>
