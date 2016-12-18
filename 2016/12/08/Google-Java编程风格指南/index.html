@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/08/Google-Java编程风格指南/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
-<meta property="og:updated_time" content="2016-12-18T15:57:20.040Z">
+<meta property="og:updated_time" content="2016-12-18T17:46:50.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Java编程风格指南">
 <meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
@@ -365,7 +365,7 @@
  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> () -&gt; &#123;</div><div class="line">  <span class="keyword">while</span> (condition()) &#123;</div><div class="line">    method();</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> MyClass() &#123;</div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (condition()) &#123;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">	something();</div><div class="line">      &#125; <span class="keyword">catch</span> (ProblemException e) &#123;</div><div class="line">	recover();</div><div class="line">      &#125;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (otherCondition()) &#123;</div><div class="line">      somethingElse();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      lastThing();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p> 一些特殊情况，将在4.8.1枚举类章节说明。</p>
 </li>
-<li><p>空语句块：可以简洁<br> 一个空语句块或块状结构可以遵从K&amp;R风格。或者，可以在左花括号起始之后，没有任何字符和换行，立即右花括号结束。除非它是<em>multi-block statement</em>多块语句（一个包含多块的语句，如：<code>if/else</code>、<code>try/catch/finally</code>）的一部分，则不允许这样做。<br> 例如：</p>
+<li><p>空语句块：可以简洁<br> 一个空语句块或块状结构可以遵从K&amp;R风格。或者，可以在左花括号起始之后，没有任何字符和换行，立即右花括号结束。除非它是<em>multi-block statement</em>多块语句（一个包含多块的语句，如：<code>if/else</code>、<code>try/catch/finally</code>）的一部分，则、否则不允许这样做。<br> 例如：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// This is acceptable</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">doNothing</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">// This is equally acceptable</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">doNothingElse</span><span class="params">()</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// This is not acceptable: No concise empty blocks in a multi-block statement</span></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  doSomething();</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;&#125;</div></pre></td></tr></table></figure>
 </li>
@@ -378,10 +378,10 @@
 <li>package语句和import语句。（详情请看3.2package语句章节和3.3import语句章节）</li>
 <li>注释中可能直接被复制粘贴执行的shell命令。</li>
 </ul>
-<h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><p>术语说明：可以合法占据一行的代码被拆分成多行，这种行为称作 <em>line-wrapping</em>换行。</p>
+<h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><p>术语说明：将可以合法占据一行的代码被拆分成多行，这种行为称作 <em>line-wrapping</em>换行。</p>
 <p>这儿并没有全面的、明确的规范适用于所有场景下的换行。对于同一行代码，通常有多种有效的方法。</p>
 <blockquote>
-<p>注意：换行的典型原因，是为了避免代码超出了单行字符的限制。即使单行代码可以被修正至符合单行字符限制，也可能会由作者自行决定而换行。</p>
+<p>注意：换行的典型原因，是为了避免代码超出了单行字符的限制。即使一行代码可以被修正至符合单行字符限制，也可能会由作者自行决定而换行。</p>
 <p>小记：不需要换行，额外的方法或者局部变量可能也可以解决问题。</p>
 </blockquote>
 <h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><h3 id="分组括号：推荐"><a href="#分组括号：推荐" class="headerlink" title="分组括号：推荐"></a>分组括号：推荐</h3><h3 id="特殊结构"><a href="#特殊结构" class="headerlink" title="特殊结构"></a>特殊结构</h3><hr>
