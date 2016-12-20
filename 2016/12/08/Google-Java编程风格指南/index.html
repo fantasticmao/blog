@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/08/Google-Java编程风格指南/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
-<meta property="og:updated_time" content="2016-12-20T17:53:34.142Z">
+<meta property="og:updated_time" content="2016-12-20T18:27:08.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Java编程风格指南">
 <meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
@@ -438,46 +438,46 @@
 </blockquote>
 <h4 id="换行缩进至少4个空格"><a href="#换行缩进至少4个空格" class="headerlink" title="换行缩进至少4个空格"></a>换行缩进至少4个空格</h4><p>换行时，第一行之后的每一行至少比第一行多缩进4个空格。</p>
 <p>连续换行时，缩进可能超过4个空格。一般来说，当且仅当两行以同一级别的语法元素开头时，它们才会持有相同水平的缩进。</p>
-<p>4.6.3<a href="#水平对齐">水平对齐</a>章节指出，不鼓励使用可变数目的空格对齐上述说的几行。</p>
-<h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><h4 id="垂直空格"><a href="#垂直空格" class="headerlink" title="垂直空格"></a>垂直空格</h4><p>单个空行出现在：</p>
+<p>4.6.3<a href="#水平对齐">水平对齐</a>章节介绍不鼓励使用可变数目的空格对齐上一行。</p>
+<h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><h4 id="垂直空格"><a href="#垂直空格" class="headerlink" title="垂直空格"></a>垂直空格</h4><p>以下情况需使用单个空行：</p>
 <ol>
-<li>类中连续的成员或初始化中：字段、构造器、方法、嵌套类、静态初始化和实例初始化。<ul>
+<li>类中连续的成员或初始化之间：字段、构造器、方法、嵌套类、静态初始化和实例初始化。<ul>
 <li><strong>特殊情况</strong>:两个连续字段（无其它代码）之间的空行是可选的。比如可以使用空行去创建字段间的 <em>logical groupings</em>逻辑分组</li>
 <li><strong>特殊情况</strong>:枚举常量之间的空行在4.8.1<a href="#枚举类">枚举类</a>章节介绍。</li>
 </ul>
 </li>
-<li>语句之间，作为逻辑上分组代码的需要</li>
-<li>类的第一个成员或者初始化之前，或者最后一个成员或初始化之后。（不鼓励也不反对）</li>
-<li>被本文档其他章节中的所要求（如3<a href="#源文件结构">源文件结构</a>章节和3.3<a href="#import语句">import语句</a>章节）</li>
+<li>逻辑上分组代码的语句之间。</li>
+<li>类中第一个成员或初始化之前，或者最后一个成员或始化之后。（不鼓励也不反对）</li>
+<li>本文档其他章节中所要求的（如3<a href="#源文件结构">源文件结构</a>章节和3.3<a href="#import语句">import语句</a>章节）</li>
 </ol>
 <p>多个连续的空行是允许的，但这是不必要也不鼓励的。</p>
-<h4 id="水平空格"><a href="#水平空格" class="headerlink" title="水平空格"></a>水平空格</h4><p>除了语言、其他规则、语法分隔、注释和Javadoc的需要，单个ASCII空格<strong>仅</strong>出现在如下情况：</p>
+<h4 id="水平空格"><a href="#水平空格" class="headerlink" title="水平空格"></a>水平空格</h4><p>除语言、其它规则要求、语法分隔、注释和Javadoc的需要之外，单个ASCII空格<strong>仅</strong>出现在以下位置：</p>
 <ol>
-<li>分隔保留关键字和它之后的开阔号（<code>(</code>），如<code>if</code>、<code>for</code>、<code>catch</code>。</li>
-<li>分隔保留关键字和它之前的右花括号（<code>}</code>），如<code>else</code>、<code>catch</code>。</li>
-<li>任何左花括号之前（<code>{</code>），除了：<ul>
-<li><code>@SomeAnnotation({a, b})</code>（不使用空格）。</li>
-<li><code>String[][] x = &#123;&#123;&quot;foo&quot;&#125;&#125;;</code>（<code>&#123;&#123;</code>之间没有空格）。</li>
+<li>任何保留关键字和它之后的开阔号<code>(</code>之间，如<code>if</code>、<code>for</code>、<code>catch</code>。</li>
+<li>任何保留关键字和它之前的右花括号<code>}</code>之间，如<code>else</code>、<code>catch</code>。</li>
+<li>任何左花括号（<code>{</code>）之前。除了：<ul>
+<li><code>@SomeAnnotation({a, b})</code>不使用空格</li>
+<li><code>String[][] x = &#123;&#123;&quot;foo&quot;&#125;&#125;;</code><code>&#123;&#123;</code>之间没有空格</li>
 </ul>
 </li>
-<li>二进制或三元操作符两侧。这也适用于以下“类似操作符”的符号：<ul>
+<li>二进制或三元操作符的两侧。这也适用于以下“类似操作符”的符号：<ul>
 <li>类型约束中的&amp;符：<code>&lt;T extends Foo &amp; Bar&gt;</code></li>
 <li>多异常捕获中的|符：<code>catch (FooException | BarException e)</code></li>
-<li>增强<code>for</code>语句版（“foreach”）的<code>:</code></li>
-<li>lambda表达式中的箭头：<code>(String str) -&gt; str.length()</code><br>但不是</li>
-<li>写法类似<code>Object::toString</code>的方法引用中的（<code>::</code>）</li>
-<li>写法类似<code>Object.toString()</code>的点分隔符（<code>.</code>）</li>
+<li>增强版<code>for</code>语句foreach中的<code>:</code></li>
+<li>lambda表达式中的箭头：<code>(String str) -&gt; str.length()</code><br>但不是：</li>
+<li>写法类似<code>Object::toString</code>方法引用中的<code>::</code></li>
+<li>写法类似<code>Object.toString()</code>点分隔符中的<code>.</code></li>
 </ul>
 </li>
-<li><code>,:;</code>或者闭括号（<code>)</code>）之后</li>
-<li>行尾的注释（<code>//</code>）的两侧。此处多个空格也是允许的，但不是必须的</li>
-<li>类型和变量的定义之间：<code>List&lt;String&gt; list</code></li>
-<li>数组初始化时，花括号的两侧。可选的。<ul>
+<li><code>,:;</code>或者闭括号<code>)</code>之后。</li>
+<li>行尾的注释<code>//</code>的两侧。此处多个空格也是允许的，但不是必须的。</li>
+<li>类型和变量的定义之间：<code>List&lt;String&gt; list</code>。</li>
+<li>数组初始化时，花括号的两侧，这是可选的。<ul>
 <li><code>new int[] {5, 6}</code>和<code>new int[] { 5, 6 }</code>都是可行的</li>
 </ul>
 </li>
 </ol>
-<p>此规则不影响一行开始或结束时的空格，只针对行内的空格。</p>
+<p>本规则不影响行开始或结束时的空格，只针对行内的空格。</p>
 <h4 id="水平对齐"><a href="#水平对齐" class="headerlink" title="水平对齐"></a>水平对齐</h4><h3 id="分组括号：推荐"><a href="#分组括号：推荐" class="headerlink" title="分组括号：推荐"></a>分组括号：推荐</h3><h3 id="特殊结构"><a href="#特殊结构" class="headerlink" title="特殊结构"></a>特殊结构</h3><hr>
 <h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a><a href="#命名">命名</a></h2><h3 id="标识符通用规则"><a href="#标识符通用规则" class="headerlink" title="标识符通用规则"></a>标识符通用规则</h3><h3 id="标识符类型规则"><a href="#标识符类型规则" class="headerlink" title="标识符类型规则"></a>标识符类型规则</h3><h3 id="骆驼峰式命名"><a href="#骆驼峰式命名" class="headerlink" title="骆驼峰式命名"></a>骆驼峰式命名</h3><hr>
 <h2 id="编程实战"><a href="#编程实战" class="headerlink" title="编程实战"></a><a href="#编程实战">编程实战</a></h2><h3 id="Override：尽量使用"><a href="#Override：尽量使用" class="headerlink" title="@Override：尽量使用"></a>@Override：尽量使用</h3><h3 id="exception捕获：不能忽视"><a href="#exception捕获：不能忽视" class="headerlink" title="exception捕获：不能忽视"></a>exception捕获：不能忽视</h3><h3 id="static成员：规范使用"><a href="#static成员：规范使用" class="headerlink" title="static成员：规范使用"></a>static成员：规范使用</h3><h3 id="finalize：禁用"><a href="#finalize：禁用" class="headerlink" title="finalize：禁用"></a>finalize：禁用</h3><hr>
