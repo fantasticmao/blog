@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/08/Google-Java编程风格指南/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
-<meta property="og:updated_time" content="2016-12-23T17:34:44.794Z">
+<meta property="og:updated_time" content="2017-01-09T15:02:39.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Java编程风格指南">
 <meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html 。个人英语水平有限，应以原文档为标准……">
@@ -302,14 +302,14 @@
       
         <p>转载并翻译自 <a href="https://google.github.io/styleguide/javaguide.html" target="_blank" rel="external">https://google.github.io/styleguide/javaguide.html</a> 。个人英语水平有限，应以原文档为标准……<a id="more"></a></p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文档是Google Java编程规范的<strong>完整</strong>定义。一个Java源文件当且仅当遵守本规范时，才可被称为Google风格。</p>
-<p>与其他编程规范类似，本文档讨论的不仅是代码对齐的美观问题，同时也包含其他类型约定和编码标准。然而，本文档侧重于我们普遍遵循的准则，也避免建议那些还<strong>存在争议的规则</strong>。</p>
+<p>与其它编程规范类似，本文档讨论的不仅是代码对齐的美观问题，同时也包含其它类型约定和编码标准。然而，本文档侧重于我们普遍遵循的准则，也避免建议那些还<strong>存在争议的规则</strong>。</p>
 <h3 id="术语说明"><a href="#术语说明" class="headerlink" title="术语说明"></a>术语说明</h3><p>在本文档中，除非另有说明：</p>
 <ol>
 <li><em>class</em>类 可表示一个<em>ordinary class</em>普通的类、<em> enum class</em>枚举类、<em>interface</em>接口或<em>annotation</em>注解类型。</li>
 <li><em>member</em>成员 可表示一个<em>nested class</em>嵌套类、<em>field</em>属性、<em>method</em>方法或<em>constructor</em>者构造方法，即除初始化方法和注释，类的所有最顶层内容。</li>
 <li><em>comment</em>注释 只表示<em>implementation comments</em>实现注释（/* */）。我们不使用<em>documentation comments</em>文档注释，而是<em>javadoc</em>。</li>
 </ol>
-<p>其他出现在本文档中的术语将另作说明。</p>
+<p>其它出现在本文档中的术语将另作说明。</p>
 <h3 id="指南说明"><a href="#指南说明" class="headerlink" title="指南说明"></a>指南说明</h3><p>本文档中的示例代不是完全规范的。也就是说，虽然示例代码是属于Google风格，但并不意味着这是实现代码的唯一优雅方式。示例中代码的风格不应被作为执行的准则。</p>
 <hr>
 <h2 id="源文件准则"><a href="#源文件准则" class="headerlink" title="源文件准则"></a>源文件准则</h2><h3 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h3><p>源文件名由其<a href="#有且仅有一个顶级类的声明">唯一的</a>顶级类的类名，区分大小写，再加上<code>.java</code>扩展名组成。</p>
@@ -381,9 +381,9 @@
 <h4 id="不允许类的静态导入"><a href="#不允许类的静态导入" class="headerlink" title="不允许类的静态导入"></a>不允许类的静态导入</h4><p>静态嵌套类以其常规方式导入，而不是使用静态导入。</p>
 <h3 id="Class定义"><a href="#Class定义" class="headerlink" title="Class定义"></a>Class定义</h3><h4 id="有且仅有一个顶级类的声明"><a href="#有且仅有一个顶级类的声明" class="headerlink" title="有且仅有一个顶级类的声明"></a>有且仅有一个顶级类的声明</h4><p>每个源文件仅能有一个顶级类。</p>
 <h4 id="类内容顺序"><a href="#类内容顺序" class="headerlink" title="类内容顺序"></a>类内容顺序</h4><p>类的成员或者初始化方法顺序对代码可读性有着很重要的影响，然而对此却没有一个统一正确的标准。不同的类可能有不同的排序方式。<br>重要的是，每个类都应遵从维护者可解释清楚的<strong>逻辑顺序</strong>排序。例如，新方法可能不是简单地放置在类的最后，因为如此产生的“按时间顺序添加”不遵从逻辑顺序。</p>
-<h5 id="方法重载：不应被分离"><a href="#方法重载：不应被分离" class="headerlink" title="方法重载：不应被分离"></a>方法重载：不应被分离</h5><p>当一个类拥有同名的多个构造器或者方法时，这些构造器或者方法不应被其他代码所分隔，甚至是私有方法。</p>
+<h5 id="方法重载：不应被分离"><a href="#方法重载：不应被分离" class="headerlink" title="方法重载：不应被分离"></a>方法重载：不应被分离</h5><p>当一个类拥有同名的多个构造器或者方法时，这些构造器或者方法不应被其它代码所分隔，甚至是私有方法。</p>
 <hr>
-<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p><strong>术语说明</strong>：<em>block-like construct</em>块状结构 指类的实体、成员或构造器。注意，在后续4.8.3.1<a href="#数组初始化：可以写成块状结构">数组初始化</a>章节中，任何数组的初始化可被认为是一个块状结构。</p>
+<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p><strong>术语说明</strong>：<em>block-like construct</em>块状结构 指类的实体、成员或构造器。注意，在后续4.8.3.1<a href="#数组初始化：可以写成块状结构">数组初始化</a>章节中，所有数组的初始化可被认为是一个块状结构。</p>
 <h3 id="花括号"><a href="#花括号" class="headerlink" title="花括号"></a>花括号</h3><h4 id="花括号在被需要的地方使用"><a href="#花括号在被需要的地方使用" class="headerlink" title="花括号在被需要的地方使用"></a>花括号在被需要的地方使用</h4><p>在<code>if</code>、<code>else</code>、<code>for</code>、<code>do</code>、<code>while</code>语句使用花括号，即使他们的实体是空的或者仅包含一条语句。</p>
 <h4 id="非空语句块：K-amp-R风格"><a href="#非空语句块：K-amp-R风格" class="headerlink" title="非空语句块：K&amp;R风格"></a>非空语句块：K&amp;R风格</h4><p>对于非空语句块和块状结构，花括号遵循Kernighan &amp; Ritchie风格（<a href="http://www.codinghorror.com/blog/2012/07/new-programming-jargon.html" target="_blank" rel="external">Egyptian brackets</a>）：</p>
 <ul>
@@ -448,7 +448,7 @@
 </li>
 <li>逻辑上分组代码的语句之间。</li>
 <li>类中第一个成员或初始化方法之前，或者最后一个成员或始化方法之后。（不鼓励也不反对）</li>
-<li>本文档其他章节中所要求的（如3<a href="#源文件结构">源文件结构</a>章节和3.3<a href="#import语句">import语句</a>章节）</li>
+<li>本文档其它章节中所要求的（如3<a href="#源文件结构">源文件结构</a>章节和3.3<a href="#import语句">import语句</a>章节）</li>
 </ol>
 <p>多个连续的空行是允许的，但这是不必要也不鼓励的。</p>
 <h4 id="水平空格"><a href="#水平空格" class="headerlink" title="水平空格"></a>水平空格</h4><p>除语言、其它规则要求、语法分隔、注释和Javadoc的需要之外，单个ASCII空格<strong>仅</strong>出现在以下位置：</p>
@@ -515,18 +515,84 @@
 <h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><h3 id="标识符通用规则"><a href="#标识符通用规则" class="headerlink" title="标识符通用规则"></a>标识符通用规则</h3><p>标识符只允许使用ASCII字母和数字，且在少数情况中可以使用下划线。因此，每个有效的标识符都可以由正则表达式<code>\w+</code>匹配。</p>
 <p>在Google风格中特殊的前缀和后缀，如<code>name_</code>、<code>mName</code>、<code>s_name</code>、<code>kName</code>是不允许的。</p>
 <h3 id="标识符类型规则"><a href="#标识符类型规则" class="headerlink" title="标识符类型规则"></a>标识符类型规则</h3><h4 id="包名"><a href="#包名" class="headerlink" title="包名"></a>包名</h4><p>包名全小写，连续的单词直接拼接，不使用下划线。例如<code>com.example.deepspace</code>，而不是<code>com.example.deepSpace</code>或<code>com.example.deep_space</code>。</p>
-<h4 id="类名"><a href="#类名" class="headerlink" title="类名"></a>类名</h4><p>类以<a href="#骆驼峰式命名">大骆峰</a>式命名</p>
+<h4 id="类名"><a href="#类名" class="headerlink" title="类名"></a>类名</h4><p>类以<a href="#骆驼峰式命名">大骆峰</a>式命名。</p>
 <p>类名通常是名词或名词短语，如<code>Character</code>和<code>ImmutableList</code>。接口名可能是名词或名词短语，如<code>List</code>，也可能是形容词或形容词短语，如<code>Readable</code>。</p>
 <p>注解类型命名，没有具体的规则和成熟的约定。</p>
 <p>测试类名以被测类的类名，加上<code>Test</code>结尾组成。例如<code>HashTest</code>或<code>HashIntegrationTest</code>。</p>
-<h4 id="方法名"><a href="#方法名" class="headerlink" title="方法名"></a>方法名</h4><p>方法以<a href="#骆驼峰式命名">小骆峰</a>式命名</p>
+<h4 id="方法名"><a href="#方法名" class="headerlink" title="方法名"></a>方法名</h4><p>方法以<a href="#骆驼峰式命名">小骆峰</a>式命名。</p>
 <p>方法名通常是动词或动词短语。例如<code>sendMessage</code>和<code>stop</code>。</p>
 <p>下划线可能为了逻辑上的分隔，而出现在Junit测试方法名中。一个典型的模式是<code>test&lt;MethodUnderTest&gt;_&lt;state&gt;</code>，例如<code>testPop_emptyStack</code>。对测试方法的命名不存在唯一正确的方式。</p>
 <h4 id="常量名"><a href="#常量名" class="headerlink" title="常量名"></a>常量名</h4><p>常量使用<code>CONSTANT_CASE</code>（全大写，以下划线分隔）命名。但Java中的常量意味着什么？</p>
 <p>常量是static final修饰的字段，是不可变的且其方法是无副作用的。包括基本元素、字符串、不可变类型和不可变类型的不可变集合。一个实例的外部状态如果是可变的，就不属于常量。但仅仅不改变实例的外部状态，又是不够的。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Constants</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NUMBER = <span class="number">5</span>;</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> ImmutableList&lt;String&gt; NAMES = ImmutableList.of(<span class="string">"Ed"</span>, <span class="string">"Ann"</span>);</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> ImmutableMap&lt;String, Integer&gt; AGES = ImmutableMap.of(<span class="string">"Ed"</span>, <span class="number">35</span>, <span class="string">"Ann"</span>, <span class="number">32</span>);</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> Joiner COMMA_JOINER = Joiner.on(<span class="string">','</span>); <span class="comment">// because Joiner is immutable</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> SomeMutableType[] EMPTY_ARRAY = &#123;&#125;;</div><div class="line"><span class="keyword">enum</span> SomeEnum &#123; ENUM_CONSTANT &#125;</div><div class="line"></div><div class="line"><span class="comment">// Not constants</span></div><div class="line"><span class="keyword">static</span> String nonFinal = <span class="string">"non-final"</span>;</div><div class="line"><span class="keyword">final</span> String nonStatic = <span class="string">"non-static"</span>;</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> Set&lt;String&gt; mutableCollection = <span class="keyword">new</span> HashSet&lt;String&gt;();</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> ImmutableSet&lt;SomeMutableType&gt; mutableElements = ImmutableSet.of(mutable);</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> ImmutableMap&lt;String, SomeMutableType&gt; mutableValues =</div><div class="line">    ImmutableMap.of(<span class="string">"Ed"</span>, mutableInstance, <span class="string">"Ann"</span>, mutableInstance2);</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> Logger logger = Logger.getLogger(MyClass.getName());</div><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> String[] nonEmptyArray = &#123;<span class="string">"these"</span>, <span class="string">"can"</span>, <span class="string">"change"</span>&#125;;</div></pre></td></tr></table></figure></p>
 <p>常量名通常是名词或名词短语。</p>
-<h4 id="非常量字段名"><a href="#非常量字段名" class="headerlink" title="非常量字段名"></a>非常量字段名</h4><p>非常量字段</p>
-<h4 id="参数名"><a href="#参数名" class="headerlink" title="参数名"></a>参数名</h4><h4 id="局部变量名"><a href="#局部变量名" class="headerlink" title="局部变量名"></a>局部变量名</h4><h4 id="类型变量名"><a href="#类型变量名" class="headerlink" title="类型变量名"></a>类型变量名</h4><h3 id="骆驼峰式命名"><a href="#骆驼峰式命名" class="headerlink" title="骆驼峰式命名"></a>骆驼峰式命名</h3><hr>
+<h4 id="非常量字段名"><a href="#非常量字段名" class="headerlink" title="非常量字段名"></a>非常量字段名</h4><p>非常量字段（静态或者非静态）以<a href="#骆驼峰式命名">小骆峰</a>式命名。</p>
+<p>非常量字段名通常是名词或名词短语。例如：<code>computedValues</code>或<code>index</code>。</p>
+<h4 id="参数名"><a href="#参数名" class="headerlink" title="参数名"></a>参数名</h4><p>参数以<a href="#骆驼峰式命名">小骆峰</a>式命名。</p>
+<p>避免在public方法中使用单个字符作为参数名。</p>
+<h4 id="局部变量名"><a href="#局部变量名" class="headerlink" title="局部变量名"></a>局部变量名</h4><p>局部变量以<a href="#骆驼峰式命名">小骆峰</a>式命名。</p>
+<p>局部变量即使是final不可变的，也不被认为是常量，且不应该以常量形式命名。</p>
+<h4 id="类型变量名"><a href="#类型变量名" class="headerlink" title="类型变量名"></a>类型变量名</h4><p>类型变量以以下两种风格之一命名：</p>
+<ol>
+<li>单个大写字母，后跟可选的单个数字（如<code>E</code>，<code>T</code>，<code>X</code>，<code>T2</code>）。</li>
+<li>以类形式的命名（5.2.2<a href="#类名">类名</a>章节），后跟大写字母T（例如：<code>RequestT</code>，<code>FooBarT</code>）。</li>
+</ol>
+<h3 id="骆驼峰式命名"><a href="#骆驼峰式命名" class="headerlink" title="骆驼峰式命名"></a>骆驼峰式命名</h3><p>有多种情况下需要将英语短语转换为驼峰形式，如缩写的单词“iOS”或不寻常的结构“IPv6”。为了提高可预测性，Google风格指定了以下几种明确的方案。</p>
+<p>以散文形式的命名开始：</p>
+<ol>
+<li>将英语短语转换成纯ASCII编码，并删除所有单引号。例如，“Müller’s algorithm”可以转换成“Muellers algorithm”。</li>
+<li>以空格或其它任何标点符号（通常为连字符）分隔单词。<ul>
+<li>推荐：如果已有单词是驼峰式拼写的，则分隔它的组成部分（如“AdWords”分隔成“ad words”）。注意如“iOS”这样的单词并不是真正的驼峰式拼写，它违反了所有惯例，因此不适用于本条建议。</li>
+</ul>
+</li>
+<li>将所有字母转换为小写（包括缩写），然后将…的首字母转换为大写：<ul>
+<li>… 每个单词，产生大驼峰式命名。</li>
+<li>… 除去第一个单词的其它单词，产生小驼峰式命名。</li>
+</ul>
+</li>
+<li>最后，连接所有字母成为一个标识符。</li>
+</ol>
+<p>注意，原单词的大小写应被忽略。例如：</p>
+<table>
+<thead>
+<tr>
+<th>Prose form</th>
+<th>Correct</th>
+<th>Incorrect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“XML HTTP request”</td>
+<td><code>XmlHttpRequest</code></td>
+<td><code>XMLHTTPRequest</code></td>
+</tr>
+<tr>
+<td>“new customer ID”</td>
+<td><code>newCustomerId</code></td>
+<td><code>newCustomerID</code></td>
+</tr>
+<tr>
+<td>“inner stopwatch”</td>
+<td><code>innerStopwatch</code></td>
+<td><code>innerStopWatch</code></td>
+</tr>
+<tr>
+<td>“supports IPv6 on iOS?”</td>
+<td>supportsIpv6OnIos</td>
+<td>supportsIPv6OnIOS</td>
+</tr>
+<tr>
+<td>“YouTube importer”</td>
+<td>YouTubeImporter<br>YoutubeImporter*</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>*是可以接受，但不推荐的。</p>
+<blockquote>
+<p>在英语中，一些模糊的连字，如“nonempty”和“non-empty”都是正确的，所以方法名<code>checkNonempty</code>和<code>checkNonEmpty</code>也都是正确的。</p>
+</blockquote>
+<hr>
 <h2 id="编程实战"><a href="#编程实战" class="headerlink" title="编程实战"></a>编程实战</h2><h3 id="Override：尽量使用"><a href="#Override：尽量使用" class="headerlink" title="@Override：尽量使用"></a>@Override：尽量使用</h3><h3 id="exception捕获：不能忽视"><a href="#exception捕获：不能忽视" class="headerlink" title="exception捕获：不能忽视"></a>exception捕获：不能忽视</h3><h3 id="static成员：规范使用"><a href="#static成员：规范使用" class="headerlink" title="static成员：规范使用"></a>static成员：规范使用</h3><h3 id="finalize：禁用"><a href="#finalize：禁用" class="headerlink" title="finalize：禁用"></a>finalize：禁用</h3><hr>
 <h2 id="Javadoc"><a href="#Javadoc" class="headerlink" title="Javadoc"></a>Javadoc</h2><h3 id="格式-1"><a href="#格式-1" class="headerlink" title="格式"></a>格式</h3><h3 id="摘要片段"><a href="#摘要片段" class="headerlink" title="摘要片段"></a>摘要片段</h3><h3 id="尽量使用Javadoc"><a href="#尽量使用Javadoc" class="headerlink" title="尽量使用Javadoc"></a>尽量使用Javadoc</h3><hr>
 
@@ -560,6 +626,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/02/Java泛型的擦除/" rel="prev" title="Java泛型的擦除">
+                Java泛型的擦除 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -627,7 +697,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -704,8 +774,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
