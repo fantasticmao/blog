@@ -95,7 +95,7 @@
 
 本篇记录Java的一个残缺实现，确切地说是Java SE5为向后兼容而采取的折中实现：泛型的擦除。">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/1.png">
-<meta property="og:updated_time" content="2017-01-12T16:39:50.047Z">
+<meta property="og:updated_time" content="2017-01-13T13:31:40.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java泛型的擦除">
 <meta name="twitter:description" content="因为只有知道了某个技术不能做到什么，你才能更好地做到所能做的。——《Java编程思想》
@@ -126,6 +126,15 @@
 
   
 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-89151446-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
 
 
@@ -289,6 +298,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/02/Java泛型的擦除/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/02/Java泛型的擦除/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -314,12 +330,14 @@
 <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>泛型顾名思义<em>泛化的类型</em>，实现了<em>参数化类型</em>的概念，使代码可以应用于多种类型。泛型可以简单地指定容器持有的类型，如<code>List&lt;String&gt; list = new ArrayList&lt;&gt;();</code>，这也是笔者早期唯一知道的泛型用法。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/1.png" alt="image"></p>
 <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="泛型类-接口"><a href="#泛型类-接口" class="headerlink" title="泛型类/接口"></a>泛型类/接口</h3><p>定义泛型类时，需在类名后添加一个<em>类型参数</em>，并用尖括号括住。然后在实例化类时，使用<em>具体类型</em>替换<em>类型参数</em>。在泛型类中，<em>泛型参数</em>代表的就是实例化类时的<em>具体类型</em>，如下是一个泛型类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Generic</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> T t;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getT</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.t = t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Generic&lt;String&gt; generic = <span class="keyword">new</span> Generic&lt;&gt;();</div><div class="line">        generic.setT(<span class="string">"item"</span>);</div><div class="line">        String s = generic.getT();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>泛型接口的定义与泛型类并没什么区别。</p>
-<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>泛型类对类型的泛化应用于整个类之上，而泛型方法则仅限于当前方法。书中提供了一个编写泛型代码的基本原则：<strong>无论何时，只要你能做到，你就应该尽量使用泛型方法</strong>。这也意味着我们需尽可能地缩小泛型泛化的应用范围。而且，<strong>泛型类对于static方法是无效的</strong>，如下例中的类是无法通过编译的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericStaticMethod</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>因为JVM在加载static方法时，类还处于初始化状态，类的实例也还未创建，此时static方法自然也无法得知泛型类的实例的<em>具体类型</em>。但<strong>泛型方法对于static方法是生效的</strong>，因为方法级别的<em>泛型参数</em>与类的实例无关，static方法获取<em>具体类型</em>也并不依赖于类的实例。</p>
-<p>定义泛型方法，只需将<em>泛型参数</em>放置于方法返回值之前即可，如下例是修改上例后的泛型方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericStaticMethod</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>泛型类对类型的泛化应用于整个类之上，而泛型方法则仅限于当前方法。书中提供了一个编写泛型代码的基本原则：<strong>无论何时，只要你能做到，你就应该尽量使用泛型方法</strong>。这也意味着我们应尽可能地缩小类型泛化的应用范围。</p>
+<p><strong>泛型类对于static方法是无效的</strong>，如下例中的类是无法通过编译的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericStaticMethod</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为JVM在加载static方法时，类还处于初始化状态，类的实例也还未创建，此时static方法自然也无法得知泛型类的实例的<em>具体类型</em>。</p>
+<p>但<strong>泛型方法对于static方法是生效的</strong>，因为方法级别的<em>泛型参数</em>与类的实例无关，static方法获取<em>具体类型</em>也并不依赖于类的实例。定义泛型方法，只需将<em>泛型参数</em>放置于方法返回值之前即可，如下例是修改上例后的泛型方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericStaticMethod</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>当类中同时存在类级别和方法级别的<em>泛型参数</em>时，此时方法中的<em>泛型参数</em>代表的是泛型方法的<em>具体类型</em>。调整上例代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericStaticMethod</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        System.out.println(t.getClass());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> GenericStaticMethod&lt;String&gt;().foo(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>输出：<code>class java.lang.Integer</code>。同时可见，若传入的<em>泛型参数</em>是基本类型，则Java的自动打包机制就会介入。</p>
-<h2 id="擦除"><a href="#擦除" class="headerlink" title="擦除"></a>擦除</h2><h2 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h2><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2>
+<h3 id="泛型数组"><a href="#泛型数组" class="headerlink" title="泛型数组"></a>泛型数组</h3><p>数组的类型应在其被创建时决定，所以<strong>泛型也不能用于创建数组</strong>。解决这个窘境的办法是使用<code>ArrayList&lt;E&gt;</code>集合类。</p>
+<h3 id="元祖"><a href="#元祖" class="headerlink" title="元祖"></a>元祖</h3><h2 id="擦除"><a href="#擦除" class="headerlink" title="擦除"></a>擦除</h2><h2 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h2><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2>
       
     </div>
 
@@ -374,6 +392,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -476,7 +501,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型类-接口"><span class="nav-number">2.1.</span> <span class="nav-text">泛型类/接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型方法"><span class="nav-number">2.2.</span> <span class="nav-text">泛型方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#擦除"><span class="nav-number">3.</span> <span class="nav-text">擦除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边界"><span class="nav-number">4.</span> <span class="nav-text">边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">5.</span> <span class="nav-text">扩展</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型类-接口"><span class="nav-number">2.1.</span> <span class="nav-text">泛型类/接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型方法"><span class="nav-number">2.2.</span> <span class="nav-text">泛型方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型数组"><span class="nav-number">2.3.</span> <span class="nav-text">泛型数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元祖"><span class="nav-number">2.4.</span> <span class="nav-text">元祖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#擦除"><span class="nav-number">3.</span> <span class="nav-text">擦除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边界"><span class="nav-number">4.</span> <span class="nav-text">边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">5.</span> <span class="nav-text">扩展</span></a></li></ol></div>
             
           </div>
         </section>
@@ -592,6 +617,27 @@
 
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'fantasticmao';
+      var disqus_identifier = '2017/01/02/Java泛型的擦除/';
+      var disqus_title = 'Java泛型的擦除';
+      var disqus_url = 'http://fantasticmao.cn/2017/01/02/Java泛型的擦除/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
 
