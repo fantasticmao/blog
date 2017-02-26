@@ -92,7 +92,7 @@ B-Tree索引、聚簇索引的实现可参考：http://blog.codinglabs.org/artic
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《高性能MySQL》第5章 创建高性能的索引。
 B-Tree索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
-<meta property="og:updated_time" content="2017-02-16T16:17:05.491Z">
+<meta property="og:updated_time" content="2017-02-26T15:51:35.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL索引高性能策略">
 <meta name="twitter:description" content="摘自《高性能MySQL》第5章 创建高性能的索引。
@@ -362,7 +362,13 @@ B-Tree索引、聚簇索引的实现可参考：http://blog.codinglabs.org/artic
 <h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p><strong>全文索引是一种特殊类型的索引，它查找的是文本中的关键字，而不是直接比较索引中的值。</strong>它有许多需要注意的细节，如停用词、词干和复数、布尔搜索等。全文索引更类似于搜索引擎做的事情，而不是简单的<code>WHERE</code>条件匹配。</p>
 <p>在相同的列上同时创建全文索引和基于B-Tree索引不会有冲突。全文索引适用于<code>MATCH AGAINST</code>操作，而不是普通的<code>WHERE</code>条件操作。</p>
 <h3 id="其它索引类别"><a href="#其它索引类别" class="headerlink" title="其它索引类别"></a>其它索引类别</h3><p>还有很多第三方的存储引擎使用不同类型的数据结构来存储索引。</p>
-<h2 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h2><h3 id="独立的列"><a href="#独立的列" class="headerlink" title="独立的列"></a>独立的列</h3><h3 id="前缀索引和索引选择性"><a href="#前缀索引和索引选择性" class="headerlink" title="前缀索引和索引选择性"></a>前缀索引和索引选择性</h3><h3 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h3><h3 id="选择合适的索引列顺序"><a href="#选择合适的索引列顺序" class="headerlink" title="选择合适的索引列顺序"></a>选择合适的索引列顺序</h3><h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h3><h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><h3 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h3><h3 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h3><h3 id="冗余和重复索引"><a href="#冗余和重复索引" class="headerlink" title="冗余和重复索引"></a>冗余和重复索引</h3><h3 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h3><h3 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>B+Tree数据结构<br>InnoDB、MyISAM的B+Tree实现<br>MySQL使用索引<br>索引的选择性和索引前缀<br>主键auto_increment</p>
+<h2 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h2><h3 id="独立的列"><a href="#独立的列" class="headerlink" title="独立的列"></a>独立的列</h3><h3 id="前缀索引和索引选择性"><a href="#前缀索引和索引选择性" class="headerlink" title="前缀索引和索引选择性"></a>前缀索引和索引选择性</h3><h3 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h3><h3 id="选择合适的索引列顺序"><a href="#选择合适的索引列顺序" class="headerlink" title="选择合适的索引列顺序"></a>选择合适的索引列顺序</h3><h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h3><h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><h3 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h3><h3 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h3><h3 id="冗余和重复索引"><a href="#冗余和重复索引" class="headerlink" title="冗余和重复索引"></a>冗余和重复索引</h3><h3 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h3><h3 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><!--
+B+Tree数据结构
+InnoDB、MyISAM的B+Tree实现
+MySQL使用索引
+索引的选择性和索引前缀
+主键auto_increment
+-->
 
       
     </div>
