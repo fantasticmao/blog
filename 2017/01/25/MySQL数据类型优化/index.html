@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png">
-<meta property="og:updated_time" content="2017-02-26T15:26:13.044Z">
+<meta property="og:updated_time" content="2017-02-28T13:28:11.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据类型优化">
 <meta name="twitter:description" content="摘自《高性能MySQL》第4章 Schema与数据类型优化。">
@@ -361,7 +361,7 @@
 <p>下面通过一个具体的例子来说明：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/1.png" alt="images"></p>
 <p>数据如何存储取决于存储引擎，并非所有的存储引擎都会按照相同的方式处理定长和变长的字符串。</p>
 <blockquote>
-<p>慷慨是不明智的：使用<code>CHAR(5)</code>和<code>VARCHAR(200)</code>存储<code>hello</code>的空间开销是一样的，但是更长的列会消耗更多的内存，因为MySQL通常会分配固定大小的内存块来保存内部值。</p>
+<p>慷慨是不明智的：使用<code>VARCHAR(5)</code>和<code>VARCHAR(200)</code>存储<code>hello</code>的空间开销是一样的，但是更长的列会消耗更多的内存，因为MySQL通常会分配固定大小的内存块来保存内部值。</p>
 </blockquote>
 <p>与<code>CHAR</code>和<code>VARCHAR</code>类似的类型还有<code>BINARY</code>和<code>VARBINARY</code>，它们存储的是二进制字符串。</p>
 <h3 id="BLOB和TEXT类型"><a href="#BLOB和TEXT类型" class="headerlink" title="BLOB和TEXT类型"></a>BLOB和TEXT类型</h3><p><code>BLOB</code>和<code>TEXT</code>都是为存储很大的数据而设计的字符串数据类型，分别采用二进制和字符方式存储。实际上，它们分别属于两组不同的数据类型家族：字符类型是<code>TINYTEXT</code>、<code>SMALLTEXT</code>、<code>TEXT</code>、<code>MEDIUMTEXT</code>、<code>LONGTEXT</code>；二进制类型是<code>TINYBLOB</code>、<code>SMALLBLOB</code>、<code>BLOB</code>、<code>MEDIUMBLOB</code>、<code>LONGBLOB</code>。<code>TEXT</code>是<code>SMALLTEXT</code>的同义词，<code>BLOB</code>是<code>SMALLBLOB</code>的同义词。</p>
