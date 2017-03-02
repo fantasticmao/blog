@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png">
-<meta property="og:updated_time" content="2017-02-28T13:28:11.792Z">
+<meta property="og:updated_time" content="2017-03-02T11:53:19.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据类型优化">
 <meta name="twitter:description" content="摘自《高性能MySQL》第4章 Schema与数据类型优化。">
@@ -407,6 +407,7 @@
 <hr>
 <h2 id="特殊类型数据"><a href="#特殊类型数据" class="headerlink" title="特殊类型数据"></a>特殊类型数据</h2><p>某些类型的数据并不直接与内置类型一致，低于秒级精度的时间戳就是一个例子。</p>
 <p>另一个例子是IPv4地址。人们经常使用<code>VARCHAR(15)</code>列来存储IP地址。然而它们实际上是32位无符号整数，不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供<code>INET_ATON()</code>和<code>INET_NTOA()</code>函数在这两种表示方法之间切换。</p>
+<hr>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>良好的schema设计原则是普遍适用的，但MySQL有它自己的实现细节要注意。</p>
 <ul>
 <li>尽量避免过度设计，例如会导致极其复杂查询的schema设计，或者有很多列的表设计。</li>
@@ -526,7 +527,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
