@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/5.png">
-<meta property="og:updated_time" content="2017-03-01T17:14:41.619Z">
+<meta property="og:updated_time" content="2017-03-02T11:53:19.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下开发环境搭建">
 <meta name="twitter:description" content="记一次个人PC的Ubuntu 16.04 LTS重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。">
@@ -325,6 +325,7 @@
         <p>记一次个人PC的Ubuntu 16.04 LTS重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。<a id="more"></a></p>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在知乎上看到了<a href="https://www.zhihu.com/question/19811112/answer/132006027" target="_blank" rel="external">一篇回答</a>，决定重装（升级？）Ubuntu……</p>
 <p>不得不说，Ubuntu相比于CentOS，体验真的棒很多，尤其是在桌面应用上。</p>
+<hr>
 <h3 id="sudo-apt-get-安装系列"><a href="#sudo-apt-get-安装系列" class="headerlink" title="sudo apt-get 安装系列"></a>sudo apt-get 安装系列</h3><p><em>Git</em>：执行<code>sudo apt-get install git</code>。安装成功之后，使用<code>git config --global $key $value</code>命令，配置Git的全局user.name和user.email。</p>
 <p><em>Vim</em>：执行<code>sudo apt-get install vim</code>。</p>
 <p><em>Shadowsocks</em>：执行<code>sudo apt-get install shadowscoks</code>。安装成功之后，<a href="/2016/12/05/Ubuntu下Shadowsocks配置/">配置shadowsocks</a>。</p>
@@ -332,7 +333,7 @@
 <p><em>NPM</em>：执行<code>sudo apt-get install npm</code>。安装成功之后，执行<code>npm config set registry https://registry.npm.taobao.org/</code>，修改NPM源。</p>
 <p><em>VLC</em>：执行<code>sudo apt-get install vlc</code>。</p>
 <p><em>Shutter</em>：执行<code>sudo apt-get install shutter</code>。</p>
-<p><em>MySQL</em>：执行<code>sudo apt-get install mysql-server mysql-client</code>。安装成功之后，配置MySQL：</p>
+<p><em>MySQL</em>：执行<code>sudo apt-get install mysql-server mysql-client</code>。安装成功之后，配置MySQL。</p>
 <ol>
 <li>执行<code>mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39; WITH GRANT OPTION;</code>语句修改MySQL远程访问权限。</li>
 <li>执行<code>mysql&gt; FLUSH PRIVILEGES;</code>语句刷新权限。</li>
@@ -340,6 +341,7 @@
 <li>打开MySQL主配置文件<code>sudo vim /etc/mysql/my.conf</code>，如下图添加client和mysqld配置，修改默认字符集编码。</li>
 <li>执行<code>service mysql restart</code>重启MySQL服务。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.png" alt="images"></li>
 </ol>
+<hr>
 <h3 id="dpkg-i-安装系列"><a href="#dpkg-i-安装系列" class="headerlink" title="dpkg -i 安装系列"></a>dpkg -i 安装系列</h3><p>下载Chrome、网易云音乐、搜狗输入法、WPS、Sublime的deb安装包，使用<code>sudo dpkg -i $packagename</code>命令安装。若因依赖关系问题导致安装失败，则使用<code>sudo apt-get -f install</code>修复。</p>
 <p><em>解决Chrome闪屏问题</em>：个人笔记本型号Dell-Inspiron-7460，使用Chrome 56在线看视频时，标签栏上下的位置会频繁闪屏。参考自<a href="https://beisongnansong.wordpress.com/2016/08/12/%E8%A7%A3%E5%86%B3ubuntu%EF%BC%88chrome%EF%BC%89%E7%9A%84%E9%97%AA%E5%B1%8F%E9%97%AE%E9%A2%98/" target="_blank" rel="external">链接</a>解决了此问题，具体措施：</p>
 <ol>
@@ -347,6 +349,7 @@
 <li>进入chrome://flags/页面，停用「加速的2D画布 」，启用「零副本光栅化处理程序 」。</li>
 <li>重新登录用户。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png" alt="images"></li>
 </ol>
+<hr>
 <h3 id="配置-安装系列"><a href="#配置-安装系列" class="headerlink" title="配置  安装系列"></a>配置  安装系列</h3><p>下载JDK、Tomcat、IDEA的tar.gz压缩包，使用<code>tar -xzf $packagename</code>解压缩，并移动解压缩文件夹下至<code>/usr/local/</code>目录下。</p>
 <p><em>JDK</em>：</p>
 <ol>
@@ -366,7 +369,8 @@
 <li>修改IDEA各项设置……太多就略过了。<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line">......</div><div class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">activation</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="编译-安装系列"><a href="#编译-安装系列" class="headerlink" title="编译  安装系列"></a>编译  安装系列</h3><p><em>Nginx</em>：</p>
+<hr>
+<h3 id="编译-安装系列"><a href="#编译-安装系列" class="headerlink" title="编译  安装系列"></a>编译  安装系列</h3><p>Nginx：可执行<code>sudo apt-get install nginx</code>安装Nginx，不过为在Response Headers中隐藏Ubuntu信息，还是选择编译安装吧。</p>
 <ol>
 <li>执行<code>sudo apt-get install libpcre3 libpcre3-dev zlib1g-dev</code>，预先安装Nginx依赖包。</li>
 <li>进入<a href="http://nginx.org/" target="_blank" rel="external">Nginx官网</a>，个人选择1.10.3稳定版本，执行<code>wget http://nginx.org/download/nginx-1.10.3.tar.gz</code>下载并解压缩。</li>
@@ -383,6 +387,7 @@
 <li>执行<code>make</code>，开始编译Redis。</li>
 <li>安装成功之后，redis-server和redis-cli位于<code>../redis-3.2.8/src</code>。</li>
 </ol>
+<hr>
 <h3 id="附"><a href="#附" class="headerlink" title="附"></a>附</h3><p><em>Debian的<code>apt-get</code>用法</em>：</p>
 <ul>
 <li><code>sudo apt-get update</code> 从所有配置源中更新软件包的信息。</li>
@@ -497,7 +502,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
