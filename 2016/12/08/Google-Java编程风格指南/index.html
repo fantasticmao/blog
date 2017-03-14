@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/08/Google-Java编程风格指南/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准，以原文档为标准，以原文档为标准。">
-<meta property="og:updated_time" content="2017-03-13T16:28:32.793Z">
+<meta property="og:updated_time" content="2017-03-14T06:27:33.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Java编程风格指南">
 <meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准，以原文档为标准，以原文档为标准。">
@@ -396,7 +396,7 @@
 <p>每组中 import 语句按 ASCII 码排序。（<strong>注意</strong>：因 <code>.</code> 排在 <code>;</code> 之前，所以这与纯  ASCII码排序略有不同）</p>
 <h4 id="不允许类的静态导入"><a href="#不允许类的静态导入" class="headerlink" title="不允许类的静态导入"></a>不允许类的静态导入</h4><p>静态嵌套类以其常规方式导入，而不是使用静态导入。</p>
 <h3 id="Class定义"><a href="#Class定义" class="headerlink" title="Class定义"></a>Class定义</h3><h4 id="有且仅有一个顶级类的声明"><a href="#有且仅有一个顶级类的声明" class="headerlink" title="有且仅有一个顶级类的声明"></a>有且仅有一个顶级类的声明</h4><p>每个源文件仅能有一个顶级类。</p>
-<h4 id="类内容顺序"><a href="#类内容顺序" class="headerlink" title="类内容顺序"></a>类内容顺序</h4><p>类的成员或者初始化方法顺序对代码可读性有着很重要的影响，然而对此却没有一个统一正确的标准。不同的类可能有不同的排序方式。<br>重要的是，每个类都应遵从维护者可解释清楚的 <strong>逻辑顺序</strong> 排序。例如，新方法可能不是简单地放置在类的最后，因为如此产生的“按时间顺序添加”不遵从逻辑顺序。</p>
+<h4 id="类内容顺序"><a href="#类内容顺序" class="headerlink" title="类内容顺序"></a>类内容顺序</h4><p>类的成员或者初始化方法顺序对代码可读性有着很重要的影响，然而对此却没有一个统一正确的标准。不同的类可能有不同的排序方式。<br>重要的是，每个类都应遵从维护者可解释清楚的 <strong>逻辑顺序</strong> 排序。例如，新方法可能不是简单地放置在类的最后，因为如此产生的「按时间顺序添加」不遵从逻辑顺序。</p>
 <h5 id="方法重载：不应被分离"><a href="#方法重载：不应被分离" class="headerlink" title="方法重载：不应被分离"></a>方法重载：不应被分离</h5><p>当一个类拥有同名的多个构造器或者方法时，这些构造器或者方法不应被其它代码所分隔，甚至是私有方法。</p>
 <hr>
 <h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p><strong>术语说明</strong>：<em>block-like construct</em> 块状结构 指类的实体、成员或构造器。注意，在后续 4.8.3.1 <a href="#数组初始化：可以写成块状结构">数组初始化</a> 章节中，所有数组的初始化可被认为是一个块状结构。</p>
@@ -431,7 +431,7 @@
 <h4 id="在何处换行"><a href="#在何处换行" class="headerlink" title="在何处换行"></a>在何处换行</h4><p>换行的主要原则是：倾向于在 <strong>更高语法级别</strong> 处换行。同时：</p>
 <ol>
 <li>在 <em>non-assignment</em> 非赋值运算符之前换行。（注意这与 Google 风格的其它语言不同，如 C++ 和 JavaScript）<ul>
-<li>这也适用于以下“类似操作符”的符号：<ul>
+<li>这也适用于以下「类似操作符」的符号：<ul>
 <li>点分隔符<code>.</code></li>
 <li>方法引用中的两个冒号<code>::</code></li>
 <li>类型约束中的&amp;符<code>T &lt;extends Foo Foo &amp; Bar&gt;</code></li>
@@ -441,7 +441,7 @@
 </ul>
 </li>
 <li>在 <em>assignment</em> 赋值运算符之后换行，但在之前换行也可以接受。<ul>
-<li>这也适用于 foreach 语句中“类似赋值操作符”的冒号。</li>
+<li>这也适用于 foreach 语句中「类似赋值操作符」的冒号。</li>
 </ul>
 </li>
 <li>方法或者构造器名与紧随它的开括号 <code>(</code> 相连。</li>
@@ -476,7 +476,7 @@
 <li><code>String[][] x = &#123;&#123;&quot;foo&quot;&#125;&#125;;</code> <code>&#123;&#123;</code>之间没有空格</li>
 </ul>
 </li>
-<li>二进制或三元操作符的两侧。这也适用于以下“类似操作符”的符号：<ul>
+<li>二进制或三元操作符的两侧。这也适用于以下「类似操作符」的符号：<ul>
 <li>类型约束中的&amp;符：<code>&lt;T extends Foo &amp; Bar&gt;</code></li>
 <li>多异常捕获中的|符：<code>catch (FooException | BarException e)</code></li>
 <li>增强版 <code>for</code> 语句foreach中的<code>:</code></li>
@@ -498,7 +498,7 @@
 <p>这种做法是允许的，但在 Google 风格中不是必须的。甚至不需要在已经对齐的地方保持水平对齐。</p>
 <p>这是一个先无对齐后有的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> x; <span class="comment">// this is fine</span></div><div class="line"><span class="keyword">private</span> Color color; <span class="comment">// this too</span></div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span>   x;      <span class="comment">// permitted, but future edits</span></div><div class="line"><span class="keyword">private</span> Color color;  <span class="comment">// may leave it unaligned</span></div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>水平对齐有助阅读代码，但难以日后维护。已经考虑日后仅需调整一行代码的可能性，却依旧能保持美观对齐的做法，是 <strong>允许</strong> 的。但更频繁的情况是编辑器（或者你自己）会提示你调整附近行中的空格。而这一行为可能会触发级联式的格式化，从而导致了“大爆炸”。在最坏的情况下会导致大量无意义的工作，最好的情况下依然会影响版本控制、减慢代码评审速度、引起代码合并冲突。</p>
+<p>水平对齐有助阅读代码，但难以日后维护。已经考虑日后仅需调整一行代码的可能性，却依旧能保持美观对齐的做法，是 <strong>允许</strong> 的。但更频繁的情况是编辑器（或者你自己）会提示你调整附近行中的空格。而这一行为可能会触发级联式的格式化，从而导致了「大爆炸」。在最坏的情况下会导致大量无意义的工作，最好的情况下依然会影响版本控制、减慢代码评审速度、引起代码合并冲突。</p>
 </blockquote>
 <h3 id="分组小括号：推荐使用"><a href="#分组小括号：推荐使用" class="headerlink" title="分组小括号：推荐使用"></a>分组小括号：推荐使用</h3><p>只有当开发人员和评审人员都同意没有小括号也不会误解代码原意，且不会影响代码可读性的情况下，才可以省略分组小括号。假设所有 Java 开发者都熟知运算符的优先级是不合理的。</p>
 <h3 id="特殊结构"><a href="#特殊结构" class="headerlink" title="特殊结构"></a>特殊结构</h3><h4 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h4><p>枚举常量的逗号之后，是可换行的。额外的空行（通常只有一个）也是允许的。下面是举例了一种可能性：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">enum</span> Answer &#123;</div><div class="line">  YES &#123;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">"yes"</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  NO,</div><div class="line">  MAYBE</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -553,12 +553,12 @@
 <li>单个大写字母，后跟可选的单个数字（如 <code>E</code>，<code>T</code>，<code>X</code>，<code>T2</code>）。</li>
 <li>以类形式的命名（ 5.2.2 <a href="#类名">类名</a> 章节），后跟大写字母 T（例如：<code>RequestT</code>，<code>FooBarT</code>）。</li>
 </ol>
-<h3 id="骆驼峰式命名"><a href="#骆驼峰式命名" class="headerlink" title="骆驼峰式命名"></a>骆驼峰式命名</h3><p>有多种情况下需要将英语短语转换为驼峰形式，如缩写的单词 “iOS” 或不寻常的结构 “IPv6” 。为了提高可预测性， Google 风格指定了以下几种明确的方案。</p>
+<h3 id="骆驼峰式命名"><a href="#骆驼峰式命名" class="headerlink" title="骆驼峰式命名"></a>骆驼峰式命名</h3><p>有多种情况下需要将英语短语转换为驼峰形式，如缩写的单词 iOS 或不寻常的结构 IPv6 。为了提高可预测性， Google 风格指定了以下几种明确的方案。</p>
 <p>以散文形式的命名开始：</p>
 <ol>
-<li>将英语短语转换成纯 ASCII 编码，并删除所有单引号。例如，“Müller’s algorithm” 可以转换成 “Muellers algorithm”。</li>
+<li>将英语短语转换成纯 ASCII 编码，并删除所有单引号。例如，Müller’s algorithm 可以转换成 Muellers algorithm。</li>
 <li>以空格或其它任何标点符号（通常为连字符）分隔单词。<ul>
-<li>推荐：如果已有单词是驼峰式拼写的，则分隔它的组成部分（如 “AdWords” 分隔成 “ad words”）。注意如 “iOS” 这样的单词并不是真正的驼峰式拼写，它违反了所有惯例，因此不适用于本条建议。</li>
+<li>推荐：如果已有单词是驼峰式拼写的，则分隔它的组成部分（如 AdWords 分隔成 ad words）。注意如 iOS 这样的单词并不是真正的驼峰式拼写，它违反了所有惯例，因此不适用于本条建议。</li>
 </ul>
 </li>
 <li>将所有字母转换为小写（包括缩写），然后将…的首字母转换为大写：<ul>
@@ -607,7 +607,7 @@
 </table>
 <p>*是可以接受，但不推荐的。</p>
 <blockquote>
-<p>在英语中，一些模糊的连字，如 “nonempty” 和 “non-empty” 都是正确的，所以方法名 <code>checkNonempty</code> 和 <code>checkNonEmpty</code> 也都是正确的。</p>
+<p>在英语中，一些模糊的连字，如 nonempty 和 non-empty 都是正确的，所以方法名 <code>checkNonempty</code> 和 <code>checkNonEmpty</code> 也都是正确的。</p>
 </blockquote>
 <hr>
 <h2 id="编程实战"><a href="#编程实战" class="headerlink" title="编程实战"></a>编程实战</h2><h3 id="Override：尽量使用"><a href="#Override：尽量使用" class="headerlink" title="@Override：尽量使用"></a>@Override：尽量使用</h3><p>只要是合法的方法，就应被标记 <code>@Override</code> 注解。合法的方法包括重写父类方法的类方法，实现接口方法的类方法，和重定义父接口方法的接口方法。</p>
@@ -618,7 +618,7 @@
 <h3 id="静态成员：规范使用"><a href="#静态成员：规范使用" class="headerlink" title="静态成员：规范使用"></a>静态成员：规范使用</h3><p>应以类名引用类的静态成员，而不是以类的引用实例或者表达式。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Foo aFoo = ...;</div><div class="line">Foo.aStaticMethod(); <span class="comment">// good</span></div><div class="line">aFoo.aStaticMethod(); <span class="comment">// bad</span></div><div class="line">somethingThatYieldsAFoo().aStaticMethod(); <span class="comment">// very bad</span></div></pre></td></tr></table></figure></p>
 <h3 id="finalize：禁用"><a href="#finalize：禁用" class="headerlink" title="finalize：禁用"></a>finalize：禁用</h3><p>覆盖 <code>Object.finalize()</code> 是 <strong>非常罕见</strong> 的行为。</p>
 <blockquote>
-<p>小记：不要使用 finalize()。如果真的有必要，请先仔细阅读并深刻理解 <a href="http://books.google.com/books?isbn=8131726592" target="_blank" rel="external">Effective Java 第七条</a> “Avoid Finalizers”，之后也不要使用 finalize()。</p>
+<p>小记：不要使用 finalize()。如果真的有必要，请先仔细阅读并深刻理解 <a href="http://books.google.com/books?isbn=8131726592" target="_blank" rel="external">Effective Java 第七条</a> Avoid Finalizers，之后也不要使用 finalize()。</p>
 </blockquote>
 <hr>
 <h2 id="Javadoc"><a href="#Javadoc" class="headerlink" title="Javadoc"></a>Javadoc</h2><h3 id="格式-1"><a href="#格式-1" class="headerlink" title="格式"></a>格式</h3><h4 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h4><p>Javadoc 的基本形式如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Multiple lines of Javadoc text are written here,</div><div class="line"> * wrapped normally...</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">method</span><span class="params">(String p1)</span> </span>&#123; ... &#125;</div></pre></td></tr></table></figure></p>
@@ -633,7 +633,7 @@
 </blockquote>
 <h3 id="尽量使用Javadoc"><a href="#尽量使用Javadoc" class="headerlink" title="尽量使用Javadoc"></a>尽量使用Javadoc</h3><p>Javadoc 应在每个 <code>public</code> 修饰的类，及其 <code>public</code> 和 <code>protected</code> 修饰的成员中存在，但除了下述的几个例外。</p>
 <p>Javadoc 中也可以附加额外内容，如 7.3.4 <a href="#非必需的Javadoc">非必需的Javadoc</a> 章节所示。</p>
-<h4 id="特殊情况：自解释的方法"><a href="#特殊情况：自解释的方法" class="headerlink" title="特殊情况：自解释的方法"></a>特殊情况：自解释的方法</h4><p>对简单明了的方法，Javadoc 是可选的，如 <code>getFoo</code>。这种情况下，注释除了 “Returns the foo” 也确实没什么好写的了。</p>
+<h4 id="特殊情况：自解释的方法"><a href="#特殊情况：自解释的方法" class="headerlink" title="特殊情况：自解释的方法"></a>特殊情况：自解释的方法</h4><p>对简单明了的方法，Javadoc 是可选的，如 <code>getFoo</code>。这种情况下，注释除了 Returns the foo 也确实没什么好写的了。</p>
 <blockquote>
 <p>注意：不应使用本规则作为省略关键注释的理由。例如，一个名为 <code>getCanonicalName</code> 的方法，读者可能不知道方法名的含义，因此不能省略它的 Javadoc。</p>
 </blockquote>
@@ -774,20 +774,20 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/FantasticMao" target="_blank" title="github">
+                <a href="https://github.com/FantasticMao" target="_blank" title="GitHub">
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  github
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://ochyac32z.bkt.clouddn.com/weixin.jpg" target="_blank" title="weixin">
+                <a href="http://ochyac32z.bkt.clouddn.com/weixin.jpg" target="_blank" title="WeChat">
                   
                     <i class="fa fa-fw fa-weixin"></i>
                   
-                  weixin
+                  WeChat
                 </a>
               </span>
             

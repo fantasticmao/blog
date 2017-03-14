@@ -92,7 +92,7 @@ B-Tree索引、聚簇索引的实现可参考：http://blog.codinglabs.org/artic
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《高性能MySQL》第5章 创建高性能的索引。
 B-Tree索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
-<meta property="og:updated_time" content="2017-03-02T11:53:19.655Z">
+<meta property="og:updated_time" content="2017-03-14T06:29:08.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL索引高性能策略">
 <meta name="twitter:description" content="摘自《高性能MySQL》第5章 创建高性能的索引。
@@ -321,7 +321,7 @@ B-Tree索引、聚簇索引的实现可参考：http://blog.codinglabs.org/artic
       
         <p>摘自《高性能MySQL》第5章 创建高性能的索引。</p>
 <p>B-Tree索引、聚簇索引的实现可参考：<a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="external">http://blog.codinglabs.org/articles/theory-of-mysql-index.html</a><a id="more"></a></p>
-<h2 id="索引基础"><a href="#索引基础" class="headerlink" title="索引基础"></a>索引基础</h2><p>索引（在MySQL中也叫做键key）是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键。尤其是当表中的数据量越来越大时，索引对性能的影响愈发重要。“最优”的索引有时比“好的”索引性能要好两个数量级。</p>
+<h2 id="索引基础"><a href="#索引基础" class="headerlink" title="索引基础"></a>索引基础</h2><p>索引（在MySQL中也叫做键key）是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键。尤其是当表中的数据量越来越大时，索引对性能的影响愈发重要。「最优」的索引有时比「好的」索引性能要好两个数量级。</p>
 <p>索引可以包含一个或多个列的值。如果索引包含多个列，那么列的顺序也十分重要，因为MySQL只能高效地使用最左前缀列，创建一个包含两个列的索引，和创建两个只包含一个列的索引是大不相同的。</p>
 <hr>
 <h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><p>在MySQL中，索引是在存储引擎层而不是服务器层实现的。所以，并没有统一的索引标准：不同存储引擎的索引的工作方式并不一样，也不是所有的存储引擎都支持所有类型的索引。</p>
@@ -358,7 +358,7 @@ B-Tree索引、聚簇索引的实现可参考：http://blog.codinglabs.org/artic
 <li>哈希索引只支持等值比较，包括 =、IN()、&lt;=&gt;。</li>
 <li>访问哈希索引的数据非常快，除非有很多哈希冲突。如果哈希冲突很多的话，一些索引维护操作的代价也会很高。</li>
 </ul>
-<p>InnoDB引擎有一个特殊的功能叫做“自适应哈希索引”。当InnoDB注意到某些索引值被使用得非常频繁时，它会在内存中基于B-Tree索引之上再创建一个哈希索引。</p>
+<p>InnoDB引擎有一个特殊的功能叫做「自适应哈希索引」。当InnoDB注意到某些索引值被使用得非常频繁时，它会在内存中基于B-Tree索引之上再创建一个哈希索引。</p>
 <h3 id="空间数据索引（R-Tree）"><a href="#空间数据索引（R-Tree）" class="headerlink" title="空间数据索引（R-Tree）"></a>空间数据索引（R-Tree）</h3><p>MyISAM存储引擎支持空间索引。和B-Tree索引不同，空间索引无须前缀查询。空间索引会从所有维度来索引数据。查询时，可以有效地使用任意维度来组合查询。必须使用MySQL的GIS相关函数如<code>MBRCONTATNS()</code>等来维护数据。<strong>MySQL的GIS支持并不完善，所以大部分人都不会使用这个特性。</strong></p>
 <h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p><strong>全文索引是一种特殊类型的索引，它查找的是文本中的关键字，而不是直接比较索引中的值。</strong>它有许多需要注意的细节，如停用词、词干和复数、布尔搜索等。全文索引更类似于搜索引擎做的事情，而不是简单的<code>WHERE</code>条件匹配。</p>
 <p>在相同的列上同时创建全文索引和基于B-Tree索引不会有冲突。全文索引适用于<code>MATCH AGAINST</code>操作，而不是普通的<code>WHERE</code>条件操作。</p>
@@ -505,20 +505,20 @@ MySQL使用索引
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/FantasticMao" target="_blank" title="github">
+                <a href="https://github.com/FantasticMao" target="_blank" title="GitHub">
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  github
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://ochyac32z.bkt.clouddn.com/weixin.jpg" target="_blank" title="weixin">
+                <a href="http://ochyac32z.bkt.clouddn.com/weixin.jpg" target="_blank" title="WeChat">
                   
                     <i class="fa fa-fw fa-weixin"></i>
                   
-                  weixin
+                  WeChat
                 </a>
               </span>
             
