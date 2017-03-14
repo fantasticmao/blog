@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png">
-<meta property="og:updated_time" content="2017-03-13T16:43:55.940Z">
+<meta property="og:updated_time" content="2017-03-14T06:28:39.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据类型优化">
 <meta name="twitter:description" content="摘自《高性能MySQL》第 4 章 Schema 与数据类型优化。">
@@ -369,7 +369,7 @@
 <p><code>BLOB</code> 和 <code>TEXT</code>家族之间仅有的不同是 <code>BLOB</code> 类型存储的是二进制数据，没有排序规则或字符集，而 <code>TEXT</code> 类型有字符集和排序规则。</p>
 <p>MySQL 只对 <code>BLOB</code> 和 <code>TEXT</code> 列的最前 <code>max_sort_length</code> 字节而不是整个字符串做排序。</p>
 <p>MySQL 不能将 <code>BLOB</code> 和 <code>TEXT</code> 列全部长度的字符串进行索引，也不能使用这些索引消除排序。</p>
-<h3 id="使用枚举（ENUM）代替字符串类型"><a href="#使用枚举（ENUM）代替字符串类型" class="headerlink" title="使用枚举（ENUM）代替字符串类型"></a>使用枚举（ENUM）代替字符串类型</h3><p>枚举列可以把一些不重复的字符串存储成一个预定义的集合。MySQL 在内部会将每个值在列表中的位置保存为整数，并且在表的 .frm 文件中保存 “数组 - 字符串” 映射关系的 “查找表”。</p>
+<h3 id="使用枚举（ENUM）代替字符串类型"><a href="#使用枚举（ENUM）代替字符串类型" class="headerlink" title="使用枚举（ENUM）代替字符串类型"></a>使用枚举（ENUM）代替字符串类型</h3><p>枚举列可以把一些不重复的字符串存储成一个预定义的集合。MySQL 在内部会将每个值在列表中的位置保存为整数，并且在表的 .frm 文件中保存 「数组 - 字符串」 映射关系的查找表。</p>
 <p>枚举字段是按照内部存储的整数而不是定义的字符串进行排序的。一种绕过这种限制的方式是按照需要的顺序来定义枚举列。另外也可以在查询中使用 <code>FIELD()</code> 函数显式地指定排序顺序，但这会导致 MySQL 无法利用索引消除排序。下面有一个例子：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png" alt="images"></p>
 <p>枚举最不好的地方是，字符串列表是固定的，添加或删除字符串必须使用 <code>ALTER TABLE</code>。因此，对于一系列未来可能会改变的字符串，使用枚举不是一个好主意。</p>
 <p>由于 MySQL 把每个枚举值保存为整数，并且必须进行查找才能转换为字符串，所以枚举列有一些开销。通常枚举的列表都比较小，所以开销还可以控制，但也不能保证一直如此。</p>
@@ -394,7 +394,7 @@
 <h3 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h3><p>如果需要保存很多 true/false 值，可以考虑合并这些列到一个 <code>SET</code> 数据类型，它在 MySQL 内部是以一系列打包的位的集合来表示的。这样就有效地利用了存储空间，并且 MySQL 有像 <code>FING_IN_SET()</code> 和 <code>FIELD()</code> 这样的函数，方便在查询中使用。</p>
 <p><code>SET</code> 类型的主要缺点是改变列的定义代价比较高，需要 <code>ALTER TABLE</code>。而且一般来说，也无法在 <code>SET</code> 列上通过索引查找。</p>
 <h3 id="在整数列上进行按位操作"><a href="#在整数列上进行按位操作" class="headerlink" title="在整数列上进行按位操作"></a>在整数列上进行按位操作</h3><p>一种替代 SET 的方式是使用一个整数包装一系列的位。例如，可以把 8 个位包装到一个 <code>TINYINT</code> 中，并且按位操作来使用。</p>
-<p>比起 <code>SET</code>，这种办法的好处在于可以不使用 <code>ALTER TABLE</code> 改变字段代表的 “枚举” 值，缺点是查询语句更难写，并且更难理解。</p>
+<p>比起 <code>SET</code>，这种办法的好处在于可以不使用 <code>ALTER TABLE</code> 改变字段代表的 「枚举」 值，缺点是查询语句更难写，并且更难理解。</p>
 <hr>
 <h2 id="选择标识符（identifier）"><a href="#选择标识符（identifier）" class="headerlink" title="选择标识符（identifier）"></a>选择标识符（identifier）</h2><p>当选择标识列的类型时，不仅仅需要考虑存储类型，还需要考虑 MySQL 对这种类型怎么执行计算和比较。例如，MySQL 在内部使用整数存储 <code>ENUM</code> 和 <code>SET</code> 类型，然后在做比较操作时转换为字符串。</p>
 <p>要确保在所有关联表中都使用相同的类型，类型之间需要精确匹配，包括想 <code>UNSIGNED</code> 这样的属性。混用不同数据类型可能导致性能问题，即使没有性能影响，在比较操作时隐式类型转换也可能导致很难发现的错误。</p>
@@ -402,8 +402,8 @@
 <h3 id="整数类型-1"><a href="#整数类型-1" class="headerlink" title="整数类型"></a>整数类型</h3><p>整数通常是标识列最好的选择，因为他们很快并且可以使用 <code>AUTO_INCREMENT</code>。</p>
 <h3 id="ENUM和SET类型"><a href="#ENUM和SET类型" class="headerlink" title="ENUM和SET类型"></a>ENUM和SET类型</h3><p>对于标识列来说，<code>ENUM</code> 和 <code>SET</code> 类型通常是一个糟糕的选择。</p>
 <h3 id="字符串类型-1"><a href="#字符串类型-1" class="headerlink" title="字符串类型"></a>字符串类型</h3><p>如果可能，应该避免使用字符串类型作为标识列，因为它们很消耗空间，并且通常比数字类型慢。</p>
-<p>对于完全 “随机” 的字符串，例如 <code>MD5()</code>、<code>SHA1()</code>、<code>UUID()</code> 产生的字符串，这些函数生成的新值会任意分布在很大的空间，这会导致INSERT以及一些SELECT语句变慢。</p>
-<p>如果存储 UUID 值，则应该移除 “-” 号，或者更好的做法是使用 <code>UNHEX()</code> 函数转换 UUID 值为 16 字节的数字，并且存储在一个 <code>BINARY(16)</code> 列中。检索时可以通过 <code>HEX()</code> 函数来格式化为十六进制格式。</p>
+<p>对于完全 「随机」 的字符串，例如 <code>MD5()</code>、<code>SHA1()</code>、<code>UUID()</code> 产生的字符串，这些函数生成的新值会任意分布在很大的空间，这会导致INSERT以及一些SELECT语句变慢。</p>
+<p>如果存储 UUID 值，则应该移除 - 号，或者更好的做法是使用 <code>UNHEX()</code> 函数转换 UUID 值为 16 字节的数字，并且存储在一个 <code>BINARY(16)</code> 列中。检索时可以通过 <code>HEX()</code> 函数来格式化为十六进制格式。</p>
 <hr>
 <h2 id="特殊类型数据"><a href="#特殊类型数据" class="headerlink" title="特殊类型数据"></a>特殊类型数据</h2><p>某些类型的数据并不直接与内置类型一致，低于秒级精度的时间戳就是一个例子。</p>
 <p>另一个例子是 IPv4 地址。人们经常使用 <code>VARCHAR(15)</code> 列来存储 IP 地址。然而它们实际上是 32 位无符号整数，不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储 IP 地址。MySQL 提供 <code>INET_ATON()</code> 和 <code>INET_NTOA()</code> 函数在这两种表示方法之间切换。</p>
@@ -551,20 +551,20 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/FantasticMao" target="_blank" title="github">
+                <a href="https://github.com/FantasticMao" target="_blank" title="GitHub">
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  github
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://ochyac32z.bkt.clouddn.com/weixin.jpg" target="_blank" title="weixin">
+                <a href="http://ochyac32z.bkt.clouddn.com/weixin.jpg" target="_blank" title="WeChat">
                   
                     <i class="fa fa-fw fa-weixin"></i>
                   
-                  weixin
+                  WeChat
                 </a>
               </span>
             
