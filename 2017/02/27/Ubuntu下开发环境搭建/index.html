@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/5.png">
-<meta property="og:updated_time" content="2017-03-14T06:24:32.137Z">
+<meta property="og:updated_time" content="2017-04-01T16:49:50.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下开发环境搭建">
 <meta name="twitter:description" content="记一次个人 PC 的 Ubuntu 16.04 LTS 重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。">
@@ -342,7 +342,7 @@
 <li>执行 <code>service mysql restart</code> 重启MySQL服务。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.png" alt="images"></li>
 </ol>
 <hr>
-<h3 id="dpkg-i-安装系列"><a href="#dpkg-i-安装系列" class="headerlink" title="dpkg -i 安装系列"></a>dpkg -i 安装系列</h3><p>下载 Chrome、网易云音乐、搜狗输入法、WPS、Sublime 的 deb 安装包，使用 <code>sudo dpkg -i $packagename</code> 命令安装。若因依赖关系问题导致安装失败，则使用 <code>sudo apt-get -f install</code> 修复。</p>
+<h3 id="dpkg-i-安装系列"><a href="#dpkg-i-安装系列" class="headerlink" title="dpkg -i 安装系列"></a>dpkg -i 安装系列</h3><p>下载 Chrome、网易云音乐、搜狗输入法、WPS、VS Code 的 deb 安装包，使用 <code>sudo dpkg -i $packagename</code> 命令安装。若因依赖关系问题导致安装失败，则使用 <code>sudo apt-get -f install</code> 修复。</p>
 <p><em>解决Chrome闪屏问题</em>：个人笔记本型号 Dell-Inspiron-7460，使用 Chrome 56 在线看视频时，标签栏上下的位置会频繁闪屏。参考自 <a href="https://beisongnansong.wordpress.com/2016/08/12/%E8%A7%A3%E5%86%B3ubuntu%EF%BC%88chrome%EF%BC%89%E7%9A%84%E9%97%AA%E5%B1%8F%E9%97%AE%E9%A2%98/" target="_blank" rel="external">链接</a> 解决了此问题，具体措施：</p>
 <ol>
 <li>新增配置文件 <code>sudo vim /usr/share/X11/xorg.conf.d/20-intel.conf</code>，贴入下图内容保存。</li>
