@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议的概念、基本流程和关键步骤，讨论了在开发 OAuth 2.">
+<meta name="description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OAuth 2.0 的研究与实践">
 <meta property="og:url" content="http://fantasticmao.cn/2017/04/26/OAuth-2.0-的研究与实践/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议的概念、基本流程和关键步骤，讨论了在开发 OAuth 2.">
-<meta property="og:updated_time" content="2017-04-26T10:26:30.407Z">
+<meta property="og:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2">
+<meta property="og:updated_time" content="2017-04-28T07:43:59.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OAuth 2.0 的研究与实践">
-<meta name="twitter:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议的概念、基本流程和关键步骤，讨论了在开发 OAuth 2.">
+<meta name="twitter:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2">
 
 
 
@@ -316,53 +316,71 @@
       
 
       
-        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议的概念、基本流程和关键步骤，讨论了在开发 OAuth 2.0 应用时的注意事项，接着在充分阅读和理解 RFC-6749 规范和参考国内外主流网站的 OAuth 2.0 实现之上，设计并实现了一个基于 OAuth 2.0 协议的开放授权应用，指出了常规 OAuth 2.0 应用在登录流程中的不足之处，并给出优化方案，给予实践证明。<br><a id="more"></a></p>
-<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="课题背景"><a href="#课题背景" class="headerlink" title="课题背景"></a>课题背景</h2><p>随着互联网行业的蓬勃发展，网络站点和应用APP的越来越多，用户在不同应用之间的使用上出现了一个问题。为了使用不同厂商的应用，如「贴吧」、「淘宝」和「QQ」，用户必须为每个应用单独注册帐号。在注册少数大厂的帐号之后，用户还必须为成千上百的中小型应用注册帐号，这极其繁琐和非人性化的使用现状，使得互联网领域中必须尽快出现一个可以连接不同应用用户体系的可靠可行的规范协议，这就是 OAuth 协议。</p>
-<p>在互联网工程任务组第73次会议上，举行了OAuth的起始会议，讨论了将OAuth协议纳入IETF做进一步的规范化工作。OAuth 协议第一版在 2010 年 4 月发表为 RFC-5849，但 RFC-5849 仅是一个非正式的 RFC。2012 年 10 月 OAuth 2.0 正式发布，它作为 OAuth 1.0 协议的下一版本但不向下兼容 OAuth 1.0。OAuth 2.0 协议关注客户端开发者的简易性，同时为Web、APP等多种客户端提供认证授权服务。目前各大主流网站均已支持 OAuth 2.0 协议。</p>
-<h2 id="研究意义"><a href="#研究意义" class="headerlink" title="研究意义"></a>研究意义</h2><p>传统的客户端-服务端认证模式是基于cookie-session方式实现。为了认证客户端，服务端必须记录客户端的凭证，通常是用户名和密码，这使得不同应用之间无法相互共享用户数据。为解决这个问题，</p>
-<h2 id="本文的工作"><a href="#本文的工作" class="headerlink" title="本文的工作"></a>本文的工作</h2><ol>
-<li>阅读 RFC-6479 规范文档，理解 OAuth 2.0 协议原理；</li>
-<li>实践证明 OAuth 2.0 协议的可行性与可靠性；</li>
-<li>引入 WebSocket 技术，优化 OAuth 2.0 应用中的繁琐流程。</li>
+        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2.0 应用时的注意事项，接着在充分阅读和理解 RFC-6749 规范和参考国内外主流网站的 OAuth 2.0 实现之上，设计并实现了一个基于 OAuth 2.0 协议的开放授权应用，证实 OAuth 2.0 协议的可用性和可靠性，并指出了常规 OAuth 2.0 应用在登录流程中的不足之处，给出优化方案，给予实践证明。<br><a id="more"></a></p>
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="背景与意义"><a href="#背景与意义" class="headerlink" title="背景与意义"></a>背景与意义</h2><p>随着互联网行业的蓬勃发展，网络站点和应用APP的越来越多，用户在不同应用之间的使用上出现了一个问题：为了使用不同厂商的应用，如「贴吧」、「淘宝」和「QQ」，用户必须为每个应用单独注册帐号。在注册少数常用应用的帐号之后，用户还必须为低频使用的几十上百的应用注册帐号。这极其繁琐和非人性化的使用现状，使得互联网领域中必须尽快出现一个可以连接不同应用用户体系的可靠可行的规范协议，这就是 OAuth 协议。</p>
+<p>在互联网工程任务组第73次会议上，举行了OAuth的起始会议，讨论了将OAuth协议纳入IETF做进一步的规范化工作。OAuth 协议第一版在 2010 年 4 月发表为 RFC-5849，但 RFC-5849 仅是一个非正式的 RFC。2012 年 10 月 OAuth 2.0 正式发布，它作为 OAuth 1.0 协议的下一版本但不向下兼容 OAuth 1.0 协议。OAuth 2.0 协议关注客户端开发者的简易性，同时为移动设备、Web应用、桌面应用等多种客户端提供认证授权服务。</p>
+<p>目前，国内外各大主流网站均已支持 OAuth 2.0 协议，国外的Facebook、Google、Twitter，国内的腾讯、新浪、豆瓣等等的诸多大型互联网公司都已在其开发者平台上提供了基于 OAuth 2.0 的开放授权 OpenApi。这意味着市场上的其它中小型应用便可以通过遵循 OAuth 2.0 协议流程，引入这些大型互联网公司的海量用户资源，以此吸引更多用户，从而提高应用。</p>
+<p>本课题着手于 RFC-6479 规范文档，充分理解 OAuth 2.0 协议的原理，并付诸实践。。。。。。。。。。。。。。。旨在证实 OAuth 2.0 协议的可用性和可靠性，并指出一个常规 OAuth 2.0 应用中存在的不足之处，并给予可行的优化方案。</p>
+<h2 id="本文的工作"><a href="#本文的工作" class="headerlink" title="本文的工作"></a>本文的工作</h2><p>基于以上背景和意义，本文将做以下工作：</p>
+<ol>
+<li>阅读 RFC-6479 规范文档，提炼 OAuth 2.0 基本概念、主要流程、关键步骤、注意事项等内容；</li>
+<li>比较各大主流网站的 OAuth 2.0 实现，总结并得出 OAuth 2.0 协议的最佳实践；</li>
+<li>设计并实现一个基于 OAuth 2.0 协议的认证授权应用，证实 OAuth 2.0 协议的可用性和可靠性；</li>
+<li>基于第三步中的应用，引入 HTML5 规范中的 WebSocket 技术，优化标准 OAuth 2.0 应用中的登录流程。</li>
 </ol>
 <hr>
-<h1 id="OAuth-2-0-协议"><a href="#OAuth-2-0-协议" class="headerlink" title="OAuth 2.0 协议"></a>OAuth 2.0 协议</h1><h2 id="协议简介"><a href="#协议简介" class="headerlink" title="协议简介"></a>协议简介</h2><h2 id="协议角色"><a href="#协议角色" class="headerlink" title="协议角色"></a>协议角色</h2><p>OAuth 定义了四个角色：</p>
+<h1 id="OAuth-2-0-协议"><a href="#OAuth-2-0-协议" class="headerlink" title="OAuth 2.0 协议"></a>OAuth 2.0 协议</h1><h2 id="协议简介"><a href="#协议简介" class="headerlink" title="协议简介"></a>协议简介</h2><p>OAuth 2.0 授权框架允许第三方应用，代表「资源所有者」通过合法地协调「资源所有者」和 HTTP 服务之间交互，或者仅代表「第三方应用」本身，对 HTTP 服务进行有限地访问。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。</p>
+<p>OAuth 2.0 协议允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。每一个令牌授权一个特定的网站（例如，视频编辑网站)在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth 2.0 协议让用户可以授权第三方网站访问他们存储在另外服务提供者的某些特定信息，而非所有内容。</p>
+<h2 id="协议角色"><a href="#协议角色" class="headerlink" title="协议角色"></a>协议角色</h2><p>OAuth 2.0 协议中定义了以下四个角色：</p>
 <ul>
-<li>resource owner<br>能授予访问 <em>受保护资源</em> 的实体。当 <em>资源所有者</em> 是人类的时候，被称为终端用户；</li>
-<li>resource server<br>托管 <em>受保护资源</em>，能接收和响应使用 <em>访问令牌</em> 访问 <em>受保护资源</em> 请求的服务器；</li>
-<li>client<br>代表 <em>资源所有者</em>，使用其授权凭据获取 <em>受保护资源</em> 的应用；</li>
-<li>authorization server<br>颁发 <em>访问令牌</em> 给成功认证并获得授权之后的 <em>客户端</em> 的服务器。</li>
+<li>Resource Owner：资源所有者，是一个能授予访问「受保护资源」权限的实体。当资源所有者是人的时候，它被称为终端的用户。</li>
+<li>Resource Server：资源服务器，是一个托管了受保护资源，能接收和响应使用「访问令牌」访问受保护资源请求的服务器。</li>
+<li>Client：客户端，是代表 Resource Owner，使用其「授权许可」获取受保护资源的第三方应用。术语 Client 并非特指某一特定的的实现点，服务端程序或桌面应用或移动设备，都可以是 OAuth 2.0 协议流程中的客户端。</li>
+<li>Authorization Server：授权服务器，是在 Client 认证成功，并获取了 Resource Owner 的授权之后，颁发访问令牌给 Client 的服务器。</li>
 </ul>
-<h2 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h2><h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><pre><code>+--------+                               +---------------+
-|        |--(A)- Authorization Request -&gt;|   Resource    |
-|        |                               |     Owner     |
-|        |&lt;-(B)-- Authorization Grant ---|               |
-|        |                               +---------------+
-|        |
-|        |                               +---------------+
-|        |--(C)-- Authorization Grant --&gt;| Authorization |
-| Client |                               |     Server    |
-|        |&lt;-(D)----- Access Token -------|               |
-|        |                               +---------------+
-|        |
-|        |                               +---------------+
-|        |--(E)----- Access Token ------&gt;|    Resource   |
-|        |                               |     Server    |
-|        |&lt;-(F)--- Protected Resource ---|               |
-+--------+                               +---------------+
-</code></pre><p>协议主要流程：</p>
-<ol>
-<li>客户端向资源所有者请求授权。</li>
-<li>客户端收到<em>授权许可</em>，<em>授权许可</em>代表了资源所有者的授权凭据。</li>
-<li>客户端向授权服务器请求<em>访问令牌</em>。</li>
-<li>授权服务器认证<em>客户端身份</em>和验证其<em>授权许可</em>，若认证成功，则颁发<em>访问令牌</em>。</li>
-<li>客户端通过<em>访问令牌</em>，向资源服务器请求受保护资源。</li>
-<li>资源服务器验证请求中<em>访问令牌</em>，若验证成功，则响应对应的受保护资源。</li>
-</ol>
-<h2 id="关键步骤"><a href="#关键步骤" class="headerlink" title="关键步骤"></a>关键步骤</h2><h3 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h3><h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>注意事项：</p>
+<h2 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h2><p>OAuth 2.0 协议中包含了以下关键术语：</p>
 <ul>
-<li>术语<em>客户端</em>并非特指任何特定的的实现特点(例如:应用程序是否是在服务器、台式机或其他设备上执行)。</li>
-<li>客户端从资源所有者获得授权许可(步骤1和2所示)的更好方法是使用授权服务器作为中介。</li>
+<li>Protected Resource：受保护资源</li>
+<li>Authorization Grant：授权许可，是一个代表 Resource Owner 授权的凭证，由 Client 在获取 Access Token 时使用。OAuth 2.0 协议规范中定义了四种授权类型：授权码、隐式授权、用户密码凭据和客户端凭据。<ul>
+<li>Authorization Code：授权码，是通过使用 Authorization Server 作为 Client 和 Resource Owner 之间的中介获得的。Client 不是直接向 Resource Owner 请求授权，而是将 Resource Owner 引导到 Authorization Server，从而将 Resource Owner 转发给具有授权码的 Client。</li>
+<li>Implicit：隐式授权</li>
+<li>Resource Owner Password Credentials：用户密码凭据</li>
+<li>Client Credentials：客户端凭据</li>
+</ul>
+</li>
+<li>Access Token：访问令牌，是用于获取受保护资源的凭据，是一个代表了颁发给 Client 的授权信息的字符串。访问令牌对客户端来说通常是加密且非透明的。访问令牌由 Resource Owner 授予，指定了请求访问的范围和有效期。Resource Server 和 Authorization Server 应共同限制访问令牌的访问行为。</li>
+<li>Refresh Token：刷新令牌，是用于获取访问令牌的凭据，由 Authorization Server 颁发给 Client。刷新令牌是在当访问令牌失效或过期之后，由 Client 使用获取新的访问令牌时使用。刷新令牌也可以获取额外的相同或更窄访问范围的访问令牌时使用。Authorization Server 是可选地选择是否颁发刷新令牌给 Client。与访问令牌不同，刷新令牌只与 Authorization Server 交互，并且永远不会被发送给 Resource Server。</li>
+</ul>
+<h2 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h2><h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">+--------+                               +---------------+</div><div class="line">|        |--(A)- Authorization Request -&gt;|   Resource    |</div><div class="line">|        |                               |     Owner     |</div><div class="line">|        |&lt;-(B)-- Authorization Grant ---|               |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |--(C)-- Authorization Grant --&gt;| Authorization |</div><div class="line">| Client |                               |     Server    |</div><div class="line">|        |&lt;-(D)----- Access Token -------|               |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |--(E)----- Access Token ------&gt;|    Resource   |</div><div class="line">|        |                               |     Server    |</div><div class="line">|        |&lt;-(F)--- Protected Resource ---|               |</div><div class="line">+--------+                               +---------------+</div><div class="line">                        图 3.4.1</div></pre></td></tr></table></figure>
+<p>OAuth 2.0 协议中四个角色的交互流程如图 3.4.1 所示，基本流程包括如下步骤：</p>
+<ol>
+<li>(A) Client 向 Resource Owner 请求授权许可。授权请求可以如图所示直接发送给 Resource Owner，但最好是间接地通过 Authorization Server 请求授权。</li>
+<li>(B) Client 接收到一个代表 Resource Owner 授权的授权许可，通常以协议规范中定义的四种许可类型之一表示。授权许可的类型由 Client 请求授权和 Authorization Server 所支持的类型决定。</li>
+<li>(C) Client 向 Authorization Server 认证身份，并通过展示授权许可请求访问令牌。</li>
+<li>(D) Authorization Server 认证 Client 身份并验证其授权许可，若认证成功则颁发访问令牌。</li>
+<li>(E) CLient 通过展示访问令牌向 Resource Server请求受保护资源。</li>
+<li>(F) Resource Server 验证请求中访问令牌，若验证成功则响应 Client 请求。</li>
+</ol>
+<h3 id="刷新令牌流程"><a href="#刷新令牌流程" class="headerlink" title="刷新令牌流程"></a>刷新令牌流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">+--------+                                           +---------------+</div><div class="line">|        |--(A)------- Authorization Grant ---------&gt;|               |</div><div class="line">|        |                                           |               |</div><div class="line">|        |&lt;-(B)----------- Access Token -------------|               |</div><div class="line">|        |               &amp; Refresh Token             |               |</div><div class="line">|        |                                           |               |</div><div class="line">|        |                            +----------+   |               |</div><div class="line">|        |--(C)---- Access Token ----&gt;|          |   |               |</div><div class="line">|        |                            |          |   |               |</div><div class="line">|        |&lt;-(D)- Protected Resource --| Resource |   | Authorization |</div><div class="line">| Client |                            |  Server  |   |     Server    |</div><div class="line">|        |--(E)---- Access Token ----&gt;|          |   |               |</div><div class="line">|        |                            |          |   |               |</div><div class="line">|        |&lt;-(F)- Invalid Token Error -|          |   |               |</div><div class="line">|        |                            +----------+   |               |</div><div class="line">|        |                                           |               |</div><div class="line">|        |--(G)----------- Refresh Token -----------&gt;|               |</div><div class="line">|        |                                           |               |</div><div class="line">|        |&lt;-(H)----------- Access Token -------------|               |</div><div class="line">+--------+           &amp; Optional Refresh Token        +---------------+</div><div class="line">                        图 3.4.2</div></pre></td></tr></table></figure>
+<p>含有刷新令牌的协议流程如图 3.4.2所示，流程包括如下步骤：</p>
+<ol>
+<li>(A) Client 向 Authorization Server 请求认证，并使用授权许可获取访问令牌。</li>
+<li>(B) Authorization Server 认证 Client 身份并验证其 Authorization Grant，若认证成功则颁发访问令牌和刷新令牌。</li>
+<li>(C) CLient 通过展示访问令牌向 Resource Server请求受保护资源。</li>
+<li>(D) Resource Server 验证请求中访问令牌，若验证成功则响应 Client 请求。</li>
+<li>(E) 重复（C）和（D）步骤直到访问令牌失效。若 CLient 得知访问令牌已经失效则跳转到（G），否则就再次请求访问受保护资源。</li>
+<li>(F) 访问令牌失效之后，Resource Owner 返回一个无效令牌的错误描述。</li>
+<li>(G) Client 通过展示刷新令牌，向 Authorization Server 请求一个新的访问令牌。客户端认证需要基于客户端的类型和授权服务器的认证策略。</li>
+<li>(H) Authorization Server 认证 Client 身份并验证其刷新令牌，若认证成功则颁发一个新的访问令牌和一个可选的刷新令牌。</li>
+</ol>
+<h2 id="关键步骤"><a href="#关键步骤" class="headerlink" title="关键步骤"></a>关键步骤</h2><h3 id="客户端注册"><a href="#客户端注册" class="headerlink" title="客户端注册"></a>客户端注册</h3><h3 id="客户端认证"><a href="#客户端认证" class="headerlink" title="客户端认证"></a>客户端认证</h3><h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>注意事项：</p>
+<ul>
+<li>Resource Server 和 Authorization Server 应共同限制访问令牌中指定的访问范围和有效期。</li>
+<li>Authorization Server 颁发刷新令牌给 Client 是可选的。</li>
+<li><p>刷新令牌只与 Authorization Server 交互，永远不会被发送给 Resource Server。</p>
+</li>
+<li><p>客户端从资源所有者获得授权许可(步骤1和2所示)的更好方法是使用授权服务器作为中介。</p>
+</li>
 <li>访问令牌所限制客户端的访问时间和访问范围，由资源服务器和认证服务器共同限制。</li>
 <li>访问令牌可以表示一个取回授权信息的标识符，或者可以自包含相关授权信息（token字符串携带一些数据和签名）。</li>
 <li>刷新令牌是可选的，有授权服务器决定，且刷新令牌只与授权服务器交互，与资源服务器无交互</li>
@@ -374,8 +392,8 @@
 <h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h2><h3 id="结构体系"><a href="#结构体系" class="headerlink" title="结构体系"></a>结构体系</h3><h4 id="服务端结构体系"><a href="#服务端结构体系" class="headerlink" title="服务端结构体系"></a>服务端结构体系</h4><h4 id="客户端结构体系"><a href="#客户端结构体系" class="headerlink" title="客户端结构体系"></a>客户端结构体系</h4><h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><p>伪代码/流程图</p>
 <h2 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h2><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><p>明确、充分</p>
 <hr>
-<h1 id="OAuth-2-0-应用优化"><a href="#OAuth-2-0-应用优化" class="headerlink" title="OAuth 2.0 应用优化"></a>OAuth 2.0 应用优化</h1><h2 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h2><h2 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h2><h3 id="WebScoket-技术简介"><a href="#WebScoket-技术简介" class="headerlink" title="WebScoket 技术简介"></a>WebScoket 技术简介</h3><p>WebSocket 是一种在单个 TCP 连接上进行双全工通讯的协议。WebSocket 通信协议于 2011 年被 IETF 定为标准 RFC-6455，并被 RFC-7936 所补充规范。WebSocket API也被W3C定为标准。</p>
-<p>WebSocket 作为一种持久化协议，区别于非持久的 HTTP 协议。它相比于其它的信息传递方式，如「长连接 long poll」和「Ajax 轮询」，具有：</p>
+<h1 id="OAuth-2-0-应用优化"><a href="#OAuth-2-0-应用优化" class="headerlink" title="OAuth 2.0 应用优化"></a>OAuth 2.0 应用优化</h1><h2 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h2><h2 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h2><h3 id="WebScoket-技术简介"><a href="#WebScoket-技术简介" class="headerlink" title="WebScoket 技术简介"></a>WebScoket 技术简介</h3><p>WebSocket 是一种在单个 TCP 连接上进行双全工通讯的协议。WebSocket 通信协议于 2011 年被 IETF 定为标准 RFC-6455，并被 RFC-7936 所补充规范。WebSocket API 也被 W3C 定为标准。</p>
+<p>WebSocket 作为一种持久化协议，区别于非持久的 HTTP 协议。它相比于其它的信息传递方式，如长连接 long poll 和 Ajax 轮询，具有：</p>
 <ol>
 <li>较少的控制开销</li>
 <li>更强的实时性</li>
@@ -564,7 +582,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绪论"><span class="nav-number">2.</span> <span class="nav-text">绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#课题背景"><span class="nav-number">2.1.</span> <span class="nav-text">课题背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究意义"><span class="nav-number">2.2.</span> <span class="nav-text">研究意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本文的工作"><span class="nav-number">2.3.</span> <span class="nav-text">本文的工作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth-2-0-协议"><span class="nav-number">3.</span> <span class="nav-text">OAuth 2.0 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议简介"><span class="nav-number">3.1.</span> <span class="nav-text">协议简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议角色"><span class="nav-number">3.2.</span> <span class="nav-text">协议角色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#术语解释"><span class="nav-number">3.3.</span> <span class="nav-text">术语解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本流程"><span class="nav-number">3.4.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键步骤"><span class="nav-number">3.5.</span> <span class="nav-text">关键步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">3.5.1.</span> <span class="nav-text">认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">3.5.2.</span> <span class="nav-text">授权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">3.6.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth-2-0-应用实现"><span class="nav-number">4.</span> <span class="nav-text">OAuth 2.0 应用实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思路"><span class="nav-number">4.1.</span> <span class="nav-text">基本思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方案"><span class="nav-number">4.2.</span> <span class="nav-text">实现方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体系"><span class="nav-number">4.2.1.</span> <span class="nav-text">结构体系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端结构体系"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">服务端结构体系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端结构体系"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">客户端结构体系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现细节"><span class="nav-number">4.3.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行效果"><span class="nav-number">4.4.</span> <span class="nav-text">运行效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存在的问题"><span class="nav-number">4.5.</span> <span class="nav-text">存在的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth-2-0-应用优化"><span class="nav-number">5.</span> <span class="nav-text">OAuth 2.0 应用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#产生原因"><span class="nav-number">5.1.</span> <span class="nav-text">产生原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方案"><span class="nav-number">5.2.</span> <span class="nav-text">优化方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebScoket-技术简介"><span class="nav-number">5.2.1.</span> <span class="nav-text">WebScoket 技术简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入-WebSocket-技术"><span class="nav-number">5.2.2.</span> <span class="nav-text">引入 WebSocket 技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现细节-1"><span class="nav-number">5.3.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试效果"><span class="nav-number">5.4.</span> <span class="nav-text">测试效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结束语"><span class="nav-number">6.</span> <span class="nav-text">结束语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#致谢"><span class="nav-number">7.</span> <span class="nav-text">致谢</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绪论"><span class="nav-number">2.</span> <span class="nav-text">绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景与意义"><span class="nav-number">2.1.</span> <span class="nav-text">背景与意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本文的工作"><span class="nav-number">2.2.</span> <span class="nav-text">本文的工作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth-2-0-协议"><span class="nav-number">3.</span> <span class="nav-text">OAuth 2.0 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议简介"><span class="nav-number">3.1.</span> <span class="nav-text">协议简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议角色"><span class="nav-number">3.2.</span> <span class="nav-text">协议角色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#术语解释"><span class="nav-number">3.3.</span> <span class="nav-text">术语解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要流程"><span class="nav-number">3.4.</span> <span class="nav-text">主要流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本流程"><span class="nav-number">3.4.1.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷新令牌流程"><span class="nav-number">3.4.2.</span> <span class="nav-text">刷新令牌流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键步骤"><span class="nav-number">3.5.</span> <span class="nav-text">关键步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端注册"><span class="nav-number">3.5.1.</span> <span class="nav-text">客户端注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端认证"><span class="nav-number">3.5.2.</span> <span class="nav-text">客户端认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">3.5.3.</span> <span class="nav-text">授权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">3.6.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth-2-0-应用实现"><span class="nav-number">4.</span> <span class="nav-text">OAuth 2.0 应用实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思路"><span class="nav-number">4.1.</span> <span class="nav-text">基本思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方案"><span class="nav-number">4.2.</span> <span class="nav-text">实现方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体系"><span class="nav-number">4.2.1.</span> <span class="nav-text">结构体系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端结构体系"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">服务端结构体系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端结构体系"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">客户端结构体系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现细节"><span class="nav-number">4.3.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行效果"><span class="nav-number">4.4.</span> <span class="nav-text">运行效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存在的问题"><span class="nav-number">4.5.</span> <span class="nav-text">存在的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth-2-0-应用优化"><span class="nav-number">5.</span> <span class="nav-text">OAuth 2.0 应用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#产生原因"><span class="nav-number">5.1.</span> <span class="nav-text">产生原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方案"><span class="nav-number">5.2.</span> <span class="nav-text">优化方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebScoket-技术简介"><span class="nav-number">5.2.1.</span> <span class="nav-text">WebScoket 技术简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入-WebSocket-技术"><span class="nav-number">5.2.2.</span> <span class="nav-text">引入 WebSocket 技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现细节-1"><span class="nav-number">5.3.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试效果"><span class="nav-number">5.4.</span> <span class="nav-text">测试效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结束语"><span class="nav-number">6.</span> <span class="nav-text">结束语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#致谢"><span class="nav-number">7.</span> <span class="nav-text">致谢</span></a></li></ol></div>
             
           </div>
         </section>
