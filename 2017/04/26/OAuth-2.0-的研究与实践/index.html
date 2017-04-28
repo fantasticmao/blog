@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/04/26/OAuth-2.0-的研究与实践/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2">
-<meta property="og:updated_time" content="2017-04-28T07:43:59.264Z">
+<meta property="og:updated_time" content="2017-04-28T16:17:31.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OAuth 2.0 的研究与实践">
 <meta name="twitter:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2">
@@ -317,10 +317,14 @@
 
       
         <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2.0 应用时的注意事项，接着在充分阅读和理解 RFC-6749 规范和参考国内外主流网站的 OAuth 2.0 实现之上，设计并实现了一个基于 OAuth 2.0 协议的开放授权应用，证实 OAuth 2.0 协议的可用性和可靠性，并指出了常规 OAuth 2.0 应用在登录流程中的不足之处，给出优化方案，给予实践证明。<br><a id="more"></a></p>
-<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="背景与意义"><a href="#背景与意义" class="headerlink" title="背景与意义"></a>背景与意义</h2><p>随着互联网行业的蓬勃发展，网络站点和应用APP的越来越多，用户在不同应用之间的使用上出现了一个问题：为了使用不同厂商的应用，如「贴吧」、「淘宝」和「QQ」，用户必须为每个应用单独注册帐号。在注册少数常用应用的帐号之后，用户还必须为低频使用的几十上百的应用注册帐号。这极其繁琐和非人性化的使用现状，使得互联网领域中必须尽快出现一个可以连接不同应用用户体系的可靠可行的规范协议，这就是 OAuth 协议。</p>
-<p>在互联网工程任务组第73次会议上，举行了OAuth的起始会议，讨论了将OAuth协议纳入IETF做进一步的规范化工作。OAuth 协议第一版在 2010 年 4 月发表为 RFC-5849，但 RFC-5849 仅是一个非正式的 RFC。2012 年 10 月 OAuth 2.0 正式发布，它作为 OAuth 1.0 协议的下一版本但不向下兼容 OAuth 1.0 协议。OAuth 2.0 协议关注客户端开发者的简易性，同时为移动设备、Web应用、桌面应用等多种客户端提供认证授权服务。</p>
-<p>目前，国内外各大主流网站均已支持 OAuth 2.0 协议，国外的Facebook、Google、Twitter，国内的腾讯、新浪、豆瓣等等的诸多大型互联网公司都已在其开发者平台上提供了基于 OAuth 2.0 的开放授权 OpenApi。这意味着市场上的其它中小型应用便可以通过遵循 OAuth 2.0 协议流程，引入这些大型互联网公司的海量用户资源，以此吸引更多用户，从而提高应用。</p>
-<p>本课题着手于 RFC-6479 规范文档，充分理解 OAuth 2.0 协议的原理，并付诸实践。。。。。。。。。。。。。。。旨在证实 OAuth 2.0 协议的可用性和可靠性，并指出一个常规 OAuth 2.0 应用中存在的不足之处，并给予可行的优化方案。</p>
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="背景与意义"><a href="#背景与意义" class="headerlink" title="背景与意义"></a>背景与意义</h2><p>随着互联网行业的蓬勃发展，网络站点和应用APP的越来越多，用户在不同应用之间的使用上出现了一个问题：为了使用不同厂商的应用，如「贴吧」、「淘宝」和「QQ」，用户必须为每个应用单独注册帐号。在注册少数常用应用的帐号之后，用户还必须为一些低频使用的应用注册帐号。这繁琐应用使用现状和非人性化的用户体验，使得互联网领域中需要出现一个可以连接不同应用用户体系的可靠可行的规范协议，这就是 OAuth 协议。</p>
+<p>OAuth 协议始于 2006 年 11 月，当时布莱恩·库克正在实现 Twitter 的 OpenID 协议。与此同时，社交书签网站 Ma.gnolia 正需要一个解决方案允许使用 OpenID 的成员授权 Dashboard 访问他们的服务。这样库克、克里斯·梅西纳和来自 Ma.gnolia 的拉里·哈尔夫与戴维·雷科尔顿会面讨论在 Twitter 和 Ma.gnolia API 上使用 OpenID 进行委托授权。他们讨论得出结论，认为没有完成 API 访问委托的开放标准。</p>
+<p>OAuth 讨论小组成立于 2007 年 4 月，这个由实现者组成的小组撰写了一个开放协议的提议草案。来自 Google 的德维特·克林顿获悉 OAuth 项目后，表示他有兴趣支持这个工作。2007 年 7 月，团队起草了最初的规范。随后，Eran Hammer-Lahav 加入团队并协调了许多 OAuth 的稿件，创建了更为正式的规范。2007 年 10 月, OAuth 核心 1.0 版本最后的草案发布了。</p>
+<p>2008 年 11 月，在明尼阿波利斯举行的互联网工程任务组第 73 次会议上，举行了 OAuth 的起始会议，讨论将该协议纳入 IETF 做进一步的规范化工作。这个会议参加的人很多，关于正式地授权在 IETF 设立一个 OAuth 工作组这一议题得到了广泛的支持。</p>
+<p>2010 年 4 月，OAuth 1.0 协议发表为 RFC-5849，一个非正式 RFC。</p>
+<p>2012 年 10 月 OAuth 2.0 正式发布，它作为 OAuth 协议的下一版本但不向下兼容 OAuth 1.0 协议。OAuth 2.0 协议关注客户端开发者的简易性，同时为移动设备、Web应用、桌面应用等多种客户端提供认证授权服务。</p>
+<p>目前，国内外各大主流互联网公司如 Facebook、Google、腾讯、新浪等，均已支持 OAuth 2.0 协议。通过在其开发者平台上提供基于 OAuth 2.0 的开放授权 OpenApi ，由客户端开发者调用，便可以向市场上的其它中小型应用分享其海量的用户数据。通过这种方式，不同厂家不同类型的应用只要遵循 OAuth 2.0 协议流程，就可以引入各大主流网站的用户资源，简化登录流程，优化用户体验，从而提高应用的可用性和用户的活跃度。</p>
+<p>本课题着手于 RFC-6479 规范文档，研究 OAuth 2.0 协议的工作原理，并参考各大主流网站 OAuth 2.0 协议的实现，付诸实践证实 OAuth 2.0 协议的可用性和可靠性，期望总结并得出一套开发 OAuth 2.0 应用的最佳实践。</p>
 <h2 id="本文的工作"><a href="#本文的工作" class="headerlink" title="本文的工作"></a>本文的工作</h2><p>基于以上背景和意义，本文将做以下工作：</p>
 <ol>
 <li>阅读 RFC-6479 规范文档，提炼 OAuth 2.0 基本概念、主要流程、关键步骤、注意事项等内容；</li>
@@ -340,14 +344,8 @@
 </ul>
 <h2 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h2><p>OAuth 2.0 协议中包含了以下关键术语：</p>
 <ul>
-<li>Protected Resource：受保护资源</li>
-<li>Authorization Grant：授权许可，是一个代表 Resource Owner 授权的凭证，由 Client 在获取 Access Token 时使用。OAuth 2.0 协议规范中定义了四种授权类型：授权码、隐式授权、用户密码凭据和客户端凭据。<ul>
-<li>Authorization Code：授权码，是通过使用 Authorization Server 作为 Client 和 Resource Owner 之间的中介获得的。Client 不是直接向 Resource Owner 请求授权，而是将 Resource Owner 引导到 Authorization Server，从而将 Resource Owner 转发给具有授权码的 Client。</li>
-<li>Implicit：隐式授权</li>
-<li>Resource Owner Password Credentials：用户密码凭据</li>
-<li>Client Credentials：客户端凭据</li>
-</ul>
-</li>
+<li>Protected Resource：受保护资源，是 Resource Owner 存储在 Resource Server 上的数据。OAuth 2.0 协议允许第三方应用通过访问令牌，在一定范围和有效期内受限制地访问用户存储在 Resource Server 上的用户私密数据。</li>
+<li>Authorization Grant：授权许可，是一个代表 Resource Owner 授权的凭证，由 Client 在获取访问令牌时使用。OAuth 2.0 协议规范中定义了四种授权类型：授权码、隐式授权、用户密码凭据和客户端凭据。</li>
 <li>Access Token：访问令牌，是用于获取受保护资源的凭据，是一个代表了颁发给 Client 的授权信息的字符串。访问令牌对客户端来说通常是加密且非透明的。访问令牌由 Resource Owner 授予，指定了请求访问的范围和有效期。Resource Server 和 Authorization Server 应共同限制访问令牌的访问行为。</li>
 <li>Refresh Token：刷新令牌，是用于获取访问令牌的凭据，由 Authorization Server 颁发给 Client。刷新令牌是在当访问令牌失效或过期之后，由 Client 使用获取新的访问令牌时使用。刷新令牌也可以获取额外的相同或更窄访问范围的访问令牌时使用。Authorization Server 是可选地选择是否颁发刷新令牌给 Client。与访问令牌不同，刷新令牌只与 Authorization Server 交互，并且永远不会被发送给 Resource Server。</li>
 </ul>
