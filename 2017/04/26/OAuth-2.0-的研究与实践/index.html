@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/04/26/OAuth-2.0-的研究与实践/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2">
-<meta property="og:updated_time" content="2017-05-01T03:13:08.479Z">
+<meta property="og:updated_time" content="2017-05-01T04:09:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OAuth 2.0 的研究与实践">
 <meta name="twitter:description" content="摘要OAuth 2.0 是由互联网工程任务组于 2012 年 10 月发表在 RFC-6749 规范文档中定义的认证授权协议，是一种基于 HTTP 重定向实现的开放授权框架。它允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。本文先简单介绍 OAuth 2.0 协议基本概念、主要流程和关键步骤，讨论了在开发 OAuth 2">
@@ -356,7 +356,7 @@
 <li>Redirection Endpoint：重定向端点，由 Authorization Server 在与 Resorce Owner 交互完成之后，重定向用户代理时使用。</li>
 <li>Token Endpoint：令牌端点，是由 Client 使用，通过展示其授权许可或者刷新令牌从而获取访问令牌。令牌终端可以由所有类型的授权许可使用，除了隐式授权类型。</li>
 <li>Access Token：访问令牌，是用于获取受保护资源的凭据，是一个代表了颁发给 Client 的授权信息的字符串。访问令牌对客户端来说通常是加密且非透明的。访问令牌由 Resource Owner 授予，指定了请求访问的范围和有效期。Resource Server 和 Authorization Server 应共同限制访问令牌的访问行为。</li>
-<li>Refresh Token：刷新令牌，是用于获取访问令牌的凭据，由 Authorization Server 颁发给 Client。刷新令牌是在当访问令牌失效或过期之后，由 Client 使用获取新的访问令牌时使用。刷新令牌也可以获取额外的相同或更窄访问范围的访问令牌时使用。Authorization Server 是可选地选择是否颁发刷新令牌给 Client。与访问令牌不同，刷新令牌只与 Authorization Server 交互，并且永远不会被发送给 Resource Server。</li>
+<li>Refresh Token：刷新令牌，是用于获取访问令牌的凭据，由 Authorization Server 颁发给 Client。刷新令牌是在当访问令牌失效或过期之后，由 Client 使用获取新的访问令牌时使用。刷新令牌也可以获取额外的相同或更窄访问范围的访问令牌时使用。</li>
 </ul>
 <h2 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h2><h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">+--------+                               +---------------+</div><div class="line">|        |--(A)- Authorization Request -&gt;|   Resource    |</div><div class="line">|        |                               |     Owner     |</div><div class="line">|        |&lt;-(B)-- Authorization Grant ---|               |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |--(C)-- Authorization Grant --&gt;| Authorization |</div><div class="line">| Client |                               |     Server    |</div><div class="line">|        |&lt;-(D)----- Access Token -------|               |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |</div><div class="line">|        |                               +---------------+</div><div class="line">|        |--(E)----- Access Token ------&gt;|    Resource   |</div><div class="line">|        |                               |     Server    |</div><div class="line">|        |&lt;-(F)--- Protected Resource ---|               |</div><div class="line">+--------+                               +---------------+</div><div class="line">                        图 3.4.1</div></pre></td></tr></table></figure>
 <p>OAuth 2.0 协议中四个角色的交互流程如图 3.4.1 所示，基本流程包括如下步骤：</p>
@@ -429,12 +429,12 @@
 <li>Resource Server 和 Authorization Server 应共同限制访问令牌中指定的访问范围和有效期。</li>
 <li>Authorization Server 颁发刷新令牌给 Client 是可选的。</li>
 <li>Authorization Server 必须支持 HTTP 基本认证（Base64编码 username:password 字符串），且 Authorization Server 必须对 Client 认证做次数限制。</li>
+<li>Authorization Server 必须为持有密钥的 Client 支持 HTTP Basic 的认证方案。</li>
 <li>Client 请求访问令牌过程中，Authorization Server 必须验证其授权许可，以及请求中的回调 URI 和注册时填写的回调 URI 是否匹配。</li>
+<li>Client 获取访问令牌的请求必须使用 HTTP POST。</li>
 <li>访问令牌可以表示一个取回授权信息的标识符，或者可以自包含相关授权信息（token字符串携带一些数据和签名）。</li>
 <li>刷新令牌只与 Authorization Server 交互，永远不会被发送给 Resource Server。</li>
-<li>Authorization Server 必须为持有密钥的 Client 支持 HTTP Basic 的认证方案。</li>
 <li>在协议流程中的请求必须使用 TLS。</li>
-<li>Client 获取访问令牌的请求必须使用 HTTP POST。</li>
 </ul>
 <hr>
 <h1 id="OAuth-2-0-应用实现"><a href="#OAuth-2-0-应用实现" class="headerlink" title="OAuth 2.0 应用实现"></a>OAuth 2.0 应用实现</h1><h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>a. 对比主流应用对 OAuth 2.0 协议的支持情况<br>b. </p>
