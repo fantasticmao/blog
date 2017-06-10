@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JavaScript,jQuery," />
 
 
 
@@ -87,16 +87,17 @@
 
 
 
-<meta name="description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。">
+<meta name="description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。">
+<meta name="keywords" content="JavaScript,jQuery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery API 小记">
 <meta property="og:url" content="http://fantasticmao.cn/2017/04/21/jQuery-API-小记/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。">
-<meta property="og:updated_time" content="2017-06-09T16:04:59.000Z">
+<meta property="og:description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。">
+<meta property="og:updated_time" content="2017-06-10T09:16:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery API 小记">
-<meta name="twitter:description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。">
+<meta name="twitter:description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。">
 
 
 
@@ -104,7 +105,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -230,6 +231,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -327,8 +338,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/开发语言/" itemprop="url" rel="index">
+                    <span itemprop="name">开发语言</span>
                   </a>
                 </span>
 
@@ -373,9 +384,9 @@
       
 
       
-        <p>摘自《JavaScript 权威指南》第 19 章 jQuery 类库。<a id="more"></a></p>
-<h1 id="jQuery-基础"><a href="#jQuery-基础" class="headerlink" title="jQuery 基础"></a>jQuery 基础</h1><p>JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。</p>
-<p>jQuery 类库定义了一个全局函数：<code>jQuery()</code>。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：<code>$()</code>。这是 jQuery 在全局命名空间中定义的唯一两个变量。</p>
+        <p>摘自《JavaScript 权威指南》第 19 章 jQuery 类库。</p>
+<p>JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。<a id="more"></a></p>
+<h1 id="jQuery-基础"><a href="#jQuery-基础" class="headerlink" title="jQuery 基础"></a>jQuery 基础</h1><p>jQuery 类库定义了一个全局函数：<code>jQuery()</code>。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：<code>$()</code>。这是 jQuery 在全局命名空间中定义的唯一两个变量。</p>
 <p>在 jQuery 类库中，最重要的方法是 <code>jQuery()</code> 方法，也就是 <code>$()</code>。它的功能很强大，有4中不同的调用方式：</p>
 <ol>
 <li>传递 CSS 选择器（字符串）给 <code>$()</code> 方法。当通过这种方式调用时，<code>$()</code> 方法返回当前文档中匹配该选择器的元素集。</li>
@@ -409,12 +420,19 @@
 <p><code>scrollTop()</code> 和 <code>scrollLeft()</code> 可获取或设置元素的滚动条位置。这些方法可用在 Window 对象以及 Document 元素上。当用在 Document 对象上时，会获取或设置存放该 Document 的 Window 对象的滚动条位置。</p>
 <h2 id="获取和设置元素数据"><a href="#获取和设置元素数据" class="headerlink" title="获取和设置元素数据"></a>获取和设置元素数据</h2><p>jQuery 定义了一个名为 <code>data()</code> 的 getter/setter 方法，可用来获取或设置与文档元素、Document、Window 对象相关的数据。</p>
 <p><code>removeData()</code> 方法用来从元素中删除数据。如果不带参数调用 <code>removeData()</code>，它会删除与元素相关联的所有数据。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'div'</span>).data(<span class="string">'x'</span>, <span class="number">1</span>); <span class="comment">// 设置一些数据</span></div><div class="line">$(<span class="string">'div.nodata'</span>).removeData(<span class="string">'x'</span>); <span class="comment">// 删除一些数据</span></div><div class="line"><span class="keyword">var</span> x = $(<span class="string">'#mydiv'</span>).data(x); <span class="comment">// 获取一些数据</span></div></pre></td></tr></table></figure></p>
-<h1 id="修改文档结构"><a href="#修改文档结构" class="headerlink" title="修改文档结构"></a>修改文档结构</h1><p>HTML 文档表示为一棵节点树。</p>
+<h1 id="修改文档结构"><a href="#修改文档结构" class="headerlink" title="修改文档结构"></a>修改文档结构</h1><p>HTML 文档表示为一棵节点树，而不是一个字符的线性序列，因此插入、删除、替换操作不会像操作字符串和数组一样简单。</p>
 <p>下面演示的每一个方法都接收一个参数，用于指定需要插入文档中的内容。该参数可以是用于指定新内容的纯文本或 HTML 字符串，也可以是 jQuery 对象、元素或文本节点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#log'</span>).append(<span class="string">'&lt;br&gt;'</span> + message); <span class="comment">// 在 #log元素结尾处添加内容</span></div><div class="line">$(<span class="string">'h1'</span>).prepend(<span class="string">'§'</span>); <span class="comment">// 在每个 &lt;h1&gt; 的起始处添加章节标识</span></div><div class="line">$(<span class="string">'h1'</span>).before(<span class="string">'&lt;hr&gt;'</span>); <span class="comment">// 在每个 &lt;h1&gt; 的前面添加水平线</span></div><div class="line">$(<span class="string">'h1'</span>).after(<span class="string">'&lt;hr&gt;'</span>); <span class="comment">// 在每个 &lt;h1&gt; 的后面添加水平线</span></div><div class="line">$(<span class="string">'hr'</span>).replaceWith(<span class="string">'&lt;br&gt;'</span>); <span class="comment">// 替换 &lt;hr&gt; 元素为 &lt;br&gt;</span></div><div class="line">$(<span class="string">'h2'</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">// 将 &lt;h2&gt; 替换为 &lt;h1&gt;，内容保持不变</span></div><div class="line">    <span class="keyword">var</span> h2 = $(<span class="keyword">this</span>);</div><div class="line">    h2.replaceWith(<span class="string">'&lt;h1&gt;'</span> + h2.html() + <span class="string">'&lt;/h1&gt;'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p><code>clone()</code> 创建并返回每一个选中的元素的一个副本，其返回的 jQuery 对象还不是文档的一部分，但可以使用上一节的方法将其插入文档中。</p>
 <p>jQuery 定义了 3 种包装函数。<code>warp()</code> 包装每一个选中元素，<code>wrapInner()</code> 包装每一个选中元素的内容，<code>warpAll()</code> 将选中元素作为一组来包装。这些方法通常传入一个新创见的包装元素或用来创建元素的 HTML 字符串。</p>
 <p><code>empty()</code> 方法会删除每个选中元素的所有字节点，但不会修改元素自身。<code>remove()</code> 方法会从文档中移除选中元素，如果传入一个参数，该参数会被当成选择器，jQeury 对象中只有匹配该选择器的元素才会被移除。<code>remove()</code> 方法会移除所有事件处理程序以及可能绑定到被移除元素上的其它数据。<code>detach()</code> 和 <code>remove()</code> 方法类似，但不会移除事件处理程序和数据。</p>
-<h1 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h1><p>待续</p>
+<h1 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h1><p>jQuery 定义了一个统一事件 API，可兼容 IE（IE9 以下），并在所有浏览器中工作。jQuery API 具有简单的形式，比标准或 IE 的事件 API 更容易使用。jQuery API 还具有更复杂、功能更齐全的形式，比标准 API 更强大。</p>
+<h2 id="事件处理程序的简单注册"><a href="#事件处理程序的简单注册" class="headerlink" title="事件处理程序的简单注册"></a>事件处理程序的简单注册</h2><p>待续</p>
+<h2 id="jQuery-事件处理程序"><a href="#jQuery-事件处理程序" class="headerlink" title="jQuery 事件处理程序"></a>jQuery 事件处理程序</h2><p>jQuery 调用每一个事件处理程序时，都传入了一个或多个参数，并且对处理程序的返回值进行了处理。需要知道的最重要的一件事情是，每个事件处理程序都传入了一个 <a href="#jQuery-事件对象">jQuery 事件对象</a> 作为第一个参数。该对象的字段提供了与该事件相关的详细信息（比如鼠标指针的坐标）。jQuery 模拟标准 Event 对象，即便在不支持的标准事件对象的浏览器中（像 IE8 及其以下），jQuery 事件对象在所有浏览器上拥有一组相同的字段。</p>
+<p>jQuery 事件处理程序函数的返回值始终是有意义的。如果处理程序返回 false，与该事件相关联的默认行为，以及该事件接下来的冒泡都会被取消。也就是说，返回 false 等同于调用 Event 对象的 <code>preventDefault()</code> 和 <code>stopPropagation()</code> 方法。同样，当事件处理程序返回一个值（非 undefined 值）时，jQuery 会将该值存储在 Event 对象的 result 属性中，该属性可以被后续调用的事件处理程序访问。</p>
+<h2 id="jQuery-事件对象"><a href="#jQuery-事件对象" class="headerlink" title="jQuery 事件对象"></a>jQuery 事件对象</h2><p>待续</p>
+<h2 id="事件处理程序的高级注册"><a href="#事件处理程序的高级注册" class="headerlink" title="事件处理程序的高级注册"></a>事件处理程序的高级注册</h2><p>待续</p>
+<h2 id="注销事件处理程序"><a href="#注销事件处理程序" class="headerlink" title="注销事件处理程序"></a>注销事件处理程序</h2><h2 id="触发事件"><a href="#触发事件" class="headerlink" title="触发事件"></a>触发事件</h2><p>待续</p>
+<h2 id="实时事件"><a href="#实时事件" class="headerlink" title="实时事件"></a>实时事件</h2><p>待续</p>
 <h1 id="动画效果"><a href="#动画效果" class="headerlink" title="动画效果"></a>动画效果</h1><p>jQuery 定义了 <code>fadeIn()</code> 和 <code>fadeOut()</code> 等简单的方法实现常见视觉效果。除了简单动画方法，jQuery 还定义了一个 <code>animate()</code> 方法，用来实现更复杂的自定义动画。</p>
 <p><strong>jQuery 动画是异步的。</strong>调用 <code>fadeIn()</code> 等动画方法时，它会立刻返回，动画则在「后台」执行。如果一个元素已经在动画过程中，再调用一个动画方法时，新动画是不会立刻执行，而会延迟到当前动画结束后才执行。例如，可以让一个元素在持久显示前先闪烁一会：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#blinker'</span>).fadeIn(<span class="number">100</span>).fadeOut(<span class="number">100</span>).fadeIn(<span class="number">100</span>).fadeOut(<span class="number">100</span>).fadeIn(<span class="number">100</span>);</div></pre></td></tr></table></figure></p>
 <h2 id="简单动画"><a href="#简单动画" class="headerlink" title="简单动画"></a>简单动画</h2><ul>
@@ -458,6 +476,14 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+        </div>
       
 
       
@@ -566,12 +592,21 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -582,11 +617,29 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/FantasticMao" target="_blank" title="GitHub">
+                <a href="https://github.com/FantasticMao/" target="_blank" title="GitHub">
                   
                     <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.instagram.com/wonderfulmao/" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/FantasticMao/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
                 </a>
               </span>
             
@@ -618,6 +671,18 @@
                   <a href="http://jm.taobao.org/" title="阿里中间件团队博客" target="_blank">阿里中间件团队博客</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="http://coolshell.cn/" title="酷壳 – CoolShell.cn" target="_blank">酷壳 – CoolShell.cn</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰的网络日志" target="_blank">阮一峰的网络日志</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luolei.org/" title="罗磊的独立博客" target="_blank">罗磊的独立博客</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -637,7 +702,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery-基础"><span class="nav-number">1.</span> <span class="nav-text">jQuery 基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getter-和-setter"><span class="nav-number">2.</span> <span class="nav-text">getter 和 setter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-HTML-属性"><span class="nav-number">2.1.</span> <span class="nav-text">获取和设置 HTML 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-CSS-属性"><span class="nav-number">2.2.</span> <span class="nav-text">获取和设置 CSS 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-CSS-类"><span class="nav-number">2.3.</span> <span class="nav-text">获取和设置 CSS 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-HTML-表单值"><span class="nav-number">2.4.</span> <span class="nav-text">获取和设置 HTML 表单值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置元素的内容"><span class="nav-number">2.5.</span> <span class="nav-text">获取和设置元素的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置元素的位置高宽"><span class="nav-number">2.6.</span> <span class="nav-text">获取和设置元素的位置高宽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置元素数据"><span class="nav-number">2.7.</span> <span class="nav-text">获取和设置元素数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改文档结构"><span class="nav-number">3.</span> <span class="nav-text">修改文档结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件处理"><span class="nav-number">4.</span> <span class="nav-text">事件处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画效果"><span class="nav-number">5.</span> <span class="nav-text">动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单动画"><span class="nav-number">5.1.</span> <span class="nav-text">简单动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义动画"><span class="nav-number">5.2.</span> <span class="nav-text">自定义动画</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax"><span class="nav-number">6.</span> <span class="nav-text">Ajax</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选择器"><span class="nav-number">7.</span> <span class="nav-text">选择器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery-基础"><span class="nav-number">1.</span> <span class="nav-text">jQuery 基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getter-和-setter"><span class="nav-number">2.</span> <span class="nav-text">getter 和 setter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-HTML-属性"><span class="nav-number">2.1.</span> <span class="nav-text">获取和设置 HTML 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-CSS-属性"><span class="nav-number">2.2.</span> <span class="nav-text">获取和设置 CSS 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-CSS-类"><span class="nav-number">2.3.</span> <span class="nav-text">获取和设置 CSS 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置-HTML-表单值"><span class="nav-number">2.4.</span> <span class="nav-text">获取和设置 HTML 表单值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置元素的内容"><span class="nav-number">2.5.</span> <span class="nav-text">获取和设置元素的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置元素的位置高宽"><span class="nav-number">2.6.</span> <span class="nav-text">获取和设置元素的位置高宽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置元素数据"><span class="nav-number">2.7.</span> <span class="nav-text">获取和设置元素数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改文档结构"><span class="nav-number">3.</span> <span class="nav-text">修改文档结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件处理"><span class="nav-number">4.</span> <span class="nav-text">事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件处理程序的简单注册"><span class="nav-number">4.1.</span> <span class="nav-text">事件处理程序的简单注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-事件处理程序"><span class="nav-number">4.2.</span> <span class="nav-text">jQuery 事件处理程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-事件对象"><span class="nav-number">4.3.</span> <span class="nav-text">jQuery 事件对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件处理程序的高级注册"><span class="nav-number">4.4.</span> <span class="nav-text">事件处理程序的高级注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注销事件处理程序"><span class="nav-number">4.5.</span> <span class="nav-text">注销事件处理程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发事件"><span class="nav-number">4.6.</span> <span class="nav-text">触发事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实时事件"><span class="nav-number">4.7.</span> <span class="nav-text">实时事件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画效果"><span class="nav-number">5.</span> <span class="nav-text">动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单动画"><span class="nav-number">5.1.</span> <span class="nav-text">简单动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义动画"><span class="nav-number">5.2.</span> <span class="nav-text">自定义动画</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax"><span class="nav-number">6.</span> <span class="nav-text">Ajax</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选择器"><span class="nav-number">7.</span> <span class="nav-text">选择器</span></a></li></ol></div>
             
 
           </div>
@@ -675,7 +740,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
@@ -748,6 +813,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
