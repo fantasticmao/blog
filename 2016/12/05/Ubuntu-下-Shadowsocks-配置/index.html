@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Linux,Ubuntu," />
 
 
 
@@ -87,22 +87,23 @@
 
 
 
-<meta name="description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城。向原作者 clowwindy 致敬。">
+<meta name="description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城，科学上网。">
+<meta name="keywords" content="Linux,Ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu 下 Shadowsocks 配置">
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/05/Ubuntu-下-Shadowsocks-配置/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城。向原作者 clowwindy 致敬。">
+<meta property="og:description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城，科学上网。">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/6.png">
-<meta property="og:updated_time" content="2017-06-09T16:04:59.000Z">
+<meta property="og:updated_time" content="2017-06-10T06:37:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 下 Shadowsocks 配置">
-<meta name="twitter:description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城。向原作者 clowwindy 致敬。">
+<meta name="twitter:description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城，科学上网。">
 <meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png">
 
 
@@ -111,7 +112,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -233,6 +234,16 @@
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -380,12 +391,12 @@
       
 
       
-        <p>Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城。向原作者 clowwindy 致敬。<a id="more"></a></p>
+        <p>Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城，科学上网。<a id="more"></a></p>
 <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Shadowsocks（影梭）是一个使用 socks5 协议的开源代理工具，分为服务端和客户端，访问墙外网络稳定且迅速。原作者 <a href="https://github.com/clowwindy" target="_blank" rel="external">clowwindy</a> 因在 2015 年 8 月受到某政府要求无奈停止维护并删除了项目代码。事件 <a href="https://web.archive.org/web/20150822042959/https://github.com/shadowsocks/shadowsocks-iOS/issues/124#issuecomment-133630294" target="_blank" rel="external">传送门</a>。现在 Shadowsocks 由 Github 上的 <a href="https://github.com/shadowsocks" target="_blank" rel="external">shadowsocks组织</a> 维护，向无私且伟大的开源奉献者们致敬。</p>
 <h3 id="1-获取-Shadowsocks-账号"><a href="#1-获取-Shadowsocks-账号" class="headerlink" title="1. 获取 Shadowsocks 账号"></a>1. 获取 Shadowsocks 账号</h3><p>搜关键字「Shadowsocks账号」，搜索引擎会提供很多账号，不过账号的有效性不能保证。如大海捞针一般寻找账号，费心费神，不如自己付费，享受稳定服务（我只是分享……）。本人在 <a href="https://crola.xyz/" target="_blank" rel="external">https://crola.xyz/</a> 站点购买 Shadowsocks 服务端账号（我没有做广告……）。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png" alt="image"></p>
 <h3 id="2-安装并配置-Shadowsocks"><a href="#2-安装并配置-Shadowsocks" class="headerlink" title="2. 安装并配置 Shadowsocks"></a>2. 安装并配置 Shadowsocks</h3><p>使用 <code>sudo apt-get install shadowsocks</code> 安装 Shadowsocks 客户端。结束安装之后，编辑 Shadowsocks 配置文件 <code>sudo vim /etc/shadowsocks/config.json</code>，将 <strong>server</strong>、<strong>server_port</strong>、<strong>password</strong> 与 Shadowsocks 服务端配置相匹配。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png" alt="image"><br>使用命令<code>sslocal -c /etc/shadowsocks/config.json</code>开启 Shadowsocks 代理。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png" alt="image"></p>
 <h3 id="3-使用-Chrome-浏览器翻墙"><a href="#3-使用-Chrome-浏览器翻墙" class="headerlink" title="3. 使用 Chrome 浏览器翻墙"></a>3. 使用 Chrome 浏览器翻墙</h3><p>新开一个终端，使用命令 <code>google-chrome --proxy-server=&quot;socks5://127.0.0.1:1080&quot;</code> 让 Chrome 代理本机请求，实现 Chrome 浏览器翻墙。<br><strong>注意</strong>：该命令应在 Chrome 未启动时执行，否则失败。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png" alt="image"></p>
-<h3 id="4-配置全局-Socks-代理翻墙"><a href="#4-配置全局-Socks-代理翻墙" class="headerlink" title="4. 配置全局 Socks 代理翻墙"></a>4. 配置全局 Socks 代理翻墙</h3><p>第 3 步中仅单独实现了 Chrome 翻墙，局限性很大。在系统设置–&gt;网络–&gt;网络代理中，填写 Socks 主机 127.0.0.1 和监听端口 1080，并应用到整个系统，即可实现所有应用翻墙。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png" alt="image"></p>
+<h3 id="4-配置全局-Socks-代理翻墙"><a href="#4-配置全局-Socks-代理翻墙" class="headerlink" title="4. 配置全局 Socks 代理翻墙"></a>4. 配置全局 Socks 代理翻墙</h3><p>第 3 步中仅单独实现了 Chrome 翻墙，局限性很大。在系统设置 -&gt; 网络 -&gt; 网络代理中，填写 Socks 主机 127.0.0.1 和监听端口 1080，并应用到整个系统，即可实现所有应用翻墙。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png" alt="image"></p>
 <h3 id="附"><a href="#附" class="headerlink" title="#附"></a>#附</h3><ul>
 <li>安装 Chrome 时，若由依赖关系问题导致安装失败，应当使用 <code>sudo apt-get -f install</code> 修复。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/6.png" alt="image"></li>
 <li>开启全局网络代理之后，退出时应 <strong>注意关闭</strong>，否则将无法联网。</li>
@@ -416,6 +427,14 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          
+        </div>
       
 
       
@@ -528,12 +547,21 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -544,11 +572,29 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/FantasticMao" target="_blank" title="GitHub">
+                <a href="https://github.com/FantasticMao/" target="_blank" title="GitHub">
                   
                     <i class="fa fa-fw fa-github"></i>
                   
                   GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.instagram.com/wonderfulmao/" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/FantasticMao/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
                 </a>
               </span>
             
@@ -578,6 +624,18 @@
               
                 <li class="links-of-blogroll-item">
                   <a href="http://jm.taobao.org/" title="阿里中间件团队博客" target="_blank">阿里中间件团队博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://coolshell.cn/" title="酷壳 – CoolShell.cn" target="_blank">酷壳 – CoolShell.cn</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰的网络日志" target="_blank">阮一峰的网络日志</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://luolei.org/" title="罗磊的独立博客" target="_blank">罗磊的独立博客</a>
                 </li>
               
             </ul>
@@ -637,7 +695,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
@@ -710,6 +768,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
