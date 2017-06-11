@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/04/21/jQuery-API-小记/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。">
-<meta property="og:updated_time" content="2017-06-11T13:17:52.000Z">
+<meta property="og:updated_time" content="2017-06-11T13:24:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery API 小记">
 <meta name="twitter:description" content="摘自《JavaScript 权威指南》第 19 章 jQuery 类库。 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。">
@@ -475,7 +475,7 @@
 <h2 id="Ajax-工具函数"><a href="#Ajax-工具函数" class="headerlink" title="Ajax 工具函数"></a>Ajax 工具函数</h2><p>jQuery 的其它 Ajax 高级工具不是方法，而是函数，可以通过 <code>jQuery</code> 或 <code>$</code> 直接调用，而不是在 jQuery 对象上调用。</p>
 <h3 id="jQuery-getScript"><a href="#jQuery-getScript" class="headerlink" title="jQuery.getScript()"></a>jQuery.getScript()</h3><p><code>jQuery.getScript()</code> 函数的第一个参数是 JavaScript 代码文件的 URL。它会异步加载文件，加载完成之后在全局作用域执行该代码。它能同时适用于同源和跨源脚本：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 从其它服务器动态加载脚本</span></div><div class="line">jQuery.getScript(<span class="string">'http://example.com/js/widget.js'</span>);</div></pre></td></tr></table></figure></p>
 <p>可以传入回调函数作为第二个参数，在这种情况下，jQuery 会在代码加载和执行完成之后调用一次该回调函数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 加载一个类库，并在加载完成时立刻使用它</span></div><div class="line">jQuery.getScript(<span class="string">'js/jquery.my.plugin.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">'div'</span>).my_plugin(); <span class="comment">// 使用加载的类库</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>传递给 <code>jQuery.getScript()</code> 的回调函数，仅在请求成功完成时才会被调用。·</p>
+<p>传递给 <code>jQuery.getScript()</code> 的回调函数，仅在请求成功完成时才会被调用。</p>
 <h3 id="jQuery-getJOSN"><a href="#jQuery-getJOSN" class="headerlink" title="jQuery.getJOSN()"></a>jQuery.getJOSN()</h3><h3 id="jQuery-get-和-jQuery-post"><a href="#jQuery-get-和-jQuery-post" class="headerlink" title="jQuery.get() 和 jQuery.post()"></a>jQuery.get() 和 jQuery.post()</h3><h2 id="jQuery-ajax-函数"><a href="#jQuery-ajax-函数" class="headerlink" title="jQuery.ajax() 函数"></a>jQuery.ajax() 函数</h2><h2 id="Ajax-事件"><a href="#Ajax-事件" class="headerlink" title="Ajax 事件"></a>Ajax 事件</h2><hr>
 <h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><p>待续</p>
 
@@ -531,6 +531,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/11/风/" rel="prev" title="风">
+                风 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -609,7 +613,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -620,7 +624,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -631,7 +635,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -645,7 +649,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/FantasticMao/" target="_blank" title="GitHub">
+                <a href="https://github.com/FantasticMao" target="_blank" title="GitHub">
                   
                     <i class="fa fa-fw fa-github"></i>
                   
@@ -654,7 +658,7 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.instagram.com/wonderfulmao/" target="_blank" title="Instagram">
+                <a href="https://www.instagram.com/wonderfulmao" target="_blank" title="Instagram">
                   
                     <i class="fa fa-fw fa-instagram"></i>
                   
@@ -663,7 +667,7 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/FantasticMao/" target="_blank" title="Weibo">
+                <a href="http://weibo.com/FantasticMao" target="_blank" title="Weibo">
                   
                     <i class="fa fa-fw fa-weibo"></i>
                   
