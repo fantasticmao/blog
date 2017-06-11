@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/5.png">
-<meta property="og:updated_time" content="2017-06-10T14:55:11.000Z">
+<meta property="og:updated_time" content="2017-06-11T08:46:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 下开发环境搭建">
 <meta name="twitter:description" content="记一次个人 PC 的 Ubuntu 16.04 LTS 重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。">
@@ -438,7 +438,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="编译-安装系列"><a href="#编译-安装系列" class="headerlink" title="编译  安装系列"></a>编译  安装系列</h3><p>Nginx：可执行 <code>sudo apt-get install nginx</code> 安装 Nginx，不过为在 Response Headers 中隐藏 Ubuntu 信息，还是选择编译安装吧。</p>
+<h3 id="编译-安装系列"><a href="#编译-安装系列" class="headerlink" title="编译  安装系列"></a>编译  安装系列</h3><p>Nginx：可执行 <code>sudo apt-get install nginx</code> 安装 Nginx，但个人偏好编译安装（为了好找配置文件）。</p>
 <ol>
 <li>执行 <code>sudo apt-get install libpcre3 libpcre3-dev zlib1g-dev</code>，预先安装 Nginx 依赖包。</li>
 <li>进入 <a href="http://nginx.org/" target="_blank" rel="external">Nginx官网</a>，个人选择 1.10.3 稳定版本，执行 <code>wget http://nginx.org/download/nginx-1.10.3.tar.gz</code> 下载并解压缩。</li>
@@ -456,7 +456,7 @@
 <li>安装成功之后，redis-server 和 redis-cli 位于 <code>../redis-3.2.8/src</code>。</li>
 </ol>
 <hr>
-<h3 id="附"><a href="#附" class="headerlink" title="#附"></a>#附</h3><p><em>Debian的 <code>apt-get</code> 用法</em>：</p>
+<h3 id="附"><a href="#附" class="headerlink" title="#附"></a>#附</h3><p><em>Debian 的 <code>apt-get</code> 用法</em>：</p>
 <ul>
 <li><code>sudo apt-get update</code> 从所有配置源中更新软件包的信息。</li>
 <li><code>sudo apt-get upgrade</code> 从配置源中升级所有已安装的软件包。</li>
