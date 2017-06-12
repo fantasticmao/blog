@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/5.png">
-<meta property="og:updated_time" content="2017-06-11T08:46:54.000Z">
+<meta property="og:updated_time" content="2017-06-11T15:33:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 下开发环境搭建">
 <meta name="twitter:description" content="记一次个人 PC 的 Ubuntu 16.04 LTS 重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。">
@@ -362,9 +362,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/27/Ubuntu-下开发环境搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/02/27/Ubuntu-下开发环境搭建/" itemprop="commentCount"></span>
+                <a class="cloud-tie-join-count" href="/2017/02/27/Ubuntu-下开发环境搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -547,12 +546,7 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -858,26 +852,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://fantasticmao.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://fantasticmao.cn/2017/02/27/Ubuntu-下开发环境搭建/';
-          this.page.identifier = '2017/02/27/Ubuntu-下开发环境搭建/';
-          this.page.title = 'Ubuntu 下开发环境搭建';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://fantasticmao.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -888,18 +862,21 @@
 
 
   
-
-
-
-
-
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "843cdc2c9d8345c2a7ee2c49cc88bc6a",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
   
 
 
 
 
-
-  
 
 
 
