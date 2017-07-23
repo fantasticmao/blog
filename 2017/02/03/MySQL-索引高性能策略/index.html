@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/02/03/MySQL-索引高性能策略/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
-<meta property="og:updated_time" content="2017-07-20T01:49:00.000Z">
+<meta property="og:updated_time" content="2017-07-23T10:15:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 索引高性能策略">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
@@ -376,16 +376,14 @@
         <p>摘自《高性能 MySQL》第 5 章 创建高性能的索引。</p>
 <p>B-Tree 索引、聚簇索引的实现可参考：<a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="external">http://blog.codinglabs.org/articles/theory-of-mysql-index.html</a><a id="more"></a></p>
 <hr>
-<h1 id="索引基础"><a href="#索引基础" class="headerlink" title="索引基础"></a>索引基础</h1><p>索引（在 MySQL 中也叫做键 key）是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键。尤其是当表中的数据量越来越大时，索引对性能的影响愈发重要。「最优」的索引有时比「好的」索引性能要好两个数量级。</p>
-<p>索引可以包含一个或多个列的值。如果索引包含多个列，那么列的顺序也十分重要，因为 MySQL 只能高效地使用最左前缀列，创建一个包含两个列的索引，和创建两个只包含一个列的索引是大不相同的。</p>
+<h1 id="索引基础"><a href="#索引基础" class="headerlink" title="索引基础"></a>索引基础</h1><p>索引（在 MySQL 中也叫做键 key）是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对性能的影响愈发重要。最优的索引有时比好的索引性能要好两个数量级。</p>
 <hr>
 <h1 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h1><p>在 MySQL 中，索引是在存储引擎层而不是服务器层实现的。所以，并没有统一的索引标准：不同存储引擎的索引的工作方式并不一样，也不是所有的存储引擎都支持所有类型的索引。</p>
 <h2 id="B-Tree-索引"><a href="#B-Tree-索引" class="headerlink" title="B-Tree 索引"></a>B-Tree 索引</h2><p>当人们谈论索引的时候，如果没有特别指明类型，多半说的是 B-Tree 索引，它使用 B-Tree 数据结构来存储数据。不过底层的存储引擎也可能使用不同的存储结构，例如 NDB 群集存储引擎内部实际上使用了 T-Tree 结构存储索引；InnoDB 则使用的是 B+Tree。</p>
 <p>存储引擎以不同的方式使用 B-Tree 索引，性能也各有不同，各有优劣。例如 MyISAM 使用前缀压缩技术使得索引更小，但 InnoDB 则按照原数据格式进行存储。</p>
-<p>B-Tree 通常意味着所有的值都是按顺序存储的，并且每一个叶子节点到根节点的距离相同。</p>
 <p><strong>B-Tree 索引能加快访问数据的速度，因为存储引擎不再需要进行全表扫描来获取需要的数据，取而代之的是从索引的根节点开始进行搜索。根节点的槽中存放了指向子节点的指针，存储引擎根据这些指针向下层查找。通过比较节点中的值和需要查找的值，找到合适的指针进入下层子节点。这些指针实际上定义了子节点中值的上限和下限。最终存储引擎要么是找到对应的值，要么是得出该值的记录不存在。</strong></p>
-<p>叶子节点比较特别，它们的指针指向的是被索引的数据，而不是其它的节点。数的深度和表的大小直接相关。</p>
-<p>B-Tree 对索引列是顺序组织存储的，所以很适合查找范围数据。例如，在一个基于文本域的索引树上，按字母顺序连续传递的值进行查找是非常合适的。索引对多个值进行排序的依据是 <code>CREATE TABLE</code> 语句中定义索引时列的顺序。</p>
+<p>B-Tree 通常意味着所有的值都是按顺序存储的，并且每一个叶子节点到根节点的距离相同。叶子节点比较特别，它们的指针指向的是被索引的数据，而不是其它的节点。数的深度和表的大小直接相关。</p>
+<p>B-Tree 对索引列是顺序组织存储的，所以很适合查找范围数据。例如，在一个基于文本域的索引树上，按字母顺序连续传递的值进行查找是非常合适的。索引对多个值进行排序的依据是 CREATE TABLE 语句中定义索引时列的顺序。</p>
 <p>假设有如下数据表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> People (</div><div class="line">  last_name  <span class="built_in">VARCHAR</span>(<span class="number">50</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  first_name <span class="built_in">VARCHAR</span>(<span class="number">50</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  dob        <span class="built_in">DATE</span>            <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  gender     ENUM (<span class="string">'m'</span>, <span class="string">'f'</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="keyword">KEY</span> (last_name, first_name, dob)</div><div class="line">)</div></pre></td></tr></table></figure></p>
 <p>B-Tree 索引适用于全键值、键值范围或键前缀查找。其中键前缀查找只适用于根据最左前缀的查找前面所述的索引对如下类型的查询有效：</p>
 <ul>
@@ -404,8 +402,7 @@
 <li>如果查询中有某个列的范围查询，则其右边所有列都无法使用索引优化查询，如 <code>... WHERE last_name = &#39;Allen&#39; AND first_name = &#39;C%&#39; AND dob = &#39;1960-01-01&#39;</code>，此时只能使用前两列索引。</li>
 </ul>
 <p>索引列的顺序至关重要，这些限制都和索引列的顺序有关。在优化性能的时候，可能需要使用相同的列但顺序不同的索引来满足不同类型的查询需求。</p>
-<h2 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h2><p>哈希索引基于哈希表实现，只有精确匹配索引所有列的查询才有效。对于每一行数据，存储引擎都会对所有的索引列计算一个哈希码。哈希索引将所有的哈希码存储在索引中，同时在哈希表中保存指向行数据的指针。</p>
-<p>在 MySQL 中，只有 Memory 引擎显式支持哈希索引。因为索引自身只需存储对应的哈希值，所以索引的结构十分紧凑，这也让哈希索引查找的速度非常快。然而哈希索引也有它的限制：</p>
+<h2 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h2><p>哈希索引基于哈希表实现，只有精确匹配索引所有列的查询才有效。对于每一行数据，存储引擎都会对所有的索引列计算一个哈希码。哈希索引将所有的哈希码存储在索引中，同时在哈希表中保存指向行数据的指针。在 MySQL 中，只有 Memory 引擎显式支持哈希索引。因为索引自身只需存储对应的哈希值，所以索引的结构十分紧凑，这也让哈希索引查找的速度非常快。然而哈希索引也有它的限制：</p>
 <ul>
 <li>哈希索引只包含哈希值和行指针，而不存储字段，所以不能使用 <a href="#覆盖索引">覆盖索引</a>。</li>
 <li>哈希索引并不是按照索引值顺序存储的，所以也就无法用于排序。</li>
@@ -415,13 +412,11 @@
 </ul>
 <p>InnoDB 引擎有一个特殊的功能叫做「自适应哈希索引」。当 InnoDB 注意到某些索引值被使用得非常频繁时，它会在内存中基于 B-Tree 索引之上再创建一个哈希索引。</p>
 <h2 id="空间数据索引（R-Tree）"><a href="#空间数据索引（R-Tree）" class="headerlink" title="空间数据索引（R-Tree）"></a>空间数据索引（R-Tree）</h2><p>MyISAM 存储引擎支持空间索引。和 B-Tree 索引不同，空间索引无须前缀查询。空间索引会从所有维度来索引数据。查询时，可以有效地使用任意维度来组合查询。必须使用 MySQL 的 GIS 相关函数如 <code>MBRCONTATNS()</code> 等来维护数据。<strong>MySQL 的 GIS 支持并不完善，所以大部分人都不会使用这个特性。</strong></p>
-<h2 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h2><p><strong>全文索引是一种特殊类型的索引，它查找的是文本中的关键字，而不是直接比较索引中的值。</strong>它有许多需要注意的细节，如停用词、词干和复数、布尔搜索等。全文索引更类似于搜索引擎做的事情，而不是简单的 <code>WHERE</code> 条件匹配。</p>
-<p>在相同的列上同时创建全文索引和基于 B-Tree 索引不会有冲突。全文索引适用于 <code>MATCH AGAINST</code> 操作，而不是普通的 <code>WHERE</code> 条件操作。</p>
+<h2 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h2><p>全文索引是一种特殊类型的索引，它查找的是文本中的关键字，而不是直接比较索引中的值。它有许多需要注意的细节，如停用词、词干和复数、布尔搜索等。全文索引更类似于搜索引擎做的事情，适用于 <code>MATCH AGAINST</code> 操作，而不是普通的 <code>WHERE</code> 条件操作。</p>
+<p>在相同的列上同时创建全文索引和基于 B-Tree 索引不会有冲突。</p>
 <h2 id="其它索引类别"><a href="#其它索引类别" class="headerlink" title="其它索引类别"></a>其它索引类别</h2><p>还有很多第三方的存储引擎使用不同类型的数据结构来存储索引。</p>
 <hr>
-<h1 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h1><p>索引可以让服务器快速地定位到表的指定位置，但这不是索引的唯一作用，根据创建索引的数据结构不同，索引也有一些其它的附加作用。</p>
-<p>最常见的 B-Tree 索引按照顺序存储数据，所以 MySQL 可以用来做 <code>ORDER BY</code> 和 <code>GROUP BY</code> 操作。并且 B-Tree 索引中存储了实际的值，所以某些查询只需使用索引就能够完成。</p>
-<p>总结下来索引有如下三个优点：</p>
+<h1 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h1><p>索引可以让服务器快速地定位到表的指定位置，但这不是索引的唯一作用，根据创建索引的数据结构不同，索引也有一些其它的附加作用。最常见的 B-Tree 索引按照顺序存储数据，所以 MySQL 可以用它来做 <code>ORDER BY</code> 和 <code>GROUP BY</code> 操作，并且 B-Tree 索引中存储了实际的数据值，所以某些查询只需使用索引就能够完成。总结下来索引有如下三个优点：</p>
 <ol>
 <li>大大减少了服务器需要扫描的数据量</li>
 <li>可以帮助服务器避免排序和临时表</li>
@@ -437,7 +432,20 @@
 <hr>
 <h1 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h1><h2 id="独立的列"><a href="#独立的列" class="headerlink" title="独立的列"></a>独立的列</h2><p>MySQL 无法对非「独立的列」使用索引，「独立的列」指索引不能是表达式的一部分，也不能是函数的参数。例如以下的两个查询无法使用索引：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> actor_id <span class="keyword">FROM</span> sakila.actor <span class="keyword">WHERE</span> actor_id + <span class="number">1</span> = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> ... <span class="keyword">WHERE</span> <span class="keyword">TO_DAYS</span>(<span class="keyword">CURRENT_DATE</span>) - <span class="keyword">TO_DAYS</span>(date_col) &lt;= <span class="number">10</span>;</div></pre></td></tr></table></figure></p>
 <p>我们应该养成简化 WHERE 条件的习惯，始终将索引列单独放在比较符号的一侧。</p>
-<h2 id="前缀索引和索引选择性"><a href="#前缀索引和索引选择性" class="headerlink" title="前缀索引和索引选择性"></a>前缀索引和索引选择性</h2><h2 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h2><h2 id="选择合适的索引列顺序"><a href="#选择合适的索引列顺序" class="headerlink" title="选择合适的索引列顺序"></a>选择合适的索引列顺序</h2><h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><h2 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h2><h2 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h2><h2 id="冗余和重复索引"><a href="#冗余和重复索引" class="headerlink" title="冗余和重复索引"></a>冗余和重复索引</h2><h2 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h2><h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><hr>
+<h2 id="前缀索引和索引选择性"><a href="#前缀索引和索引选择性" class="headerlink" title="前缀索引和索引选择性"></a>前缀索引和索引选择性</h2><p>为了避免索引很长的字符串，导致索引变得大且慢的问题，可以使用「前缀索引」。「前缀索引」可以仅索引字符串的起始部分，以此节约索引空间，从而提高索引效率。</p>
+<p>不过前缀索引会降低「索引的选择性」，「索引的选择性」指不重复的索引值（基数）和数据表的记录总数（#T）的比值，范围在 1/#T 到 1 之间。索引的选择性越高则查询效率越高，因为选择性高的索引可以让 MySQL 在查找时过滤更多的行。</p>
+<p>对于 BLOB、TEXT 或者很长的 VARCHAR 类型的列，MySQL 要求必须使用索引。</p>
+<p>设计一个好的前缀索引，诀窍在于要选择足够长的前缀以保证较高的选择性，但同时也不能太长。In other words，就是要使得索引的前缀基数，尽可能地接近完整列的基数。</p>
+<p>前缀索引是一种能使索引更小，更快的有效办法，但也有其缺点：MySQL 无法使用前缀索引做 <code>ORDER BY</code> 和 <code>GROUP BY</code>，也无法使用前缀索引做覆盖扫描。下面演示一下前缀索引的语法：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> db_demo <span class="keyword">ADD</span> <span class="keyword">KEY</span> (foo(<span class="number">7</span>));</div></pre></td></tr></table></figure></p>
+<h2 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h2><p>在多个列上建立独立的单列索引大部分情况下并不能提高 MySQL 的查询性能。例如，表 film_actor 在字段 film_id 和 actor_id 上各有一个单列索引。但对于下面这个查询 WHERE 条件，这两个单列索引都不是好的选择：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> film_id, actor_id <span class="keyword">FROM</span> film_actor </div><div class="line"><span class="keyword">WHERE</span> actor_id = <span class="number">1</span> <span class="keyword">OR</span> file_id = <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
+<p>旧版本的 MySQL 会对这个查询使用全表扫面，除非改写成如下的两个查询 UNION 的方式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> film_id, actor_id <span class="keyword">FROM</span> film_actor</div><div class="line"><span class="keyword">WHERE</span> actor_id = <span class="number">1</span></div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> film_id, actor_id <span class="keyword">FROM</span> film_actor</div><div class="line"><span class="keyword">WHERE</span> film_id = <span class="number">1</span> <span class="keyword">AND</span> actor_id &lt;&gt; <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
+<p>5.0+ 版本的 MySQL 引入了一种叫「索引合并」的策略，一定程度上可以使用表的多个单列索引来定位指定的行。这种算法有三个变种：OR 条件的联合（union），AND 条件的相交（intersection），组合前两种情况的联合及相交。</p>
+<p>通过 EXPLAIN 中的 Extra 列中可以看到 MySQL 使用「索引合并」技术优化复杂的查询，这种策略有时候是一种优化的结果，但更多时候说明了表上的索引建得很糟糕：</p>
+<ul>
+<li>当出现服务器对多个索引做相交操作时（有多个 AND 条件），通常意味着需要一个包含所有相关列的多列索引，而不是多个独立的单列索引。</li>
+<li>当服务器需要对多个索引做联合操作时（有多个 OR 条件），通常需要耗费大量 CPU 和内存资源在算法的缓存、排序和合并操作上。</li>
+</ul>
+<h2 id="选择合适的索引列顺序"><a href="#选择合适的索引列顺序" class="headerlink" title="选择合适的索引列顺序"></a>选择合适的索引列顺序</h2><h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><h2 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h2><h2 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h2><h2 id="冗余和重复索引"><a href="#冗余和重复索引" class="headerlink" title="冗余和重复索引"></a>冗余和重复索引</h2><h2 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h2><h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><hr>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><!--
 B+Tree数据结构
 InnoDB、MyISAM的B+Tree实现
