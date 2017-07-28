@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/02/03/MySQL-索引高性能策略/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
-<meta property="og:updated_time" content="2017-07-23T10:15:03.000Z">
+<meta property="og:updated_time" content="2017-07-28T16:52:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 索引高性能策略">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
@@ -433,8 +433,7 @@
 <h1 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h1><h2 id="独立的列"><a href="#独立的列" class="headerlink" title="独立的列"></a>独立的列</h2><p>MySQL 无法对非「独立的列」使用索引，「独立的列」指索引不能是表达式的一部分，也不能是函数的参数。例如以下的两个查询无法使用索引：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> actor_id <span class="keyword">FROM</span> sakila.actor <span class="keyword">WHERE</span> actor_id + <span class="number">1</span> = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> ... <span class="keyword">WHERE</span> <span class="keyword">TO_DAYS</span>(<span class="keyword">CURRENT_DATE</span>) - <span class="keyword">TO_DAYS</span>(date_col) &lt;= <span class="number">10</span>;</div></pre></td></tr></table></figure></p>
 <p>我们应该养成简化 WHERE 条件的习惯，始终将索引列单独放在比较符号的一侧。</p>
 <h2 id="前缀索引和索引选择性"><a href="#前缀索引和索引选择性" class="headerlink" title="前缀索引和索引选择性"></a>前缀索引和索引选择性</h2><p>为了避免索引很长的字符串，导致索引变得大且慢的问题，可以使用「前缀索引」。「前缀索引」可以仅索引字符串的起始部分，以此节约索引空间，从而提高索引效率。</p>
-<p>不过前缀索引会降低「索引的选择性」，「索引的选择性」指不重复的索引值（基数）和数据表的记录总数（#T）的比值，范围在 1/#T 到 1 之间。索引的选择性越高则查询效率越高，因为选择性高的索引可以让 MySQL 在查找时过滤更多的行。</p>
-<p>对于 BLOB、TEXT 或者很长的 VARCHAR 类型的列，MySQL 要求必须使用索引。</p>
+<p>不过前缀索引会降低「索引的选择性」，「索引的选择性」指不重复的索引值（基数）和数据表的记录总数（#T）的比值，范围在 1/#T 到 1 之间。索引的选择性越高则查询效率越高，因为选择性高的索引可以让 MySQL 在查找时过滤更多的行。对于 BLOB、TEXT 或者很长的 VARCHAR 类型的列，MySQL 要求必须使用索引。</p>
 <p>设计一个好的前缀索引，诀窍在于要选择足够长的前缀以保证较高的选择性，但同时也不能太长。In other words，就是要使得索引的前缀基数，尽可能地接近完整列的基数。</p>
 <p>前缀索引是一种能使索引更小，更快的有效办法，但也有其缺点：MySQL 无法使用前缀索引做 <code>ORDER BY</code> 和 <code>GROUP BY</code>，也无法使用前缀索引做覆盖扫描。下面演示一下前缀索引的语法：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> db_demo <span class="keyword">ADD</span> <span class="keyword">KEY</span> (foo(<span class="number">7</span>));</div></pre></td></tr></table></figure></p>
 <h2 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h2><p>在多个列上建立独立的单列索引大部分情况下并不能提高 MySQL 的查询性能。例如，表 film_actor 在字段 film_id 和 actor_id 上各有一个单列索引。但对于下面这个查询 WHERE 条件，这两个单列索引都不是好的选择：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> film_id, actor_id <span class="keyword">FROM</span> film_actor </div><div class="line"><span class="keyword">WHERE</span> actor_id = <span class="number">1</span> <span class="keyword">OR</span> file_id = <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
@@ -445,7 +444,9 @@
 <li>当出现服务器对多个索引做相交操作时（有多个 AND 条件），通常意味着需要一个包含所有相关列的多列索引，而不是多个独立的单列索引。</li>
 <li>当服务器需要对多个索引做联合操作时（有多个 OR 条件），通常需要耗费大量 CPU 和内存资源在算法的缓存、排序和合并操作上。</li>
 </ul>
-<h2 id="选择合适的索引列顺序"><a href="#选择合适的索引列顺序" class="headerlink" title="选择合适的索引列顺序"></a>选择合适的索引列顺序</h2><h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><h2 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h2><h2 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h2><h2 id="冗余和重复索引"><a href="#冗余和重复索引" class="headerlink" title="冗余和重复索引"></a>冗余和重复索引</h2><h2 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h2><h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><hr>
+<h2 id="选择合适的索引列顺序"><a href="#选择合适的索引列顺序" class="headerlink" title="选择合适的索引列顺序"></a>选择合适的索引列顺序</h2><p>索引列的正确顺序依赖于使用该索引的查询语句，并且需要同时考虑如何更好地满足排序和分组操作。在一个多列的 B-Tree 索引中，索引列的顺序意味着索引首先按照最左列进行排序，之后是第二列，第三列等。因此索引可以按照升序或降序进行扫描，以精确满足符合查询列顺序的 <code>ORDER BY</code>、<code>GROUP BY</code> 和 <code>DISTINCT</code> 等子句的查询需求。</p>
+<p>当不需要考虑排序和分组时，将选择性最高的列放在前面通常是很好的。此时的索引作用于优化 WHERE 条件查询，从而更高效地过滤数据。然而，查询的性能并不仅是依赖于索引列的选择性（整体基数），也和查询的具体值有关（值的分布）。</p>
+<h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><h2 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h2><h2 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h2><h2 id="冗余和重复索引"><a href="#冗余和重复索引" class="headerlink" title="冗余和重复索引"></a>冗余和重复索引</h2><h2 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h2><h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><hr>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><!--
 B+Tree数据结构
 InnoDB、MyISAM的B+Tree实现
