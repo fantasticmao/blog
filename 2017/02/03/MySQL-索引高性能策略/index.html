@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/02/03/MySQL-索引高性能策略/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
-<meta property="og:updated_time" content="2017-07-31T02:22:15.000Z">
+<meta property="og:updated_time" content="2017-09-13T17:38:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 索引高性能策略">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
@@ -450,7 +450,8 @@
 <p>针对此结果，按以往的经验法则，应该将 customer_id 列放在前面，因为其条件值对应的数量更少，MySQL 可以依此过滤更多的行。这之后，我们再来看看 customer_id 条件值对应 staff_id 条件值的选择性：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(staff_id = <span class="number">2</span>) <span class="keyword">FROM</span> payment <span class="keyword">WHERE</span> customer_id = <span class="number">584</span>\G</div><div class="line">************************* <span class="number">1.</span> <span class="keyword">row</span> *************************</div><div class="line"><span class="keyword">SUM</span>(staff_id = <span class="number">2</span>): <span class="number">17</span></div></pre></td></tr></table></figure></p>
 <p>从以上结果得出，在 <code>customer_id = 584</code> 条件值下，<code>staff_id = 2</code> 条件值的选择性更高。但需要注意的是，这种查询结果非常依赖于某一具体的条件值。如果以这种方式优化，针对某些特定场景（如提取关键数据、查询 guest 用户）会很有效，但对于大多数业务场景，则会导致其它条件值的查询变慢，从而拖垮了服务器的整体性能。因此在选择索引列的顺序时，我们应该考虑列的整体基数和选择性，而不是仅依赖于某个查询条件的具体值：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> staff_id) / <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> staff_id_selectivity,</div><div class="line"><span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> customer_id) / <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> customer_id_selectivity,</div><div class="line"><span class="keyword">COUNT</span>(*)</div><div class="line"><span class="keyword">FROM</span> payment\G</div><div class="line">************************* <span class="number">1.</span> <span class="keyword">row</span> *************************</div><div class="line">   staff_id_selectivity: <span class="number">0.0001</span></div><div class="line">customer_id_selectivity: <span class="number">0.0373</span></div><div class="line">               <span class="keyword">COUNT</span>(*): <span class="number">16049</span></div></pre></td></tr></table></figure></p>
 <p>终究，我们还是应该选择将 customer_id 作为索引列的第一位。:)</p>
-<h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>当索引的叶子节点中已经包含了要查询的数据，MySQL 就可以使用索引来直接获取列的数据，这样就没必要再进行回表查询了。如果一个索引包含（或者说覆盖）所有需要查询的字段的值，我们就称之为「覆盖索引」。覆盖索引是非常有用的工具，能够极大地提高性能。</p>
+<h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><p>待续</p>
+<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><p>当索引的叶子节点中已经包含了要查询的数据，MySQL 就可以使用索引来直接获取列的数据，这样就没必要再进行回表查询了。如果一个索引包含（或者说覆盖）所有需要查询的字段的值，我们就称之为「覆盖索引」。覆盖索引是非常有用的工具，能够极大地提高性能。</p>
 <p>不是所有类型的索引都可以成为覆盖索引。覆盖索引必须要存储索引列的值，而 <a href="#哈希索引">哈希索引</a>、<a href="#空间数据索引（R-Tree）">空间索引</a>、<a href="#全文索引">全文索引</a> 都不存储索引列的值，所以 MySQL 只能使用 B-Tree 索引做覆盖索引。当发起一个索引覆盖查询时，可以在 EXPLAIN 的 Extra 列中看到「Using index」的信息。</p>
 <h2 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h2><p>MySQL 有两种方式可以生成有序的结果：通过排序操作、通过索引顺序扫描。当 EXPLAIN 的 type 列值为「index」时，则说明了 MySQL 使用了索引扫描来做排序。</p>
 <p>MySQL 可以使用同一个索引即满足查询，又满足排序，但当只有索引列的顺序和 <code>ORDER BY</code> 子句完全一致，并且所有列的排序方向都一致时，MySQL 才能够使用索引来对结果进行排序。</p>
@@ -462,7 +463,7 @@
 <p>重复索引是指在相同的列上按照相同的顺序创建相同类型的索引，冗余索引和重复索引则有一些不同，举个例子：如果创建了索引 (A, B)，再创建索引 (A) 就是冗余索引，但如果再创建索引 (B, A) 或索引 (B) 则不是冗余索引。</p>
 <p>大多数情况下都不需要冗余索引，应该尽量扩展已有的索引而不是创建新索引。但也有时候出于性能方面的考虑，需要创建冗余索引。因为扩展已有的索引会导致其变得很大，从而影响其它使用该索引的查询性能。</p>
 <p>有多个索引的缺点是索引的成本很高。测试表明，当表中的数据越多，向持有索引的表中插入数据就会越慢。<strong>一般来说，新增索引将会导致 INSERT、UPDATE、DELETE 等操作的速度变慢，特别是当新增索引后达到了服务器内存瓶颈的时候。</strong></p>
-<h2 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h2><p>有两个工具可以帮助定位未使用的索引。最简单有效的办法是在 Percona Server 或者 MariaDB 中先打开 userstates 服务器变量（默认是关闭的），然后让服务器正常运行一段时间，再通过查询 INFORMATION_SCHEMA.INDEX_STATISTICS 就能查到每个索引的使用频率。另外，还可以使用 Percona Toolkit 中的 pt-index-usage，该工具可以读取查询日志，并对日志中的每条查询进行 EXPLAIN 操作，然后打印出关于索引和查询的报告。</p>
+<h2 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h2><p>有两个工具可以帮助定位未使用的索引。最简单有效的办法是在 Percona Server 或者 MariaDB 中，先打开 userstates 服务器变量（默认是关闭的），然后让服务器正常运行一段时间，再通过查询 INFORMATION_SCHEMA.INDEX_STATISTICS 就能查到每个索引的使用频率。另外，还可以使用 Percona Toolkit 中的 pt-index-usage，该工具可以读取查询日志，并对日志中的每条查询进行 EXPLAIN 操作，然后打印出关于索引和查询的报告。</p>
 <h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><hr>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><!--
 B+Tree数据结构
@@ -597,7 +598,7 @@ MySQL使用索引
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -689,6 +690,10 @@ MySQL使用索引
               
                 <li class="links-of-blogroll-item">
                   <a href="http://ifeve.com/" title="并发编程网" target="_blank">并发编程网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.ibm.com/developerworks/cn/topics/" title="IBM developerworks" target="_blank">IBM developerworks</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
