@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="我们大多时候是抱着问题，去选择一个框架，为以成熟可靠的方案，解决现有问题的。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用了 Log4j／Logback 等日志框架；请求的访问量很高，我们则使用 Redis／Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。 有时候也会觉得一段实现代码太烂，或因为其它原因，于是我们选用了新的框架替换">
+<meta name="description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何快速上手一个框架">
 <meta property="og:url" content="http://fantasticmao.cn/2017/09/14/如何快速上手一个框架/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="我们大多时候是抱着问题，去选择一个框架，为以成熟可靠的方案，解决现有问题的。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用了 Log4j／Logback 等日志框架；请求的访问量很高，我们则使用 Redis／Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。 有时候也会觉得一段实现代码太烂，或因为其它原因，于是我们选用了新的框架替换">
-<meta property="og:updated_time" content="2017-09-13T17:38:44.000Z">
+<meta property="og:description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛">
+<meta property="og:updated_time" content="2017-09-17T16:11:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何快速上手一个框架">
-<meta name="twitter:description" content="我们大多时候是抱着问题，去选择一个框架，为以成熟可靠的方案，解决现有问题的。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用了 Log4j／Logback 等日志框架；请求的访问量很高，我们则使用 Redis／Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。 有时候也会觉得一段实现代码太烂，或因为其它原因，于是我们选用了新的框架替换">
+<meta name="twitter:description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛">
 
 
 
@@ -373,32 +373,29 @@
       
 
       
-        <p>我们大多时候是抱着问题，去选择一个框架，为以成熟可靠的方案，解决现有问题的。比如使用 <code>System.out.println()</code> 打印日志很麻烦而且也不规范，于是我们使用了 Log4j／Logback 等日志框架；请求的访问量很高，我们则使用 Redis／Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。</p>
-<p>有时候也会觉得一段实现代码太烂，或因为其它原因，于是我们选用了新的框架替换。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。</p>
+        <p>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 <code>System.out.println()</code> 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。</p>
 <p>开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的 Topic —— 关于使用框架的方法论。<a id="more"></a></p>
 <hr>
-<p>在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。</p>
-<p>使用 JSON 序列化框架，我们就需要知道 JSON 的定义是什么，如此调用 Jackson、Gson、FastJson 等系列框架的 API 才能明白原理。</p>
-<p>使用 Web 框架，则需要知道 HTTP 协议，知道什么是请求头、请求体、请求的方法、响应状态、Cookie、Session 等等，了解这一系列之后，我们用起 Servlet、Spring MVC、Struts 或者包括其它语言的 Web 框架，才能得心顺手。</p>
-<p>同理可得，当使用 Netty 这样的一个网络编程框架，我们就需要了解更底层的 TCP/IP 知识，以及 Java 中相关 Socket API 才行，虽然我还没接触过。</p>
-<p>未了解过框架涉及领域的专业知识，茫然调用框架提供的 API，是一件很冲动、白费力气的事情。做好充分的准备，再开始学习使用框架，是个明知的选择。</p>
+<h1 id="一"><a href="#一" class="headerlink" title="一"></a>一</h1><p>在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。</p>
+<p>使用 JSON 序列化框架，我们就需要知道 JSON 对象的定义和其序列化机制，如此调用 Jackson、Gson、FastJson 等系列框架的 API 才能明白原理。使用 Web 框架，则需要知道 HTTP 协议，知道 HTTP 报文、Cookie - Session 机制、持久连接机制等等，了解这一系列之后，我们使用 Servlet、Spring MVC、Struts 或者包括其它语言的 Web 框架，才能得心顺手。同理可得，当使用 Netty 网络编程框架，我们就需要知道必要的更底层的 TCP/IP 等网络知识，虽然我还没接触过。</p>
+<p>未了解过框架涉及领域的专业知识，茫然调用框架提供的 API，是一件很冲动和白费力气的事情。</p>
 <hr>
-<p>第二个阶段是：开始使用框架，牛刀小试。</p>
-<p>这个阶段主要是依靠一些零碎的知识和搜索引擎，开始使用框架。这期间可能会遇到很多问题，包括对概念的不理解、对程序抛的异常束手无策等等。在这个阶段，每解决一个问题，都是一次自己能力的小提升。</p>
-<p>在这个充满挑战的阶段，建议在 IDE 上配置相关 Jar 包的源代码，然后在调试程序阶段时，顺带通过源代码的注释（开源框架的注释总是很详细的）和搜索引擎的帮助，从各个点着手，阅读框架的源代码。这个阶段也可以为后续从点到面地阅读框架源代码做准备。</p>
-<p>举个例子，实践 Spring IoC 模块的时候，起初可能依靠网上的各种比喻、解释来理解「依赖注入／控制反转」这个概念，在生硬地理解了核心概念之后，参照着相关 Demo ，硬着头皮运行起了一个简单的 Spring 应用。经过一段时间，写的代码多了，看的异常多了，也逐渐明白 Spring IoC 的 Bean 加载过程，明白 <code>BeanFactory</code>、<code>BeanDefinition</code>、<code>ApplicationContext</code> 等核心接口的含义，还有一些框架的细节实现和特性用法。这个时候，可能觉得自己需要全面地系统性地学习一遍 Spring 了。</p>
+<h1 id="二"><a href="#二" class="headerlink" title="二"></a>二</h1><p>第二个阶段是：开始使用框架，牛刀小试。</p>
+<p>这个阶段主要是依靠零碎知识和搜索引擎的帮助，开始使用框架。这期间可能会遇到很多问题，包括对框架概念的不理解、对应用程序抛的异常束手无策等等。在这个阶段，每解决一个问题，都是一次自己能力的小提升。在这个充满挑战的阶段，建议在 IDE 上配置相关 Jar 包的源代码，并在调试程序阶段，通过阅读源代码和注释（开源框架的注释总是很详细的），来理解框架 API 层面提供的功能。这个阶段也可以为后续从点到面地阅读框架源代码做准备。</p>
+<p>举个例子，在实践 Spring IoC 模块时候，起初可能会依靠各种比喻和解释来理解「依赖注入」这个概念，并且会生硬地参照着杂七杂八的 Demo，来编写一个 Spring 应用的代码。这便是我所说的使用框架的第二阶段。</p>
+<p>经过使用「依赖注入」提供的特性一段时间之后，也逐渐明白 Spring IoC 的 Bean 加载过程，明白 <code>BeanFactory</code>、<code>BeanDefinition</code>、<code>ApplicationContext</code> 等核心接口的含义，还有一些框架的细节实现和特性用法。这个时候，可能觉得自己需要全面地系统性地学习一遍 Spring 了。</p>
 <hr>
-<p>第三个阶段是：阅读相关书籍，参阅官方文档。</p>
-<p>在对框架的整体使用流程有所了解之后，这时候就需要开始进行系统的学习。可以通过阅读一本业界公认的经典书籍，也可以通过阅读开源框架的官方文档。不过不是所有技术文档都是由中文版的，这会让一些英语不是母语的同学，阅读起来比较费时间，包括我也是。但这是不可避免的，自己要尽量去克服这个问题，多积赞一些词汇量（其实专业词汇也没有几个）。</p>
-<p>在阅读官方文档的时候，会发现之前自己学习的地方有很多漏洞，或者是不规范的地方，这也是为什么我们需要系统性地学习知识的原因。</p>
+<h1 id="三"><a href="#三" class="headerlink" title="三"></a>三</h1><p>第三个阶段是：阅读经典书籍，参阅官方文档。</p>
+<p>在对框架的使用流程有所了解之后，这时候就需要开始进行系统的学习了。可以通过阅读一本业界公认的经典书籍，也可以通过阅读开源框架的官方文档，这些都是进阶掌握一个框架的好方法（当然也有其它方法）。在阅读官方文档的时候，会发现自己之前学习的地方有很多纰漏或者不规范的地方，这也是为什么我们需要系统性地学习知识的原因。</p>
+<p>大多数官方文档都是英文的，这会让一些同学阅读起来比较费力，包括我也是。但这是不可避免的，自己要尽量去克服这个问题，多花一些时间，多积赞一些词汇量（其实专业词汇也没有几个）。可以随意举例几个官方文档，我觉得是一个合格的 Java 开发者应该有阅读过的：<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/" target="_blank" rel="external">Spring</a>、<a href="https://dev.mysql.com/doc/refman/5.7/en/" target="_blank" rel="external">MySQL</a>、<a href="https://redis.io/" target="_blank" rel="external">Reids</a>。</p>
 <hr>
-<p>第四个阶段是：多敲代码，熟能生巧。</p>
-<p>看过一遍书籍或文档之后，过一段时间可能就会忘记，因为内容实在是太多了。这个阶段我们需要经常性地，有需求性地回顾相关知识。比如看了一遍 MySQL Explain 语句的输出格式之后，可能对其输出的列，每个列的具体值的含义，一次性记不大全，没关系，多看几遍就是了。</p>
+<h1 id="四"><a href="#四" class="headerlink" title="四"></a>四</h1><p>第四个阶段是：多敲代码，熟能生巧。</p>
+<p>这个阶段其实是伴随第二和第三阶段的。敲过一遍代码，看过一遍书，过段时间可能就会忘记，因为内容实在是太多了。这个阶段我们需要经常性地，有需求性地回顾相关知识。比如看了一遍 MySQL Explain 语句的输出格式之后，可能对其输出的列，每个列的具体值的含义，一次性记不大全，没关系，多看几遍就是了。</p>
 <hr>
-<p>第五个阶段是：货比三家，感受框架的设计哲学。</p>
-<p>这是最后一个阶段。在用过多个同类的框架／库之后，我们可以对比每个框架的设计和实现，去揣摩作者当初编写这个框架的想法，发现其中的优缺点，吸取经验。经典的例子是 Java 中的几个 ORM 框架。从繁琐的 JDBC 到实用的 Mybatis、Hibernate，再到更优雅的 Spring Data Jpa。这些 ORM 框架的更新迭代，都体现着一种框架的设计哲学。想想人家的代码为什么要这么设计、要这么实现？总是受益良多的。</p>
+<h1 id="五"><a href="#五" class="headerlink" title="五"></a>五</h1><p>第五个阶段是：货比三家，感受框架的设计哲学。</p>
+<p>这是最后一个阶段。在用过多个同类的框架／库之后，我们可以对比每个框架的设计和实现，去揣摩作者当初编写这个框架的想法，发现其中的优缺点，吸取经验。经典的例子是 Java 中的几个 ORM 框架。从繁琐的 JDBC 到实用的 MyBatis、Hibernate，再到更优雅的 Spring Data JPA。这些 ORM 框架的更新迭代，都体现着一种框架的设计哲学。想想人家的代码为什么要这么设计、要这么实现？总是受益良多的。</p>
 <hr>
-<p>最后想说的是，我们应该拒绝成为一个只会调用 API 的工程师哈。</p>
+<h1 id="附"><a href="#附" class="headerlink" title="附"></a>附</h1><p>最后想说的是，我们应该拒绝成为一个 API 的工程师哈。</p>
 
       
     </div>
@@ -496,8 +493,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -647,6 +653,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一"><span class="nav-number">1.</span> <span class="nav-text">一</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二"><span class="nav-number">2.</span> <span class="nav-text">二</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三"><span class="nav-number">3.</span> <span class="nav-text">三</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四"><span class="nav-number">4.</span> <span class="nav-text">四</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五"><span class="nav-number">5.</span> <span class="nav-text">五</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附"><span class="nav-number">6.</span> <span class="nav-text">附</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
