@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛">
+<meta name="description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。 有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何快速上手一个框架">
 <meta property="og:url" content="http://fantasticmao.cn/2017/09/14/如何快速上手一个框架/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛">
-<meta property="og:updated_time" content="2017-09-24T09:42:43.000Z">
+<meta property="og:description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。 有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发">
+<meta property="og:updated_time" content="2017-09-24T10:07:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何快速上手一个框架">
-<meta name="twitter:description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛">
+<meta name="twitter:description" content="大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。 有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发">
 
 
 
@@ -373,11 +373,14 @@
       
 
       
-        <p>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 <code>System.out.println()</code> 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。</p>
+        <p>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 <code>System.out.println()</code> 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。</p>
+<p>有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。</p>
 <p>开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的 Topic —— 关于使用框架的方法论。<a id="more"></a></p>
 <hr>
 <h1 id="一"><a href="#一" class="headerlink" title="一"></a>一</h1><p>在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。</p>
-<p>使用 JSON 序列化框架，我们就需要知道 JSON 对象的定义和其序列化机制，如此调用 Jackson、Gson、FastJson 等系列框架的 API 才能明白原理。使用 Web 框架，则需要知道 HTTP 协议，知道 HTTP 报文、Cookie - Session 机制、持久连接机制等等，了解这一系列之后，我们使用 Servlet、Spring MVC、Struts 或者包括其它语言的 Web 框架，才能得心顺手。同理可得，当使用 Netty 网络编程框架，我们就需要知道必要的更底层的 TCP/IP 等网络知识，虽然我还没接触过。</p>
+<p>使用 JSON 序列化框架，我们就需要知道 JSON 对象的定义和其序列化机制，如此调用 Jackson、Gson、FastJson 等系列框架的 API 才能明白原理。</p>
+<p>使用 Web 框架，则需要知道 HTTP 协议，知道 HTTP 报文、Cookie - Session 机制、持久连接机制等等，了解这一系列之后，我们使用 Servlet、Spring MVC、Struts 或者包括其它语言的 Web 框架，才能得心顺手。</p>
+<p>同理可得，当使用 Netty 网络编程框架，我们就需要知道必要的更底层的 TCP/IP 等网络知识，虽然我还没接触过。</p>
 <p>未了解过框架涉及领域的专业知识，茫然调用框架提供的 API，是一件很冲动和白费力气的事情。</p>
 <hr>
 <h1 id="二"><a href="#二" class="headerlink" title="二"></a>二</h1><p>第二个阶段是：开始使用框架，牛刀小试。</p>
