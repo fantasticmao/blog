@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/02/03/MySQL-索引高性能策略/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
-<meta property="og:updated_time" content="2017-09-13T17:38:44.000Z">
+<meta property="og:updated_time" content="2017-09-24T09:48:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 索引高性能策略">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。 B-Tree 索引、聚簇索引的实现可参考：http://blog.codinglabs.org/articles/theory-of-mysql-index.html">
@@ -464,14 +464,9 @@
 <p>大多数情况下都不需要冗余索引，应该尽量扩展已有的索引而不是创建新索引。但也有时候出于性能方面的考虑，需要创建冗余索引。因为扩展已有的索引会导致其变得很大，从而影响其它使用该索引的查询性能。</p>
 <p>有多个索引的缺点是索引的成本很高。测试表明，当表中的数据越多，向持有索引的表中插入数据就会越慢。<strong>一般来说，新增索引将会导致 INSERT、UPDATE、DELETE 等操作的速度变慢，特别是当新增索引后达到了服务器内存瓶颈的时候。</strong></p>
 <h2 id="未使用的索引"><a href="#未使用的索引" class="headerlink" title="未使用的索引"></a>未使用的索引</h2><p>有两个工具可以帮助定位未使用的索引。最简单有效的办法是在 Percona Server 或者 MariaDB 中，先打开 userstates 服务器变量（默认是关闭的），然后让服务器正常运行一段时间，再通过查询 INFORMATION_SCHEMA.INDEX_STATISTICS 就能查到每个索引的使用频率。另外，还可以使用 Percona Toolkit 中的 pt-index-usage，该工具可以读取查询日志，并对日志中的每条查询进行 EXPLAIN 操作，然后打印出关于索引和查询的报告。</p>
-<h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><hr>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><!--
-B+Tree数据结构
-InnoDB、MyISAM的B+Tree实现
-MySQL使用索引
-索引的选择性和索引前缀
-主键auto_increment
--->
+<h2 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h2><p>待续</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>待续</p>
 
       
     </div>
