@@ -96,7 +96,7 @@
 <meta property="og:description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科。">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/UDP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/UDP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/2.png">
-<meta property="og:updated_time" content="2017-12-25T10:09:21.000Z">
+<meta property="og:updated_time" content="2018-01-03T07:41:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UDP 必知必会">
 <meta name="twitter:description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科。">
@@ -388,6 +388,7 @@
 <li>UDP 支持一对一、一对多、多对一和多对多的网络通信；</li>
 <li>UDP 首部只占 8 个字节，相比于占 20 字节的 TCP 开销很小。</li>
 </ol>
+<hr>
 <h1 id="报文结构"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构</h1><p>报文格式：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/UDP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/1.png" alt="iamges"></p>
 <p>首部字段：<br>Source Port：可选字段，表示发送进程的端口，在需要对方回信时选用。缺省值为全 0；<br>Destination Port：必选字段，表示接收进程的端口；<br>Length：包含 header 和 data 的用户数据报文的长度，最小值是 8；<br>Checksum：用于校验用户数据报文在传输过程中是否有错。</p>
 <p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/UDP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/2.png" alt="images"></p>
@@ -433,8 +434,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/04/设计原则/" rel="next" title="设计原则">
-                <i class="fa fa-chevron-left"></i> 设计原则
+              <a href="/2017/12/15/HTTP-必知必会/" rel="next" title="HTTP 必知必会">
+                <i class="fa fa-chevron-left"></i> HTTP 必知必会
               </a>
             
           </div>
@@ -513,7 +514,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -535,7 +536,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -616,6 +617,10 @@
                 </li>
               
                 <li class="links-of-blogroll-item">
+                  <a href="http://linux.vbird.org/" title="鳥哥的 Linux 私房菜" target="_blank">鳥哥的 Linux 私房菜</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
                   <a href="http://dbanotes.net/" title="DBA Notes 闲思录" target="_blank">DBA Notes 闲思录</a>
                 </li>
               
@@ -681,7 +686,7 @@
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
