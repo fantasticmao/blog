@@ -96,17 +96,17 @@
 <meta property="og:description" content="摘自《图解 HTTP》，并参考自维基百科。">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/2.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/Cookie.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/HTTP-content-negotiation.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/Cookie.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-content-negotiation.png">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/450px-HTTP_persistent_connection.svg.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/HTTP-persistent-connection-1.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/HTTP-persistent-connection-2.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-persistent-connection-1.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-persistent-connection-2.png">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/HTTP_pipelining2.svg/640px-HTTP_pipelining2.svg.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/HTTP-pipelining.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/HTTP-compression.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/HTTP-Chunked-transfer-encoding.png">
-<meta property="og:image" content="http://fantasticmao.cn/images/HTTP-必知必会/HTTP-cache.png">
-<meta property="og:updated_time" content="2018-01-28T22:19:16.000Z">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-pipelining.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-compression.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-Chunked-transfer-encoding.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-cache.png">
+<meta property="og:updated_time" content="2018-01-29T16:49:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP 必知必会">
 <meta name="twitter:description" content="摘自《图解 HTTP》，并参考自维基百科。">
@@ -465,22 +465,23 @@
 <h1 id="实现机制"><a href="#实现机制" class="headerlink" title="实现机制"></a>实现机制</h1><h2 id="无状态性和-Cookie"><a href="#无状态性和-Cookie" class="headerlink" title="无状态性和 Cookie"></a>无状态性和 Cookie</h2><p>HTTP 是一种不保存状态，即无状态（stateless）的协议。HTTP 协议自身不对 <code>Request</code> 和 <code>Response</code> 之间的通信状态进行保存。也就是说在 HTTP 协议这个级别，网络通讯过程中对于任何发送的 <code>Request</code> 或 <code>Response</code> 都不会做持久化处理。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把 HTTP 协议设计成如此简单。</p>
 <p>随着 Web 的不断发展，因无状态而导致业务处理变得棘手的情况增多了。HTTP 协议为了实现期望保持状态的功能，于是引入了 Cookie 技术。</p>
 <p><strong><a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank" rel="external">Cookie</a> 技术通过在 <code>Request</code> 和 <code>Response</code> 报文中写入 Cookie 信息来控制客户端的状态。</strong>它会根据从服务端发送的 <code>Response</code> 报文内的一个叫做 <code>Set-Cookie</code> 的首部字段，通知客户端保存 Cookie 值。当下次客户端再往该服务端发送 <code>Request</code> 时，客户端会自动在报文中加入 Cookie 值后发送出去。此时，服务端发现客户端发送过来的 Cookie 值后，会去检查究竟是从哪一个客户端发来的，然后对比服务端上的记录，最后得到请求之前的状态信息。</p>
-<p>Wireshark 抓包示意图：<br><img src="/images/HTTP-必知必会/Cookie.png" alt="images"></p>
+<p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/Cookie.png" alt="images"></p>
 <h2 id="HTTP-内容协商"><a href="#HTTP-内容协商" class="headerlink" title="HTTP 内容协商"></a>HTTP 内容协商</h2><p>一个 <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank" rel="external">URI</a> 可能对应多种不同表现形式的资源，例如不同的语言、不同的编码、不同的媒体类型。<a href="https://en.wikipedia.org/wiki/Content_negotiation" target="_blank" rel="external">HTTP 内容协商</a>（HTTP content negotiation）机制允许对同一个 URI 提供多个不同版本的资源，以便客户端能指定和获取最适合它们的版本资源。HTTP 协议提供了以下几种不同的内容协商机制：<code>server-driven</code>、<code>agent-driven</code>、<code>transparent</code>、其它混合的组合。</p>
 <p>server-driven：服务端驱动（或称主动）内容协商是根据在服务端上执行的算法来选择资源的最合适的表现形式。这通常是基于客户端所提供的可接受标准来执行的。<strong>具体来说，当客户端向服务端发送 <code>Request</code> 时，在请求首部的 <code>Accept</code> 系列字段中给出可接受的媒体类型和相关的质量因素，而服务端则按照客户端所提供的这些参数，选择其最合适的资源版本返回 <code>Response</code>。</strong></p>
-<p>Wireshark 抓包示意图：<br><img src="/images/HTTP-必知必会/HTTP-content-negotiation.png" alt="images"></p>
+<p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-content-negotiation.png" alt="images"></p>
 <p>agent-driven：用户代理驱动（或称被动）内容协商是根据在客户端上执行的算法来选择资源的最合适的表现形式。这通常是基于服务端所提供的资源的表现形式列表和元数据，以此来执行的。</p>
 <p>其它内容协商机制：略。</p>
 <h2 id="HTTP-持久连接"><a href="#HTTP-持久连接" class="headerlink" title="HTTP 持久连接"></a>HTTP 持久连接</h2><p>在 HTTP 协议的初始版本中，每进行一次 HTTP 通信就要建立和断开一次 TCP <code>Connection</code>，这样频繁地建立和断开无谓的TCP <code>Connection</code> 会增加网络通信的开销，于是 HTTP/1.1 提出了 <a href="https://en.wikipedia.org/wiki/HTTP_persistent_connection" target="_blank" rel="external">HTTP 持久连接</a>（HTTP persistent connection，也称作 HTTP keep-alive 或 HTTP connection reuse）机制。<strong>它可以使用同一个 <code>Connection</code> 来发送多个 <code>Request</code> 和接收多个 <code>Response</code>，而不是为每一个新的 <code>Request</code> 或 <code>Response</code> 都打开新的 <code>Connection</code>。</strong></p>
 <p>在 HTTP/1.0 中，没有官方的 keep-alive 操作。为了实现持久连接，通常的操作是在现有版本的协议上添加一个标记。比如，如果浏览器支持的话，它会在请求首部字段中添加 <code>Connection: Keep-Alive</code>，然后当服务端接收到 <code>Request</code> 并返回 <code>Response</code> 的时候，则会在响应首部字段中添加 <code>Connection: Keep-Alive</code>。这样做，HTTP 就不会中断 TCP <code>Connection</code>，然后当客户端发送另一个 <code>Request</code> 时，HTTP 就会使用同一个 TCP <code>Connection</code>。<strong>这种情况会一直持续到客户端或服务端的任意一方，在明确提出断开连接之后终止。</strong></p>
 <p>在 HTTP/1.1 中，所有的连接默认都是持久连接，除非特殊声明不支持。</p>
 <p>使用多个连接和使用持久连接的对比图（图片来源自维基百科）：<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/HTTP_persistent_connection.svg/450px-HTTP_persistent_connection.svg.png" alt="images"></p>
-<p>Wireshark 抓包示意图：<br><img src="/images/HTTP-必知必会/HTTP-persistent-connection-1.png" alt="images"><br><img src="/images/HTTP-必知必会/HTTP-persistent-connection-2.png" alt="images"></p>
+<p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-persistent-connection-1.png" alt="images"></p>
+<p><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-persistent-connection-2.png" alt="images"></p>
 <h2 id="HTTP-管线化"><a href="#HTTP-管线化" class="headerlink" title="HTTP 管线化"></a>HTTP 管线化</h2><p>HTTP 持久连接使多个请求以管线化的方式发送成为可能。<strong><a href="https://en.wikipedia.org/wiki/HTTP_pipelining" target="_blank" rel="external">HTTP 管线化</a>（HTTP pipelining）可以在单个 TCP <code>Connection</code> 上并行发送多个客户端的 <code>Request</code>，且不需要在发送过程中等待服务端的 <code>Response</code>。</strong>管线化机制可以提升动态加载 HTML 页面的速度，特别是在高延迟的网络环境下，如连接卫星的网络环境。但对于正常宽带连接的网络环境，提升效果却不是很明显。因为对于客户端并行发送的网络请求，服务端还是需要以相同的顺序响应，这就有可能造成了 HOL blocking（Head-of-line blocking，队头阻塞）。</p>
 <p>非幂等性的请求，如 POST 请求，不应该被管线化。GET 和 HEAD 请求在任何情况下都可以被管线化。其它幂等性的请求，如 PUT 和 DELETE 请求，取决于当前请求是否依赖其它请求，来决定其是否可以被管线化。</p>
 <p>HTTP 管线化需要客户端和服务端的同时支持。虽然使用 HTTP/1.1 协议可以确认服务端是支持管线化机制的，但这并不意味着服务端必须返回管线化的结果。如果客户端选择了非管线化的 <code>Request</code>，服务端则会正常返回非管线化的 <code>Response</code>。</p>
 <p>使用非管线化和管线化的对比图（图片来源自维基百科）：<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/HTTP_pipelining2.svg/640px-HTTP_pipelining2.svg.png" alt="images"></p>
-<p>Wireshark 抓包示意图：<br><img src="/images/HTTP-必知必会/HTTP-pipelining.png" alt="images"></p>
+<p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-pipelining.png" alt="images"></p>
 <p>PS：在理想情况下，HTTP 响应报文是作为整包且有序地发送给客户端的，并且服务端会在响应报文中使用 <code>Content-Length</code> 首部字段标志响应实体的长度，因此客户端可以依据 <code>Content-Length</code> 值来计算当前响应实体的结束和下一个响应实体的开始。而使用 HTTP 持久连接和 HTTP 管线化，则会使客户端难以确认服务端返回的响应的先后顺序，以至于 <code>Content-Length</code> 无法被正常使用。为了解决这个问题，HTTP/1.1 引入了 <a href="#HTTP-分块传输编码">分块传输编码</a>。它定义了一个 <code>last-chunk</code> 比特位，可以用来设置每一个响应的结束标识，客户端也由此可以得知每一个响应实体的结束状态了。<br>// TODO 好好理解</p>
 <h2 id="HTTP-压缩"><a href="#HTTP-压缩" class="headerlink" title="HTTP 压缩"></a>HTTP 压缩</h2><p><a href="https://en.wikipedia.org/wiki/HTTP_compression" target="_blank" rel="external">HTTP 压缩</a>（HTTP compression） 是一种在客户端和服务端之间使用压缩算法传输内容的数据传输机制，它可以充分利用带宽，提升网络传输速率。</p>
 <p>客户端在发送 <code>Request</code> 时，通过在请求首部中添加 <code>Accept-Encoding</code> 字段，告知服务端其所支持的压缩方式。服务端在返回 <code>Response</code> 时，通过在响应首部中添加 <code>Content-Encoding</code> 或 <code>Transfer-Encoding</code> 字段，告知客户端其所使用的压缩方式。常见的压缩方式，举例如下：</p>
@@ -490,15 +491,15 @@
 <li>compress：基于 UNIX compress 的压缩方式（不推荐大多数应用使用）；</li>
 <li>identity：默认值，不压缩内容；</li>
 </ul>
-<p>Wireshark 抓包示意图：<br><img src="/images/HTTP-必知必会/HTTP-compression.png" alt="images"></p>
+<p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-compression.png" alt="images"></p>
 <h2 id="HTTP-分块传输编码"><a href="#HTTP-分块传输编码" class="headerlink" title="HTTP 分块传输编码"></a>HTTP 分块传输编码</h2><p><a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding" target="_blank" rel="external">HTTP 分块传输编码</a>（HTTP Chunked transfer encoding）是一种允许服务端将 <code>Response</code> 数据分块传输给客户端的数据传输机制。在分块传输编码中，数据流被分成一系列不重叠的「数据块」，以字节为单位被发送，且彼此独立地被客户端接收。</p>
 <p>在一次 HTTP <code>Response</code> 报文中，通过使用 <code>Transfer-Encoding:chunked</code> 指示当前 <code>Response</code> 是分块传输编码的，并以最终传输一个 0 字节的「数据块」为结束标识。</p>
-<p>Wireshark 抓包示意图：<br><img src="/images/HTTP-必知必会/HTTP-Chunked-transfer-encoding.png" alt="images"></p>
+<p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-Chunked-transfer-encoding.png" alt="images"></p>
 <h2 id="HTTP-缓存"><a href="#HTTP-缓存" class="headerlink" title="HTTP 缓存"></a>HTTP 缓存</h2><p><a href="https://en.wikipedia.org/wiki/Web_cache" target="_blank" rel="external">HTTP 缓存</a>（HTTP cache）是一种为了减少网络请求的带宽延迟，从而对页面进行临时存储的技术。通过缓存技术，可以使 <code>Request</code> 在满足特定条件的情况下，直接从缓存中获取 <code>Response</code> 信息，以此提升页面加载速度和减少对服务器的压力。HTTP 协议定义了三种控制缓存的基本机制：<code>freshness</code>、<code>validation</code>、<code>invalidation</code>。</p>
 <p>Freshness 机制允许一个 <code>Response</code> 在不需要源服务器重新校验的情况下，可以被直接用作于响应 <code>Request</code>，并且 <code>Response</code> 新鲜程度可以由客户端和服务端同时控制。例如，<code>Expires</code> 响应首部字段可以指定缓存的失效日期，<code>Cache-Control: max-age</code> 指令可以告知缓存的有效时间（单位为秒）。</p>
 <p>Validation 机制用于校验一个被缓存的 <code>Response</code> 在过时之后，是否依旧有效。例如，如果响应首部中包含 <code>Last-Modified</code> 字段，那么则可以使用一个包含 <code>If-Modified-Since</code> 请求首部字段的 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests" target="_blank" rel="external">条件请求</a>（conditional request），来查看缓存是否已经被更新。除此之外还有 <a href="https://en.wikipedia.org/wiki/HTTP_ETag" target="_blank" rel="external">ETag</a>（entity tag）机制，它同时支持强校验和弱校验。</p>
 <p>Invalidation 机制通常是针对使用缓存技术的副作用。例如，一个关联着缓存数据的 URL，若被以 PUT/POST/DELETE 方法请求了，那么其缓存数据就会失效。</p>
-<p>Wireshark 抓包示意图：<br><img src="/images/HTTP-必知必会/HTTP-cache.png" alt="images"></p>
+<p>Wireshark 抓包示意图：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/HTTP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/HTTP-cache.png" alt="images"></p>
 <p>更全面地了解 HTTP 条件请求，推荐阅读：<a href="https://tools.ietf.org/html/rfc7232" target="_blank" rel="external">RFC 7232 - Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests</a></p>
 <p>更全面地了解 HTTP 缓存机制，推荐阅读：<a href="https://tools.ietf.org/html/rfc7234" target="_blank" rel="external">RFC 7234 - Hypertext Transfer Protocol (HTTP/1.1): Caching</a>。<!-- [浅谈浏览器http的缓存机制](http://www.cnblogs.com/vajoy/p/5341664.html) --> <!-- [What's the difference between Cache-Control: max-age=0 and no-cache?](https://stackoverflow.com/questions/1046966/whats-the-difference-between-cache-control-max-age-0-and-no-cache/1383359#1383359) --></p>
 <hr>
