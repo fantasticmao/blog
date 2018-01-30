@@ -87,19 +87,19 @@
 
 
 
-<meta name="description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科。">
+<meta name="description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科与 RFC-768。">
 <meta name="keywords" content="UDP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UDP 必知必会">
 <meta property="og:url" content="http://fantasticmao.cn/2017/12/23/UDP-必知必会/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科。">
+<meta property="og:description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科与 RFC-768。">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/UDP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/UDP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/2.png">
-<meta property="og:updated_time" content="2018-01-03T07:41:42.000Z">
+<meta property="og:updated_time" content="2018-01-30T16:12:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UDP 必知必会">
-<meta name="twitter:description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科。">
+<meta name="twitter:description" content="摘自《计算机网络》 第 5 章 传输层，并参考自维基百科与 RFC-768。">
 <meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/UDP%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/1.png">
 
 
@@ -376,7 +376,7 @@
       
 
       
-        <p>摘自<a href="https://book.douban.com/subject/26960678/" target="_blank" rel="external">《计算机网络》</a> 第 5 章 传输层，并参考自维基百科。<a id="more"></a></p>
+        <p>摘自<a href="https://book.douban.com/subject/26960678/" target="_blank" rel="external">《计算机网络》</a> 第 5 章 传输层，并参考自维基百科与 RFC-768。<a id="more"></a></p>
 <h1 id="协议概述"><a href="#协议概述" class="headerlink" title="协议概述"></a>协议概述</h1><p><a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" target="_blank" rel="external">UDP</a>（User Datagram Protocol，用户数据报协议）是 OSI 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠的数据传送服务，是 TCP/IP 协议族的核心成员之一，由 David P. Reed 于 1980 设计，并在 <a href="https://tools.ietf.org/html/rfc768" target="_blank" rel="external">RFC-768</a> 中正式定义。</p>
 <p>UDP 使用最小协议机制的简单无连接通信模型，可以使分组交换的计算机在 IP 网络上使用数据报通信。它提供 checksum 字段用于保证数据完整性，提供 port number 字段用于区分源地址和目标地址不同功能的应用进程。UDP 适用于对错误校验和错误纠正要求不高的应用场景，如多媒体应用、IP 电话等等。UDP 在通讯时不需要像 TCP 一样进行握手，因此减少了网络通信的开销和发送数据之前的延迟，但它也是不可靠的传输协议，即不保证数据可靠的交付和时序。</p>
 <p>UDP 只在 IP 的数据服务之上增加了很少的一点功能，其主要特点是：</p>
