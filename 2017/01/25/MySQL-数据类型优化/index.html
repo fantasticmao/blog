@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png">
-<meta property="og:updated_time" content="2018-01-30T16:16:01.000Z">
+<meta property="og:updated_time" content="2018-03-10T09:31:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 数据类型优化">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 4 章 Schema 与数据类型优化。">
@@ -379,48 +379,47 @@
 
       
         <p>摘自<a href="https://book.douban.com/subject/23008813/" target="_blank" rel="external">《高性能 MySQL》</a>第 4 章 Schema 与数据类型优化。<a id="more"></a></p>
+<p>良好的逻辑设计和物理设计是高性能的基石，应该根据系统将要执行的查询语句来设计 schema，这往往需要权衡各种因素。例如，反范式的设计可以加快某些类型的查询，但同时可能使另一些类型的查询变慢。比如添加计数表和汇总表是一种很好的优化查询的方式，但这些表的维护成本可能会很高。MySQL 独有的特性和实现细节对性能的影响也很大。</p>
+<hr>
 <h1 id="选择优化的数据类型"><a href="#选择优化的数据类型" class="headerlink" title="选择优化的数据类型"></a>选择优化的数据类型</h1><p>MySQL 支持的数据类型非常多，选择正确的数据类型对于获取高性能至关重要。不管存储哪种类型的数据，都应遵从下面几个原则：</p>
 <ol>
-<li>更小的通常更好<br> 一般情况下，应该尽量使用可以正确存储数据的最小数据类型。</li>
-<li>简单就好<br> 简单数据类型的操作通常需要更少的 CPU 周期。例如整型比字符串代价更低，因为字符集和校对规则使字符串比整型比较更复杂。建议使用 MySQL 内建的类型而不是字符串来存储日期时间，建议使用整型存储 IP 地址。</li>
-<li>尽量避免NULL<br> 通常情况下最好指定列为 NOT NULL，除非真的需要存储 NULL 值。如果查询中包含可为 NULL 的列，对 MySQL 来说更难优化，因为可为 NULL 的列使得索引、索引统计和值比较都更复杂。可能为 NULL 的列会使用更多的存储空间，在MySQL 里也需要特殊处理。</li>
+<li>更小的通常更好<br> 一般情况下，应该尽量使用可以正确存储数据的最小数据类型。更小的数据类型通常更快，因为它们占用更少的磁盘、内存和 CPU 缓存，并且处理时需要的 CPU 周期也更少。</li>
+<li>简单就好<br> 简单数据类型的操作通常需要更少的 CPU 周期。例如整型比字符串代价更低，因为字符集和校对规则使字符串比较比整型比较更复杂。建议使用 MySQL 内建的类型而不是字符串来存储日期时间，建议使用整型存储 IP 地址。</li>
+<li>尽量避免NULL<br> 通常情况下最好指定列为 NOT NULL，除非真的需要存储 NULL 值。如果查询中包含可为 NULL 的列，对 MySQL 来说更难优化，因为可为 NULL 的列使得索引、索引统计和值比较都更复杂。可能为 NULL 的列会使用更多的存储空间，在MySQL 里也需要特殊处理。当可为 NULL 的列被索引时，每个索引记录需要一个额外的字节，在 MyISAM 里甚至还可能导致固定大小的索引（例如只有一个整数列的索引）变成可变大小的索引。</li>
 </ol>
-<p>在为列选择数据类型时，第一步确定合适的大类型：数字、字符串、时间等。第二步选择具体类型。很多 MySQL 的数据类型可以存储相同类型的数据，只是存储的长度和范围不一样、允许的精度不同、需要的物理空间不同。相同大类型的不同子类型数据有时也有一些特殊的行为和属性，如 <code>DATETIME</code> 和 <code>TIMESTAMP</code>。</p>
+<p>在为列选择数据类型时，第一步确定合适的大类型：数字、字符串、时间等，第二步选择具体类型。很多 MySQL 的数据类型可以存储相同类型的数据，只是存储的长度和范围不一样、允许的精度不同、需要的物理空间（磁盘和内存空间）不同。相同大类型的不同子类型数据有时也有一些特殊的行为和属性，如 <code>DATETIME</code> 和 <code>TIMESTAMP</code>。</p>
 <hr>
 <h1 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h1><p>可以使用这几种整型类型：<code>TINYINT</code>、<code>SMALLINT</code>、<code>MEDIUMINT</code>、<code>INT</code>、<code>BIGINT</code>，分别使用 8、16、24、32、64 位存储空间，它们的存储的值的范围从 -2 ^ (N - 1) 到 2 ^ (N - 1) - 1，其中 N 是存储空间的位数。</p>
 <p>整数类型有可选的 <code>UNSIGNED</code> 属性，表示不允许负值，这大致可以使正数的上限提高一倍。例如 <code>TINYINT UNSIGNED</code> 可以存储的范围是 0 ~ 255，而 <code>TINYINT</code> 的存储范围是 -128 ~ 127。</p>
 <p>整数计算一般使用 64 为的 <code>BIGINT</code> 整数，即使在 32 位环境也是如此。（一些聚合函数是例外，它们使用 <code>DECIMAL</code> 或 <code>DOUBLE</code> 进行计算）</p>
-<p>MySQL 可以使整数类型指定宽度，例如 <code>INT(11)</code>，对大多数应用这是没有意义的：它不会限制值的合法范围，只是规定类 MySQL 的一些交互工具用来显示字符的个数。对于存储和计算来说，<code>INT(1)</code> 和 <code>INT(20)</code>是相同的。</p>
+<p>MySQL 可以为整数类型指定宽度，例如 <code>INT(11)</code>，对大多数应用这是没有意义的：它不会限制值的合法范围，只是规定类 MySQL 的一些交互工具用来显示字符的个数。对于存储和计算来说，<code>INT(1)</code> 和 <code>INT(20)</code>是相同的。</p>
 <hr>
-<h1 id="实数类型"><a href="#实数类型" class="headerlink" title="实数类型"></a>实数类型</h1><p>实数是带有小数部分的数字。它们不只是为了存储小数部分，也可以使用 <code>DECIMAL</code> 存储比 <code>BIGINT</code> 还大的整数。</p>
-<p><code>FLOAT</code> 和 <code>DOUBLE</code>类型支持使用标准的浮点运算进行近似计算。如果需要知道浮点运算是怎么计算的，则需要研究所使用的平台的浮点数的具体实现。</p>
-<p><code>DECIMAL</code> 类型用于存储精确的小数。因为CPU不支持 <code>DECIMAL</code> 的直接计算，所以在 MySQL 5.0 及更高版本中，MySQL 服务器自身实现类 <code>DECIMAL</code> 的高精度计算。相对而言，CPU 直接支持原生浮点计算，所以浮点运算更快。</p>
-<p>浮点和 <code>DECIMAL</code> 类型都可以指定精度。对于 <code>DECIMAL</code> 列，可以指定小数点前后所允许的最大位数，这会影响列的空间消耗。</p>
-<p>MySQL 5.0 及更高版本中的 <code>DECIMAL</code> 类型允许最多 65 个数字。</p>
-<p>有多种方法可以指定浮点列所需要的精度，这会使得 MySQL 悄悄选择不同的数据类型，或者在存储时对值进行取舍。这些精度定义是非标准的，所以我们建议只指定数据类型，不指定精度。</p>
+<h1 id="实数类型"><a href="#实数类型" class="headerlink" title="实数类型"></a>实数类型</h1><p>实数是带有小数部分的数字。它们不只是为了存储小数部分，也可以使用 <code>DECIMAL</code> 存储比 <code>BIGINT</code> 还大的整数。MySQL 既支持精确类型，也支持不精确类型。</p>
+<p><code>FLOAT</code> 和 <code>DOUBLE</code>类型支持使用标准的浮点运算进行近似计算。<code>DECIMAL</code> 类型用于存储精确的小数。因为 CPU 不支持 <code>DECIMAL</code> 的直接计算，所以在 MySQL 5.0 及更高版本中，MySQL 服务器自身实现了 <code>DECIMAL</code> 的高精度计算。</p>
+<p>浮点和 <code>DECIMAL</code> 类型都可以指定精度。对于 <code>DECIMAL</code> 列，可以指定小数点前后所允许的最大位数，这会影响列的空间消耗。有多种方法可以指定浮点列所需要的精度，这会使得 MySQL 悄悄选择不同的数据类型，或者在存储时对值进行取舍。这些精度定义是非标准的，所以一般建议只指定数据类型，不指定精度。</p>
 <p>浮点类型在存储相同范围的值时，通常比 <code>DECIMAL</code> 使用更少的空间。<code>FLOAT</code> 使用 4 个字节存储，<code>DOUBLE</code> 使用 8 个字节，相比 <code>FLOAT</code> 有更高的精度和更大的范围。和整数类型一样，能选择的只是存储类型。MySQL 使用 <code>DOUBLE</code> 作为内部浮点计算的类型。</p>
-<p>因为需要额外的空间和计算开销，所以应该尽量只在对小数进行精确计算时才使用 <code>DECIMAL</code>，例如财务数据。</p>
+<p>因为需要额外的空间和计算开销，所以应该尽量只在对小数进行精确计算时才使用 <code>DECIMAL</code>，例如财务数据。但在数据量比较大的时候，可以考虑使用 <code>BIGINT</code> 代替 <code>DECIMAL</code>，将需要存储的货币单位根据小数的位数乘以相应的倍数即可。</p>
 <hr>
-<h1 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h1><p>MySQL 支持多种字符串类型，每种类型还有很多变种。从 MySQL 4.1 开始，每个字符串列可以定义自己的字符集和排序规则，或者说校对规则。这些东西会很大程度上影响性能。</p>
-<h2 id="VARCHAR和CHAR类型"><a href="#VARCHAR和CHAR类型" class="headerlink" title="VARCHAR和CHAR类型"></a>VARCHAR和CHAR类型</h2><p><code>VARCHAR</code> 和 <code>CHAR</code> 是两种主要的字符串类型。很难精确地解释两种类型的值是如何存储在磁盘和内存中的，因为这跟存储引擎的具体实现有关。下面的描述假设使用的存储引擎是 InnoDB 或 MyISAM。</p>
+<h1 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h1><p>MySQL 支持多种字符串类型，每种类型还有很多变种。这些数据类型在 4.1 和 5.0 版本发生了很大的变化，使得情况更加复杂。从 MySQL 4.1 开始，每个字符串列可以定义自己的字符集和排序规则，或者说校对规则。这些东西会很大程度上影响性能。</p>
+<h2 id="VARCHAR和CHAR类型"><a href="#VARCHAR和CHAR类型" class="headerlink" title="VARCHAR和CHAR类型"></a>VARCHAR和CHAR类型</h2><p><code>VARCHAR</code> 和 <code>CHAR</code> 是两种主要的字符串类型，这两种类型的值是在磁盘和内存中的存储方式，与存储引擎的具体实现有关。下面的描述假设使用的存储引擎是 InnoDB 或 MyISAM，如果使用的不是这两种存储引擎，请参考所使用的存储引擎的文档。</p>
 <h3 id="VARCHAR"><a href="#VARCHAR" class="headerlink" title="VARCHAR"></a>VARCHAR</h3><ul>
-<li><code>VARCHAR</code> 类型用于存储可变长的字符串，是最常见的字符串数据类型。它比定长类型更节省空间，因为它仅使用必要的空间。</li>
-<li><code>VARCHAR</code> 需要使用 1 或 2 个额外字节记录字符串长度：如果列的最大长度小于或等于 255 字节，则只使用 1 个字节表示，否则使用 2 个字节。</li>
-<li>由于行是变长的，在 UPDATE 时可能使行变得比原来更长，这就导致 MySQL 需要做额外的工作。</li>
-<li>在 5.0 及更高版本，MySQL 在存储和检索时，会保留末尾空格。在 4.1 或更老版本，MySQL 会剔除末尾空格。</li>
-<li>以下情况使用 <code>VARCHAR</code> 是合适的：字符串列的最大长度比平均长度大很多；列的更新很少，所以碎片不是问题；使用了像 UTF-8 这样复杂的字符集，每个字符都使用不同的字节数进行存储。</li>
+<li><code>VARCHAR</code> 类型用于存储可变长的字符串，是最常见的字符串数据类型。它比定长类型更节省空间，因为它仅使用必要的空间；</li>
+<li><code>VARCHAR</code> 需要使用 1 或 2 个额外字节记录字符串长度：如果列的最大长度小于或等于 255 字节，则只使用 1 个字节表示，否则使用 2 个字节；</li>
+<li><code>VARCHAR</code> 节省了存储空间，所以对性能也有帮助。但由于行是变长的，在 UPDATE 时可能使行变得比原来更长，这就导致 MySQL 需要做额外的工作；</li>
+<li><code>VARCHAR</code> 适用于以下场景：字符串列的最大长度比平均长度大很多；列的更新很少，所以碎片不是问题；使用了像 UTF-8 这样复杂的字符集，每个字符都使用不同的字节数进行存储；</li>
+<li>在 5.0 及更高版本，MySQL 在存储和检索时，会保留末尾空格。在 4.1 或更老版本，MySQL 会剔除末尾空格；</li>
+<li>InnoDB 会灵活地把过长的 <code>VARCHAR</code> 存储为 <code>BLOB</code>。</li>
 </ul>
 <h3 id="CHAR"><a href="#CHAR" class="headerlink" title="CHAR"></a>CHAR</h3><ul>
-<li><code>CHAR</code> 类型是定长的：MySQL 总是根据定义的字符串长度分配足够的空间。</li>
-<li>当定义 <code>CHAR</code> 值时，MySQL 会删除所有的末尾空格。</li>
-<li><code>CHAR</code> 类型适合存储很短的字符串，或者所有值都接近同一个长度。例如：MD5 值；经常变更的数据，因为 <code>CHAR</code> 类型不容易产生碎片。</li>
+<li><code>CHAR</code> 类型是定长的，MySQL 总是根据定义的字符串长度分配足够的空间；</li>
+<li><code>CHAR</code> 在存储值时，MySQL 会删除所有的末尾空格；</li>
+<li><code>CHAR</code> 适合存储很短的字符串，或者所有值都接近同一个长度，例如存储密码的 MD5 值；</li>
+<li>对于经常变更的数据，<code>CHAR</code> 比 <code>VARCHAR</code> 更不容易产生碎片；</li>
+<li>对于非常短的列，<code>CHAR</code> 比 <code>VARCHAR</code> 在存储空间上更有效率。</li>
 </ul>
-<p>下面通过一个具体的例子来说明：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/1.png" alt="images"></p>
-<p>数据如何存储取决于存储引擎，并非所有的存储引擎都会按照相同的方式处理定长和变长的字符串。</p>
-<blockquote>
-<p>慷慨是不明智的：使用 <code>VARCHAR(5)</code> 和 <code>VARCHAR(200)</code> 存储 <code>hello</code> 的空间开销是一样的，但是更长的列会消耗更多的内存，因为 MySQL 通常会分配固定大小的内存块来保存内部值。</p>
-</blockquote>
-<p>与 <code>CHAR</code> 和 <code>VARCHAR</code> 类似的类型还有 <code>BINARY</code> 和 <code>VARBINARY</code>，它们存储的是二进制字符串。</p>
+<p><code>CHAR</code> 类型的这些行为可能有一点难以理解，下面通过一个具体的例子来说明：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/1.png" alt="images"></p>
+<p>与 <code>CHAR</code> 和 <code>VARCHAR</code> 类似的类型还有 <code>BINARY</code> 和 <code>VARBINARY</code>，它们存储的是二进制字符串。二进制字符串跟常规字符串非常相似，但是二进制字符串存储的是字节码而不是字符串，填充也不一样：MySQL 填充 <code>BINARY</code> 采用 <code>\0</code> 而不是空格，在检索时也不会去掉填充值。</p>
+<p>记住一点，慷慨是不明智的。使用 <code>VARCHAR(5)</code> 和 <code>VARCHAR(200)</code> 存储 <code>hello</code> 的空间开销是一样的，但是更长的列会消耗更多的内存，因为 MySQL 通常会分配固定大小的内存块来保存内部值。</p>
 <h2 id="BLOB和TEXT类型"><a href="#BLOB和TEXT类型" class="headerlink" title="BLOB和TEXT类型"></a>BLOB和TEXT类型</h2><p><code>BLOB</code> 和 <code>TEXT</code>都是为存储很大的数据而设计的字符串数据类型，分别采用二进制和字符方式存储。实际上，它们分别属于两组不同的数据类型家族：字符类型是 <code>TINYTEXT</code>、<code>SMALLTEXT</code>、<code>TEXT</code>、<code>MEDIUMTEXT</code>、<code>LONGTEXT</code>；二进制类型是 <code>TINYBLOB</code>、<code>SMALLBLOB</code>、<code>BLOB</code>、<code>MEDIUMBLOB</code>、<code>LONGBLOB</code>。<code>TEXT</code> 是 <code>SMALLTEXT</code>的同义词，<code>BLOB</code> 是 <code>SMALLBLOB</code>的同义词。</p>
 <p>MySQL 把每个 <code>BLOB</code> 和 <code>TEXT</code> 值当作一个独立的对象处理。存储引擎在存储时通常会特殊处理。</p>
 <p><code>BLOB</code> 和 <code>TEXT</code>家族之间仅有的不同是 <code>BLOB</code> 类型存储的是二进制数据，没有排序规则或字符集，而 <code>TEXT</code> 类型有字符集和排序规则。</p>
