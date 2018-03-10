@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png">
-<meta property="og:updated_time" content="2018-03-10T09:31:52.000Z">
+<meta property="og:updated_time" content="2018-03-10T14:48:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 数据类型优化">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 4 章 Schema 与数据类型优化。">
@@ -420,28 +420,32 @@
 <p><code>CHAR</code> 类型的这些行为可能有一点难以理解，下面通过一个具体的例子来说明：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/1.png" alt="images"></p>
 <p>与 <code>CHAR</code> 和 <code>VARCHAR</code> 类似的类型还有 <code>BINARY</code> 和 <code>VARBINARY</code>，它们存储的是二进制字符串。二进制字符串跟常规字符串非常相似，但是二进制字符串存储的是字节码而不是字符串，填充也不一样：MySQL 填充 <code>BINARY</code> 采用 <code>\0</code> 而不是空格，在检索时也不会去掉填充值。</p>
 <p>记住一点，慷慨是不明智的。使用 <code>VARCHAR(5)</code> 和 <code>VARCHAR(200)</code> 存储 <code>hello</code> 的空间开销是一样的，但是更长的列会消耗更多的内存，因为 MySQL 通常会分配固定大小的内存块来保存内部值。</p>
-<h2 id="BLOB和TEXT类型"><a href="#BLOB和TEXT类型" class="headerlink" title="BLOB和TEXT类型"></a>BLOB和TEXT类型</h2><p><code>BLOB</code> 和 <code>TEXT</code>都是为存储很大的数据而设计的字符串数据类型，分别采用二进制和字符方式存储。实际上，它们分别属于两组不同的数据类型家族：字符类型是 <code>TINYTEXT</code>、<code>SMALLTEXT</code>、<code>TEXT</code>、<code>MEDIUMTEXT</code>、<code>LONGTEXT</code>；二进制类型是 <code>TINYBLOB</code>、<code>SMALLBLOB</code>、<code>BLOB</code>、<code>MEDIUMBLOB</code>、<code>LONGBLOB</code>。<code>TEXT</code> 是 <code>SMALLTEXT</code>的同义词，<code>BLOB</code> 是 <code>SMALLBLOB</code>的同义词。</p>
-<p>MySQL 把每个 <code>BLOB</code> 和 <code>TEXT</code> 值当作一个独立的对象处理。存储引擎在存储时通常会特殊处理。</p>
+<h2 id="BLOB和TEXT类型"><a href="#BLOB和TEXT类型" class="headerlink" title="BLOB和TEXT类型"></a>BLOB和TEXT类型</h2><p><code>BLOB</code> 和 <code>TEXT</code>都是为存储很大的数据而设计的字符串数据类型，分别采用二进制和字符方式存储。</p>
+<p>实际上，它们分别属于两组不同的数据类型家族：字符类型是 <code>TINYTEXT</code>、<code>SMALLTEXT</code>、<code>TEXT</code>、<code>MEDIUMTEXT</code>、<code>LONGTEXT</code>；二进制类型是 <code>TINYBLOB</code>、<code>SMALLBLOB</code>、<code>BLOB</code>、<code>MEDIUMBLOB</code>、<code>LONGBLOB</code>。<code>TEXT</code> 是 <code>SMALLTEXT</code>的同义词，<code>BLOB</code> 是 <code>SMALLBLOB</code>的同义词。</p>
+<p>与其它类型不同，MySQL 把每个 <code>BLOB</code> 和 <code>TEXT</code> 值当作一个独立的对象处理。存储引擎在存储时通常会特殊处理。当 <code>BLOB</code> 和 <code>TEXT</code> 值太大时，InnoDB 会使用专门的「外部」存储区域来进行存储，此时每个值在行内需要 1 ~ 4 个字节存储一个指针，然后在外部区域存储实际值。</p>
 <p><code>BLOB</code> 和 <code>TEXT</code>家族之间仅有的不同是 <code>BLOB</code> 类型存储的是二进制数据，没有排序规则或字符集，而 <code>TEXT</code> 类型有字符集和排序规则。</p>
-<p>MySQL 只对 <code>BLOB</code> 和 <code>TEXT</code> 列的最前 <code>max_sort_length</code> 字节而不是整个字符串做排序。</p>
+<p>MySQL 对 <code>BLOB</code> 和 <code>TEXT</code> 列进行排序与其他类型是不同的：它只对每个列的最前 max_sort_length 字节而不是整个字符串做排序。如果只需要排序前面的一小部分字符，则可以减小 max_sort_length 的配置，或者使用 <code>ORDER BY SUBSTRING(column, length)</code>。</p>
 <p>MySQL 不能将 <code>BLOB</code> 和 <code>TEXT</code> 列全部长度的字符串进行索引，也不能使用这些索引消除排序。</p>
-<h2 id="使用枚举（ENUM）代替字符串类型"><a href="#使用枚举（ENUM）代替字符串类型" class="headerlink" title="使用枚举（ENUM）代替字符串类型"></a>使用枚举（ENUM）代替字符串类型</h2><p>枚举列可以把一些不重复的字符串存储成一个预定义的集合。MySQL 在内部会将每个值在列表中的位置保存为整数，并且在表的 .frm 文件中保存 「数组 - 字符串」 映射关系的查找表。</p>
+<h2 id="使用枚举（ENUM）代替字符串类型"><a href="#使用枚举（ENUM）代替字符串类型" class="headerlink" title="使用枚举（ENUM）代替字符串类型"></a>使用枚举（ENUM）代替字符串类型</h2><p>枚举列可以把一些不重复的字符串存储成一个预定义的集合。MySQL 在存储枚举时非常紧凑，会根据列表值的数量压缩到一个或者两个字节中。MySQL 在内部会将每个值在列表中的位置保存为整数，并且在表的 .frm 文件中保存 「数组 - 字符串」 映射关系的查找表。</p>
 <p>枚举字段是按照内部存储的整数而不是定义的字符串进行排序的。一种绕过这种限制的方式是按照需要的顺序来定义枚举列。另外也可以在查询中使用 <code>FIELD()</code> 函数显式地指定排序顺序，但这会导致 MySQL 无法利用索引消除排序。下面有一个例子：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png" alt="images"></p>
 <p>枚举最不好的地方是，字符串列表是固定的，添加或删除字符串必须使用 <code>ALTER TABLE</code>。因此，对于一系列未来可能会改变的字符串，使用枚举不是一个好主意。</p>
-<p>由于 MySQL 把每个枚举值保存为整数，并且必须进行查找才能转换为字符串，所以枚举列有一些开销。通常枚举的列表都比较小，所以开销还可以控制，但也不能保证一直如此。</p>
+<p>由于 MySQL 把每个枚举值保存为整数，并且必须进行查找才能转换为字符串，所以枚举列有一些开销。通常枚举的列表都比较小，所以开销还可以控制，但也不能保证一直如此。在特定情况下，把 <code>CHAR</code>/<code>VARCHAR</code> 列与枚举列进行关联可能会比直接关联 <code>CHAR</code>/<code>VARCHAR</code> 列更慢。</p>
 <hr>
-<h1 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h1><p>MySQL 能存储的最小时间粒度为秒（MariaDB 支持微秒级别的时间类型），但是 MySQL 也可以使用微秒级的粒度进行临时运算，如使用 <code>BIGINT</code> 类型存储微秒级别的时间戳，或使用 <code>DOUBLE</code> 存储秒之后的小数部分。</p>
+<h1 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h1><p>MySQL 可以使用许多类型来保存日期和时间值，例如 <code>YEAR</code> 和 <code>DATE</code>。MySQL 能存储的最小时间粒度为秒（MariaDB 支持微秒级别的时间类型），但是 MySQL 也可以使用微秒级的粒度进行临时运算，例如使用 <code>BIGINT</code> 类型存储微秒级别的时间戳，或使用 <code>DOUBLE</code> 存储秒之后的小数部分。</p>
 <h2 id="DATETIME"><a href="#DATETIME" class="headerlink" title="DATETIME"></a>DATETIME</h2><ul>
-<li><code>DATETIME</code> 类型能保存大范围的值，从 1001 年到 9999 年，精度为秒。它把日期和时间封装到格式为 YYYYMMDDHHMMSS 的整数中，与时区无关，使用 8 个字节的存储空间。</li>
+<li><code>DATETIME</code> 类型能保存大范围的值，从 1001 年到 9999 年，精度为秒。它把日期和时间封装到格式为 YYYYMMDDHHMMSS 的整数中，与时区无关，使用 8 个字节的存储空间；</li>
+<li>默认情况下，MySQL 以一种可排序的、无歧义的格式显示 <code>DATETIME</code> 值，例如 「2008-01-16 22:37:08」。这是 ANSI 标准定义的日期和时间表示法。</li>
 </ul>
 <h2 id="TIMESTAMP"><a href="#TIMESTAMP" class="headerlink" title="TIMESTAMP"></a>TIMESTAMP</h2><ul>
-<li><code>TIMESTAMP</code> 类型保存了从 1970 年 1 月 1 日午夜（格林尼治标准时间）以来的秒数，它和 UNIX 时间戳相同。<code>TIMESTAMP</code> 只使用 4 个字符的存储空间，因此它的范围比 <code>DATETIME</code> 小得多：只能表示从 1970 年到 2038 年。</li>
-<li>MySQL 提供了 <code>FROM_UNIXTIME()</code> 函数把 UNIX 时间戳转换为日期，并提供了 <code>UNIX_TIMESTAMP()</code> 函数把日期转换为 UNIX 时间戳。</li>
-<li>MySQL 4.1 及更新的版本按照 <code>DATETIME</code> 的方式格式化 <code>TIMESTAMP</code> 的值。这仅仅是显示格式上的区别，<code>TIMESTAMP</code> 的存储格式在各个版本都是一样的。</li>
-<li><code>TIMESTAMP</code> 显示的值依赖于时区。MySQL 服务器、操作系统、以及客户端连接都有时区设置。</li>
-<li>默认情况下，如果插入时没有指定第一个 <code>TIMESTAMP</code> 列的值，MySQL 则设置这个列的值为当前时间。在插入一行记录时，MySQL 默认也会更新第一个 <code>TIMESTAMP</code> 列的值。<code>TIMESTAMP</code> 列默认为 NOT NULL。如下例：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png" alt="images"></li>
+<li><code>TIMESTAMP</code> 类型保存了从 1970 年 1 月 1 日午夜（格林尼治标准时间）以来的秒数，它和 Unix 时间戳相同。<code>TIMESTAMP</code> 只使用 4 个字符的存储空间，因此它的范围比 <code>DATETIME</code> 小得多：只能表示从 1970 年到 2038 年；</li>
+<li>MySQL 提供了 <code>FROM_UNIXTIME()</code> 函数把 Unix 时间戳转换为日期，并提供了 <code>UNIX_TIMESTAMP()</code> 函数把日期转换为 Unix 时间戳；</li>
+<li>MySQL 4.1 及更新的版本按照 <code>DATETIME</code> 的方式格式化 <code>TIMESTAMP</code> 的值。这仅仅是显示格式上的区别，<code>TIMESTAMP</code> 的存储格式在各个版本都是一样的；</li>
+<li><code>TIMESTAMP</code> 显示的值依赖于时区。MySQL 服务器、操作系统、以及客户端连接都有时区设置。因此，存储值为 0 的 <code>TIMESTAMP</code> 在美国东部时区显示为「1969-12-31 19:00:00」，与格林尼治时间差 5 个小时；</li>
+<li>默认情况下，如果在插入记录时没有指定第一个 <code>TIMESTAMP</code> 列的值，MySQL 则设置这个列的值为当前时间。在更新记录时，MySQL 默认也会更新第一个 <code>TIMESTAMP</code> 列的值（除非在 UPDATE 语句中明确指定了值）；</li>
+<li><code>TIMESTAMP</code> 列默认为 NOT NULL，这也和其它的数据类型不一样。</li>
 </ul>
-<p>除了特殊行为之外，通常应该使用 <code>TIMESTAMP</code>，因为它比 <code>DATETIME</code> 空间效率更高。有时人们也会将 UNIX 时间戳存储为整数值，但这不会带来任何收益。用整数保存时间戳的格式通常步方便处理，所以我们不推荐。</p>
+<p>下面有一个例子：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png" alt="images"></p>
+<p>除了特殊行为之外，通常应该使用 <code>TIMESTAMP</code>，因为它比 <code>DATETIME</code> 空间效率更高。有时人们也会将 Unix 时间戳存储为整数值，但这不会带来任何收益。用整数保存时间戳的格式通常步方便处理。</p>
 <hr>
 <h1 id="位数据类型"><a href="#位数据类型" class="headerlink" title="位数据类型"></a>位数据类型</h1><p>MySQL 有少数几种存储类型使用紧凑的位存储数据。所有这些位类型，不管底层存储格式和处理方式如何，从技术上来说都是字符串类型。</p>
 <h2 id="BIT"><a href="#BIT" class="headerlink" title="BIT"></a>BIT</h2><p>可以使用 <code>BIT</code> 列在一列中存储一个或多个 true/false 值。<code>BIT(1)</code> 定义一个包含单个位的字段，<code>BIT(2)</code> 存储 2 个位，以此类推。<code>BIT</code> 列的最大长度是 64 位。</p>
