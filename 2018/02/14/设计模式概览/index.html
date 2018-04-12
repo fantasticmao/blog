@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="本篇文章记录我所理解和掌握的设计模式。">
+<meta name="description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式概览">
 <meta property="og:url" content="http://fantasticmao.cn/2018/02/14/设计模式概览/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="本篇文章记录我所理解和掌握的设计模式。">
-<meta property="og:updated_time" content="2018-04-11T18:04:41.000Z">
+<meta property="og:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
+<meta property="og:updated_time" content="2018-04-12T03:11:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式概览">
-<meta name="twitter:description" content="本篇文章记录我所理解和掌握的设计模式。">
+<meta name="twitter:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
 
 
 
@@ -372,116 +372,78 @@
       
 
       
-        <p>本篇文章记录我所理解和掌握的设计模式。<a id="more"></a></p>
-<p>Design patterns are formalized best practices that the programmer can use to solve common problems when designing an application or system.</p>
-<p>Design patterns can speed up the development process by providing tested, proven development paradigms.</p>
-<p>Reusing design patterns helps to prevent subtle issues that can cause major problems, and it also improves code readability for coders and architects who are familiar with the patterns.</p>
+        <p>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。<a id="more"></a></p>
 <hr>
-<h1 id="创建型-Creational-Patterns"><a href="#创建型-Creational-Patterns" class="headerlink" title="创建型 Creational Patterns"></a>创建型 Creational Patterns</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>描述</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>抽象工厂模式（Abstract Factory Pattern）</td>
-<td>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/abstract-factory" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/abstract-factory-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>待续</td>
-</tr>
-<tr>
-<td>工厂方法模式（Factory Method Pattern）</td>
-<td>定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/factory-method" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/factory-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.lang.Object#toString()<br>java.lang.Boolean#valueOf()<br>java.lang.Class#newInstance()<br>java.lang.Class#forName()<br>java.nio.charset.Charset#forName()<br>java.lang.reflect.Proxy#newProxyInstance()</td>
-</tr>
-<tr>
-<td>生成器模式（Builder Pattern）</td>
-<td>将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/builder" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/builder-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.lang.StringBuilder<br>java.lang.StringBuffer<br>org.springframework.boot.web.client.RestTemplateBuilder<br>org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder</td>
-</tr>
-<tr>
-<td>对象池模式（Object Pool Pattern）</td>
-<td><br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/object-pool" target="_blank" rel="external">链接1</a></td>
-<td>java.lang.Integer in JVM<br>DataSource Poll</td>
-</tr>
-<tr>
-<td>单例模式（Singleton Pattern）</td>
-<td>保证一个类仅有一个实例，并提供一个访问它的全局访问点。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/singleton" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/singleton-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.lang.Runtime#getRuntime()</td>
-</tr>
-</tbody>
-</table>
+<h1 id="创建型-Creational-Patterns"><a href="#创建型-Creational-Patterns" class="headerlink" title="创建型 Creational Patterns"></a>创建型 Creational Patterns</h1><h2 id="抽象工厂模式-Abstract-Factory-Pattern"><a href="#抽象工厂模式-Abstract-Factory-Pattern" class="headerlink" title="抽象工厂模式 Abstract Factory Pattern"></a>抽象工厂模式 Abstract Factory Pattern</h2><p>意图：Provide an interface for creating families of related or dependent objects without specifying their concrete classes. 提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。<br>参考：<a href="https://en.wikipedia.org/wiki/Abstract_factory_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/abstract-factory" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/abstract-factory-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：待续</p>
+<h2 id="工厂方法模式-Factory-Method-Pattern"><a href="#工厂方法模式-Factory-Method-Pattern" class="headerlink" title="工厂方法模式 Factory Method Pattern"></a>工厂方法模式 Factory Method Pattern</h2><p>意图：Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses. 定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。<br>参考：<a href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/factory-method" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/factory-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.lang.Object#toString()</li>
+<li>java.lang.Boolean#valueOf() &amp; java.lang.Integer#valueOf()</li>
+<li>java.lang.Class#newInstance() &amp; java.lang.reflect.Proxy#newProxyInstance()</li>
+<li>java.lang.Class#forName() &amp; java.nio.charset.Charset#forName()</li>
+</ul>
+<h2 id="生成器模式-Builder-Pattern"><a href="#生成器模式-Builder-Pattern" class="headerlink" title="生成器模式 Builder Pattern"></a>生成器模式 Builder Pattern</h2><p>意图：Separate the construction of a complex object from its representation so that the same construction process can create different representations. 将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。<br>参考：<a href="https://en.wikipedia.org/wiki/Builder_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/builder" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/builder-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.lang.StringBuilder &amp; java.lang.StringBuffer</li>
+<li>org.springframework.boot.web.client.RestTemplateBuilder</li>
+<li>org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder</li>
+</ul>
+<h2 id="对象池模式-Object-Pool-Pattern"><a href="#对象池模式-Object-Pool-Pattern" class="headerlink" title="对象池模式 Object Pool Pattern"></a>对象池模式 Object Pool Pattern</h2><p>意图：When objects are expensive to create and they are needed only for short periods of time it is advantageous to utilize the Object Pool pattern. The Object Pool provides a cache for instantiated objects tracking which ones are in use and which are available.<br>参考：<a href="https://en.wikipedia.org/wiki/Object_pool_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/object-pool" target="_blank" rel="external">java-design-patterns</a><br>实现：</p>
+<ul>
+<li>java.lang.Integer in JVM</li>
+<li>DataSource Poll</li>
+</ul>
+<h2 id="单例模式-Singleton-Pattern"><a href="#单例模式-Singleton-Pattern" class="headerlink" title="单例模式 Singleton Pattern"></a>单例模式 Singleton Pattern</h2><p>意图：Ensure a class only has one instance, and provide a global point of access to it. 保证一个类仅有一个实例，并提供一个访问它的全局访问点。<br>参考：<a href="https://en.wikipedia.org/wiki/Singleton_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/singleton" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/singleton-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.lang.Runtime#getRuntime()</li>
+</ul>
 <hr>
-<h1 id="结构型-Structural-Patterns"><a href="#结构型-Structural-Patterns" class="headerlink" title="结构型 Structural Patterns"></a>结构型 Structural Patterns</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>描述</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>适配器模式（Adapter Pattern）</td>
-<td>将一个类的接口转换成客户希望的另外一个接口。适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/adapter" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/adapter-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.io.InputStreamReader<br>java.io.OutputStreamWriter<br>java.util.Collections#enumeration()<br>java.util.Collections#list()<br>java.util.Arrays#asList()</td>
-</tr>
-<tr>
-<td>装饰器模式（Decorator Pattern）</td>
-<td>动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/decorator" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.io.BufferedInputStream<br>java.io.DataInputStream<br>java.util.Collections#synchronizedXXX()<br>java.util.Collections#unmodifiableXXX()</td>
-</tr>
-<tr>
-<td>代理模式（Proxy Pattern）</td>
-<td>为其他对象提供一种代理以控制对这个对象的访问。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/proxy" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/proxy-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.lang.reflect.Proxy<br>org.springframework.aop.framework.AopProxy</td>
-</tr>
-</tbody>
-</table>
+<h1 id="结构型-Structural-Patterns"><a href="#结构型-Structural-Patterns" class="headerlink" title="结构型 Structural Patterns"></a>结构型 Structural Patterns</h1><h2 id="适配器模式-Adapter-Pattern"><a href="#适配器模式-Adapter-Pattern" class="headerlink" title="适配器模式 Adapter Pattern"></a>适配器模式 Adapter Pattern</h2><p>意图：Convert the interface of a class into another interface the clients expect. Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces. 将一个类的接口转换成客户希望的另外一个接口。适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。<br>参考：<a href="https://en.wikipedia.org/wiki/Adapter_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/adapter" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/adapter-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.util.Arrays#asList()</li>
+<li>java.io.InputStreamReader &amp; java.io.OutputStreamWriter</li>
+<li>java.util.Collections#enumeration() &amp; java.util.Collections#list()</li>
+</ul>
+<h2 id="装饰器模式-Decorator-Pattern"><a href="#装饰器模式-Decorator-Pattern" class="headerlink" title="装饰器模式 Decorator Pattern"></a>装饰器模式 Decorator Pattern</h2><p>意图：Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality. 动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。<br>参考：<a href="https://en.wikipedia.org/wiki/Decorator_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/decorator" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.io.BufferedInputStream &amp; java.io.DataInputStream</li>
+<li>java.util.Collections#synchronizedXXX()&amp; java.util.Collections#unmodifiableXXX()</li>
+</ul>
+<h2 id="代理模式-Proxy-Pattern"><a href="#代理模式-Proxy-Pattern" class="headerlink" title="代理模式 Proxy Pattern"></a>代理模式 Proxy Pattern</h2><p>意图：Provide a surrogate or placeholder for another object to control access to it. 为其他对象提供一种代理以控制对这个对象的访问。<br>参考：<a href="https://en.wikipedia.org/wiki/Proxy_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/proxy" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/proxy-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.lang.reflect.Proxy</li>
+<li>org.springframework.aop.framework.AopProxy</li>
+</ul>
 <hr>
-<h1 id="行为型-Behavioral-Patterns"><a href="#行为型-Behavioral-Patterns" class="headerlink" title="行为型 Behavioral Patterns"></a>行为型 Behavioral Patterns</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>描述</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>责任链模式（Chain-Of-Responsibility Pattern）</td>
-<td>避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/chain" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.util.logging.Logger#log()<br>javax.servlet.Filter#doFilter()<br>org.springframework.web.servlet.HandlerInterceptor</td>
-</tr>
-<tr>
-<td>迭代器模式（Iterator Pattern）</td>
-<td>提供一种方法顺序访问一个聚合对象中各个元素, 而又无须暴露该对象的内部表示。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/iterator" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/iterator-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.util.Iterator<br>java.util.Enumeration</td>
-</tr>
-<tr>
-<td>观察者模式（Observer Pattern）</td>
-<td>定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/observer" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/observer-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.util.Observer &amp; java.util.Observable<br>org.springframework.context.ApplicationListener &amp; org.springframework.context.ApplicationEvent</td>
-</tr>
-<tr>
-<td>策略模式（Strategy Pattern）</td>
-<td>定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/strategy" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/strategy-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>java.lang.Comparable#compareTo()<br>org.springframework.web.accept.ContentNegotiationStrategy#resolveMediaTypes()</td>
-</tr>
-<tr>
-<td>模板方法模式（Template Method Pattern）</td>
-<td>定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/template-method" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/template-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>org.springframework.context.support.AbstractApplicationContext#refresh()</td>
-</tr>
-<tr>
-<td>访问者模式（Visitor Pattern）</td>
-<td>主要将数据结构与数据操作分离。<br>参考：<a href="https://github.com/iluwatar/java-design-patterns/tree/master/visitor" target="_blank" rel="external">链接1</a>、<a href="http://www.runoob.com/design-pattern/visitor-pattern.html" target="_blank" rel="external">链接2</a></td>
-<td>待续</td>
-</tr>
-</tbody>
-</table>
+<h1 id="行为型-Behavioral-Patterns"><a href="#行为型-Behavioral-Patterns" class="headerlink" title="行为型 Behavioral Patterns"></a>行为型 Behavioral Patterns</h1><h2 id="责任链模式-Chain-Of-Responsibility-Pattern"><a href="#责任链模式-Chain-Of-Responsibility-Pattern" class="headerlink" title="责任链模式 Chain-Of-Responsibility Pattern"></a>责任链模式 Chain-Of-Responsibility Pattern</h2><p>意图：Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it. 避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。<br>参考：<a href="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/chain" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.util.logging.Logger#log()</li>
+<li>javax.servlet.Filter#doFilter()</li>
+<li>org.springframework.web.servlet.HandlerInterceptor</li>
+</ul>
+<h2 id="迭代器模式-Iterator-Pattern"><a href="#迭代器模式-Iterator-Pattern" class="headerlink" title="迭代器模式 Iterator Pattern"></a>迭代器模式 Iterator Pattern</h2><p>意图：Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation. 提供一种方法顺序访问一个聚合对象中各个元素, 而又无须暴露该对象的内部表示。<br>参考：<a href="https://en.wikipedia.org/wiki/Iterator_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/iterator" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/iterator-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.util.Iterator</li>
+<li>java.util.Enumeration</li>
+</ul>
+<h2 id="观察者模式-Observer-Pattern"><a href="#观察者模式-Observer-Pattern" class="headerlink" title="观察者模式 Observer Pattern"></a>观察者模式 Observer Pattern</h2><p>意图：Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. 定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。<br>参考：<a href="https://en.wikipedia.org/wiki/Observer_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/observer" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/observer-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.util.Observer &amp; java.util.Observable</li>
+<li>org.springframework.context.ApplicationListener <br>&amp; org.springframework.context.ApplicationEvent</li>
+</ul>
+<h2 id="策略模式-Strategy-Pattern"><a href="#策略模式-Strategy-Pattern" class="headerlink" title="策略模式 Strategy Pattern"></a>策略模式 Strategy Pattern</h2><p>意图：Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it. 定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。<br>参考：<a href="https://en.wikipedia.org/wiki/Strategy_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/strategy" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/strategy-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>java.lang.Comparable#compareTo()</li>
+<li>org.springframework.web.accept.ContentNegotiationStrategy#resolveMediaTypes()</li>
+</ul>
+<h2 id="模板方法模式-Template-Method-Pattern"><a href="#模板方法模式-Template-Method-Pattern" class="headerlink" title="模板方法模式 Template Method Pattern"></a>模板方法模式 Template Method Pattern</h2><p>意图：Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template method lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure. 定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。<br>参考：<a href="https://en.wikipedia.org/wiki/Template_method_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/template-method" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/template-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>org.springframework.context.support.AbstractApplicationContext#refresh()</li>
+</ul>
+<h2 id="访问者模式-Visitor-Pattern"><a href="#访问者模式-Visitor-Pattern" class="headerlink" title="访问者模式 Visitor Pattern"></a>访问者模式 Visitor Pattern</h2><p>意图：Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates. 主要将数据结构与数据操作分离。<br>参考：<a href="https://en.wikipedia.org/wiki/Visitor_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/visitor" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/visitor-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
+<ul>
+<li>org.springframework.beans.factory.config.BeanDefinitionVisitor</li>
+</ul>
 
       
     </div>
@@ -755,7 +717,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建型-Creational-Patterns"><span class="nav-number">1.</span> <span class="nav-text">创建型 Creational Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构型-Structural-Patterns"><span class="nav-number">2.</span> <span class="nav-text">结构型 Structural Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行为型-Behavioral-Patterns"><span class="nav-number">3.</span> <span class="nav-text">行为型 Behavioral Patterns</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建型-Creational-Patterns"><span class="nav-number">1.</span> <span class="nav-text">创建型 Creational Patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象工厂模式-Abstract-Factory-Pattern"><span class="nav-number">1.1.</span> <span class="nav-text">抽象工厂模式 Abstract Factory Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂方法模式-Factory-Method-Pattern"><span class="nav-number">1.2.</span> <span class="nav-text">工厂方法模式 Factory Method Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器模式-Builder-Pattern"><span class="nav-number">1.3.</span> <span class="nav-text">生成器模式 Builder Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象池模式-Object-Pool-Pattern"><span class="nav-number">1.4.</span> <span class="nav-text">对象池模式 Object Pool Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式-Singleton-Pattern"><span class="nav-number">1.5.</span> <span class="nav-text">单例模式 Singleton Pattern</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构型-Structural-Patterns"><span class="nav-number">2.</span> <span class="nav-text">结构型 Structural Patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#适配器模式-Adapter-Pattern"><span class="nav-number">2.1.</span> <span class="nav-text">适配器模式 Adapter Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器模式-Decorator-Pattern"><span class="nav-number">2.2.</span> <span class="nav-text">装饰器模式 Decorator Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理模式-Proxy-Pattern"><span class="nav-number">2.3.</span> <span class="nav-text">代理模式 Proxy Pattern</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行为型-Behavioral-Patterns"><span class="nav-number">3.</span> <span class="nav-text">行为型 Behavioral Patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#责任链模式-Chain-Of-Responsibility-Pattern"><span class="nav-number">3.1.</span> <span class="nav-text">责任链模式 Chain-Of-Responsibility Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器模式-Iterator-Pattern"><span class="nav-number">3.2.</span> <span class="nav-text">迭代器模式 Iterator Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式-Observer-Pattern"><span class="nav-number">3.3.</span> <span class="nav-text">观察者模式 Observer Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式-Strategy-Pattern"><span class="nav-number">3.4.</span> <span class="nav-text">策略模式 Strategy Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板方法模式-Template-Method-Pattern"><span class="nav-number">3.5.</span> <span class="nav-text">模板方法模式 Template Method Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问者模式-Visitor-Pattern"><span class="nav-number">3.6.</span> <span class="nav-text">访问者模式 Visitor Pattern</span></a></li></ol></li></ol></div>
             
 
           </div>
