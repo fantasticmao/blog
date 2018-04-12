@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2018/02/14/设计模式概览/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
-<meta property="og:updated_time" content="2018-04-12T03:11:02.000Z">
+<meta property="og:updated_time" content="2018-04-12T03:14:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式概览">
 <meta name="twitter:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
@@ -407,7 +407,7 @@
 <h2 id="装饰器模式-Decorator-Pattern"><a href="#装饰器模式-Decorator-Pattern" class="headerlink" title="装饰器模式 Decorator Pattern"></a>装饰器模式 Decorator Pattern</h2><p>意图：Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality. 动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。<br>参考：<a href="https://en.wikipedia.org/wiki/Decorator_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/decorator" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
 <ul>
 <li>java.io.BufferedInputStream &amp; java.io.DataInputStream</li>
-<li>java.util.Collections#synchronizedXXX()&amp; java.util.Collections#unmodifiableXXX()</li>
+<li>java.util.Collections#synchronizedXXX() &amp; java.util.Collections#unmodifiableXXX()</li>
 </ul>
 <h2 id="代理模式-Proxy-Pattern"><a href="#代理模式-Proxy-Pattern" class="headerlink" title="代理模式 Proxy Pattern"></a>代理模式 Proxy Pattern</h2><p>意图：Provide a surrogate or placeholder for another object to control access to it. 为其他对象提供一种代理以控制对这个对象的访问。<br>参考：<a href="https://en.wikipedia.org/wiki/Proxy_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/proxy" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/proxy-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
 <ul>
@@ -429,7 +429,7 @@
 <h2 id="观察者模式-Observer-Pattern"><a href="#观察者模式-Observer-Pattern" class="headerlink" title="观察者模式 Observer Pattern"></a>观察者模式 Observer Pattern</h2><p>意图：Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. 定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。<br>参考：<a href="https://en.wikipedia.org/wiki/Observer_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/observer" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/observer-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
 <ul>
 <li>java.util.Observer &amp; java.util.Observable</li>
-<li>org.springframework.context.ApplicationListener <br>&amp; org.springframework.context.ApplicationEvent</li>
+<li>org.springframework.context.ApplicationListener &amp; org.springframework.context.ApplicationEvent</li>
 </ul>
 <h2 id="策略模式-Strategy-Pattern"><a href="#策略模式-Strategy-Pattern" class="headerlink" title="策略模式 Strategy Pattern"></a>策略模式 Strategy Pattern</h2><p>意图：Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it. 定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。<br>参考：<a href="https://en.wikipedia.org/wiki/Strategy_pattern" target="_blank" rel="external">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/strategy" target="_blank" rel="external">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/strategy-pattern.html" target="_blank" rel="external">菜鸟教程</a><br>实现：</p>
 <ul>
