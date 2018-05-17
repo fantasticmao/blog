@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2018/05/09/关于专栏《Java-核心技术-36-讲》/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
-<meta property="og:updated_time" content="2018-05-13T18:20:13.000Z">
+<meta property="og:updated_time" content="2018-05-17T17:36:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于专栏《Java 核心技术 36 讲》">
 <meta name="twitter:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
@@ -382,7 +382,23 @@
 <p>Java 作为一个老牌且成熟的编程语言，其发展多年的虚拟机也经受了业界苛刻的考验。JVM（Java Virtual Machine）不仅支持了 Java 宣传标语 —— Write Once, Run Anywhere —— 的跨平台特性，并且提供了丰富的垃圾收集机制来自动分配和回收内存。其中，常用的垃圾收集器如 Serial、Parallel、CMS、G1 等。另外，JVM 除了支持 source code -&gt; byte code -&gt; machine code 的编译 &amp; 解释运行方式，还支持 JIT（Just In Time）编译方式，能够极大提高 Java 程序的运行性能。最后，JVM 作为一个强大的虚拟机，还支持运行例如 Clojure、Scala、Groovy、JRuby、Jython 等等大量的符合 JVM 字节码规范的语言。</p>
 <p>由此衍生的问题：谈谈你对 Spring Framework 的理解</p>
 <hr>
-<h1 id="Exception-与-Error-有什么区别"><a href="#Exception-与-Error-有什么区别" class="headerlink" title="Exception 与 Error 有什么区别"></a>Exception 与 Error 有什么区别</h1>
+<h1 id="Exception-与-Error-有什么区别"><a href="#Exception-与-Error-有什么区别" class="headerlink" title="Exception 与 Error 有什么区别"></a>Exception 与 Error 有什么区别</h1><p>在 Java 标准异常中，<code>Throwable</code> 类表示任何可以被作为异常抛出的类，<code>Exception</code> 类和 <code>Error</code> 类都继承了 <code>Throwable</code> 类。</p>
+<p><code>Error</code> 类表示编译错误和系统错误，是在程序正常运行情况下，不大可能会出现的异常，例如 <code>OutOfMemoryError</code>、<code>StackOverflowError</code>。</p>
+<p><code>Exception</code> 类则表示可以被作为异常抛出的基本类型，是在程序正常运行情况下的可预料错误。<code>Exception</code> 类的异常分为 <strong>受检查异常</strong>（checked）和 <strong>不受检查异常</strong>（unchecked）。受检查异常必须在程序编译期被显示捕获和被正确处理，例如 <code>IOException</code>、<code>SQLException</code>。不受检查异常需继承于 <code>RuntimeException</code> 类，会在程序运行时被自动抛出，不需要被显示捕获，例如 <code>NullPointerException</code>、<code>ArrayIndexOutOfBoundsException</code>、<code>IllegalArgumentException</code>。</p>
+<p>编写异常处理代码的最佳实践：</p>
+<ul>
+<li>不要掩盖／生吞异常；</li>
+<li>Throw Early, Catch Late；</li>
+<li>在抛出异常信息时，避免泄漏敏感信息；</li>
+<li>在知道如何处理异常的情况下，再捕获并处理异常；</li>
+<li>尽量不要 try 整段代码块，也要避免使用异常控制代码流程；</li>
+<li>不要捕获类似 <code>Exception</code> 类的通用异常，而是应该捕获特定异常；</li>
+<li>受检查异常被抛出后，往往不能被恢复，并且对函数式编程十分不友好；</li>
+<li>JDK 7 支持 Multiple Catch 语法和基于 <code>AutoCloseable</code> 接口的 Try With Resource 语法；</li>
+<li>finally 语句在任何时候都会被执行，通常被用于清理系统资源，并且不应在 finally 语句中 return 方法的执行结果，因为这会导致异常信息的丢失；</li>
+<li>可以通过 <code>java.lang.Throwable#Throwable(String, Throwable)</code> 构造方法，捕获一个异常的同时抛出另一个异常，并且保留原始异常的堆栈信息。Spring Data 正是通过这种方式，将不同 ORM 框架中的不同异常封装成了一个通用的异常结构体系，详情可见 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#orm-introduction" target="_blank" rel="external">官方文档</a> 描述。</li>
+</ul>
+
       
     </div>
 
@@ -504,7 +520,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
