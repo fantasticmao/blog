@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2018/05/09/关于专栏《Java-核心技术-36-讲》/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
-<meta property="og:updated_time" content="2018-05-17T17:36:35.000Z">
+<meta property="og:updated_time" content="2018-05-19T10:41:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于专栏《Java 核心技术 36 讲》">
 <meta name="twitter:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
@@ -393,11 +393,15 @@
 <li>在知道如何处理异常的情况下，再捕获并处理异常；</li>
 <li>尽量不要 try 整段代码块，也要避免使用异常控制代码流程；</li>
 <li>不要捕获类似 <code>Exception</code> 类的通用异常，而是应该捕获特定异常；</li>
-<li>受检查异常被抛出后，往往不能被恢复，并且对函数式编程十分不友好；</li>
-<li>JDK 7 支持 Multiple Catch 语法和基于 <code>AutoCloseable</code> 接口的 Try With Resource 语法；</li>
-<li>finally 语句在任何时候都会被执行，通常被用于清理系统资源，并且不应在 finally 语句中 return 方法的执行结果，因为这会导致异常信息的丢失；</li>
+<li>受检查异常被抛出后，往往不能被恢复，并且对函数式编程和三元表达式十分不友好；</li>
+<li>JDK 7 支持 multiple-catch 语法和基于 <code>java.lang.AutoCloseable</code> 接口的 try-with-resource 语法；</li>
+<li>当程序未被中断时，finally 语句都会被正常执行，并且通常被用于清理系统资源。不应在 finally 语句中 return 方法的执行结果，因为这会导致异常信息的丢失；</li>
 <li>可以通过 <code>java.lang.Throwable#Throwable(String, Throwable)</code> 构造方法，捕获一个异常的同时抛出另一个异常，并且保留原始异常的堆栈信息。Spring Data 正是通过这种方式，将不同 ORM 框架中的不同异常封装成了一个通用的异常结构体系，详情可见 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#orm-introduction" target="_blank" rel="external">官方文档</a> 描述。</li>
 </ul>
+<hr>
+<h1 id="谈谈-final、finally、finalize-有什么不同"><a href="#谈谈-final、finally、finalize-有什么不同" class="headerlink" title="谈谈 final、finally、finalize 有什么不同"></a>谈谈 final、finally、finalize 有什么不同</h1><p>finally 关键字是在 try-finally 或 try-catch-finally 语句块中，保证 Java 代码必须被执行的一种机制。另外，若在 finally 语句块中需要关闭实现了 <code>java.lang.AutoCloseable</code> 接口的资源，则可以使用 JDK 7 中提供的 try-with-resource 语法简化代码。</p>
+<p>需要额外注意的是，以下这段示例代码的 finally 语句块并不会被执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// do something</span></div><div class="line">    System.exit(<span class="number">1</span>);</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    System.out.println(<span class="string">"Print from finally"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>finalize() 是基础类 <code>java.lang.Object</code> 的一个方法，它的设计目的在于保证对象被垃圾收集之前，完成特定资源的回收。然而 JVM 在垃圾收集时，需要对实现了 finalize() 的对象进行特殊处理，所以 finalize() 本质上已经成为了垃圾收集的阻碍者，它可能导致对象需要经过多轮垃圾收集周期才能被回收。现在，finalize 机制已经不被推荐使用，并且在 JDK 9 中被标记为 <code>@Deprecated</code>。</p>
 
       
     </div>
@@ -673,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你对-Java-平台的理解"><span class="nav-number">1.</span> <span class="nav-text">谈谈你对 Java 平台的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception-与-Error-有什么区别"><span class="nav-number">2.</span> <span class="nav-text">Exception 与 Error 有什么区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你对-Java-平台的理解"><span class="nav-number">1.</span> <span class="nav-text">谈谈你对 Java 平台的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception-与-Error-有什么区别"><span class="nav-number">2.</span> <span class="nav-text">Exception 与 Error 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-final、finally、finalize-有什么不同"><span class="nav-number">3.</span> <span class="nav-text">谈谈 final、finally、finalize 有什么不同</span></a></li></ol></div>
             
 
           </div>
