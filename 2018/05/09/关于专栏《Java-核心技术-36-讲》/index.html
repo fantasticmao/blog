@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2018/05/09/关于专栏《Java-核心技术-36-讲》/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
-<meta property="og:updated_time" content="2018-05-20T10:44:51.000Z">
+<meta property="og:updated_time" content="2018-05-20T19:09:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于专栏《Java 核心技术 36 讲》">
 <meta name="twitter:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
@@ -400,11 +400,31 @@
 </ul>
 <hr>
 <h1 id="谈谈-final、finally、finalize-有什么不同"><a href="#谈谈-final、finally、finalize-有什么不同" class="headerlink" title="谈谈 final、finally、finalize 有什么不同"></a>谈谈 final、finally、finalize 有什么不同</h1><p>final 关键字可以用于修饰变量、方法、类，并且在不同场景下的 final 关键字的语义不尽相同。当 final 修饰成员变量／局部变量／方法参数时，表示该变量的引用是不能被修改的；当 final 修饰方法时，表示该方法是不能被重写的；当 final 修饰类时，表示该类是不能被继承的。</p>
-<p>需要注意的是，使用 final 修饰对象类型的变量时，并不代表此变量具有 <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="external">immutable</a> 的特性。例如在 <code>final List&lt;String&gt; list = new ArrayList&lt;&gt;()</code> 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。</p>
-<p>很多类似使用 final 可以提高性能的结论，都是基于假设得出的。实际上， JVM 对于 final 的优化，是和它的实现密切相关。在日常开发中，建议不要指望使用这些小技巧，来获得所谓的性能上提升处。关于这点，可以参阅 RednaxelaFX 在知乎上的相关回答：<a href="https://www.zhihu.com/question/66083114/answer/242241071" target="_blank" rel="external">final 修饰递归方法会提高效率吗？</a>、<a href="https://www.zhihu.com/question/21762917/answer/19239387" target="_blank" rel="external">JVM 对于声明为 final 的局部变量做了哪些性能优化？</a></p>
+<p>需要注意的是，使用 final 修饰引用类型的变量时，并不代表此变量具有 <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="external">immutable</a> 的特性。例如在 <code>final List&lt;String&gt; list = new ArrayList&lt;&gt;()</code> 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。</p>
+<p>很多类似使用 final 可以提高性能的结论，都是基于假设得出的。实际上， JVM 对于 final 的优化，是和它的实现细节密切相关。在日常开发中，建议不要指望使用这些小技巧，来获得所谓的性能上的提升。关于这点，可以参阅 RednaxelaFX 在知乎上的相关回答：<a href="https://www.zhihu.com/question/66083114/answer/242241071" target="_blank" rel="external">final 修饰递归方法会提高效率吗？</a>、<a href="https://www.zhihu.com/question/21762917/answer/19239387" target="_blank" rel="external">JVM 对于声明为 final 的局部变量做了哪些性能优化？</a></p>
 <p>finally 关键字是在 try-finally 或 try-catch-finally 语句块中，保证 Java 代码必须被执行的一种机制。另外，若在 finally 语句块中需要关闭实现了 <code>java.lang.AutoCloseable</code> 接口的资源，则可以使用 JDK 7 中提供的 try-with-resource 语法简化代码。</p>
 <p>需要额外注意的是，以下这段示例代码的 finally 语句块并不会被执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// do something</span></div><div class="line">    System.exit(<span class="number">1</span>);</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    System.out.println(<span class="string">"Print from finally"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>finalize() 是基础类 <code>java.lang.Object</code> 的一个方法，它的设计目的在于保证对象被垃圾收集之前，完成特定资源的回收。然而 JVM 在垃圾收集时，需要对实现了 finalize() 的对象进行特殊处理，所以 finalize() 本质上已经成为了垃圾收集的阻碍者，它可能导致对象需要经过多轮垃圾收集周期才能被回收。现在，finalize 机制已经不被推荐使用，并且在 JDK 9 中被标记为 <code>@Deprecated</code>。</p>
+<p>finalize() 是基础类 <code>java.lang.Object</code> 的一个方法，它的设计目的在于保证对象被垃圾收集之前，完成特定资源的回收。然而 JVM 在垃圾收集时，需要对实现了 finalize() 的对象进行特殊处理，并且通过 finalize() 的实现方式都可以通过 try-finally 更好、更及时地实现。所以 finalize() 本质上已经成为了垃圾收集的阻碍者，它可能导致对象需要经过多轮垃圾收集周期才能被回收。现在，finalize 机制已经不被推荐使用，并且在 JDK 9 中被标记为 <code>@Deprecated</code>。</p>
+<p>关于 JVM 对实现 finalize() 对象的特殊处理，可见<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">《深入理解 Java 虚拟机》</a> 的 3.2.4 章节：</p>
+<blockquote>
+<p>即使在可达性分析算法中的不可达的对象，也并非是「非死不可」的，这时候它们暂时处于「缓行」阶段。要真正宣告一个对象死亡，至少要经历两次标记过程：如果对象在进行可达性分析后发现没有与 GC Roots 相连接的引用链，那它将会被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行 finalize() 方法。当对象没有覆盖 finalize() 方法，或者 finalize() 方法已经被虚拟机调用过，虚拟机将这两个情况都视为「没有必要执行」。</p>
+<p>如果这个对象被判定为有必要执行 finalize() 方法，那么这个对象将会被放置在一个叫做 F-Queue 的队列之中，并在稍后被一个由虚拟机自动建立的、低优先级的 Finalizer 线程去执行它。</p>
+</blockquote>
+<hr>
+<h1 id="强引用、软引用、弱引用、虚引用有什么区别"><a href="#强引用、软引用、弱引用、虚引用有什么区别" class="headerlink" title="强引用、软引用、弱引用、虚引用有什么区别"></a>强引用、软引用、弱引用、虚引用有什么区别</h1><p>这个问题，可以在<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">《深入理解 Java 虚拟机》</a> 的 3.2.3 章节中找到答案：</p>
+<blockquote>
+<p>垃圾收集器在对堆进行回收前，第一件事情就是要确定堆中的对象哪些还「存活」，哪些已经「死去」。</p>
+<p>引用计数算法：给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1；当引用失效时，计数器值就减 1；任何时刻计数器值为 0 的对象就是不可能再被使用的。</p>
+<p>可达性分析算法：通过一系列称为 GC Roots 的对象作为起始点，从这些节点开始向下搜索，搜索所经过的路径称为引用链。当一个对象到 GC Roots 没有任何引用链的时候，则证明此对象是不可用的。</p>
+<p>引用计数算法很难解决对象之间相互循环引用的问题。在主流的商用程序语言的主流实现中，都是通过可达性分析算法来判定对象是否存活的。</p>
+<p>无论是通过引用计数算法判断对象的引用数量，还是通过可达性分析算法判断对象的引用链是否可达，判断对象是否存活都与「引用」有关。在 JDK 1.2 以前，Java 中的引用定义很传统：如果 reference 类型的数据中存储的数值代表的是另一块内存的起始地址，就称这块内存地址代表着一个引用。在 JDK 1.2 之后，Java 对引用的概念进行了扩充，将引用分为强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Reference）、虚引用（Phantom Reference）四种，这四种引用强度依次逐渐减弱。</p>
+<ul>
+<li>强引用就是指程序代码之中普遍存在的，类似 <code>Object obj = new Object()</code> 这类的引用。只要强引用还存在，垃圾收集器就永远不会回收被引用的对象。</li>
+<li>软引用是用来描述一些还有用但并非必需的对象。对于软引用关联着的对象，在系统将要发生内存溢出异常之前，将会把这些对象列进回收范围之中，进行第二次回收。如果这次回收还没有足够的内存，才会抛出内存溢出异常。</li>
+<li>弱引用也是用来描述非必需的对象，但是它的强度比软引用更弱一些，被弱引用关联的对象只能生存到下一次垃圾收集发生之前。当垃圾收集器工作时，无论当前内存是否足够，都会回收掉只被弱引用关联的对象。</li>
+<li>虚引用也称为幽灵引用或幻影引用，是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的，就是能在这个对象被垃圾收集器回收时，收到一个系统通知。</li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -680,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你对-Java-平台的理解"><span class="nav-number">1.</span> <span class="nav-text">谈谈你对 Java 平台的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception-与-Error-有什么区别"><span class="nav-number">2.</span> <span class="nav-text">Exception 与 Error 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-final、finally、finalize-有什么不同"><span class="nav-number">3.</span> <span class="nav-text">谈谈 final、finally、finalize 有什么不同</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你对-Java-平台的理解"><span class="nav-number">1.</span> <span class="nav-text">谈谈你对 Java 平台的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception-与-Error-有什么区别"><span class="nav-number">2.</span> <span class="nav-text">Exception 与 Error 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-final、finally、finalize-有什么不同"><span class="nav-number">3.</span> <span class="nav-text">谈谈 final、finally、finalize 有什么不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强引用、软引用、弱引用、虚引用有什么区别"><span class="nav-number">4.</span> <span class="nav-text">强引用、软引用、弱引用、虚引用有什么区别</span></a></li></ol></div>
             
 
           </div>
