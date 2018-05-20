@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://fantasticmao.cn/2018/05/09/关于专栏《Java-核心技术-36-讲》/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
-<meta property="og:updated_time" content="2018-05-19T10:41:30.000Z">
+<meta property="og:updated_time" content="2018-05-20T10:44:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于专栏《Java 核心技术 36 讲》">
 <meta name="twitter:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
@@ -399,7 +399,10 @@
 <li>可以通过 <code>java.lang.Throwable#Throwable(String, Throwable)</code> 构造方法，捕获一个异常的同时抛出另一个异常，并且保留原始异常的堆栈信息。Spring Data 正是通过这种方式，将不同 ORM 框架中的不同异常封装成了一个通用的异常结构体系，详情可见 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#orm-introduction" target="_blank" rel="external">官方文档</a> 描述。</li>
 </ul>
 <hr>
-<h1 id="谈谈-final、finally、finalize-有什么不同"><a href="#谈谈-final、finally、finalize-有什么不同" class="headerlink" title="谈谈 final、finally、finalize 有什么不同"></a>谈谈 final、finally、finalize 有什么不同</h1><p>finally 关键字是在 try-finally 或 try-catch-finally 语句块中，保证 Java 代码必须被执行的一种机制。另外，若在 finally 语句块中需要关闭实现了 <code>java.lang.AutoCloseable</code> 接口的资源，则可以使用 JDK 7 中提供的 try-with-resource 语法简化代码。</p>
+<h1 id="谈谈-final、finally、finalize-有什么不同"><a href="#谈谈-final、finally、finalize-有什么不同" class="headerlink" title="谈谈 final、finally、finalize 有什么不同"></a>谈谈 final、finally、finalize 有什么不同</h1><p>final 关键字可以用于修饰变量、方法、类，并且在不同场景下的 final 关键字的语义不尽相同。当 final 修饰成员变量／局部变量／方法参数时，表示该变量的引用是不能被修改的；当 final 修饰方法时，表示该方法是不能被重写的；当 final 修饰类时，表示该类是不能被继承的。</p>
+<p>需要注意的是，使用 final 修饰对象类型的变量时，并不代表此变量具有 <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="external">immutable</a> 的特性。例如在 <code>final List&lt;String&gt; list = new ArrayList&lt;&gt;()</code> 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。</p>
+<p>很多类似使用 final 可以提高性能的结论，都是基于假设得出的。实际上， JVM 对于 final 的优化，是和它的实现密切相关。在日常开发中，建议不要指望使用这些小技巧，来获得所谓的性能上提升处。关于这点，可以参阅 RednaxelaFX 在知乎上的相关回答：<a href="https://www.zhihu.com/question/66083114/answer/242241071" target="_blank" rel="external">final 修饰递归方法会提高效率吗？</a>、<a href="https://www.zhihu.com/question/21762917/answer/19239387" target="_blank" rel="external">JVM 对于声明为 final 的局部变量做了哪些性能优化？</a></p>
+<p>finally 关键字是在 try-finally 或 try-catch-finally 语句块中，保证 Java 代码必须被执行的一种机制。另外，若在 finally 语句块中需要关闭实现了 <code>java.lang.AutoCloseable</code> 接口的资源，则可以使用 JDK 7 中提供的 try-with-resource 语法简化代码。</p>
 <p>需要额外注意的是，以下这段示例代码的 finally 语句块并不会被执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// do something</span></div><div class="line">    System.exit(<span class="number">1</span>);</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    System.out.println(<span class="string">"Print from finally"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>finalize() 是基础类 <code>java.lang.Object</code> 的一个方法，它的设计目的在于保证对象被垃圾收集之前，完成特定资源的回收。然而 JVM 在垃圾收集时，需要对实现了 finalize() 的对象进行特殊处理，所以 finalize() 本质上已经成为了垃圾收集的阻碍者，它可能导致对象需要经过多轮垃圾收集周期才能被回收。现在，finalize 机制已经不被推荐使用，并且在 JDK 9 中被标记为 <code>@Deprecated</code>。</p>
 
