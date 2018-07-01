@@ -94,13 +94,14 @@
 <meta property="og:url" content="http://fantasticmao.cn/2016/12/05/Ubuntu-下-Shadowsocks-配置/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城，科学上网。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/5.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/6.png">
-<meta property="og:updated_time" content="2018-03-16T04:20:48.000Z">
+<meta property="og:updated_time" content="2018-07-01T17:30:19.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 下 Shadowsocks 配置">
 <meta name="twitter:description" content="Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城，科学上网。">
@@ -172,7 +173,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -381,7 +382,7 @@
 
       
         <p>Ubuntu 操作系统下的 Shadowsocks 配置，翻越防火长城，科学上网。<a id="more"></a></p>
-<h1 id="简介-Shadowsocks"><a href="#简介-Shadowsocks" class="headerlink" title="简介 Shadowsocks"></a>简介 Shadowsocks</h1><p>Shadowsocks 中文名影梭，是一个使用 socks5 协议的开源代理工具，访问墙外网络稳定且迅速。原作者 <a href="https://github.com/clowwindy" target="_blank" rel="external">clowwindy</a> 因在 2015 年 8 月受到某政府要求无奈停止维护并删除了项目代码，事件 <a href="https://web.archive.org/web/20150822042959/https://github.com/shadowsocks/shadowsocks-iOS/issues/124#issuecomment-133630294" target="_blank" rel="external">传送门</a>。现在 Shadowsocks 由 Github 上的 <a href="https://github.com/shadowsocks" target="_blank" rel="external">Shadowsocks 组织</a> 维护，向无私且伟大的开源奉献者们致敬。</p>
+<h1 id="简介-Shadowsocks"><a href="#简介-Shadowsocks" class="headerlink" title="简介 Shadowsocks"></a>简介 Shadowsocks</h1><p>Shadowsocks 中文名影梭，是一个使用 socks5 协议的开源代理工具，访问墙外网络稳定且迅速。原作者 <a href="https://github.com/clowwindy" target="_blank" rel="noopener">clowwindy</a> 因在 2015 年 8 月受到某政府要求无奈停止维护并删除了项目代码，事件 <a href="https://web.archive.org/web/20150822042959/https://github.com/shadowsocks/shadowsocks-iOS/issues/124#issuecomment-133630294" target="_blank" rel="noopener">传送门</a>。现在 Shadowsocks 由 Github 上的 <a href="https://github.com/shadowsocks" target="_blank" rel="noopener">Shadowsocks 组织</a> 维护，向无私且伟大的开源奉献者们致敬。</p>
 <h1 id="获取-Shadowsocks-配置"><a href="#获取-Shadowsocks-配置" class="headerlink" title="获取 Shadowsocks 配置"></a>获取 Shadowsocks 配置</h1><p>获取 Shadowsocks 配置的渠道有很多，可以自己搭建海外 Shadowsocks 服务器，也可以依靠搜索引擎获取。个人是在某一站点（站长要求保密）购买 Shadowsocks 配置，服务稳定，速度很快。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/1.png" alt="image"></p>
 <h1 id="安装并配置-Shadowsocks"><a href="#安装并配置-Shadowsocks" class="headerlink" title="安装并配置 Shadowsocks"></a>安装并配置 Shadowsocks</h1><p>使用 <code>sudo apt-get install shadowsocks</code> 安装 Shadowsocks 客户端。结束安装之后，编辑 Shadowsocks 配置文件 <code>sudo vim /etc/shadowsocks/config.json</code>，将 <strong>server</strong>、<strong>server_port</strong>、<strong>password</strong> 与 Shadowsocks 服务端配置相匹配。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/2.png" alt="image"><br>使用命令<code>sslocal -c /etc/shadowsocks/config.json</code>开启 Shadowsocks 代理。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/3.png" alt="image"></p>
 <h1 id="使用-Chrome-浏览器翻墙"><a href="#使用-Chrome-浏览器翻墙" class="headerlink" title="使用 Chrome 浏览器翻墙"></a>使用 Chrome 浏览器翻墙</h1><p>新开一个终端，使用命令 <code>google-chrome --proxy-server=&quot;socks5://127.0.0.1:1080&quot;</code> 让 Chrome 代理本机请求，实现 Chrome 浏览器翻墙。<br><strong>注意</strong>：该命令应在 Chrome 未启动时执行，否则失败。<br><img src="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E7%8E%AF%E5%A2%83%E4%B8%8BShadowsocks%E9%85%8D%E7%BD%AE/4.png" alt="image"></p>
@@ -407,12 +408,6 @@
       
     </div>
 
-    <div>
-      
-        
-
-      
-    </div>
 
     <footer class="post-footer">
       
@@ -465,7 +460,7 @@
     </div>
   </div>
 
-
+          
           </div>
           
 
@@ -515,21 +510,19 @@
           
         </div>
         <nav class="site-state motion-element">
-
+        
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
-            
-            
             <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
+              <a href="/categories">
                 <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -537,10 +530,8 @@
           
 
           
-            
-            
             <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
+              <a href="/tags">
                 <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -727,7 +718,7 @@
         
       </div>
     
-
+    
   </div>
 
   
@@ -747,8 +738,6 @@
 
 
   
-
-
 
 
 
@@ -807,6 +796,7 @@
   
 
 
+
   
 
 
@@ -834,20 +824,17 @@
 
 
 
-
-
-
+  
   
 
-
-
-
+  
 
   
 
   
 
   
+
 
   
 
