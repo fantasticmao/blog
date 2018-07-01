@@ -94,12 +94,13 @@
 <meta property="og:url" content="http://fantasticmao.cn/2017/02/27/Ubuntu-下开发环境搭建/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="记一次个人 PC 的 Ubuntu 16.04 LTS 重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/4.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Ubuntu%E4%B8%8B%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/5.png">
-<meta property="og:updated_time" content="2018-04-15T17:42:16.000Z">
+<meta property="og:updated_time" content="2018-07-01T17:30:19.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 下开发环境搭建">
 <meta name="twitter:description" content="记一次个人 PC 的 Ubuntu 16.04 LTS 重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。">
@@ -171,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -380,7 +381,7 @@
 
       
         <p>记一次个人 PC 的 Ubuntu 16.04 LTS 重装记录，包含开发环境的搭建、日常软件的安装、几个踩过的坑。<a id="more"></a></p>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在知乎上看到了 <a href="https://www.zhihu.com/question/19811112/answer/132006027" target="_blank" rel="external">一篇回答</a>，决定重装（升级？） Ubuntu……</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在知乎上看到了 <a href="https://www.zhihu.com/question/19811112/answer/132006027" target="_blank" rel="noopener">一篇回答</a>，决定重装（升级？） Ubuntu……</p>
 <p>不得不说，Ubuntu 相比于 CentOS，体验真的棒很多，尤其是在桌面应用上。</p>
 <hr>
 <h3 id="sudo-apt-get-安装系列"><a href="#sudo-apt-get-安装系列" class="headerlink" title="sudo apt-get 安装系列"></a>sudo apt-get 安装系列</h3><p><em>Git</em>：执行 <code>sudo apt-get install git</code>。安装成功之后，使用 <code>git config --global $key $value</code> 命令，配置 Git 的全局 user.name、user.email、core.editor。</p>
@@ -400,7 +401,7 @@
 </ol>
 <hr>
 <h3 id="dpkg-i-安装系列"><a href="#dpkg-i-安装系列" class="headerlink" title="dpkg -i 安装系列"></a>dpkg -i 安装系列</h3><p>下载 Chrome、网易云音乐、搜狗输入法、WPS、VS Code 的 deb 安装包，使用 <code>sudo dpkg -i $packagename</code> 命令安装。若因依赖关系问题导致安装失败，则使用 <code>sudo apt-get -f install</code> 修复。</p>
-<p><em>解决 Chrome 闪屏问题</em>：个人笔记本型号 Dell-Inspiron-7460，使用 Chrome 56 在线看视频时，标签栏上下的位置会频繁闪屏。参考自 <a href="https://beisongnansong.wordpress.com/2016/08/12/%E8%A7%A3%E5%86%B3ubuntu%EF%BC%88chrome%EF%BC%89%E7%9A%84%E9%97%AA%E5%B1%8F%E9%97%AE%E9%A2%98/" target="_blank" rel="external">链接</a> 解决了此问题，具体措施：</p>
+<p><em>解决 Chrome 闪屏问题</em>：个人笔记本型号 Dell-Inspiron-7460，使用 Chrome 56 在线看视频时，标签栏上下的位置会频繁闪屏。参考自 <a href="https://beisongnansong.wordpress.com/2016/08/12/%E8%A7%A3%E5%86%B3ubuntu%EF%BC%88chrome%EF%BC%89%E7%9A%84%E9%97%AA%E5%B1%8F%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">链接</a> 解决了此问题，具体措施：</p>
 <ol>
 <li>新增配置文件 <code>sudo vim /usr/share/X11/xorg.conf.d/20-intel.conf</code>，贴入下图内容保存。</li>
 <li>进入 chrome://flags/ 页面，停用「加速的2D画布 」，启用「零副本光栅化处理程序 」。</li>
@@ -423,14 +424,14 @@
 <ol>
 <li>执行 <code>/usr/local/idea/bin/idea.sh</code>，以 <strong>普通用户权限</strong> 启动 IDEA，而非是管理员用户权限。</li>
 <li>执行 <code>sudo cp /usr/local/idea/plugins/maven/lib/maven3/conf/settings.xml ~/.m2/</code>，将 Maven 配置文件拷贝一份至 Maven 本地仓库中。在配置文件中，如下添加阿里的 Maven 镜像和修改默认 JDK 版本。</li>
-<li>修改 IDEA 各项设置……太多就略过了。<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line">......</div><div class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">activation</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div></pre></td></tr></table></figure>
+<li>修改 IDEA 各项设置……太多就略过了。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line">......</span><br><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <hr>
 <h3 id="编译-安装系列"><a href="#编译-安装系列" class="headerlink" title="编译  安装系列"></a>编译  安装系列</h3><p>Nginx：可执行 <code>sudo apt-get install nginx</code> 安装 Nginx，但个人偏好编译安装（为了好找配置文件）。</p>
 <ol>
 <li>执行 <code>sudo apt-get install libpcre3 libpcre3-dev zlib1g-dev</code>，预先安装 Nginx 依赖包。</li>
-<li>进入 <a href="http://nginx.org/" target="_blank" rel="external">Nginx官网</a>，个人选择 1.10.3 稳定版本，执行 <code>wget http://nginx.org/download/nginx-1.10.3.tar.gz</code> 下载并解压缩。</li>
+<li>进入 <a href="http://nginx.org/" target="_blank" rel="noopener">Nginx官网</a>，个人选择 1.10.3 稳定版本，执行 <code>wget http://nginx.org/download/nginx-1.10.3.tar.gz</code> 下载并解压缩。</li>
 <li>执行 <code>cd nginx-1.10.3/</code>，进入 Nginx 目录。</li>
 <li>执行 <code>./configure</code>，开始执行脚本。</li>
 <li>执行 <code>make</code>，开始编译 Nginx。</li>
@@ -439,7 +440,7 @@
 </ol>
 <p><em>Redis</em>：</p>
 <ol>
-<li>进入 <a href="http://redis.io" target="_blank" rel="external">Redis官网</a>，个人选择 3.2.8 稳定版，执行 <code>wget http://download.redis.io/releases/redis-3.2.8.tar.gz</code> 下载并解压缩。</li>
+<li>进入 <a href="http://redis.io" target="_blank" rel="noopener">Redis官网</a>，个人选择 3.2.8 稳定版，执行 <code>wget http://download.redis.io/releases/redis-3.2.8.tar.gz</code> 下载并解压缩。</li>
 <li>执行 <code>cd redis-3.2.8/</code>，进入 Redis 目录。</li>
 <li>执行 <code>make</code>，开始编译 Redis。</li>
 <li>安装成功之后，redis-server 和 redis-cli 位于 <code>../redis-3.2.8/src</code>。</li>
@@ -453,7 +454,7 @@
 <li><code>sudo apt-get -f install</code> 修复软件包之间的依赖关系。</li>
 <li><code>sudo apt-get autoremove $packagename</code> 移除自动安装的软件包及其依赖。</li>
 </ul>
-<p>下文节选自 <code>man apt</code> 描述部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">DESCRIPTION</div><div class="line">       apt provides a high-level commandline interface for the package</div><div class="line">       management system. </div><div class="line"></div><div class="line">       update (apt-get(8))</div><div class="line">	   update is used to download package information from all configured</div><div class="line">	   sources.</div><div class="line"></div><div class="line">       upgrade (apt-get(8))</div><div class="line">	   upgrade is used to install available upgrades of all packages</div><div class="line">	   currently installed on the system from the sources configured via</div><div class="line">	   sources.list(5).</div><div class="line"></div><div class="line">       full-upgrade (apt-get(8))</div><div class="line">	   full-upgrade performs the function of upgrade but will remove</div><div class="line">	   currently installed packages if this is needed to upgrade the</div><div class="line">	   system as a whole.</div><div class="line"></div><div class="line">       install, remove, purge (apt-get(8))</div><div class="line">	   Performs the requested action on one or more packages specified via</div><div class="line">	   regex(7), glob(7) or exact match. </div><div class="line"></div><div class="line">       autoremove (apt-get(8))</div><div class="line">	   autoremove is used to remove packages that were automatically</div><div class="line">	   installed to satisfy dependencies for other packages and are now no</div><div class="line">	   longer needed as dependencies changed or the package(s) needing</div><div class="line">	   them were removed in the meantime.</div><div class="line"></div><div class="line">       search (apt-cache(8))</div><div class="line">	   search can be used to search for the given regex(7) term(s) in the</div><div class="line">	   list of available packages and display matches.</div><div class="line"></div><div class="line">       show (apt-cache(8))</div><div class="line">	   Show information about the given package(s) including its</div><div class="line">	   dependencies, installation and download size, sources the package</div><div class="line">	   is available from, the description of the packages content and much</div><div class="line">	   more. </div><div class="line"></div><div class="line">       list (work-in-progress)</div><div class="line">	   list is somewhat similar to dpkg-query --list in that it can</div><div class="line">	   display a list of packages satisfying certain criteria. </div><div class="line"></div><div class="line">       edit-sources (work-in-progress)</div><div class="line">	   edit-sources lets you edit your sources.list(5) files in your</div><div class="line">	   preferred texteditor while also providing basic sanity checks.</div></pre></td></tr></table></figure></p>
+<p>下文节选自 <code>man apt</code> 描述部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">DESCRIPTION</span><br><span class="line">       apt provides a high-level commandline interface for the package</span><br><span class="line">       management system. </span><br><span class="line"></span><br><span class="line">       update (apt-get(8))</span><br><span class="line">	   update is used to download package information from all configured</span><br><span class="line">	   sources.</span><br><span class="line"></span><br><span class="line">       upgrade (apt-get(8))</span><br><span class="line">	   upgrade is used to install available upgrades of all packages</span><br><span class="line">	   currently installed on the system from the sources configured via</span><br><span class="line">	   sources.list(5).</span><br><span class="line"></span><br><span class="line">       full-upgrade (apt-get(8))</span><br><span class="line">	   full-upgrade performs the function of upgrade but will remove</span><br><span class="line">	   currently installed packages if this is needed to upgrade the</span><br><span class="line">	   system as a whole.</span><br><span class="line"></span><br><span class="line">       install, remove, purge (apt-get(8))</span><br><span class="line">	   Performs the requested action on one or more packages specified via</span><br><span class="line">	   regex(7), glob(7) or exact match. </span><br><span class="line"></span><br><span class="line">       autoremove (apt-get(8))</span><br><span class="line">	   autoremove is used to remove packages that were automatically</span><br><span class="line">	   installed to satisfy dependencies for other packages and are now no</span><br><span class="line">	   longer needed as dependencies changed or the package(s) needing</span><br><span class="line">	   them were removed in the meantime.</span><br><span class="line"></span><br><span class="line">       search (apt-cache(8))</span><br><span class="line">	   search can be used to search for the given regex(7) term(s) in the</span><br><span class="line">	   list of available packages and display matches.</span><br><span class="line"></span><br><span class="line">       show (apt-cache(8))</span><br><span class="line">	   Show information about the given package(s) including its</span><br><span class="line">	   dependencies, installation and download size, sources the package</span><br><span class="line">	   is available from, the description of the packages content and much</span><br><span class="line">	   more. </span><br><span class="line"></span><br><span class="line">       list (work-in-progress)</span><br><span class="line">	   list is somewhat similar to dpkg-query --list in that it can</span><br><span class="line">	   display a list of packages satisfying certain criteria. </span><br><span class="line"></span><br><span class="line">       edit-sources (work-in-progress)</span><br><span class="line">	   edit-sources lets you edit your sources.list(5) files in your</span><br><span class="line">	   preferred texteditor while also providing basic sanity checks.</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -472,12 +473,6 @@
       
     </div>
 
-    <div>
-      
-        
-
-      
-    </div>
 
     <footer class="post-footer">
       
@@ -528,7 +523,7 @@
     </div>
   </div>
 
-
+          
           </div>
           
 
@@ -578,21 +573,19 @@
           
         </div>
         <nav class="site-state motion-element">
-
+        
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
-            
-            
             <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
+              <a href="/categories">
                 <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -600,10 +593,8 @@
           
 
           
-            
-            
             <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
+              <a href="/tags">
                 <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -790,7 +781,7 @@
         
       </div>
     
-
+    
   </div>
 
   
@@ -810,8 +801,6 @@
 
 
   
-
-
 
 
 
@@ -870,6 +859,7 @@
   
 
 
+
   
 
 
@@ -897,20 +887,17 @@
 
 
 
-
-
-
+  
   
 
-
-
-
+  
 
   
 
   
 
   
+
 
   
 

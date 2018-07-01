@@ -94,7 +94,8 @@
 <meta property="og:url" content="http://fantasticmao.cn/2018/05/09/关于专栏《Java-核心技术-36-讲》/index.html">
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
-<meta property="og:updated_time" content="2018-05-20T19:09:40.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-01T17:30:19.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于专栏《Java 核心技术 36 讲》">
 <meta name="twitter:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
@@ -165,7 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -373,12 +374,12 @@
       
 
       
-        <p>最近我在极客时间上订阅了一个专栏 —— <a href="https://time.geekbang.org/column/intro/82" target="_blank" rel="external">《Java 核心技术 36 讲》</a>。<a id="more"></a>这是一个以 Java 经典面试题为切入点，来讲解和剖析相关领域知识的专栏。大致看了专栏的目录，发现其中涉及的知识点，即包含自己完全未接触过的知识点（广度不够），也包含接触过但仍然一知半解的知识点（深度不够），也包含相当熟悉但却回答不上的知识点（体系化不够）。</p>
+        <p>最近我在极客时间上订阅了一个专栏 —— <a href="https://time.geekbang.org/column/intro/82" target="_blank" rel="noopener">《Java 核心技术 36 讲》</a>。<a id="more"></a>这是一个以 Java 经典面试题为切入点，来讲解和剖析相关领域知识的专栏。大致看了专栏的目录，发现其中涉及的知识点，即包含自己完全未接触过的知识点（广度不够），也包含接触过但仍然一知半解的知识点（深度不够），也包含相当熟悉但却回答不上的知识点（体系化不够）。</p>
 <p>哎，革命尚未成功，同志仍需努力。</p>
 <p>对于学习技术这件事，记一些想法：要更侧重于通过阅读书籍／文档／手册／RFC 等方式，而不是仅仅通过看视频／听分享／听演讲等方式获取新知识、学习新技术。记几个观点：学习需要自我驱动、学习的资料需要官方化、学习的知识需要体系化。</p>
 <p>闲言少叙，开始摘记吧。</p>
 <hr>
-<h1 id="谈谈你对-Java-平台的理解"><a href="#谈谈你对-Java-平台的理解" class="headerlink" title="谈谈你对 Java 平台的理解"></a>谈谈你对 Java 平台的理解</h1><p>Java 是一种被广泛使用的面向对象编程语言，支持面向对象的封装、多态、继承三大特性。Java 的基本语法类似于 C 语言，相对规范和严谨（区别于 PHP、Python 等弱类型语言），支持 Annotaion、Generic、Lambda、Method Reference 等等。除此之外，Java 的核心类库和第三方库也十分丰富，核心类库包括 IO／NIO、Collection、Netword、Concurrent、Security、Date／Time 等等，第三方库包括 Spring Framework、Netty、Hibernate、Jackson、Guava 等等。</p>
+<h1 id="谈谈你对-Java-平台的理解"><a href="#谈谈你对-Java-平台的理解" class="headerlink" title="谈谈你对 Java 平台的理解"></a>谈谈你对 Java 平台的理解</h1><p>Java 是一种被广泛使用的面向对象编程语言，支持面向对象的封装、多态、继承三大特性。Java 的基本语法类似于 C 语言，相对规范和严谨（区别于 PHP、Python 等弱类型语言），支持 Annotaion、Generic、Lambda、Method Reference 等等。除此之外，Java 的核心类库和第三方库也十分丰富，核心类库包括 IO／NIO、Collection、Network、Concurrent、Security、Date／Time 等等，第三方库包括 Spring Framework、Netty、Hibernate、Jackson、Guava 等等。</p>
 <p>Java 作为一个老牌且成熟的编程语言，其发展多年的虚拟机也经受了业界苛刻的考验。JVM（Java Virtual Machine）不仅支持了 Java 宣传标语 —— Write Once, Run Anywhere —— 的跨平台特性，并且提供了丰富的垃圾收集机制来自动分配和回收内存。其中，常用的垃圾收集器如 Serial、Parallel、CMS、G1 等。另外，JVM 除了支持 source code -&gt; byte code -&gt; machine code 的编译 &amp; 解释运行方式，还支持 JIT（Just In Time）编译方式，能够极大提高 Java 程序的运行性能。最后，JVM 作为一个强大的虚拟机，还支持运行例如 Clojure、Scala、Groovy、JRuby、Jython 等等大量的符合 JVM 字节码规范的语言。</p>
 <p>由此衍生的问题：谈谈你对 Spring Framework 的理解</p>
 <hr>
@@ -396,22 +397,22 @@
 <li>受检查异常被抛出后，往往不能被恢复，并且对函数式编程和三元表达式十分不友好；</li>
 <li>JDK 7 支持 multiple-catch 语法和基于 <code>java.lang.AutoCloseable</code> 接口的 try-with-resource 语法；</li>
 <li>当程序未被中断时，finally 语句都会被正常执行，并且通常被用于清理系统资源。不应在 finally 语句中 return 方法的执行结果，因为这会导致异常信息的丢失；</li>
-<li>可以通过 <code>java.lang.Throwable#Throwable(String, Throwable)</code> 构造方法，捕获一个异常的同时抛出另一个异常，并且保留原始异常的堆栈信息。Spring Data 正是通过这种方式，将不同 ORM 框架中的不同异常封装成了一个通用的异常结构体系，详情可见 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#orm-introduction" target="_blank" rel="external">官方文档</a> 描述。</li>
+<li>可以通过 <code>java.lang.Throwable#Throwable(String, Throwable)</code> 构造方法，捕获一个异常的同时抛出另一个异常，并且保留原始异常的堆栈信息。Spring Data 正是通过这种方式，将不同 ORM 框架中的不同异常封装成了一个通用的异常结构体系，详情可见 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#orm-introduction" target="_blank" rel="noopener">官方文档</a> 描述。</li>
 </ul>
 <hr>
 <h1 id="谈谈-final、finally、finalize-有什么不同"><a href="#谈谈-final、finally、finalize-有什么不同" class="headerlink" title="谈谈 final、finally、finalize 有什么不同"></a>谈谈 final、finally、finalize 有什么不同</h1><p>final 关键字可以用于修饰变量、方法、类，并且在不同场景下的 final 关键字的语义不尽相同。当 final 修饰成员变量／局部变量／方法参数时，表示该变量的引用是不能被修改的；当 final 修饰方法时，表示该方法是不能被重写的；当 final 修饰类时，表示该类是不能被继承的。</p>
-<p>需要注意的是，使用 final 修饰引用类型的变量时，并不代表此变量具有 <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="external">immutable</a> 的特性。例如在 <code>final List&lt;String&gt; list = new ArrayList&lt;&gt;()</code> 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。</p>
-<p>很多类似使用 final 可以提高性能的结论，都是基于假设得出的。实际上， JVM 对于 final 的优化，是和它的实现细节密切相关。在日常开发中，建议不要指望使用这些小技巧，来获得所谓的性能上的提升。关于这点，可以参阅 RednaxelaFX 在知乎上的相关回答：<a href="https://www.zhihu.com/question/66083114/answer/242241071" target="_blank" rel="external">final 修饰递归方法会提高效率吗？</a>、<a href="https://www.zhihu.com/question/21762917/answer/19239387" target="_blank" rel="external">JVM 对于声明为 final 的局部变量做了哪些性能优化？</a></p>
+<p>需要注意的是，使用 final 修饰引用类型的变量时，并不代表此变量具有 <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="noopener">immutable</a> 的特性。例如在 <code>final List&lt;String&gt; list = new ArrayList&lt;&gt;()</code> 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。</p>
+<p>很多类似使用 final 可以提高性能的结论，都是基于假设得出的。实际上， JVM 对于 final 的优化，是和它的实现细节密切相关。在日常开发中，建议不要指望使用这些小技巧，来获得所谓的性能上的提升。关于这点，可以参阅 RednaxelaFX 在知乎上的相关回答：<a href="https://www.zhihu.com/question/66083114/answer/242241071" target="_blank" rel="noopener">final 修饰递归方法会提高效率吗？</a>、<a href="https://www.zhihu.com/question/21762917/answer/19239387" target="_blank" rel="noopener">JVM 对于声明为 final 的局部变量做了哪些性能优化？</a></p>
 <p>finally 关键字是在 try-finally 或 try-catch-finally 语句块中，保证 Java 代码必须被执行的一种机制。另外，若在 finally 语句块中需要关闭实现了 <code>java.lang.AutoCloseable</code> 接口的资源，则可以使用 JDK 7 中提供的 try-with-resource 语法简化代码。</p>
-<p>需要额外注意的是，以下这段示例代码的 finally 语句块并不会被执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// do something</span></div><div class="line">    System.exit(<span class="number">1</span>);</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    System.out.println(<span class="string">"Print from finally"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>需要额外注意的是，以下这段示例代码的 finally 语句块并不会被执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">    System.exit(<span class="number">1</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Print from finally"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>finalize() 是基础类 <code>java.lang.Object</code> 的一个方法，它的设计目的在于保证对象被垃圾收集之前，完成特定资源的回收。然而 JVM 在垃圾收集时，需要对实现了 finalize() 的对象进行特殊处理，并且通过 finalize() 的实现方式都可以通过 try-finally 更好、更及时地实现。所以 finalize() 本质上已经成为了垃圾收集的阻碍者，它可能导致对象需要经过多轮垃圾收集周期才能被回收。现在，finalize 机制已经不被推荐使用，并且在 JDK 9 中被标记为 <code>@Deprecated</code>。</p>
-<p>关于 JVM 对实现 finalize() 对象的特殊处理，可见<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">《深入理解 Java 虚拟机》</a> 的 3.2.4 章节：</p>
+<p>关于 JVM 对实现 finalize() 对象的特殊处理，可见<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="noopener">《深入理解 Java 虚拟机》</a> 的 3.2.4 章节：</p>
 <blockquote>
 <p>即使在可达性分析算法中的不可达的对象，也并非是「非死不可」的，这时候它们暂时处于「缓行」阶段。要真正宣告一个对象死亡，至少要经历两次标记过程：如果对象在进行可达性分析后发现没有与 GC Roots 相连接的引用链，那它将会被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行 finalize() 方法。当对象没有覆盖 finalize() 方法，或者 finalize() 方法已经被虚拟机调用过，虚拟机将这两个情况都视为「没有必要执行」。</p>
 <p>如果这个对象被判定为有必要执行 finalize() 方法，那么这个对象将会被放置在一个叫做 F-Queue 的队列之中，并在稍后被一个由虚拟机自动建立的、低优先级的 Finalizer 线程去执行它。</p>
 </blockquote>
 <hr>
-<h1 id="强引用、软引用、弱引用、虚引用有什么区别"><a href="#强引用、软引用、弱引用、虚引用有什么区别" class="headerlink" title="强引用、软引用、弱引用、虚引用有什么区别"></a>强引用、软引用、弱引用、虚引用有什么区别</h1><p>这个问题，可以在<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="external">《深入理解 Java 虚拟机》</a> 的 3.2.3 章节中找到答案：</p>
+<h1 id="强引用、软引用、弱引用、虚引用有什么区别"><a href="#强引用、软引用、弱引用、虚引用有什么区别" class="headerlink" title="强引用、软引用、弱引用、虚引用有什么区别"></a>强引用、软引用、弱引用、虚引用有什么区别</h1><p>这个问题，可以在<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="noopener">《深入理解 Java 虚拟机》</a> 的 3.2.3 章节中找到答案：</p>
 <blockquote>
 <p>垃圾收集器在对堆进行回收前，第一件事情就是要确定堆中的对象哪些还「存活」，哪些已经「死去」。</p>
 <p>引用计数算法：给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1；当引用失效时，计数器值就减 1；任何时刻计数器值为 0 的对象就是不可能再被使用的。</p>
@@ -443,12 +444,6 @@
       
     </div>
 
-    <div>
-      
-        
-
-      
-    </div>
 
     <footer class="post-footer">
       
@@ -477,6 +472,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/06/25/写给-HashMap-的注释/" rel="prev" title="写给 HashMap 的注释">
+                写给 HashMap 的注释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -493,7 +492,7 @@
     </div>
   </div>
 
-
+          
           </div>
           
 
@@ -543,21 +542,19 @@
           
         </div>
         <nav class="site-state motion-element">
-
+        
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
-            
-            
             <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
+              <a href="/categories">
                 <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -565,10 +562,8 @@
           
 
           
-            
-            
             <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
+              <a href="/tags">
                 <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -755,7 +750,7 @@
         
       </div>
     
-
+    
   </div>
 
   
@@ -775,8 +770,6 @@
 
 
   
-
-
 
 
 
@@ -835,6 +828,7 @@
   
 
 
+
   
 
 
@@ -862,20 +856,17 @@
 
 
 
-
-
-
+  
   
 
-
-
-
+  
 
   
 
   
 
   
+
 
   
 
