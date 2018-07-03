@@ -108,24 +108,25 @@
 
 
 
-  <meta name="description" content="优秀的自律，成功会随你而来。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://fantasticmao.cn/categories/index.html">
+  <meta name="description" content="基本介绍二分查找是一种简单且高效的查找算法。 在数据库领域中，基于 Binary Search Tree 演化的 B+Tree 索引更是大量地用到了二分查找算法，例如在索引上进行的等值查询、范围查询等等。 它的经典应用场景便是在数据库内核的实现中，绝大部分的 SQL（在索引上的等值查询、范围查找等）都会使用到二分查找进行数据的定位。 基于有序数组的二分查找算法可以演进为基于二叉树的  基本实现先来">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分查找的正确实现">
+<meta property="og:url" content="http://fantasticmao.cn/2018/03/10/二分查找的正确实现/index.html">
 <meta property="og:site_name" content="FantasticMao">
-<meta property="og:description" content="优秀的自律，成功会随你而来。">
+<meta property="og:description" content="基本介绍二分查找是一种简单且高效的查找算法。 在数据库领域中，基于 Binary Search Tree 演化的 B+Tree 索引更是大量地用到了二分查找算法，例如在索引上进行的等值查询、范围查询等等。 它的经典应用场景便是在数据库内核的实现中，绝大部分的 SQL（在索引上的等值查询、范围查找等）都会使用到二分查找进行数据的定位。 基于有序数组的二分查找算法可以演进为基于二叉树的  基本实现先来">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-07-02T05:41:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="优秀的自律，成功会随你而来。">
+<meta name="twitter:title" content="二分查找的正确实现">
+<meta name="twitter:description" content="基本介绍二分查找是一种简单且高效的查找算法。 在数据库领域中，基于 Binary Search Tree 演化的 B+Tree 索引更是大量地用到了二分查找算法，例如在索引上进行的等值查询、范围查询等等。 它的经典应用场景便是在数据库内核的实现中，绝大部分的 SQL（在索引上的等值查询、范围查找等）都会使用到二分查找进行数据的定位。 基于有序数组的二分查找算法可以演进为基于二叉树的  基本实现先来">
 
 
 
 
 
 
-  <link rel="canonical" href="http://fantasticmao.cn/categories/"/>
+  <link rel="canonical" href="http://fantasticmao.cn/2018/03/10/二分查找的正确实现/"/>
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title>categories | FantasticMao</title>
+  <title>二分查找的正确实现 | FantasticMao</title>
   
 
 
@@ -244,7 +245,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
   </li>
@@ -293,109 +294,215 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fantasticmao.cn/2018/03/10/二分查找的正确实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MaoMao">
+      <meta itemprop="description" content="优秀的自律，成功会随你而来。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FantasticMao">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                目前共计 6 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络基础/">网络基础</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">二分查找的正确实现
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-10 14:58:31" itemprop="dateCreated datePublished" datetime="2018-03-10T14:58:31+08:00">2018-03-10</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><p>二分查找是一种简单且高效的查找算法。</p>
+<p>在数据库领域中，基于 Binary Search Tree 演化的 B+Tree 索引更是大量地用到了二分查找算法，例如在索引上进行的等值查询、范围查询等等。</p>
+<p>它的经典应用场景便是在数据库内核的实现中，绝大部分的 SQL（在索引上的等值查询、范围查找等）都会使用到二分查找进行数据的定位。</p>
+<p>基于有序数组的二分查找算法可以演进为基于二叉树的</p>
+<hr>
+<h1 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h1><p>先来翻阅一下 Wikipedia 对于 Binary Search Algorithm 的描述：<a href="https://en.wikipedia.org/wiki/Binary_search_algorithm" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Binary_search_algorithm</a></p>
+<blockquote>
+<p>In computer science, binary search, also known as half-interval search, logarithmic search, or binary chop, is a search algorithm that finds the position of a target value within a sorted array.</p>
+</blockquote>
+<blockquote>
+<p>在计算机科学中，二分查找也被称为折半查找、对数查找、二分劈开（黑人问号），是一种在有序数组中定位目标元素的查找算法。</p>
+</blockquote>
+<blockquote>
+<p>Binary search compares the target value to the middle element of the array, if they are unequal, the half in which the target cannot lie is eliminated and the search continues on the remaining half until it is successful. If the search ends with the remaining half being empty, the target is not in the array.</p>
+</blockquote>
+<blockquote>
+<p>二分查找会将目标元素与数组中间元素进行比较，若不相等，则目标元素不存在的半段数组会被淘汰，并且查询会在目标元素存在的半段数组中继续进行，直到比较成功为止。如果查询以空数组为结束，则表示目标元素不存在。</p>
+</blockquote>
+<p>二分查找算法不仅限于 Array 数据结构，它更可以应用于如 Tree 等其它数据结构，而且其应用的场景也是非常之广，</p>
+<hr>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><h2 id="参数校验"><a href="#参数校验" class="headerlink" title="参数校验"></a>参数校验</h2><h2 id="中值计算"><a href="#中值计算" class="headerlink" title="中值计算"></a>中值计算</h2><h2 id="递归实现-gt-迭代实现"><a href="#递归实现-gt-迭代实现" class="headerlink" title="递归实现 -&gt; 迭代实现"></a>递归实现 -&gt; 迭代实现</h2><h2 id="查找第一个／最后一个值"><a href="#查找第一个／最后一个值" class="headerlink" title="查找第一个／最后一个值"></a>查找第一个／最后一个值</h2><hr>
+<h1 id="完整实现"><a href="#完整实现" class="headerlink" title="完整实现"></a>完整实现</h1>
       
     </div>
+
     
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/14/设计模式概览/" rel="next" title="设计模式概览">
+                <i class="fa fa-chevron-left"></i> 设计模式概览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/31/Vim-常用命令/" rel="prev" title="Vim 常用命令">
+                Vim 常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    
-    
-    
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -416,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -608,6 +724,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本实现"><span class="nav-number">2.</span> <span class="nav-text">基本实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数校验"><span class="nav-number">3.1.</span> <span class="nav-text">参数校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中值计算"><span class="nav-number">3.2.</span> <span class="nav-text">中值计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归实现-gt-迭代实现"><span class="nav-number">3.3.</span> <span class="nav-text">递归实现 -&gt; 迭代实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找第一个／最后一个值"><span class="nav-number">3.4.</span> <span class="nav-text">查找第一个／最后一个值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整实现"><span class="nav-number">4.</span> <span class="nav-text">完整实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
