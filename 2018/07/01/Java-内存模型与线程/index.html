@@ -116,10 +116,14 @@
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-05T19:01:28.014Z">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.png">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.png">
+<meta property="og:updated_time" content="2018-08-06T18:36:48.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 内存模型与线程">
 <meta name="twitter:description" content="摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。">
+<meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.png">
 
 
 
@@ -412,8 +416,11 @@
 <p>并发处理的广泛应用是使得 <a href="https://en.wikipedia.org/wiki/Amdahl&#39;s_law" target="_blank" rel="noopener">Amdahl 定律</a> 代替 <a href="https://en.wikipedia.org/wiki/Moore&#39;s_law" target="_blank" rel="noopener">Moore 定律</a> 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。<a id="more"></a></p>
 <hr>
 <h1 id="硬件的效率与一致性"><a href="#硬件的效率与一致性" class="headerlink" title="硬件的效率与一致性"></a>硬件的效率与一致性</h1><p>计算机的大部分运算任务都不可能只靠处理器（CPU）计算就能完成。因为大部分情况下，处理器都需要与存储设备（内存）进行交互，例如读取数据、存储运算结果等。</p>
+<p><img src="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.png" alt="iamge"></p>
 <p>由于计算的 CPU 与内存的运算速度存在几个数量级的差距，所以现代大部分计算机系统都加入了一层读写速度尽可能接近 CPU 运算速度的 <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener">高速缓存（Cache）</a>，用来作为 CPU 和内存的缓冲。这种缓冲的运行机制是：将 CPU 运算所需要使用到的数据复制到缓存中，让运算能快速进行；当运算结束之后再从缓冲同步回内存之中。通过这种方式，CPU 就无需等待对内存的缓慢读写了。</p>
-<p>不过这种运行机制也引入了一个新的问题：<a href="https://en.wikipedia.org/wiki/Cache_coherence" target="_blank" rel="noopener">内存一致性（Cache Coherence）</a>。当多个 CPU 的运算任务都涉及同一块内存区域时，将可能导致 CPU 的寄存器、高速缓存、内存中的数据不一致问题。为了解决内存一致性问题，需要各个 CPU 在访问内存时都遵循一致的协议，在读写数据时需要根据协议来进行操作，类似的协议有 <a href="https://en.wikipedia.org/wiki/MSI_protocol" target="_blank" rel="noopener">MSI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MESI_protocol" target="_blank" rel="noopener">MESI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MOSI_protocol" target="_blank" rel="noopener">MOSI Protocol</a>、<a href="https://en.wikipedia.org/wiki/Firefly_(cache_coherence_protocol)" target="_blank" rel="noopener">Firefly</a>、<a href="https://en.wikipedia.org/wiki/Dragon_protocol" target="_blank" rel="noopener">Dragon Protocol</a> 等。</p>
+<p><img src="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.png" alt="image"></p>
+<p>不过这种运行机制也引入了一个新的问题：<a href="https://en.wikipedia.org/wiki/Cache_coherence" target="_blank" rel="noopener">缓存一致性（Cache Coherence）</a>。当多个 CPU 的运算任务都涉及同一块内存区域时，将可能导致 CPU 的寄存器、高速缓存、内存中的数据不一致问题。为了解决内存一致性问题，需要各个 CPU 在访问内存时都遵循一致的协议，在读写数据时需要根据协议来进行操作，类似的协议有 <a href="https://en.wikipedia.org/wiki/MSI_protocol" target="_blank" rel="noopener">MSI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MESI_protocol" target="_blank" rel="noopener">MESI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MOSI_protocol" target="_blank" rel="noopener">MOSI Protocol</a>、<a href="https://en.wikipedia.org/wiki/Firefly_(cache_coherence_protocol)" target="_blank" rel="noopener">Firefly</a>、<a href="https://en.wikipedia.org/wiki/Dragon_protocol" target="_blank" rel="noopener">Dragon Protocol</a> 等。</p>
+<p><img src="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.png" alt="image"></p>
 <p><a href="https://en.wikipedia.org/wiki/Memory_module" target="_blank" rel="noopener">内存模型（Memory Module）</a> 一词可以理解为在特定的操作协议下，计算机对特定的内存或高速缓存进行读写访问的抽象过程。不同架构的物理机器可以拥有不同的内存模型，Java 虚拟机也拥有自己的内存模型。</p>
 <p>除了增加高速缓存之外，为了使 CPU 内部的运算单元能尽可能地被充分利用，CPU 还会可能会对输入代码进行 <a href="https://en.wikipedia.org/wiki/Out-of-order_execution" target="_blank" rel="noopener">乱序执行（Out-Of-Order Execution）</a> 优化。CPU 会在计算之后将乱序执行的结果重组，保证该结果与顺序执行的结果是一致的，但并不保证程序中各个语句计算的先后顺序与输入代码中的顺序一致。因此，如果存在一个计算任务依赖另一个计算任务的中间结果，那么其顺序性并不能靠代码的先后顺序来保证。与 CPU 的乱序执行优化类似，Java 虚拟机的即时编译（JIT）也有类似的指令重排序（Instruction Reorder）优化。</p>
 <hr>
