@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-07T17:49:34.700Z">
+<meta property="og:updated_time" content="2018-08-06T08:09:50.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式概览">
 <meta name="twitter:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
@@ -423,8 +423,8 @@
 <h2 id="工厂方法模式-Factory-Method-Pattern"><a href="#工厂方法模式-Factory-Method-Pattern" class="headerlink" title="工厂方法模式 Factory Method Pattern"></a>工厂方法模式 Factory Method Pattern</h2><p>意图：定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.<br>参考：<a href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/factory-method" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/factory-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
 <ul>
 <li>java.lang.Object#getClass() &amp; java.lang.Object#toString()</li>
-<li>java.lang.Class#newInstance()</li>
 <li>java.util.concurrent.ThreadFactory</li>
+<li>org.springframework.beans.factory.FactoryBean</li>
 </ul>
 <h2 id="原型模式-Prototype-Pattern"><a href="#原型模式-Prototype-Pattern" class="headerlink" title="原型模式 Prototype Pattern"></a>原型模式 Prototype Pattern</h2><p>意图：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.<br>参考：<a href="https://en.wikipedia.org/wiki/Prototype_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/prototype" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/prototype-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
 <ul>
@@ -499,12 +499,15 @@
 <ul>
 <li>java.util.Observer#update(Observable, Object)</li>
 <li>java.util.Observable#notifyObservers()</li>
+<li>org.springframework.context.ApplicationEvent</li>
+<li>org.springframework.context.ApplicationEventPublisher</li>
 </ul>
 <h2 id="状态模式-State-Pattern"><a href="#状态模式-State-Pattern" class="headerlink" title="状态模式 State Pattern"></a>状态模式 State Pattern</h2><p>意图：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。Allow an object to alter its behavior when its internal state changes. The object will appear to change its class.<br>参考：<a href="https://en.wikipedia.org/wiki/State_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/state" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/state-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：待续</p>
 <h2 id="策略模式-Strategy-Pattern"><a href="#策略模式-Strategy-Pattern" class="headerlink" title="策略模式 Strategy Pattern"></a>策略模式 Strategy Pattern</h2><p>意图：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。Strategy 使得算法可独立于使用它的客户而变化。Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.<br>参考：<a href="https://en.wikipedia.org/wiki/Strategy_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/strategy" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/strategy-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
 <ul>
 <li>java.lang.Comparable#compareTo(Object)</li>
 <li>java.lang.Object#hashCode() &amp; java.lang.Object#equals(Object)</li>
+<li>org.springframework.core.io.ResourceLoader#getResource(String)</li>
 <li>org.springframework.web.accept.ContentNegotiationStrategy#resolveMediaTypes(NativeWebRequest)</li>
 </ul>
 <h2 id="模板方法模式-Template-Method-Pattern"><a href="#模板方法模式-Template-Method-Pattern" class="headerlink" title="模板方法模式 Template Method Pattern"></a>模板方法模式 Template Method Pattern</h2><p>意图：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。Template Method 使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template method lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure.<br>参考：<a href="https://en.wikipedia.org/wiki/Template_method_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/template-method" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/template-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
@@ -641,7 +644,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
