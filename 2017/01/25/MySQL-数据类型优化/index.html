@@ -120,7 +120,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png">
-<meta property="og:updated_time" content="2018-07-02T05:41:52.000Z">
+<meta property="og:updated_time" content="2018-08-07T05:24:25.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 数据类型优化">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 4 章 Schema 与数据类型优化。">
@@ -458,7 +458,7 @@
 <h2 id="BLOB-和-TEXT-类型"><a href="#BLOB-和-TEXT-类型" class="headerlink" title="BLOB 和 TEXT 类型"></a>BLOB 和 TEXT 类型</h2><p><code>BLOB</code> 和 <code>TEXT</code>都是为存储很大的数据而设计的字符串数据类型，分别采用二进制和字符方式存储。</p>
 <p>实际上，它们分别属于两组不同的数据类型家族：字符类型是 <code>TINYTEXT</code>、<code>SMALLTEXT</code>、<code>TEXT</code>、<code>MEDIUMTEXT</code>、<code>LONGTEXT</code>；二进制类型是 <code>TINYBLOB</code>、<code>SMALLBLOB</code>、<code>BLOB</code>、<code>MEDIUMBLOB</code>、<code>LONGBLOB</code>。<code>TEXT</code> 是 <code>SMALLTEXT</code>的同义词，<code>BLOB</code> 是 <code>SMALLBLOB</code> 的同义词。</p>
 <p>与其它类型不同，MySQL 把每个 <code>BLOB</code> 和 <code>TEXT</code> 值当作一个独立的对象处理。存储引擎在存储时通常会特殊处理。当 <code>BLOB</code> 和 <code>TEXT</code> 值太大时，InnoDB 会使用专门的「外部」存储区域来进行存储，此时每个值在行内需要 1 ~ 4 个字节存储一个指针，然后在外部区域存储实际值。</p>
-<p><code>BLOB</code> 和 <code>TEXT</code>家族之间仅有的不同是 <code>BLOB</code> 类型存储的是二进制数据，没有排序规则或字符集，而 <code>TEXT</code> 类型有字符集和排序规则。</p>
+<p><code>BLOB</code> 和 <code>TEXT</code> 家族之间仅有的不同是 <code>BLOB</code> 类型存储的是二进制数据，没有排序规则或字符集，而 <code>TEXT</code> 类型有字符集和排序规则。</p>
 <p>MySQL 对 <code>BLOB</code> 和 <code>TEXT</code> 列进行排序与其他类型是不同的：它只对每个列的最前 max_sort_length 字节而不是整个字符串做排序。如果只需要排序前面的一小部分字符，则可以减小 max_sort_length 的配置，或者使用 <code>ORDER BY SUBSTRING(column, length)</code>。</p>
 <p>MySQL 不能将 <code>BLOB</code> 和 <code>TEXT</code> 列全部长度的字符串进行索引，也不能使用这些索引消除排序。</p>
 <h2 id="使用枚举代替字符串类型"><a href="#使用枚举代替字符串类型" class="headerlink" title="使用枚举代替字符串类型"></a>使用枚举代替字符串类型</h2><p>枚举（ENUM）列可以把一些不重复的字符串存储成一个预定义的集合。MySQL 在存储枚举时非常紧凑，会根据列表值的数量压缩到一个或者两个字节中。MySQL 在内部会将每个值在列表中的位置保存为整数，并且在表的 .frm 文件中保存 「数组 - 字符串」 映射关系的查找表。</p>
