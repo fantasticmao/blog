@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.png">
 <meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.png">
-<meta property="og:updated_time" content="2018-08-06T18:36:48.802Z">
+<meta property="og:updated_time" content="2018-08-06T18:56:05.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 内存模型与线程">
 <meta name="twitter:description" content="摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。">
@@ -457,7 +457,7 @@
 <hr>
 <h2 id="原子性、可见性、有序性"><a href="#原子性、可见性、有序性" class="headerlink" title="原子性、可见性、有序性"></a>原子性、可见性、有序性</h2><p>Java 内存模型是围绕着在并发过程中如何处理原子性、可见性、有序性这 3 个特性来建立的，这 3 个特性对应的操作如下：</p>
 <ul>
-<li>原子性<br>  由 Java 内存模型直接保证的原子性变量操作包括 read、load、assign、use、store、write，我们大致可以认为基本数据类型的访问读写是具备原子性的。如果应用一个更大范围的原子性保证，Java 内存模型还提供了 lock 和 unlock 操作。尽管虚拟句未把 lock 和 unlock 操作直接开放给用户使用，但是却提供了更高层次的字节码指令 monitorenter 和 monitorexit 来隐式地使用这两个操作。这两个字节码指令对应到 Java 代码中就是同步块——synchronized 关键字，因此 synchronized 块之间的操作也具备原子性。</li>
+<li>原子性<br>  由 Java 内存模型直接保证的原子性变量操作包括 read、load、assign、use、store、write，我们大致可以认为基本数据类型的访问读写是具备原子性的。如果应用一个更大范围的原子性保证，Java 内存模型还提供了 lock 和 unlock 操作。尽管虚拟机未把 lock 和 unlock 操作直接开放给用户使用，但是却提供了更高层次的字节码指令 monitorenter 和 monitorexit 来隐式地使用这两个操作。这两个字节码指令对应到 Java 代码中就是同步块——synchronized 关键字，因此 synchronized 块之间的操作也具备原子性。</li>
 <li>可见性<br>  可见性是指当一个线程修改了共享变量的值，其它线程能够立即得知这个修改。Java 内存模型是通过 <strong>在变量修改后将新值同步回主内存，在变量读取前从主内存刷新变量值</strong> 这种依赖主内存作为媒介的方式，来实现可见性的。无论是普通变量还是 volatile 变量都是如此，普通变量与 volatile 变量的区别是，volatile 的特殊规则保证了新值能立即同步到主内存，以及每次使用前立即从主内存刷新。<br>  除了 volatile 关键字之外，Java 还有两个关键字能实现可见性，即 synchronized 和 final。同步块的可见性是由于「对一个变量执行 unlock 操作之前，必须先把此变量同步回主内存中」这条规则获得的。final 关键字的可见性是指：被 final 修饰的字段在构造器中一旦初始化完成，并且构造器没有把 this 的引用传递出去，那在其它线程中就能看见 final 字段的值。</li>
 <li>有序性<br>  Java 程序中天然的有序性可以总结为一句话：如果在本线程内观察，所有的操作都是有序的；如果在一个线程中观察另一个线程，所有的操作都是无序的。前半句话是指「线程内表现为串行的语义」，后半句是指「指令重排序」现象和「工作内存与主内存同步延迟」现象。<br>  Java 语言提供了 volatile 和 synchronized 两个关键字来保证线程之间操作的有序性。volatile 关键字本身就包含了禁止指令重排序的语义，而 synchronized 则是由「一个变量在同一个时刻只允许一条线程对其进行 lock 操作」这条规则获得的。</li>
 </ul>
