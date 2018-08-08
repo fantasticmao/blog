@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-16T15:28:09.712Z">
+<meta property="og:updated_time" content="2018-08-08T09:32:29.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于专栏《Java 核心技术 36 讲》">
 <meta name="twitter:description" content="最近我在极客时间上订阅了一个专栏 —— 《Java 核心技术 36 讲》。">
@@ -415,27 +415,24 @@
 <hr>
 <h1 id="谈谈你对-Java-平台的理解"><a href="#谈谈你对-Java-平台的理解" class="headerlink" title="谈谈你对 Java 平台的理解"></a>谈谈你对 Java 平台的理解</h1><p>Java 是一种被广泛使用的面向对象编程语言，支持面向对象的封装、多态、继承三大特性。Java 的基本语法类似于 C 语言，相对规范和严谨（区别于 PHP、Python 等弱类型语言），支持 Annotaion、Generic、Lambda、Method Reference 等等。除此之外，Java 的核心类库和第三方库也十分丰富，核心类库包括 IO／NIO、Collection、Network、Concurrent、Security、Date／Time 等等，第三方库包括 Spring Framework、Netty、Hibernate、Jackson、Guava 等等。</p>
 <p>Java 作为一个老牌且成熟的编程语言，其发展多年的虚拟机也经受了业界苛刻的考验。JVM（Java Virtual Machine）不仅支持了 Java 宣传标语 —— Write Once, Run Anywhere —— 的跨平台特性，并且提供了丰富的垃圾收集机制来自动分配和回收内存。其中，常用的垃圾收集器如 Serial、Parallel、CMS、G1 等。另外，JVM 除了支持 source code -&gt; byte code -&gt; machine code 的编译 &amp; 解释运行方式，还支持 JIT（Just In Time）编译方式，能够极大提高 Java 程序的运行性能。最后，JVM 作为一个强大的虚拟机，还支持运行例如 Clojure、Scala、Groovy、JRuby、Jython 等等大量的符合 JVM 字节码规范的语言。</p>
-<p>由此衍生的问题：谈谈你对 Spring Framework 的理解</p>
 <hr>
 <h1 id="Exception-与-Error-有什么区别"><a href="#Exception-与-Error-有什么区别" class="headerlink" title="Exception 与 Error 有什么区别"></a>Exception 与 Error 有什么区别</h1><p>在 Java 标准异常中，<code>Throwable</code> 类表示任何可以被作为异常抛出的类，<code>Exception</code> 类和 <code>Error</code> 类都继承了 <code>Throwable</code> 类。</p>
 <p><code>Error</code> 类表示编译错误和系统错误，是在程序正常运行情况下，不大可能会出现的异常，例如 <code>OutOfMemoryError</code>、<code>StackOverflowError</code>。</p>
 <p><code>Exception</code> 类则表示可以被作为异常抛出的基本类型，是在程序正常运行情况下的可预料错误。<code>Exception</code> 类的异常分为 <strong>受检查异常</strong>（checked）和 <strong>不受检查异常</strong>（unchecked）。受检查异常必须在程序编译期被显示捕获和被正确处理，例如 <code>IOException</code>、<code>SQLException</code>。不受检查异常需继承于 <code>RuntimeException</code> 类，会在程序运行时被自动抛出，不需要被显示捕获，例如 <code>NullPointerException</code>、<code>ArrayIndexOutOfBoundsException</code>、<code>IllegalArgumentException</code>。</p>
 <p>编写异常处理代码的最佳实践：</p>
 <ul>
-<li>不要掩盖／生吞异常；</li>
 <li>Throw Early, Catch Late；</li>
-<li>在抛出异常信息时，避免泄漏敏感信息；</li>
 <li>在知道如何处理异常的情况下，再捕获并处理异常；</li>
 <li>尽量不要 try 整段代码块，也要避免使用异常控制代码流程；</li>
+<li>不要掩盖／生吞异常，在抛出异常信息时避免泄漏敏感信息；</li>
 <li>不要捕获类似 <code>Exception</code> 类的通用异常，而是应该捕获特定异常；</li>
 <li>受检查异常被抛出后，往往不能被恢复，并且对函数式编程和三元表达式十分不友好；</li>
 <li>JDK 7 支持 multiple-catch 语法和基于 <code>java.lang.AutoCloseable</code> 接口的 try-with-resource 语法；</li>
 <li>当程序未被中断时，finally 语句都会被正常执行，并且通常被用于清理系统资源。不应在 finally 语句中 return 方法的执行结果，因为这会导致异常信息的丢失；</li>
-<li>可以通过 <code>java.lang.Throwable#Throwable(String, Throwable)</code> 构造方法，捕获一个异常的同时抛出另一个异常，并且保留原始异常的堆栈信息。Spring Data 正是通过这种方式，将不同 ORM 框架中的不同异常封装成了一个通用的异常结构体系，详情可见 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#orm-introduction" target="_blank" rel="noopener">官方文档</a> 描述。</li>
 </ul>
 <hr>
 <h1 id="谈谈-final、finally、finalize-有什么不同"><a href="#谈谈-final、finally、finalize-有什么不同" class="headerlink" title="谈谈 final、finally、finalize 有什么不同"></a>谈谈 final、finally、finalize 有什么不同</h1><p>final 关键字可以用于修饰变量、方法、类，并且在不同场景下的 final 关键字的语义不尽相同。当 final 修饰成员变量／局部变量／方法参数时，表示该变量的引用是不能被修改的；当 final 修饰方法时，表示该方法是不能被重写的；当 final 修饰类时，表示该类是不能被继承的。</p>
-<p>需要注意的是，使用 final 修饰引用类型的变量时，并不代表此变量具有 <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="noopener">immutable</a> 的特性。例如在 <code>final List&lt;String&gt; list = new ArrayList&lt;&gt;()</code> 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。</p>
+<p>需要注意的是，使用 final 修饰引用类型的变量时，并不代表此变量具有 <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="noopener">Immutable</a> 的特性。例如在 <code>final List&lt;String&gt; list = new ArrayList&lt;&gt;()</code> 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。</p>
 <p>很多类似使用 final 可以提高性能的结论，都是基于假设得出的。实际上， JVM 对于 final 的优化，是和它的实现细节密切相关。在日常开发中，建议不要指望使用这些小技巧，来获得所谓的性能上的提升。关于这点，可以参阅 RednaxelaFX 在知乎上的相关回答：<a href="https://www.zhihu.com/question/66083114/answer/242241071" target="_blank" rel="noopener">final 修饰递归方法会提高效率吗？</a>、<a href="https://www.zhihu.com/question/21762917/answer/19239387" target="_blank" rel="noopener">JVM 对于声明为 final 的局部变量做了哪些性能优化？</a></p>
 <p>finally 关键字是在 try-finally 或 try-catch-finally 语句块中，保证 Java 代码必须被执行的一种机制。另外，若在 finally 语句块中需要关闭实现了 <code>java.lang.AutoCloseable</code> 接口的资源，则可以使用 JDK 7 中提供的 try-with-resource 语法简化代码。</p>
 <p>需要额外注意的是，以下这段示例代码的 finally 语句块并不会被执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">    System.exit(<span class="number">1</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"Print from finally"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -448,11 +445,7 @@
 <hr>
 <h1 id="强引用、软引用、弱引用、虚引用有什么区别"><a href="#强引用、软引用、弱引用、虚引用有什么区别" class="headerlink" title="强引用、软引用、弱引用、虚引用有什么区别"></a>强引用、软引用、弱引用、虚引用有什么区别</h1><p>这个问题，可以在<a href="https://book.douban.com/subject/24722612/" target="_blank" rel="noopener">《深入理解 Java 虚拟机》</a> 的 3.2.3 章节中找到答案：</p>
 <blockquote>
-<p>垃圾收集器在对堆进行回收前，第一件事情就是要确定堆中的对象哪些还「存活」，哪些已经「死去」。</p>
-<p>引用计数算法：给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加 1；当引用失效时，计数器值就减 1；任何时刻计数器值为 0 的对象就是不可能再被使用的。</p>
-<p>可达性分析算法：通过一系列称为 GC Roots 的对象作为起始点，从这些节点开始向下搜索，搜索所经过的路径称为引用链。当一个对象到 GC Roots 没有任何引用链的时候，则证明此对象是不可用的。</p>
-<p>引用计数算法很难解决对象之间相互循环引用的问题。在主流的商用程序语言的主流实现中，都是通过可达性分析算法来判定对象是否存活的。</p>
-<p>无论是通过引用计数算法判断对象的引用数量，还是通过可达性分析算法判断对象的引用链是否可达，判断对象是否存活都与「引用」有关。在 JDK 1.2 以前，Java 中的引用定义很传统：如果 reference 类型的数据中存储的数值代表的是另一块内存的起始地址，就称这块内存地址代表着一个引用。在 JDK 1.2 之后，Java 对引用的概念进行了扩充，将引用分为强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Reference）、虚引用（Phantom Reference）四种，这四种引用强度依次逐渐减弱。</p>
+<p>无论是通过 <a href="https://en.wikipedia.org/wiki/Reference_counting" target="_blank" rel="noopener">引用计数算法（Reference Counting）</a> 判断对象的引用数量，还是通过 <a href="https://en.wikipedia.org/wiki/Tracing_garbage_collection" target="_blank" rel="noopener">可达性分析算法（Tracing Garbage Collection）</a> 判断对象的引用链是否可达，判断对象是否存活都与「引用」有关。在 JDK 1.2 以前，Java 中的引用定义很传统：如果 reference 类型的数据中存储的数值代表的是另一块内存的起始地址，就称这块内存地址代表着一个引用。在 JDK 1.2 之后，Java 对引用的概念进行了扩充，将引用分为强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Reference）、虚引用（Phantom Reference）四种，这四种引用强度依次逐渐减弱。</p>
 <ul>
 <li>强引用就是指程序代码之中普遍存在的，类似 <code>Object obj = new Object()</code> 这类的引用。只要强引用还存在，垃圾收集器就永远不会回收被引用的对象。</li>
 <li>软引用是用来描述一些还有用但并非必需的对象。对于软引用关联着的对象，在系统将要发生内存溢出异常之前，将会把这些对象列进回收范围之中，进行第二次回收。如果这次回收还没有足够的内存，才会抛出内存溢出异常。</li>
@@ -460,6 +453,12 @@
 <li>虚引用也称为幽灵引用或幻影引用，是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的，就是能在这个对象被垃圾收集器回收时，收到一个系统通知。</li>
 </ul>
 </blockquote>
+<p>软引用可以用来实现内存敏感的缓存机制，弱引用可以用来实现没有强制约束的关联关系。不同引用类型的应用案例有：</p>
+<ul>
+<li><code>ThreadLocal.ThreadLocalMap</code> 使用弱引用存储 <code>ThreadLocal</code> 实例；</li>
+<li><code>WeakCache&lt;K, P, V&gt;</code> 使用弱引用存储 Key 和 Value，使用强引用存储 SubKey；</li>
+<li><code>com.google.common.cache.LocalCache</code> 支持使用软引用和弱引用的缓存失效策略，详情可参见 <a href="https://github.com/google/guava/wiki/CachesExplained#reference-based-eviction" target="_blank" rel="noopener">文档</a>；</li>
+</ul>
 <hr>
 <h1 id="String、StringBuffer、StringBuilder-有什么区别"><a href="#String、StringBuffer、StringBuilder-有什么区别" class="headerlink" title="String、StringBuffer、StringBuilder 有什么区别"></a>String、StringBuffer、StringBuilder 有什么区别</h1><hr>
 <h1 id="动态代理是基于什么原理"><a href="#动态代理是基于什么原理" class="headerlink" title="动态代理是基于什么原理"></a>动态代理是基于什么原理</h1><hr>
@@ -479,14 +478,48 @@
 <p>程序发生死锁时，可以借助 JDK 自带的 jstack 命令，分析线程的栈信息来排查和定位。具体思路是：区分线程状态 -&gt; 查找 <code>BLOCKED</code> 状态的线程 -&gt; 分析各个线程的 monitor 状态。以下是上例死锁程序的 jstack 输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Found one Java-level deadlock:</span><br><span class="line">=============================</span><br><span class="line">&quot;run2&quot;:</span><br><span class="line">  waiting to lock monitor 0x00007fc8f98204a8 (object 0x00000007957151e8, a java.lang.Object),</span><br><span class="line">  which is held by &quot;run1&quot;</span><br><span class="line">&quot;run1&quot;:</span><br><span class="line">  waiting to lock monitor 0x00007fc8f981dcc8 (object 0x00000007957151f8, a java.lang.Object),</span><br><span class="line">  which is held by &quot;run2&quot;</span><br><span class="line"></span><br><span class="line">Java stack information for the threads listed above:</span><br><span class="line">===================================================</span><br><span class="line">&quot;run2&quot;:</span><br><span class="line">	at priv.mm.thread.Deadlock.lambda$main$1(Deadlock.java:38)</span><br><span class="line">	- waiting to lock &lt;0x00000007957151e8&gt; (a java.lang.Object)</span><br><span class="line">	- locked &lt;0x00000007957151f8&gt; (a java.lang.Object)</span><br><span class="line">	at priv.mm.thread.Deadlock$$Lambda$2/1389133897.run(Unknown Source)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">&quot;run1&quot;:</span><br><span class="line">	at priv.mm.thread.Deadlock.lambda$main$0(Deadlock.java:25)</span><br><span class="line">	- waiting to lock &lt;0x00000007957151f8&gt; (a java.lang.Object)</span><br><span class="line">	- locked &lt;0x00000007957151e8&gt; (a java.lang.Object)</span><br><span class="line">	at priv.mm.thread.Deadlock$$Lambda$1/317574433.run(Unknown Source)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line"></span><br><span class="line">Found 1 deadlock.</span><br></pre></td></tr></table></figure></p>
 <p>程序的死锁问题在大多数情况下都无法在线解决，通常只能重启应用，修正代码逻辑。</p>
 <hr>
-<h1 id="Java-并发包提供了哪些并发工具"><a href="#Java-并发包提供了哪些并发工具" class="headerlink" title="Java 并发包提供了哪些并发工具"></a>Java 并发包提供了哪些并发工具</h1><ul>
+<h1 id="Java-并发包提供了哪些并发工具"><a href="#Java-并发包提供了哪些并发工具" class="headerlink" title="Java 并发包提供了哪些并发工具"></a>Java 并发包提供了哪些并发工具</h1><p>阅读 <code>java.util.concurrent</code> 的 <a href="https://docs.oracle.com/javase/10/docs/api/java/util/concurrent/package-summary.html" target="_blank" rel="noopener">JavaDoc 文档</a> 可以总结得出该包下提供的并发工具有：</p>
+<ul>
+<li>Executors<ul>
+<li>ThreadPoolExecutor</li>
+<li>ScheduledThreadPoolExecutor</li>
+<li>ForkJoinPool</li>
+</ul>
+</li>
+<li>Queues<ul>
+<li>ConcurrentLinkedQueue</li>
+<li>ConcurrentLinkedDeque</li>
+<li>BlockingQueue<ul>
+<li>LinkedBlockingQueue</li>
+<li>ArrayBlockingQueue</li>
+<li>SynchronousQueue</li>
+<li>PriorityBlockingQueue</li>
+<li>DelayQueue</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Timing</li>
+<li>Synchronizers<ul>
+<li>Semaphore</li>
 <li>CountDownLatch</li>
 <li>CyclicBarrier</li>
-<li>Semaphore</li>
+<li>Phaser</li>
+<li>Exchanger</li>
+</ul>
+</li>
+<li>Concurrent Collections<ul>
+<li>ConcurrentHashMap</li>
+<li>ConcurrentSkipListMap</li>
+<li>ConcurrentSkipListSet</li>
+<li>CopyOnWriteArrayList</li>
+<li>CopyOnWriteArraySet</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h1 id="并发包中的-ConcurrentLinkedQueue-和-LinkedBlockingQueue-有什么区别"><a href="#并发包中的-ConcurrentLinkedQueue-和-LinkedBlockingQueue-有什么区别" class="headerlink" title="并发包中的 ConcurrentLinkedQueue 和 LinkedBlockingQueue 有什么区别"></a>并发包中的 ConcurrentLinkedQueue 和 LinkedBlockingQueue 有什么区别</h1><hr>
-<h1 id="Java-并发类库提供的线程有哪几种，分别有什么特点"><a href="#Java-并发类库提供的线程有哪几种，分别有什么特点" class="headerlink" title="Java 并发类库提供的线程有哪几种，分别有什么特点"></a>Java 并发类库提供的线程有哪几种，分别有什么特点</h1><hr>
+<h1 id="Java-并发类库提供的线程池有哪几种，分别有什么特点"><a href="#Java-并发类库提供的线程池有哪几种，分别有什么特点" class="headerlink" title="Java 并发类库提供的线程池有哪几种，分别有什么特点"></a>Java 并发类库提供的线程池有哪几种，分别有什么特点</h1><hr>
 <h1 id="AtomicInteger-底层实现原理是什么，如何在自己的产品代码中应用-CAS-操作"><a href="#AtomicInteger-底层实现原理是什么，如何在自己的产品代码中应用-CAS-操作" class="headerlink" title="AtomicInteger 底层实现原理是什么，如何在自己的产品代码中应用 CAS 操作"></a>AtomicInteger 底层实现原理是什么，如何在自己的产品代码中应用 CAS 操作</h1><hr>
 <h1 id="请介绍类加载过程，什么是双亲委派模型"><a href="#请介绍类加载过程，什么是双亲委派模型" class="headerlink" title="请介绍类加载过程，什么是双亲委派模型"></a>请介绍类加载过程，什么是双亲委派模型</h1><hr>
 <h1 id="有哪些方法可以在运行时动态生成一个-Java-类"><a href="#有哪些方法可以在运行时动态生成一个-Java-类" class="headerlink" title="有哪些方法可以在运行时动态生成一个 Java 类"></a>有哪些方法可以在运行时动态生成一个 Java 类</h1><hr>
@@ -799,7 +832,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你对-Java-平台的理解"><span class="nav-number">1.</span> <span class="nav-text">谈谈你对 Java 平台的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception-与-Error-有什么区别"><span class="nav-number">2.</span> <span class="nav-text">Exception 与 Error 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-final、finally、finalize-有什么不同"><span class="nav-number">3.</span> <span class="nav-text">谈谈 final、finally、finalize 有什么不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强引用、软引用、弱引用、虚引用有什么区别"><span class="nav-number">4.</span> <span class="nav-text">强引用、软引用、弱引用、虚引用有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String、StringBuffer、StringBuilder-有什么区别"><span class="nav-number">5.</span> <span class="nav-text">String、StringBuffer、StringBuilder 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态代理是基于什么原理"><span class="nav-number">6.</span> <span class="nav-text">动态代理是基于什么原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#int-和-Integer-有什么区别"><span class="nav-number">7.</span> <span class="nav-text">int 和 Integer 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比-Vector、ArrayList、LinkedList-有什么区别"><span class="nav-number">8.</span> <span class="nav-text">对比 Vector、ArrayList、LinkedList 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比-Hashtable、HashMap、TreeMap-有什么区别"><span class="nav-number">9.</span> <span class="nav-text">对比 Hashtable、HashMap、TreeMap 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何保证集合是线程安全的，ConcurrentHashMap-如何实现高效的线程安全"><span class="nav-number">10.</span> <span class="nav-text">如何保证集合是线程安全的，ConcurrentHashMap 如何实现高效的线程安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-提供了哪些-I-O-方式，NIO-如何实现多路复用"><span class="nav-number">11.</span> <span class="nav-text">Java 提供了哪些 I/O 方式，NIO 如何实现多路复用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-有几种文件拷贝方式，哪一种高效"><span class="nav-number">12.</span> <span class="nav-text">Java 有几种文件拷贝方式，哪一种高效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈接口和抽象类有什么区别"><span class="nav-number">13.</span> <span class="nav-text">谈谈接口和抽象类有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你知道的设计模式"><span class="nav-number">14.</span> <span class="nav-text">谈谈你知道的设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized-和-ReentrantLock-有什么区别"><span class="nav-number">15.</span> <span class="nav-text">synchronized 和 ReentrantLock 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized-底层如何实现，什么是锁的升级、降级"><span class="nav-number">16.</span> <span class="nav-text">synchronized 底层如何实现，什么是锁的升级、降级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个线程调用两次-start-方法会出现什么情况"><span class="nav-number">17.</span> <span class="nav-text">一个线程调用两次 start() 方法会出现什么情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么情况下-Java-程序会产生死锁，如何定位、修复"><span class="nav-number">18.</span> <span class="nav-text">什么情况下 Java 程序会产生死锁，如何定位、修复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-并发包提供了哪些并发工具"><span class="nav-number">19.</span> <span class="nav-text">Java 并发包提供了哪些并发工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发包中的-ConcurrentLinkedQueue-和-LinkedBlockingQueue-有什么区别"><span class="nav-number">20.</span> <span class="nav-text">并发包中的 ConcurrentLinkedQueue 和 LinkedBlockingQueue 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-并发类库提供的线程有哪几种，分别有什么特点"><span class="nav-number">21.</span> <span class="nav-text">Java 并发类库提供的线程有哪几种，分别有什么特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AtomicInteger-底层实现原理是什么，如何在自己的产品代码中应用-CAS-操作"><span class="nav-number">22.</span> <span class="nav-text">AtomicInteger 底层实现原理是什么，如何在自己的产品代码中应用 CAS 操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请介绍类加载过程，什么是双亲委派模型"><span class="nav-number">23.</span> <span class="nav-text">请介绍类加载过程，什么是双亲委派模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有哪些方法可以在运行时动态生成一个-Java-类"><span class="nav-number">24.</span> <span class="nav-text">有哪些方法可以在运行时动态生成一个 Java 类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-JVM-内存区域的划分，哪些区域可能发生-OOM"><span class="nav-number">25.</span> <span class="nav-text">谈谈 JVM 内存区域的划分，哪些区域可能发生 OOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何监控和诊断-JVM-堆内和对外内存使用情况"><span class="nav-number">26.</span> <span class="nav-text">如何监控和诊断 JVM 堆内和对外内存使用情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-常见的垃圾收集器有哪些"><span class="nav-number">27.</span> <span class="nav-text">Java 常见的垃圾收集器有哪些</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你的-GC-调优思路"><span class="nav-number">28.</span> <span class="nav-text">谈谈你的 GC 调优思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-内存模型中的-Happen-Before-是什么"><span class="nav-number">29.</span> <span class="nav-text">Java 内存模型中的 Happen-Before 是什么</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你对-Java-平台的理解"><span class="nav-number">1.</span> <span class="nav-text">谈谈你对 Java 平台的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exception-与-Error-有什么区别"><span class="nav-number">2.</span> <span class="nav-text">Exception 与 Error 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-final、finally、finalize-有什么不同"><span class="nav-number">3.</span> <span class="nav-text">谈谈 final、finally、finalize 有什么不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强引用、软引用、弱引用、虚引用有什么区别"><span class="nav-number">4.</span> <span class="nav-text">强引用、软引用、弱引用、虚引用有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String、StringBuffer、StringBuilder-有什么区别"><span class="nav-number">5.</span> <span class="nav-text">String、StringBuffer、StringBuilder 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态代理是基于什么原理"><span class="nav-number">6.</span> <span class="nav-text">动态代理是基于什么原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#int-和-Integer-有什么区别"><span class="nav-number">7.</span> <span class="nav-text">int 和 Integer 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比-Vector、ArrayList、LinkedList-有什么区别"><span class="nav-number">8.</span> <span class="nav-text">对比 Vector、ArrayList、LinkedList 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比-Hashtable、HashMap、TreeMap-有什么区别"><span class="nav-number">9.</span> <span class="nav-text">对比 Hashtable、HashMap、TreeMap 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何保证集合是线程安全的，ConcurrentHashMap-如何实现高效的线程安全"><span class="nav-number">10.</span> <span class="nav-text">如何保证集合是线程安全的，ConcurrentHashMap 如何实现高效的线程安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-提供了哪些-I-O-方式，NIO-如何实现多路复用"><span class="nav-number">11.</span> <span class="nav-text">Java 提供了哪些 I/O 方式，NIO 如何实现多路复用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-有几种文件拷贝方式，哪一种高效"><span class="nav-number">12.</span> <span class="nav-text">Java 有几种文件拷贝方式，哪一种高效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈接口和抽象类有什么区别"><span class="nav-number">13.</span> <span class="nav-text">谈谈接口和抽象类有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你知道的设计模式"><span class="nav-number">14.</span> <span class="nav-text">谈谈你知道的设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized-和-ReentrantLock-有什么区别"><span class="nav-number">15.</span> <span class="nav-text">synchronized 和 ReentrantLock 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized-底层如何实现，什么是锁的升级、降级"><span class="nav-number">16.</span> <span class="nav-text">synchronized 底层如何实现，什么是锁的升级、降级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个线程调用两次-start-方法会出现什么情况"><span class="nav-number">17.</span> <span class="nav-text">一个线程调用两次 start() 方法会出现什么情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么情况下-Java-程序会产生死锁，如何定位、修复"><span class="nav-number">18.</span> <span class="nav-text">什么情况下 Java 程序会产生死锁，如何定位、修复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-并发包提供了哪些并发工具"><span class="nav-number">19.</span> <span class="nav-text">Java 并发包提供了哪些并发工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发包中的-ConcurrentLinkedQueue-和-LinkedBlockingQueue-有什么区别"><span class="nav-number">20.</span> <span class="nav-text">并发包中的 ConcurrentLinkedQueue 和 LinkedBlockingQueue 有什么区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-并发类库提供的线程池有哪几种，分别有什么特点"><span class="nav-number">21.</span> <span class="nav-text">Java 并发类库提供的线程池有哪几种，分别有什么特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AtomicInteger-底层实现原理是什么，如何在自己的产品代码中应用-CAS-操作"><span class="nav-number">22.</span> <span class="nav-text">AtomicInteger 底层实现原理是什么，如何在自己的产品代码中应用 CAS 操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请介绍类加载过程，什么是双亲委派模型"><span class="nav-number">23.</span> <span class="nav-text">请介绍类加载过程，什么是双亲委派模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有哪些方法可以在运行时动态生成一个-Java-类"><span class="nav-number">24.</span> <span class="nav-text">有哪些方法可以在运行时动态生成一个 Java 类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈-JVM-内存区域的划分，哪些区域可能发生-OOM"><span class="nav-number">25.</span> <span class="nav-text">谈谈 JVM 内存区域的划分，哪些区域可能发生 OOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何监控和诊断-JVM-堆内和对外内存使用情况"><span class="nav-number">26.</span> <span class="nav-text">如何监控和诊断 JVM 堆内和对外内存使用情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-常见的垃圾收集器有哪些"><span class="nav-number">27.</span> <span class="nav-text">Java 常见的垃圾收集器有哪些</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈你的-GC-调优思路"><span class="nav-number">28.</span> <span class="nav-text">谈谈你的 GC 调优思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-内存模型中的-Happen-Before-是什么"><span class="nav-number">29.</span> <span class="nav-text">Java 内存模型中的 Happen-Before 是什么</span></a></li></ol></div>
             
 
           </div>
