@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-07T02:11:20.862Z">
+<meta property="og:updated_time" content="2018-08-09T17:15:26.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式概览">
 <meta name="twitter:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
@@ -424,6 +424,7 @@
 <h2 id="工厂方法模式-Factory-Method-Pattern"><a href="#工厂方法模式-Factory-Method-Pattern" class="headerlink" title="工厂方法模式 Factory Method Pattern"></a>工厂方法模式 Factory Method Pattern</h2><p>意图：定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.<br>参考：<a href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/factory-method" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/factory-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
 <ul>
 <li>java.lang.Object#getClass() &amp; java.lang.Object#toString()</li>
+<li>javax.sql.DataSource#getConnection()</li>
 <li>java.util.concurrent.ThreadFactory</li>
 <li>org.springframework.beans.factory.FactoryBean</li>
 </ul>
@@ -484,6 +485,7 @@
 </ul>
 <h2 id="迭代器模式-Iterator-Pattern"><a href="#迭代器模式-Iterator-Pattern" class="headerlink" title="迭代器模式 Iterator Pattern"></a>迭代器模式 Iterator Pattern</h2><p>意图：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示。Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.<br>参考：<a href="https://en.wikipedia.org/wiki/Iterator_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/iterator" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/iterator-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
 <ul>
+<li>java.sql.ResultSet</li>
 <li>java.util.Iterator</li>
 <li>java.util.Enumeration</li>
 </ul>
@@ -565,8 +567,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/31/Vim-常用命令/" rel="prev" title="Vim 常用命令">
-                Vim 常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/10/二分查找的实现细节/" rel="prev" title="二分查找的实现细节">
+                二分查找的实现细节 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -645,7 +647,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
