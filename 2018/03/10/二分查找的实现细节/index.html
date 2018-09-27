@@ -116,12 +116,12 @@
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="Even though the idea is simple, implementing binary search correctly requires attention to some subtleties about its exit conditions and midpoint calculation.  最近留意到关于实现 二分查找算法（Binary Search Algorithm">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0/1.png">
-<meta property="og:updated_time" content="2018-09-27T08:18:42.626Z">
+<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/1.png">
+<meta property="og:updated_time" content="2018-09-27T08:34:12.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二分查找的实现细节">
 <meta name="twitter:description" content="Even though the idea is simple, implementing binary search correctly requires attention to some subtleties about its exit conditions and midpoint calculation.  最近留意到关于实现 二分查找算法（Binary Search Algorithm">
-<meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0/1.png">
+<meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/1.png">
 
 
 
@@ -417,7 +417,7 @@
 <hr>
 <h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><p>在计算机科学中，二分查找也被称为折半查找、对数查找，是一种在有序数组中查找目标元素的搜索算法。</p>
 <p>二分查找会将目标元素与数组中间元素进行比较，若不相等，则目标元素不存在的半段数组会被淘汰，并且查询会在目标元素存在的半段数组中继续进行，直到比较成功为止。如果查询以空数组为结束，则表示目标元素不存在。一次二分查找的具体过程可以参考下图（图片来源自维基百科）：</p>
-<p><img src="http://ogvr8n3tg.bkt.clouddn.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0/1.png" alt="iamge"></p>
+<p><img src="http://ogvr8n3tg.bkt.clouddn.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/1.png" alt="iamge"></p>
 <p>二分查找的最差时间复杂度是 𝑶(log 𝒏)，空间复杂度是 𝑶(1)。相比于最差时间复杂度为 𝑶(𝒏) 的 <a href="https://en.wikipedia.org/wiki/Linear_search" target="_blank" rel="noopener">线性查找（Linear Search）</a>，二分查找执行更快、效率更高。相比于为快速查找量身定制的数据结构 <a href="https://en.wikipedia.org/wiki/Hash_table" target="_blank" rel="noopener">哈希表（Hash Table）</a>，二分查找的限制更少、应用更广。</p>
 <p>二分查找有许多不同的变种版本，例如 <a href="https://en.wikipedia.org/wiki/Fractional_cascading" target="_blank" rel="noopener">Fractional Cascading</a> 加速了二分查找在多个数组中对相同数值的搜索速度，有效解决了计算机几何以及其它领域中的一系列搜索相关问题；<a href="https://en.wikipedia.org/wiki/Exponential_search" target="_blank" rel="noopener">Exponential Search</a> 扩展了二分查找算法，使其可以应用于无界列表。</p>
 <p>二分查找的算法思想也衍生出了许多其它数据结构和算法，例如 <a href="https://en.wikipedia.org/wiki/Binary_search_tree" target="_blank" rel="noopener">Binary Search Tree</a> 和 <a href="https://en.wikipedia.org/wiki/B-tree" target="_blank" rel="noopener">B-Tree</a>。</p>
