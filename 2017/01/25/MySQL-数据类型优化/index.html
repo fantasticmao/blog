@@ -116,15 +116,15 @@
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="摘自《高性能 MySQL》第 4 章 Schema 与数据类型优化。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/1.png">
-<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png">
-<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png">
-<meta property="og:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png">
-<meta property="og:updated_time" content="2018-08-07T05:24:25.194Z">
+<meta property="og:image" content="http://fantasticmao.cn/images/MySQL数据类型优化/1.png">
+<meta property="og:image" content="http://fantasticmao.cn/images/MySQL数据类型优化/2.png">
+<meta property="og:image" content="http://fantasticmao.cn/images/MySQL数据类型优化/3.png">
+<meta property="og:image" content="http://fantasticmao.cn/images/MySQL数据类型优化/4.png">
+<meta property="og:updated_time" content="2018-10-18T13:41:28.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 数据类型优化">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 4 章 Schema 与数据类型优化。">
-<meta name="twitter:image" content="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/1.png">
+<meta name="twitter:image" content="http://fantasticmao.cn/images/MySQL数据类型优化/1.png">
 
 
 
@@ -452,7 +452,7 @@
 <li>对于经常变更的数据，<code>CHAR</code> 比 <code>VARCHAR</code> 更不容易产生碎片；</li>
 <li>对于非常短的列，<code>CHAR</code> 比 <code>VARCHAR</code> 在存储空间上更有效率。</li>
 </ul>
-<p><code>CHAR</code> 类型的这些行为可能有一点难以理解，下面通过一个具体的例子来说明：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/1.png" alt="images"></p>
+<p><code>CHAR</code> 类型的这些行为可能有一点难以理解，下面通过一个具体的例子来说明：<br><img src="/images/MySQL数据类型优化/1.png" alt="images"></p>
 <p>与 <code>CHAR</code> 和 <code>VARCHAR</code> 类似的类型还有 <code>BINARY</code> 和 <code>VARBINARY</code>，它们存储的是二进制字符串。二进制字符串跟常规字符串非常相似，但是二进制字符串存储的是字节码而不是字符串，填充也不一样：MySQL 填充 <code>BINARY</code> 采用 <code>\0</code> 而不是空格，在检索时也不会去掉填充值。</p>
 <p>记住一点，慷慨是不明智的。使用 <code>VARCHAR(5)</code> 和 <code>VARCHAR(200)</code> 存储 <code>hello</code> 的空间开销是一样的，但是更长的列会消耗更多的内存，因为 MySQL 通常会分配固定大小的内存块来保存内部值。</p>
 <h2 id="BLOB-和-TEXT-类型"><a href="#BLOB-和-TEXT-类型" class="headerlink" title="BLOB 和 TEXT 类型"></a>BLOB 和 TEXT 类型</h2><p><code>BLOB</code> 和 <code>TEXT</code>都是为存储很大的数据而设计的字符串数据类型，分别采用二进制和字符方式存储。</p>
@@ -462,7 +462,7 @@
 <p>MySQL 对 <code>BLOB</code> 和 <code>TEXT</code> 列进行排序与其他类型是不同的：它只对每个列的最前 max_sort_length 字节而不是整个字符串做排序。如果只需要排序前面的一小部分字符，则可以减小 max_sort_length 的配置，或者使用 <code>ORDER BY SUBSTRING(column, length)</code>。</p>
 <p>MySQL 不能将 <code>BLOB</code> 和 <code>TEXT</code> 列全部长度的字符串进行索引，也不能使用这些索引消除排序。</p>
 <h2 id="使用枚举代替字符串类型"><a href="#使用枚举代替字符串类型" class="headerlink" title="使用枚举代替字符串类型"></a>使用枚举代替字符串类型</h2><p>枚举（ENUM）列可以把一些不重复的字符串存储成一个预定义的集合。MySQL 在存储枚举时非常紧凑，会根据列表值的数量压缩到一个或者两个字节中。MySQL 在内部会将每个值在列表中的位置保存为整数，并且在表的 .frm 文件中保存 「数组 - 字符串」 映射关系的查找表。</p>
-<p>枚举字段是按照内部存储的整数而不是定义的字符串进行排序的。一种绕过这种限制的方式是按照需要的顺序来定义枚举列。另外也可以在查询中使用 <code>FIELD()</code> 函数显式地指定排序顺序，但这会导致 MySQL 无法利用索引消除排序。下面有一个例子：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/2.png" alt="images"></p>
+<p>枚举字段是按照内部存储的整数而不是定义的字符串进行排序的。一种绕过这种限制的方式是按照需要的顺序来定义枚举列。另外也可以在查询中使用 <code>FIELD()</code> 函数显式地指定排序顺序，但这会导致 MySQL 无法利用索引消除排序。下面有一个例子：<br><img src="/images/MySQL数据类型优化/2.png" alt="images"></p>
 <p>枚举最不好的地方是，字符串列表是固定的，添加或删除字符串必须使用 <code>ALTER TABLE</code>。因此，对于一系列未来可能会改变的字符串，使用枚举不是一个好主意。</p>
 <p>由于 MySQL 把每个枚举值保存为整数，并且必须进行查找才能转换为字符串，所以枚举列有一些开销。通常枚举的列表都比较小，所以开销还可以控制，但也不能保证一直如此。在特定情况下，把 <code>CHAR</code>/<code>VARCHAR</code> 列与枚举列进行关联可能会比直接关联 <code>CHAR</code>/<code>VARCHAR</code> 列更慢。</p>
 <hr>
@@ -479,14 +479,14 @@
 <li>默认情况下，如果在插入记录时没有指定第一个 <code>TIMESTAMP</code> 列的值，MySQL 则设置这个列的值为当前时间。在更新记录时，MySQL 默认也会更新第一个 <code>TIMESTAMP</code> 列的值（除非在 UPDATE 语句中明确指定了值）；</li>
 <li><code>TIMESTAMP</code> 列默认为 NOT NULL，这也和其它的数据类型不一样。</li>
 </ul>
-<p>下面有一个例子：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/3.png" alt="images"></p>
+<p>下面有一个例子：<br><img src="/images/MySQL数据类型优化/3.png" alt="images"></p>
 <p>除了特殊行为之外，通常应该使用 <code>TIMESTAMP</code>，因为它比 <code>DATETIME</code> 空间效率更高。有时人们也会将 Unix 时间戳存储为整数值，但这不会带来任何收益。用整数保存时间戳的格式通常步方便处理。</p>
 <hr>
 <h1 id="位数据类型"><a href="#位数据类型" class="headerlink" title="位数据类型"></a>位数据类型</h1><p>MySQL 有少数几种存储类型使用紧凑的位存储数据。所有这些位类型，不管底层存储格式和处理方式如何，从技术上来说都是字符串类型。</p>
 <h2 id="BIT"><a href="#BIT" class="headerlink" title="BIT"></a>BIT</h2><p>在 MySQL 5.0 之前，<code>BIT</code> 是 <code>TINYINT</code> 的同义词。但是在 MySQL 5.0 以及更新版本，这是一个特性完全不同的数据类型。</p>
 <p>可以使用 <code>BIT</code> 列在一列中存储一个或多个 true/false 值。<code>BIT(1)</code> 定义一个包含单个位的字段，<code>BIT(2)</code> 存储 2 个位，以此类推。<code>BIT</code> 列的最大长度是 64 位。</p>
 <p><code>BIT</code> 的行为因存储引擎而异。MyISAM 会打包存储的所有 <code>BIT</code> 列，其它存储引擎如 Memory 和 InnoDB，为每个 <code>BIT</code> 列使用一个足够存储的最小整数类型来存放。</p>
-<p>MySQL 把 <code>BIT</code> 当作字符串类型，而不是数字类型。当检索 <code>BIT(1)</code> 的值时，结果是一个包含二进制 0 或 1 值的字符串，而不是 ASCII 码的 0 或 1。然而，在数据上下文的场景中检索时，结果是将位字符串转换成数字。如下例所示：<br><img src="http://ogvr8n3tg.bkt.clouddn.com/MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/4.png" alt="images"></p>
+<p>MySQL 把 <code>BIT</code> 当作字符串类型，而不是数字类型。当检索 <code>BIT(1)</code> 的值时，结果是一个包含二进制 0 或 1 值的字符串，而不是 ASCII 码的 0 或 1。然而，在数据上下文的场景中检索时，结果是将位字符串转换成数字。如下例所示：<br><img src="/images/MySQL数据类型优化/4.png" alt="images"></p>
 <p>这是相当令人费解的，所以一般建议应该谨慎使用 <code>BIT</code> 类型。对于大部分应用，最好避免使用 <code>BIT</code> 类型。如果想在一个 bit 的存储空间中存储一个 true/false 值，另一个方法是创建一个可以为空的 <code>CHAR(0)</code> 列。该列可以保存空值（NULL）或者长度为零的字符串（空字符串）。</p>
 <h2 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h2><p>如果需要保存很多 true/false 值，可以考虑合并这些列到一个 <code>SET</code> 数据类型，它在 MySQL 内部是以一系列打包的位的集合来表示的。这样就有效地利用了存储空间，并且 MySQL 有像 <code>FING_IN_SET()</code> 和 <code>FIELD()</code> 这样的函数，方便在查询中使用。</p>
 <p><code>SET</code> 类型的主要缺点是改变列的定义代价比较高，需要 <code>ALTER TABLE</code>，这对大表来说是非常昂贵的操作。一般来说，也无法在 <code>SET</code> 列上通过索引查找。</p>
