@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="FantasticMao">
 <meta property="og:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-09T17:15:26.268Z">
+<meta property="og:updated_time" content="2018-11-07T07:02:49.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式概览">
 <meta name="twitter:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。">
@@ -451,6 +451,7 @@
 <li>java.io.BufferedInputStream &amp; java.io.DataInputStream</li>
 <li>java.util.Collections#synchronizedCollection(Collection) &amp; java.util.Collections##unmodifiableCollection(Collection)</li>
 <li>javax.servlet.http.HttpServletRequestWrapper</li>
+<li>org.springframework.beans.BeanWrapper</li>
 </ul>
 <h2 id="外观模式-Facade-Pattern"><a href="#外观模式-Facade-Pattern" class="headerlink" title="外观模式 Facade Pattern"></a>外观模式 Facade Pattern</h2><p>意图：为子系统中的一组接口提供一个一致的界面。Facade 定义了一个高层接口，这个接口使得这一子系统更加容易使用。Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.<br>参考：<a href="https://en.wikipedia.org/wiki/Facade_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/facade" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/facade-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：待续</p>
 <h2 id="享元模式-Flyweight-Pattern"><a href="#享元模式-Flyweight-Pattern" class="headerlink" title="享元模式 Flyweight Pattern"></a>享元模式 Flyweight Pattern</h2><p>意图：运用共享技术有效地支持大量细粒度的对象。Use sharing to support large numbers of fine-grained objects efficiently.<br>参考：<a href="https://en.wikipedia.org/wiki/Flyweight_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/flyweight" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/flyweight-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
@@ -473,10 +474,7 @@
 <h2 id="命令模式-Command-Pattern"><a href="#命令模式-Command-Pattern" class="headerlink" title="命令模式 Command Pattern"></a>命令模式 Command Pattern</h2><p>意图：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤消的操作。Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.<br>参考：<a href="https://en.wikipedia.org/wiki/Command_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/command" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/command-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
 <ul>
 <li>java.lang.Runnable#run()</li>
-<li>java.util.function.Supplier#get()</li>
-<li>java.util.function.Predicate#test(Object)</li>
-<li>java.util.function.Function#apply(Object)</li>
-<li>java.util.function.Consumer#accept(Object)</li>
+<li>org.springframework.web.servlet.HandlerExecutionChain</li>
 </ul>
 <h2 id="解释器模式-Interpreter-Pattern"><a href="#解释器模式-Interpreter-Pattern" class="headerlink" title="解释器模式 Interpreter Pattern"></a>解释器模式 Interpreter Pattern</h2><p>意图：给定一个语言，定义它的文法表示，并定义一个解释器，这个解释器使用该标识来解释语言中的句子。Given a language, define a represention for its grammar along with an interpreter that uses the representation to interpret sentences in the language.<br>参考：<a href="https://en.wikipedia.org/wiki/Interpreter_pattern" target="_blank" rel="noopener">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/interpreter" target="_blank" rel="noopener">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/interpreter-pattern.html" target="_blank" rel="noopener">菜鸟教程</a><br>实现：</p>
 <ul>
@@ -740,7 +738,7 @@
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="http://ochyac32z.bkt.clouddn.com/weixin.jpg" target="_blank" title="WeChat"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
+                  <a href="/images/weixin.png" target="_blank" title="WeChat"><i class="fa fa-fw fa-weixin"></i>WeChat</a>
                   
                 </span>
               
