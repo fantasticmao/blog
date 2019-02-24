@@ -117,7 +117,7 @@
 <meta property="og:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://fantasticmao.cn/images/MySQL索引高性能策略/1.png">
-<meta property="og:updated_time" content="2018-12-03T13:13:36.199Z">
+<meta property="og:updated_time" content="2019-02-24T05:53:53.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 索引高性能策略">
 <meta name="twitter:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。">
@@ -426,13 +426,6 @@
 <p>B-Tree 通常意味着所有的值都是按顺序存储的，并且每一个叶子节点到根节点的距离相同。叶子节点比较特别，它们的指针指向的是被索引的数据，而不是其它的节点。树的深度和表的大小直接相关。</p>
 <p>B-Tree 索引能加快访问数据的速度，因为存储引擎不再需要进行全表扫描来获取需要的数据，取而代之的是从索引的根节点开始进行搜索。根节点的槽中存放了指向子节点的指针，存储引擎根据这些指针向下层查找。通过比较节点中的值和需要查找的值，找到合适的指针进入下层子节点。这些指针实际上定义了子节点中值的上限和下限。最终存储引擎要么是找到对应的值，要么是得出该值的记录不存在。</p>
 <p>B-Tree 对索引列是顺序组织存储的，所以很适合查找范围数据。例如，在一个基于文本域的索引树上，按字母顺序连续传递的值进行查找是非常合适的。索引对多个值进行排序的依据是 CREATE TABLE 语句中定义索引时列的顺序。</p>
-<p>一次 B-Tree 索引的插入、搜索、删除过程如下视频所示：</p>
-<p><video src="/images/MySQL索引高性能策略/B-Tree-Insert.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
-
-<p><video src="/images/MySQL索引高性能策略/B-Tree-Search.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
-
-<p><video src="/images/MySQL索引高性能策略/B-Tree-Remove.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
-
 <p>假设有如下数据表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> People (</span><br><span class="line">  last_name  <span class="built_in">VARCHAR</span>(<span class="number">50</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  first_name <span class="built_in">VARCHAR</span>(<span class="number">50</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  dob        <span class="built_in">DATE</span>            <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  gender     ENUM (<span class="string">'m'</span>, <span class="string">'f'</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="keyword">KEY</span> (last_name, first_name, dob)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
 <p>B-Tree 索引适用于全键值、键值范围或键前缀查找。其中键前缀查找只适用于根据最左前缀的查找前面所述的索引对如下类型的查询有效：</p>
 <ul>
@@ -639,7 +632,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -847,7 +840,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
