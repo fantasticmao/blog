@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on FantasticMao&#39;s Blog</title>
+    <link>https://blog.fantasticmao.cn/tags/vim/</link>
+    <description>Recent content in Vim on FantasticMao&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 31 Mar 2018 21:51:23 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.fantasticmao.cn/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Vim 常用命令</title>
+      <link>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
+      
+      <guid>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl + b、PgUp 向上翻页   Ctrl + f、PgDn 向下翻页   Ctrl + u 向上翻半页   Ctrl + d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y + 移动光标 复制光标移动过程中的内容   选中内容 + y 复制光标选中的内容   p 执行 a／向下，再粘贴剪贴板内容   P 执行 i／向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn + Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d + 移动光标 删除光标移动过程中的内容   选中内容 + d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?</description>
+    </item>
+    
+  </channel>
+</rss>

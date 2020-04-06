@@ -1,0 +1,71 @@
+baseURL = "https://blog.fantasticmao.cn/"
+title = "FantasticMao's Blog"
+theme = "hugo-coder"
+
+languageCode = "zh-cn"
+defaultContentLanguage = "zh-cn"
+paginate = 20
+
+enableRobotsTXT = true
+enableEmoji = true
+
+googleAnalytics = "UA-89151446-1"
+disqusShortname = "fantasticmao"
+
+[params]
+    author = "FantasticMao"
+    avatarurl = "images/avatar.jpg"
+    favicon_32 = "favicons/favicon-32x32.png"
+    favicon_16 = "favicons/favicon-16x16.png"
+    since = 2016
+
+[taxonomies]
+    category = "categories"
+    tag = "tags"
+
+[[params.social]]
+    name = "GitHub"
+    icon = "fab fa-github fa-2x"
+    weight = 1
+    url = "https://github.com/FantasticMao/"
+[[params.social]]
+    name = "WeChat"
+    icon = "fab fa-weixin fa-2x"
+    weight = 2
+    url = "images/weixin.png"
+[[params.social]]
+    name = "Twitter"
+    icon = "fab fa-twitter fa-2x"
+    weight = 3
+    url = "https://twitter.com/FantasticMao/"
+[[params.social]]
+    name = "Instagram"
+    icon = "fab fa-instagram fa-2x"
+    weight = 4
+    url = "https://www.instagram.com/wonderfulmao/"
+[[params.social]]
+    name = "RSS"
+    icon = "fas fa-rss fa-2x"
+    weight = 5
+    url = "/index.xml"
+
+[[menu.main]]
+    name = "首页"
+    weight = 1
+    url = "/"
+[[menu.main]]
+    name = "归档"
+    weight = 2
+    url = "/posts/"
+[[menu.main]]
+    name = "分类"
+    weight = 3
+    url = "/categories/"
+[[menu.main]]
+    name = "标签"
+    weight = 4
+    url = "/tags/"
+[[menu.main]]
+    name = "关于"
+    weight = 5
+    url = "/about/"
