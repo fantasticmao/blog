@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络基础 on FantasticMao&#39;s Blog</title>
+    <link>https://blog.fantasticmao.cn/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in 网络基础 on FantasticMao&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 23 Dec 2017 15:39:28 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.fantasticmao.cn/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>UDP 必知必会</title>
+      <link>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</link>
+      <pubDate>Sat, 23 Dec 2017 15:39:28 +0800</pubDate>
+      
+      <guid>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</guid>
+      <description>摘自《计算机网络》 第 5 章 传输层，并参考自维基百科与 RFC-768。协议概述 UDP（User Datagram Protocol，用户数据报协议）是 OSI 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠的数据传送服务，是 TCP/IP 协议族的核心成员之一，由 David P. Reed 于 1980 设计，并在 RFC-768 中正式定义。
+UDP 使用最小协议机制的简单无连接通信模型，可以使分组交换的计算机在 IP 网络上使用数据报通信。它提供 checksum 字段用于保证数据完整性，提供 port number 字段用于区分源地址和目标地址不同功能的应用进程。UDP 适用于对错误校验和错误纠正要求不高的应用场景，如多媒体应用、IP 电话等等。UDP 在通讯时不需要像 TCP 一样进行握手，因此减少了网络通信的开销和发送数据之前的延迟，但它也是不可靠的传输协议，即不保证数据可靠的交付和时序。
+UDP 只在 IP 的数据服务之上增加了很少的一点功能，其主要特点是：
+ UDP 是无连接的，即发送数据之前不需要建立连接； UDP 不保证可靠交付，因此主机不需要维持复杂的连接状态； UDP 是面向报文的，发送方的 UDP 对应用层交下来的报文，即不合并也不拆封，在添加首部后就向下交付 IP 层； UDP 没有拥塞控制，因此网络拥塞不会使源主机的发送频率降低； UDP 支持一对一、一对多、多对一和多对多的网络通信； UDP 首部只占 8 个字节，相比于占 20 字节的 TCP 开销很小。   报文结构 报文格式： 首部字段： Source Port：可选字段，表示发送进程的端口，在需要对方回信时选用。缺省值为全 0； Destination Port：必选字段，表示接收进程的端口； Length：包含 header 和 data 的用户数据报文的长度，最小值是 8； Checksum：用于校验用户数据报文在传输过程中是否有错。</description>
+    </item>
+    
+  </channel>
+</rss>

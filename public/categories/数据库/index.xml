@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on FantasticMao&#39;s Blog</title>
+    <link>https://blog.fantasticmao.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on FantasticMao&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 24 Feb 2019 13:50:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.fantasticmao.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>从数据结构角度看索引</title>
+      <link>https://blog.fantasticmao.cn/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</link>
+      <pubDate>Sun, 24 Feb 2019 13:50:18 +0800</pubDate>
+      
+      <guid>https://blog.fantasticmao.cn/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</guid>
+      <description>上周和团队内部的同事分享了一则关于 MySQL 索引相关的知识。这个分享主要是从数据结构角度出发，学习和分析 MySQL 索引相关的一些特性和原理。 演讲稿 浏览器内在线查看：从数据结构角度看索引.pdf
+当前页内在线预览： {% pdf /images/从数据结构角度看索引/从数据结构角度看索引.pdf %}
+ B-Tree 插入元素  B-Tree 删除元素  B-Tree 查找元素 </description>
+    </item>
+    
+    <item>
+      <title>MySQL 索引高性能策略</title>
+      <link>https://blog.fantasticmao.cn/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Fri, 03 Feb 2017 16:24:07 +0800</pubDate>
+      
+      <guid>https://blog.fantasticmao.cn/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</guid>
+      <description>摘自《高性能 MySQL》第 5 章 创建高性能的索引。 索引基础 索引（在 MySQL 中也叫做键 key）是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对性能的影响愈发重要。在数据量较小且负载比较低时，不恰当的索引对性能的影响可能还不明显，但当数据量逐渐增大时，性能则会急剧下降。
+理解 MySQL 中索引是如何工作的，最简单的方法就是去看看一本书的「索引」部分。如果想在一本书中找到某个特定主题，一般会先看书的「索引」，再找到对应的页码。在 MySQL 中，存储引擎用类似的方法使用索引，其先在索引中找到对应值，然后根据匹配的索引记录找到对应的数据行。
+索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高几个数量级，「最优」的索引有时比「好的」索引性能要好两个数量级。
+索引可以包含一个或多个列的值。如果索引包含多个列，那么列的顺序也十分重要，因为 MySQL 只能高效地使用索引的最左前缀列。创建一个包含两个列的索引，和创建两个只包含一个列的索引是大不相同的。
+ 索引的类型 索引有很多种类型，可以为不同的场景提供更好的性能。在 MySQL 中，索引是在存储引擎层而不是服务器层实现的。所以，并没有统一的索引标准，不同存储引擎的索引的工作方式并不一样，也不是所有的存储引擎都支持所有类型的索引，即使多个存储引擎支持同一种类型的索引，其底层实现也可能不同。
+MySQL 逻辑架构可以参考下图（图片来源自 网络）:
+B-Tree 索引 当人们谈论索引的时候，如果没有特别指明类型，多半说的是 B-Tree 索引，它使用 B-Tree 数据结构来存储数据。底层的存储引擎也可能使用不同的存储结构，例如 NDB 群集存储引擎内部实际上使用了 T-Tree 结构存储索引，InnoDB 则使用的是 B+Tree 数据结构。
+存储引擎以不同的方式使用 B-Tree 索引，性能也各有不同、各有优劣。例如 MyISAM 使用前缀压缩技术使得索引更小，但 InnoDB 则按照原数据格式进行存储。再如 MyISAM 索引通过数据的物理位置引用被索引的行，而 InnoDB 则根据主键引用被索引的行。
+B-Tree 数据结构和算法原理可以参考文章 MySQL 索引背后的数据结构及算法原理 。
+B-Tree 通常意味着所有的值都是按顺序存储的，并且每一个叶子节点到根节点的距离相同。叶子节点比较特别，它们的指针指向的是被索引的数据，而不是其它的节点。树的深度和表的大小直接相关。
+B-Tree 索引能加快访问数据的速度，因为存储引擎不再需要进行全表扫描来获取需要的数据，取而代之的是从索引的根节点开始进行搜索。根节点的槽中存放了指向子节点的指针，存储引擎根据这些指针向下层查找。通过比较节点中的值和需要查找的值，找到合适的指针进入下层子节点。这些指针实际上定义了子节点中值的上限和下限。最终存储引擎要么是找到对应的值，要么是得出该值的记录不存在。
+B-Tree 对索引列是顺序组织存储的，所以很适合查找范围数据。例如，在一个基于文本域的索引树上，按字母顺序连续传递的值进行查找是非常合适的。索引对多个值进行排序的依据是 CREATE TABLE 语句中定义索引时列的顺序。
+假设有如下数据表：
+CREATE TABLE People ( last_name VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT NULL, dob DATE NOT NULL, gender ENUM (&amp;#39;m&amp;#39;, &amp;#39;f&amp;#39;) NOT NULL, KEY (last_name, first_name, dob) ) B-Tree 索引适用于全键值、键值范围或键前缀查找。其中键前缀查找只适用于根据最左前缀的查找前面所述的索引对如下类型的查询有效：</description>
+    </item>
+    
+    <item>
+      <title>MySQL 数据类型优化</title>
+      <link>https://blog.fantasticmao.cn/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Wed, 25 Jan 2017 12:20:03 +0800</pubDate>
+      
+      <guid>https://blog.fantasticmao.cn/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
+      <description>摘自《高性能 MySQL》第 4 章 Schema 与数据类型优化。良好的逻辑设计和物理设计是高性能的基石，应该根据系统将要执行的查询语句来设计 schema，这往往需要权衡各种因素。例如，反范式的设计可以加快某些类型的查询，但同时可能使另一些类型的查询变慢。比如添加计数表和汇总表是一种很好的优化查询的方式，但这些表的维护成本可能会很高。MySQL 独有的特性和实现细节对性能的影响也很大。
+ 选择优化的数据类型 MySQL 支持的数据类型非常多，选择正确的数据类型对于获取高性能至关重要。不管存储哪种类型的数据，都应遵从下面几个原则：
+ 更小的通常更好 一般情况下，应该尽量使用可以正确存储数据的最小数据类型。更小的数据类型通常更快，因为它们占用更少的磁盘、内存和 CPU 缓存，并且处理时需要的 CPU 周期也更少。 简单就好 简单数据类型的操作通常需要更少的 CPU 周期。例如整型比字符串代价更低，因为字符集和校对规则使字符串比较比整型比较更复杂。建议使用 MySQL 内建的类型而不是字符串来存储日期时间，建议使用整型存储 IP 地址。 尽量避免 NULL 通常情况下最好指定列为 NOT NULL，除非真的需要存储 NULL 值。如果查询中包含可为 NULL 的列，对 MySQL 来说更难优化，因为可为 NULL 的列使得索引、索引统计和值比较都更复杂。可能为 NULL 的列会使用更多的存储空间，在 MySQL 里也需要特殊处理。当可为 NULL 的列被索引时，每个索引记录需要一个额外的字节，在 MyISAM 里甚至还可能导致固定大小的索引（例如只有一个整数列的索引）变成可变大小的索引。  在为列选择数据类型时，第一步确定合适的大类型：数字、字符串、时间等，第二步选择具体类型。很多 MySQL 的数据类型可以存储相同类型的数据，只是存储的长度和范围不一样、允许的精度不同、需要的物理空间（磁盘和内存空间）不同。相同大类型的不同子类型数据有时也有一些特殊的行为和属性，如 DATETIME 和 TIMESTAMP。
+ 整数类型 可以使用这几种整型类型：TINYINT、SMALLINT、MEDIUMINT、INT、BIGINT，分别使用 8、16、24、32、64 位存储空间，它们的存储的值的范围从 -2 ^ (N - 1) 到 2 ^ (N - 1) - 1，其中 N 是存储空间的位数。</description>
+    </item>
+    
+  </channel>
+</rss>
