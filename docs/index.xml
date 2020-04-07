@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/</link>
+    <link>/</link>
     <description>Recent content on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 23 Nov 2016 21:42:50 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>从数据结构角度看索引</title>
-      <link>https://blog.fantasticmao.cn/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</link>
+      <link>/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Sun, 24 Feb 2019 13:50:18 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</guid>
+      <guid>/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</guid>
       <description>上周和团队内部的同事分享了一则关于 MySQL 索引相关的知识。这个分享主要是从数据结构角度出发，学习和分析 MySQL 索引相关的一些特性和原理。 演讲稿 浏览器内在线查看：从数据结构角度看索引.pdf
 当前页内在线预览： {% pdf /images/从数据结构角度看索引/从数据结构角度看索引.pdf %}
  B-Tree 插入元素  B-Tree 删除元素  B-Tree 查找元素 </description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>GC 对性能的影响对比</title>
-      <link>https://blog.fantasticmao.cn/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</link>
+      <link>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</link>
       <pubDate>Wed, 14 Nov 2018 10:21:22 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
+      <guid>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
       <description>本篇文章记录一个普通 Web 应用在访问量逐渐增加的情况下，不同类型 GC 对应用性能影响的趋势对比。在比较应用性能时，仅以响应时间（Latency）和吞吐量（Throughput）为应用的性能指标。
  由于不同类型 GC 本该适用于不同类型的应用（例如 Serial GC 适合运行单核 CPU 机器上的小应用，G1 GC 适合运行大内存的应用），所以此次比较结果不能得出各个 GC 谁优谁劣的绝对结论。
   以响应时间为性能指标
@@ -38,10 +38,10 @@
     
     <item>
       <title>Java 内存模型与线程</title>
-      <link>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <link>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
       <description>摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。
 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。 硬件的效率与一致性 计算机的大部分运算任务都不可能只靠处理器（CPU）计算就能完成。因为大部分情况下，处理器都需要与存储设备（内存）进行交互，例如读取数据、存储运算结果等。
 由于计算的 CPU 与内存的运算速度存在几个数量级的差距，所以现代大部分计算机系统都加入了一层读写速度尽可能接近 CPU 运算速度的 高速缓存（Cache），用来作为 CPU 和内存的缓冲。这种缓冲的运行机制是：将 CPU 运算所需要使用到的数据复制到缓存中，让运算能快速进行；当运算结束之后再从缓冲同步回内存之中。通过这种方式，CPU 就无需等待对内存的缓慢读写了。
@@ -53,19 +53,19 @@
     
     <item>
       <title>Vim 常用命令</title>
-      <link>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl + b、PgUp 向上翻页   Ctrl + f、PgDn 向下翻页   Ctrl + u 向上翻半页   Ctrl + d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y + 移动光标 复制光标移动过程中的内容   选中内容 + y 复制光标选中的内容   p 执行 a／向下，再粘贴剪贴板内容   P 执行 i／向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn + Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d + 移动光标 删除光标移动过程中的内容   选中内容 + d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?</description>
     </item>
     
     <item>
       <title>二分查找的实现细节</title>
-      <link>https://blog.fantasticmao.cn/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</link>
+      <link>/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</link>
       <pubDate>Sat, 10 Mar 2018 14:58:31 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</guid>
+      <guid>/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</guid>
       <description>最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
 本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。 简单介绍 在计算机科学中，二分查找也被称为折半查找、对数查找，是一种在有序数组中查找目标元素的搜索算法。
 二分查找会将目标元素与数组中间元素进行比较，若不相等，则目标元素不存在的半段数组会被淘汰，并且查询会在目标元素存在的半段数组中继续进行，直到比较成功为止。如果查询以空数组为结束，则表示目标元素不存在。一次二分查找的具体过程可以参考下图（图片来源自维基百科）：
@@ -78,10 +78,10 @@ public int binarySearch(int[] arr, int low, int high, int key) { // 算法退出
     
     <item>
       <title>设计模式概览</title>
-      <link>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
+      <link>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
+      <guid>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
       <description>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。 创建型 Creational Patterns 抽象工厂模式 Abstract Factory Pattern 意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
 参考：Wikipedia、java-design-patterns、菜鸟教程
 实现：
@@ -93,10 +93,10 @@ public int binarySearch(int[] arr, int low, int high, int key) { // 算法退出
     
     <item>
       <title>UDP 必知必会</title>
-      <link>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</link>
+      <link>/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</link>
       <pubDate>Sat, 23 Dec 2017 15:39:28 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</guid>
+      <guid>/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</guid>
       <description>摘自《计算机网络》 第 5 章 传输层，并参考自维基百科与 RFC-768。协议概述 UDP（User Datagram Protocol，用户数据报协议）是 OSI 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠的数据传送服务，是 TCP/IP 协议族的核心成员之一，由 David P. Reed 于 1980 设计，并在 RFC-768 中正式定义。
 UDP 使用最小协议机制的简单无连接通信模型，可以使分组交换的计算机在 IP 网络上使用数据报通信。它提供 checksum 字段用于保证数据完整性，提供 port number 字段用于区分源地址和目标地址不同功能的应用进程。UDP 适用于对错误校验和错误纠正要求不高的应用场景，如多媒体应用、IP 电话等等。UDP 在通讯时不需要像 TCP 一样进行握手，因此减少了网络通信的开销和发送数据之前的延迟，但它也是不可靠的传输协议，即不保证数据可靠的交付和时序。
 UDP 只在 IP 的数据服务之上增加了很少的一点功能，其主要特点是：
@@ -105,10 +105,10 @@ UDP 只在 IP 的数据服务之上增加了很少的一点功能，其主要特
     
     <item>
       <title>设计原则</title>
-      <link>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link>
+      <link>/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link>
       <pubDate>Wed, 04 Oct 2017 10:23:57 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</guid>
+      <guid>/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</guid>
       <description>摘自《写给大家看的设计书》第一部分 —— 设计原则。引言 以下是对基本设计原则的概述，每一个优秀的设计中都应用了这些设计原则。要记住，它们实际上是相互关联的，只应用某一个原则的情况很少。
  对比（Contrast） 对比的基本思想是，要避免页面上的元素太过相似。如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。要让页面引人注目，对比通常是最重要的一个因素。 重复（Repetition） 让设计中的视觉要素在整个作品中重复出现。可以重复颜色、形状、材质、空间关系、线宽、字体、大小和图片，等等。这样一来，既能增加条理性，还可以加强一致性。 对齐（Alignment） 任何元素都不能在页面上随意安放，每个元素都应当与页面上的另一个元素存在某种视觉联系。这样能建立一种清晰、精巧而且清爽的视觉效果。 亲密性（Proximity） 彼此相关的元素应当靠近，归组在一起。如果多个元素之间存在很近的亲密性，它们就会成为一个视觉单元，而不是多个孤立的项。这样有助于组织页面信息、减少混乱。   亲密性 如果一个设计中充斥着太多的内容，这个页面会显得杂乱无章，读者也无法从中很快看到所需的信息。Robin 亲密性原则是指： 将相关的元素组织在一起。
 移动相关的元素项，使它们的物理位置相互靠近，将相关的元素项凝聚为一个组，而不是一堆彼此无关的片段；移动无关的元素项或组，使它们的物理位置相互分离，为读者提供一个直观的提示，使其可以马上了解页面的组织和内容。
@@ -132,10 +132,10 @@ UDP 只在 IP 的数据服务之上增加了很少的一点功能，其主要特
     
     <item>
       <title>如何快速上手一个框架</title>
-      <link>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
+      <link>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
+      <guid>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
       <description>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。
 有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。
 开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的 Topic —— 关于使用框架的方法论。 一 在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。
@@ -151,10 +151,10 @@ UDP 只在 IP 的数据服务之上增加了很少的一点功能，其主要特
     
     <item>
       <title>jQuery API 小记</title>
-      <link>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
+      <link>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
+      <guid>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
       <description>摘自《JavaScript 权威指南》第 19 章 jQuery 类库。
 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。 jQuery 基础 jQuery 类库定义了一个全局函数：jQuery()。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：$()。这是 jQuery 在全局命名空间中定义的唯一两个变量。
 在 jQuery 类库中，最重要的方法是 jQuery()，也就是 $()。它的功能很强大，有 4 中不同的调用方式：
@@ -167,10 +167,10 @@ jQuery(function () { // 文档加载完毕时调用  // 所有 jQuery 代码放�
     
     <item>
       <title>MySQL 索引高性能策略</title>
-      <link>https://blog.fantasticmao.cn/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</link>
+      <link>/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</link>
       <pubDate>Fri, 03 Feb 2017 16:24:07 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</guid>
+      <guid>/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</guid>
       <description>摘自《高性能 MySQL》第 5 章 创建高性能的索引。 索引基础 索引（在 MySQL 中也叫做键 key）是存储引擎用于快速找到记录的一种数据结构。索引对于良好的性能非常关键，尤其是当表中的数据量越来越大时，索引对性能的影响愈发重要。在数据量较小且负载比较低时，不恰当的索引对性能的影响可能还不明显，但当数据量逐渐增大时，性能则会急剧下降。
 理解 MySQL 中索引是如何工作的，最简单的方法就是去看看一本书的「索引」部分。如果想在一本书中找到某个特定主题，一般会先看书的「索引」，再找到对应的页码。在 MySQL 中，存储引擎用类似的方法使用索引，其先在索引中找到对应值，然后根据匹配的索引记录找到对应的数据行。
 索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高几个数量级，「最优」的索引有时比「好的」索引性能要好两个数量级。
@@ -189,10 +189,10 @@ CREATE TABLE People ( last_name VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT
     
     <item>
       <title>MySQL 数据类型优化</title>
-      <link>https://blog.fantasticmao.cn/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
+      <link>/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
       <pubDate>Wed, 25 Jan 2017 12:20:03 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
+      <guid>/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
       <description>摘自《高性能 MySQL》第 4 章 Schema 与数据类型优化。良好的逻辑设计和物理设计是高性能的基石，应该根据系统将要执行的查询语句来设计 schema，这往往需要权衡各种因素。例如，反范式的设计可以加快某些类型的查询，但同时可能使另一些类型的查询变慢。比如添加计数表和汇总表是一种很好的优化查询的方式，但这些表的维护成本可能会很高。MySQL 独有的特性和实现细节对性能的影响也很大。
  选择优化的数据类型 MySQL 支持的数据类型非常多，选择正确的数据类型对于获取高性能至关重要。不管存储哪种类型的数据，都应遵从下面几个原则：
   更小的通常更好
@@ -207,10 +207,10 @@ CREATE TABLE People ( last_name VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT
     
     <item>
       <title>Java 泛型的擦除</title>
-      <link>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
+      <link>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
       <pubDate>Mon, 02 Jan 2017 20:12:26 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
+      <guid>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
       <description>本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。摘自《Java 编程思想》15 章。
  泛型简介 泛型程序设计是程序设计语言的一种风格或范式。泛型允许程序员在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类型。
 Java 泛型的参数只可以代表类，不能代表个别对象。由于 Java 泛型的类型参数之实际类型在编译时会被消除，所以无法在运行时得知其类型参数的类型，而且无法直接使用基本值类型作为泛型类型参数。Java 编译程序在编译泛型时会自动加入类型转换的编码，故运行速度不会因为使用泛型而加快。—— 摘自 维基百科
@@ -223,10 +223,10 @@ public class Generic&amp;lt;T&amp;gt; { private T t; public T getT() { return t;
     
     <item>
       <title>关于</title>
-      <link>https://blog.fantasticmao.cn/about/</link>
+      <link>/about/</link>
       <pubDate>Wed, 23 Nov 2016 21:42:50 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/about/</guid>
+      <guid>/about/</guid>
       <description>我，一个 95 年、黑头发、戴眼镜的小伙子。
 2016 年参加工作，以 Java 谋生，也对 JavaScript、Python、Golang、Shell Script 感兴趣，想要学习网络编程、分布式架构、云原生领域的技术知识，坐标浙江杭州。
 讨论技术可以通过文章底部 Disqus 评论，或者通过首页的社交链接与我联系，随时欢迎 :)</description>

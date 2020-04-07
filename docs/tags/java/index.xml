@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/tags/java/</link>
+    <link>/tags/java/</link>
     <description>Recent content in Java on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 01 Jul 2018 19:16:50 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/tags/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java 内存模型与线程</title>
-      <link>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <link>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
       <description>摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。
 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。 硬件的效率与一致性 计算机的大部分运算任务都不可能只靠处理器（CPU）计算就能完成。因为大部分情况下，处理器都需要与存储设备（内存）进行交互，例如读取数据、存储运算结果等。
 由于计算的 CPU 与内存的运算速度存在几个数量级的差距，所以现代大部分计算机系统都加入了一层读写速度尽可能接近 CPU 运算速度的 高速缓存（Cache），用来作为 CPU 和内存的缓冲。这种缓冲的运行机制是：将 CPU 运算所需要使用到的数据复制到缓存中，让运算能快速进行；当运算结束之后再从缓冲同步回内存之中。通过这种方式，CPU 就无需等待对内存的缓慢读写了。
@@ -28,10 +28,10 @@
     
     <item>
       <title>设计模式概览</title>
-      <link>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
+      <link>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
+      <guid>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
       <description>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。 创建型 Creational Patterns 抽象工厂模式 Abstract Factory Pattern 意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
 参考：Wikipedia、java-design-patterns、菜鸟教程
 实现：
@@ -43,10 +43,10 @@
     
     <item>
       <title>如何快速上手一个框架</title>
-      <link>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
+      <link>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
+      <guid>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
       <description>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。
 有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。
 开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的 Topic —— 关于使用框架的方法论。 一 在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。
@@ -62,10 +62,10 @@
     
     <item>
       <title>Java 泛型的擦除</title>
-      <link>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
+      <link>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
       <pubDate>Mon, 02 Jan 2017 20:12:26 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
+      <guid>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
       <description>本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。摘自《Java 编程思想》15 章。
  泛型简介 泛型程序设计是程序设计语言的一种风格或范式。泛型允许程序员在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类型。
 Java 泛型的参数只可以代表类，不能代表个别对象。由于 Java 泛型的类型参数之实际类型在编译时会被消除，所以无法在运行时得知其类型参数的类型，而且无法直接使用基本值类型作为泛型类型参数。Java 编译程序在编译泛型时会自动加入类型转换的编码，故运行速度不会因为使用泛型而加快。—— 摘自 维基百科

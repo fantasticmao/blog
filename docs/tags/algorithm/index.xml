@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Algorithm on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/tags/algorithm/</link>
+    <link>/tags/algorithm/</link>
     <description>Recent content in Algorithm on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 10 Mar 2018 14:58:31 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>二分查找的实现细节</title>
-      <link>https://blog.fantasticmao.cn/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</link>
+      <link>/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</link>
       <pubDate>Sat, 10 Mar 2018 14:58:31 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</guid>
+      <guid>/posts/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</guid>
       <description>最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
 本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。 简单介绍 在计算机科学中，二分查找也被称为折半查找、对数查找，是一种在有序数组中查找目标元素的搜索算法。
 二分查找会将目标元素与数组中间元素进行比较，若不相等，则目标元素不存在的半段数组会被淘汰，并且查询会在目标元素存在的半段数组中继续进行，直到比较成功为止。如果查询以空数组为结束，则表示目标元素不存在。一次二分查找的具体过程可以参考下图（图片来源自维基百科）：

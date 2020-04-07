@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>设计 on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/categories/%E8%AE%BE%E8%AE%A1/</link>
+    <link>/categories/%E8%AE%BE%E8%AE%A1/</link>
     <description>Recent content in 设计 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 04 Oct 2017 10:23:57 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/categories/%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>设计原则</title>
-      <link>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link>
+      <link>/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link>
       <pubDate>Wed, 04 Oct 2017 10:23:57 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</guid>
+      <guid>/posts/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</guid>
       <description>摘自《写给大家看的设计书》第一部分 —— 设计原则。引言 以下是对基本设计原则的概述，每一个优秀的设计中都应用了这些设计原则。要记住，它们实际上是相互关联的，只应用某一个原则的情况很少。
  对比（Contrast） 对比的基本思想是，要避免页面上的元素太过相似。如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。要让页面引人注目，对比通常是最重要的一个因素。 重复（Repetition） 让设计中的视觉要素在整个作品中重复出现。可以重复颜色、形状、材质、空间关系、线宽、字体、大小和图片，等等。这样一来，既能增加条理性，还可以加强一致性。 对齐（Alignment） 任何元素都不能在页面上随意安放，每个元素都应当与页面上的另一个元素存在某种视觉联系。这样能建立一种清晰、精巧而且清爽的视觉效果。 亲密性（Proximity） 彼此相关的元素应当靠近，归组在一起。如果多个元素之间存在很近的亲密性，它们就会成为一个视觉单元，而不是多个孤立的项。这样有助于组织页面信息、减少混乱。   亲密性 如果一个设计中充斥着太多的内容，这个页面会显得杂乱无章，读者也无法从中很快看到所需的信息。Robin 亲密性原则是指： 将相关的元素组织在一起。
 移动相关的元素项，使它们的物理位置相互靠近，将相关的元素项凝聚为一个组，而不是一堆彼此无关的片段；移动无关的元素项或组，使它们的物理位置相互分离，为读者提供一个直观的提示，使其可以马上了解页面的组织和内容。

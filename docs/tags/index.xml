@@ -2,111 +2,111 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>标签 on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in 标签 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 23 Nov 2016 21:41:22 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>MySQL</title>
-      <link>https://blog.fantasticmao.cn/tags/mysql/</link>
+      <link>/tags/mysql/</link>
       <pubDate>Sun, 24 Feb 2019 13:50:18 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/mysql/</guid>
+      <guid>/tags/mysql/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JVM</title>
-      <link>https://blog.fantasticmao.cn/tags/jvm/</link>
+      <link>/tags/jvm/</link>
       <pubDate>Wed, 14 Nov 2018 10:21:22 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/jvm/</guid>
+      <guid>/tags/jvm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>https://blog.fantasticmao.cn/tags/java/</link>
+      <link>/tags/java/</link>
       <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/java/</guid>
+      <guid>/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://blog.fantasticmao.cn/tags/linux/</link>
+      <link>/tags/linux/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/linux/</guid>
+      <guid>/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vim</title>
-      <link>https://blog.fantasticmao.cn/tags/vim/</link>
+      <link>/tags/vim/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/vim/</guid>
+      <guid>/tags/vim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Algorithm</title>
-      <link>https://blog.fantasticmao.cn/tags/algorithm/</link>
+      <link>/tags/algorithm/</link>
       <pubDate>Sat, 10 Mar 2018 14:58:31 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/algorithm/</guid>
+      <guid>/tags/algorithm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Spring Framework</title>
-      <link>https://blog.fantasticmao.cn/tags/spring-framework/</link>
+      <link>/tags/spring-framework/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/spring-framework/</guid>
+      <guid>/tags/spring-framework/</guid>
       <description></description>
     </item>
     
     <item>
       <title>UDP</title>
-      <link>https://blog.fantasticmao.cn/tags/udp/</link>
+      <link>/tags/udp/</link>
       <pubDate>Sat, 23 Dec 2017 15:39:28 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/udp/</guid>
+      <guid>/tags/udp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Design</title>
-      <link>https://blog.fantasticmao.cn/tags/design/</link>
+      <link>/tags/design/</link>
       <pubDate>Wed, 04 Oct 2017 10:23:57 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/design/</guid>
+      <guid>/tags/design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JavaScript</title>
-      <link>https://blog.fantasticmao.cn/tags/javascript/</link>
+      <link>/tags/javascript/</link>
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/javascript/</guid>
+      <guid>/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>jQuery</title>
-      <link>https://blog.fantasticmao.cn/tags/jquery/</link>
+      <link>/tags/jquery/</link>
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/tags/jquery/</guid>
+      <guid>/tags/jquery/</guid>
       <description></description>
     </item>
     
