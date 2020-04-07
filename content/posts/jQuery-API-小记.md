@@ -168,7 +168,7 @@ $("h1").text(function (n, current) {
 
 `position()` 很像 `offset()`，但它只能用作 getter，返回的元素是相对于其偏移父元素的，而不是相对于文档的。
 
-用于获取元素宽度和高度的 getter/setter 共有 3 个。`width()` 和 `height()`返回基本的宽度和高度，不包含内边距、边框、外边距。`innerWidth()` 和 `innerHeight()` 返回元素的宽度和高度，包含内边距的宽度和高度。`outerWidth()` 和 `outerHeight()` 通常返回的是包含元素内边距和边框的尺寸。
+用于获取元素宽度和高度的 getter/setter 共有 3 个。`width()` 和 `height()` 返回基本的宽度和高度，不包含内边距、边框、外边距。`innerWidth()` 和 `innerHeight()` 返回元素的宽度和高度，包含内边距的宽度和高度。`outerWidth()` 和 `outerHeight()` 通常返回的是包含元素内边距和边框的尺寸。
 
 `scrollTop()` 和 `scrollLeft()` 可获取或设置元素的滚动条位置。这些方法可用在 Window 对象以及 Document 元素上。当用在 Document 对象上时，会获取或设置存放该 Document 的 Window 对象的滚动条位置。
 
@@ -324,19 +324,19 @@ $("#blinker").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 1. 动画属性对象
    该对象的属性名必须是 CSS 属性，这些属性的值必须是动画的目标值。动画只支持数值属性：对于颜色、字体或 display 等枚举属性是无法实现动画效果的。如果属性值是数值，则默认单位是像素。如果属性值是字符串，可以指定单位。还可以指定相对值，用「+=」前缀表示增加，用「-=」前缀表示减少。jQuery 动画属性对象中，还可以使用 hide、show、toggle 这三个属性值。
 
-```javascript
-$("p").animate({
-  "margin-left": "+=.5in", // 增加段落缩进
-  opacity: "-=.1", // 同时减少不透明度
-});
-$("img").animate({
-  width: "hide",
-  borderLeft: "hide",
-  borderRight: "hide",
-  paddingLeft: "hide",
-  paddingRight: "hide",
-});
-```
+   ```javascript
+   $("p").animate({
+     "margin-left": "+=.5in", // 增加段落缩进
+     opacity: "-=.1", // 同时减少不透明度
+   });
+   $("img").animate({
+     width: "hide",
+     borderLeft: "hide",
+     borderRight: "hide",
+     paddingLeft: "hide",
+     paddingRight: "hide",
+   });
+   ```
 
 2. 动画选项对象
    该选项对象用来指定动画如何执行。duration 属性指定动画持续的毫秒时间，其值可以是 fast、slow 或任何 jQuery.fx.speeds 中定义的名称。complete 属性指定动画完成时的回调函数。setp 属性指定在动画每一步或每一帧调用的回调函数。在回调函数中，this 指向正在连续变化的元素，第一个参数则是正在变化的属性值。queue 属性指定动画是否需要队列化，即是否需要等到所有尚未发生的动画都完成后再执行该动画。默认情况下，所有动画都是队列化的。easing 属性指定缓动函数名，jQuery 默认使用的是命为 swing 的正弦函数。

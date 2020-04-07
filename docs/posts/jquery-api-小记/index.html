@@ -259,7 +259,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </code></pre></div><h2 id="获取和设置元素的位置高宽">获取和设置元素的位置高宽</h2>
 <p>使用 <code>offset()</code> 可以获取或设置元素的位置。该方法相对文档来计算位置值，返回一个对象，带有 left 和 top 属性，代表 X 和 Y 坐标。</p>
 <p><code>position()</code> 很像 <code>offset()</code>，但它只能用作 getter，返回的元素是相对于其偏移父元素的，而不是相对于文档的。</p>
-<p>用于获取元素宽度和高度的 getter/setter 共有 3 个。<code>width()</code> 和 <code>height()</code>返回基本的宽度和高度，不包含内边距、边框、外边距。<code>innerWidth()</code> 和 <code>innerHeight()</code> 返回元素的宽度和高度，包含内边距的宽度和高度。<code>outerWidth()</code> 和 <code>outerHeight()</code> 通常返回的是包含元素内边距和边框的尺寸。</p>
+<p>用于获取元素宽度和高度的 getter/setter 共有 3 个。<code>width()</code> 和 <code>height()</code> 返回基本的宽度和高度，不包含内边距、边框、外边距。<code>innerWidth()</code> 和 <code>innerHeight()</code> 返回元素的宽度和高度，包含内边距的宽度和高度。<code>outerWidth()</code> 和 <code>outerHeight()</code> 通常返回的是包含元素内边距和边框的尺寸。</p>
 <p><code>scrollTop()</code> 和 <code>scrollLeft()</code> 可获取或设置元素的滚动条位置。这些方法可用在 Window 对象以及 Document 元素上。当用在 Document 对象上时，会获取或设置存放该 Document 的 Window 对象的滚动条位置。</p>
 <h2 id="获取和设置元素数据">获取和设置元素数据</h2>
 <p>jQuery 定义了一个名为 <code>data()</code> 的 getter/setter 方法，可用来获取或设置与文档元素、Document、Window 对象相关的数据。</p>
@@ -353,9 +353,9 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 <h2 id="自定义动画">自定义动画</h2>
 <p><code>animate()</code> 可以实现更多通用的动画效果。第一个参数是必需的，它必须是一个对象，该对象的属性指定要变化的 CSS 属性和它们的目标值。第二个参数是可选的，可以传入一个选项对象给 <code>animate()</code>。通常，<code>animate()</code> 接收两个对象参数，第一个指定动画内容，第二个指定如何定制动画。</p>
 <ol>
-<li>动画属性对象
-该对象的属性名必须是 CSS 属性，这些属性的值必须是动画的目标值。动画只支持数值属性：对于颜色、字体或 display 等枚举属性是无法实现动画效果的。如果属性值是数值，则默认单位是像素。如果属性值是字符串，可以指定单位。还可以指定相对值，用「+=」前缀表示增加，用「-=」前缀表示减少。jQuery 动画属性对象中，还可以使用 hide、show、toggle 这三个属性值。</li>
-</ol>
+<li>
+<p>动画属性对象
+该对象的属性名必须是 CSS 属性，这些属性的值必须是动画的目标值。动画只支持数值属性：对于颜色、字体或 display 等枚举属性是无法实现动画效果的。如果属性值是数值，则默认单位是像素。如果属性值是字符串，可以指定单位。还可以指定相对值，用「+=」前缀表示增加，用「-=」前缀表示减少。jQuery 动画属性对象中，还可以使用 hide、show、toggle 这三个属性值。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">animate</span>({
   <span style="color:#e6db74">&#34;margin-left&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;+=.5in&#34;</span>, <span style="color:#75715e">// 增加段落缩进
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">opacity</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;-=.1&#34;</span>, <span style="color:#75715e">// 同时减少不透明度
@@ -367,9 +367,11 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   <span style="color:#a6e22e">paddingLeft</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;hide&#34;</span>,
   <span style="color:#a6e22e">paddingRight</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;hide&#34;</span>,
 });
-</code></pre></div><ol start="2">
-<li>动画选项对象
-该选项对象用来指定动画如何执行。duration 属性指定动画持续的毫秒时间，其值可以是 fast、slow 或任何 jQuery.fx.speeds 中定义的名称。complete 属性指定动画完成时的回调函数。setp 属性指定在动画每一步或每一帧调用的回调函数。在回调函数中，this 指向正在连续变化的元素，第一个参数则是正在变化的属性值。queue 属性指定动画是否需要队列化，即是否需要等到所有尚未发生的动画都完成后再执行该动画。默认情况下，所有动画都是队列化的。easing 属性指定缓动函数名，jQuery 默认使用的是命为 swing 的正弦函数。</li>
+</code></pre></div></li>
+<li>
+<p>动画选项对象
+该选项对象用来指定动画如何执行。duration 属性指定动画持续的毫秒时间，其值可以是 fast、slow 或任何 jQuery.fx.speeds 中定义的名称。complete 属性指定动画完成时的回调函数。setp 属性指定在动画每一步或每一帧调用的回调函数。在回调函数中，this 指向正在连续变化的元素，第一个参数则是正在变化的属性值。queue 属性指定动画是否需要队列化，即是否需要等到所有尚未发生的动画都完成后再执行该动画。默认情况下，所有动画都是队列化的。easing 属性指定缓动函数名，jQuery 默认使用的是命为 swing 的正弦函数。</p>
+</li>
 </ol>
 <hr>
 <h1 id="jquery-中的-ajax">jQuery 中的 Ajax</h1>
