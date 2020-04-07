@@ -140,7 +140,9 @@
 
           <div class="tags">
   <i class="fas fa-tag"></i>
-    <a href="../../tags/java/">Java</a></div>
+    <a href="../../tags/java/">Java</a>
+      <span class="separator">•</span>
+    <a href="../../tags/jvm/">JVM</a></div>
 
         </div>
       </header>
@@ -287,11 +289,11 @@ volatile 变量在被赋值后，将会多执行一个相当于 <a href="https:/
 <ul>
 <li>
 <p>新建 New</p>
-<p>创建后未启动的线程状态；</p>
+<p>创建后未启动的线程状态。</p>
 </li>
 <li>
 <p>运行 Runnable</p>
-<p>Runnable 状态包括了操作系统线程状态中的 Running 状态和 Ready 状态，也就是说处于 Runnable 状态的线程有可能正在执行任务，也有可能正在等待着 CPU 为它分配执行的时间；</p>
+<p>Runnable 状态包括了操作系统线程状态中的 Running 状态和 Ready 状态，也就是说处于 Runnable 状态的线程有可能正在执行任务，也有可能正在等待着 CPU 为它分配执行的时间。</p>
 </li>
 <li>
 <p>无期限等待 Waiting</p>
@@ -315,7 +317,7 @@ volatile 变量在被赋值后，将会多执行一个相当于 <a href="https:/
 </li>
 <li>
 <p>阻塞 Bloked</p>
-<p>被阻塞的线程状态。「阻塞状态」和「等待状态」的区别是：阻塞状态是在等待着获取一个互斥锁，这个事件将在另外一个线程放弃锁的时候发生；等待状态是在等待一段时间，或者其它线程的唤醒动作。在程序等待进入同步代码块时，线程将进入 Bloked 状态；</p>
+<p>被阻塞的线程状态。「阻塞状态」和「等待状态」的区别是：阻塞状态是在等待着获取一个互斥锁，这个事件将在另外一个线程放弃锁的时候发生；等待状态是在等待一段时间，或者其它线程的唤醒动作。在程序等待进入同步代码块时，线程将进入 Bloked 状态。</p>
 </li>
 <li>
 <p>结束 Terminated</p>

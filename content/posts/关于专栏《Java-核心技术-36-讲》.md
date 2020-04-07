@@ -10,19 +10,19 @@ draft: true
 
 革命尚未成功，同志仍需努力。
 
-对于学习技术这件事，记一些想法：要更侧重于通过阅读书籍／文档／手册／RFC 等方式，而不是仅仅通过看视频／听分享／听演讲等方式获取新知识、学习新技术。记几个观点：学习需要自我驱动、学习的资料需要官方化、学习的知识需要体系化。
+对于学习技术这件事，记一些想法：要更侧重于通过阅读书籍 / 文档 / 手册 / RFC 等方式，而不是仅仅通过看视频 / 听分享 / 听演讲等方式获取新知识、学习新技术。记几个观点：学习需要自我驱动、学习的资料需要官方化、学习的知识需要体系化。
 
 ---
 
-# 谈谈你对 Java 平台的理解
+## 谈谈你对 Java 平台的理解
 
-Java 是一种被广泛使用的面向对象编程语言，支持面向对象的封装、多态、继承三大特性。Java 的基本语法类似于 C 语言，相对规范和严谨（区别于 PHP、Python 等弱类型语言），支持 Annotaion、Generic、Lambda、Method Reference 等等。除此之外，Java 的核心类库和第三方库也十分丰富，核心类库包括 IO／NIO、Collection、Network、Concurrent、Security、Date／Time 等等，第三方库包括 Spring Framework、Netty、Hibernate、Jackson、Guava 等等。
+Java 是一种被广泛使用的面向对象编程语言，支持面向对象的封装、多态、继承三大特性。Java 的基本语法类似于 C 语言，相对规范和严谨（区别于 PHP、Python 等弱类型语言），支持 Annotaion、Generic、Lambda、Method Reference 等等。除此之外，Java 的核心类库和第三方库也十分丰富，核心类库包括 IO / NIO、Collection、Network、Concurrent、Security、Date / Time 等等，第三方库包括 Spring Framework、Netty、Hibernate、Jackson、Guava 等等。
 
 Java 作为一个老牌且成熟的编程语言，其发展多年的虚拟机也经受了业界苛刻的考验。JVM（Java Virtual Machine）不仅支持了 Java 宣传标语 —— Write Once, Run Anywhere —— 的跨平台特性，并且提供了丰富的垃圾收集机制来自动分配和回收内存。其中，常用的垃圾收集器如 Serial、Parallel、CMS、G1 等。另外，JVM 除了支持 source code -> byte code -> machine code 的编译 & 解释运行方式，还支持 JIT（Just In Time）编译方式，能够极大提高 Java 程序的运行性能。最后，JVM 作为一个强大的虚拟机，还支持运行例如 Clojure、Scala、Groovy、JRuby、Jython 等等大量的符合 JVM 字节码规范的语言。
 
 ---
 
-# Exception 与 Error 有什么区别
+## Exception 与 Error 有什么区别
 
 在 Java 标准异常中，`Throwable` 类表示任何可以被作为异常抛出的类，`Exception` 类和 `Error` 类都继承了 `Throwable` 类。
 
@@ -35,17 +35,17 @@ Java 作为一个老牌且成熟的编程语言，其发展多年的虚拟机也
 - Throw Early, Catch Late；
 - 在知道如何处理异常的情况下，再捕获并处理异常；
 - 尽量不要 try 整段代码块，也要避免使用异常控制代码流程；
-- 不要掩盖／生吞异常，在抛出异常信息时避免泄漏敏感信息；
+- 不要掩盖 / 生吞异常，在抛出异常信息时避免泄漏敏感信息；
 - 不要捕获类似 `Exception` 类的通用异常，而是应该捕获特定异常；
 - 受检查异常被抛出后，往往不能被恢复，并且对函数式编程和三元表达式十分不友好；
 - JDK 7 支持 multiple-catch 语法和基于 `java.lang.AutoCloseable` 接口的 try-with-resource 语法；
-- 当程序未被中断时，finally 语句都会被正常执行，并且通常被用于清理系统资源。不应在 finally 语句中 return 方法的执行结果，因为这会导致异常信息的丢失；
+- 当程序未被中断时，finally 语句都会被正常执行，并且通常被用于清理系统资源。不应在 finally 语句中 return 方法的执行结果，因为这会导致异常信息的丢失。
 
 ---
 
-# 谈谈 final、finally、finalize 有什么不同
+## 谈谈 final、finally、finalize 有什么不同
 
-final 关键字可以用于修饰变量、方法、类，并且在不同场景下的 final 关键字的语义不尽相同。当 final 修饰成员变量／局部变量／方法参数时，表示该变量的引用是不能被修改的；当 final 修饰方法时，表示该方法是不能被重写的；当 final 修饰类时，表示该类是不能被继承的。
+final 关键字可以用于修饰变量、方法、类，并且在不同场景下的 final 关键字的语义不尽相同。当 final 修饰成员变量 / 局部变量 / 方法参数时，表示该变量的引用是不能被修改的；当 final 修饰方法时，表示该方法是不能被重写的；当 final 修饰类时，表示该类是不能被继承的。
 
 需要注意的是，使用 final 修饰引用类型的变量时，并不代表此变量具有 [Immutable](https://en.wikipedia.org/wiki/Immutable_object) 的特性。例如在 `final List<String> list = new ArrayList<>()` 示例代码中，final 仅能保证 list 变量无法再次被赋值，而不能保证 list 的内容不被修改。
 
@@ -74,7 +74,7 @@ finalize() 是基础类 `java.lang.Object` 的一个方法，它的设计目的�
 
 ---
 
-# 强引用、软引用、弱引用、虚引用有什么区别
+## 强引用、软引用、弱引用、虚引用有什么区别
 
 这个问题，可以在[《深入理解 Java 虚拟机》](https://book.douban.com/subject/24722612/) 的 3.2.3 章节中找到答案：
 
@@ -89,65 +89,65 @@ finalize() 是基础类 `java.lang.Object` 的一个方法，它的设计目的�
 
 - `ThreadLocal.ThreadLocalMap` 使用弱引用存储 `ThreadLocal` 实例；
 - `WeakCache<K, P, V>` 使用弱引用存储 Key 和 Value，使用强引用存储 SubKey；
-- `com.google.common.cache.LocalCache` 支持使用软引用和弱引用的缓存失效策略，详情可参见 [文档](https://github.com/google/guava/wiki/CachesExplained#reference-based-eviction)；
+- `com.google.common.cache.LocalCache` 支持使用软引用和弱引用的缓存失效策略，详情可参见 [文档](https://github.com/google/guava/wiki/CachesExplained#reference-based-eviction)。
 
 ---
 
-# String、StringBuffer、StringBuilder 有什么区别
+## String、StringBuffer、StringBuilder 有什么区别
 
 ---
 
-# 动态代理是基于什么原理
+## 动态代理是基于什么原理
 
 ---
 
-# int 和 Integer 有什么区别
+## int 和 Integer 有什么区别
 
 ---
 
-# 对比 Vector、ArrayList、LinkedList 有什么区别
+## 对比 Vector、ArrayList、LinkedList 有什么区别
 
 ---
 
-# 对比 Hashtable、HashMap、TreeMap 有什么区别
+## 对比 Hashtable、HashMap、TreeMap 有什么区别
 
 ---
 
-# 如何保证集合是线程安全的，ConcurrentHashMap 如何实现高效的线程安全
+## 如何保证集合是线程安全的，ConcurrentHashMap 如何实现高效的线程安全
 
 ---
 
-# Java 提供了哪些 I/O 方式，NIO 如何实现多路复用
+## Java 提供了哪些 I/O 方式，NIO 如何实现多路复用
 
 ---
 
-# Java 有几种文件拷贝方式，哪一种高效
+## Java 有几种文件拷贝方式，哪一种高效
 
 ---
 
-# 谈谈接口和抽象类有什么区别
+## 谈谈接口和抽象类有什么区别
 
 ---
 
-# 谈谈你知道的设计模式
+## 谈谈你知道的设计模式
 
 ---
 
-# synchronized 和 ReentrantLock 有什么区别
+## synchronized 和 ReentrantLock 有什么区别
 
 ---
 
-# synchronized 底层如何实现，什么是锁的升级、降级
+## synchronized 底层如何实现，什么是锁的升级、降级
 
 ---
 
-# 一个线程调用两次 start() 方法会出现什么情况
+## 一个线程调用两次 start() 方法会出现什么情况
 
 会抛出 `java.lang.IllegalThreadStateException` 异常。
 
 ---
 
-# 什么情况下 Java 程序会产生死锁，如何定位、修复
+## 什么情况下 Java 程序会产生死锁，如何定位、修复
 
 在现代计算中，[死锁](https://en.wikipedia.org/wiki/Deadlock) 是一种特定的程序运行状态。当两个以上的运算单元（线程或进程），双方都在等待对方停止运行，以获取系统资源，但却没有一方提前退出时，就称为死锁。如下示例代码将会产生死锁问题：
 
@@ -216,7 +216,7 @@ Found 1 deadlock.
 
 ---
 
-# Java 并发包提供了哪些并发工具
+## Java 并发包提供了哪些并发工具
 
 阅读 `java.util.concurrent` 的 [JavaDoc 文档](https://docs.oracle.com/javase/10/docs/api/java/util/concurrent/package-summary.html) 可以总结得出该包下提供的并发工具有：
 
@@ -249,40 +249,40 @@ Found 1 deadlock.
 
 ---
 
-# 并发包中的 ConcurrentLinkedQueue 和 LinkedBlockingQueue 有什么区别
+## 并发包中的 ConcurrentLinkedQueue 和 LinkedBlockingQueue 有什么区别
 
 ---
 
-# Java 并发类库提供的线程池有哪几种，分别有什么特点
+## Java 并发类库提供的线程池有哪几种，分别有什么特点
 
 ---
 
-# AtomicInteger 底层实现原理是什么，如何在自己的产品代码中应用 CAS 操作
+## AtomicInteger 底层实现原理是什么，如何在自己的产品代码中应用 CAS 操作
 
 ---
 
-# 请介绍类加载过程，什么是双亲委派模型
+## 请介绍类加载过程，什么是双亲委派模型
 
 ---
 
-# 有哪些方法可以在运行时动态生成一个 Java 类
+## 有哪些方法可以在运行时动态生成一个 Java 类
 
 ---
 
-# 谈谈 JVM 内存区域的划分，哪些区域可能发生 OOM
+## 谈谈 JVM 内存区域的划分，哪些区域可能发生 OOM
 
 ---
 
-# 如何监控和诊断 JVM 堆内和对外内存使用情况
+## 如何监控和诊断 JVM 堆内和对外内存使用情况
 
 ---
 
-# Java 常见的垃圾收集器有哪些
+## Java 常见的垃圾收集器有哪些
 
 ---
 
-# 谈谈你的 GC 调优思路
+## 谈谈你的 GC 调优思路
 
 ---
 
-# Java 内存模型中的 Happen-Before 是什么
+## Java 内存模型中的 Happen-Before 是什么
