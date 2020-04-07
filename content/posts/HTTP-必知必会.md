@@ -1,20 +1,20 @@
 ---
 title: "HTTP 必知必会"
 date: 2017-12-15T22:36:26+08:00
-categories: ["网络基础"]
+categories: ["网络"]
 tags: ["HTTP"]
 draft: true
 ---
 
-摘自[《图解 HTTP》](https://book.douban.com/subject/25863515/)，并参考自维基百科与各系列 RFC。<!-- more -->
+摘自 [《图解 HTTP》](https://book.douban.com/subject/25863515/)，并参考自维基百科与各系列 RFC。<!-- more -->
 
-为了避免阅读歧义，本篇博客中术语「请求」、「响应」、「连接」会均用英文术语 `Request`、`Response`、`Connection` 表达。
+为了避免阅读歧义，本篇文章中术语「请求」、「响应」、「连接」均会用英文术语 `Request`、`Response`、`Connection` 表达。
 
 ---
 
-# 协议概述
+## 协议概述
 
-## 发展历史
+### 发展历史
 
 1989 年，[Tim Berners-Lee](https://en.wikipedia.org/wiki/Tim_Berners-Lee) 和他的团队在 [CERN](https://en.wikipedia.org/wiki/CERN)（European Organization for Nuclear Research，欧洲核子研究中心）发明了 HTTP 和 HTML，以及相关 web 服务器与 web 浏览器的技术。同年，他首次提出了 World Wide Web 项目，也就是现在众所周知的万维网。
 
@@ -47,11 +47,11 @@ draft: true
 
 ---
 
-## 术语解释
+### 术语解释
 
 > HTTP is a stateless request/response protocol that operates by exchanging messages across a reliable transport- or session-layer "connection".
 
-HTTP 是一个无状态的 `Request`／`Response` 机制的协议，通过在传输层或会话层的可靠的 `Connection` 之间交换信息来工作的。
+HTTP 是一个无状态的 `Request` / `Response` 机制的协议，通过在传输层或会话层的可靠的 `Connection` 之间交换信息来工作的。
 
 > An HTTP "client" is a program that establishes a connection to a server for the purpose of sending one or more HTTP requests. An HTTP "server" is a program that accepts connections in order to service HTTP requests by sending HTTP responses.
 
@@ -95,7 +95,7 @@ Cache：「缓存」是一份之前 `Response` 信息的本地存储，和其控
 
 ---
 
-## 报文简析
+### 报文简析
 
 ![image](/images/HTTP必知必会/1.png)
 
@@ -113,9 +113,9 @@ Message Body: Transfer-Encoding、Content-Length、Message Body Length
 
 ---
 
-# 实现机制
+## 实现机制
 
-## 无状态和 Cookie
+### 无状态和 Cookie
 
 HTTP 是一种不保存状态，即无状态（stateless）的协议。HTTP 协议自身不对 `Request` 和 `Response` 之间的通信状态进行保存。也就是说在 HTTP 协议这个级别，网络通讯过程中对于任何发送的 `Request` 或 `Response` 都不会做持久化处理。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把 HTTP 协议设计成如此简单。
 
@@ -129,7 +129,7 @@ Wireshark 抓包示意图：
 
 ---
 
-## HTTP 内容协商
+### HTTP 内容协商
 
 一个 [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) 可能对应多种不同表现形式的资源，例如不同的语言、不同的编码、不同的媒体类型。[HTTP 内容协商](https://en.wikipedia.org/wiki/Content_negotiation)（HTTP content negotiation）机制允许对同一个 URI 提供多个不同版本的资源，以便客户端能指定和获取最适合它们的版本资源。HTTP 协议提供了以下几种不同的内容协商机制：`server-driven`、`agent-driven`、`transparent`、其它混合的组合。
 
@@ -145,7 +145,7 @@ agent-driven：用户代理驱动（或称被动）内容协商是根据在客�
 
 ---
 
-## HTTP 持久连接
+### HTTP 持久连接
 
 在 HTTP 协议的初始版本中，每进行一次 HTTP 通信就要建立和断开一次 TCP `Connection`，这样频繁地建立和断开无谓的 TCP `Connection` 会增加网络通信的开销，于是 HTTP/1.1 提出了 [HTTP 持久连接](https://en.wikipedia.org/wiki/HTTP_persistent_connection)（HTTP persistent connection，也称作 HTTP keep-alive 或 HTTP connection reuse）机制。它可以使用同一个 `Connection` 来发送多个 `Request` 和接收多个 `Response`，而不是为每一个新的 `Request` 或 `Response` 都打开新的 `Connection`。
 
@@ -165,7 +165,7 @@ Wireshark 抓包示意图：
 
 ---
 
-## HTTP 管线化
+### HTTP 管线化
 
 HTTP 持久连接使多个请求以管线化的方式发送成为可能。[HTTP 管线化](https://en.wikipedia.org/wiki/HTTP_pipelining)（HTTP pipelining）可以在单个 TCP `Connection` 上并行发送多个客户端的 `Request`，且不需要在发送过程中等待服务端的 `Response`。管线化机制可以提升动态加载 HTML 页面的速度，特别是在高延迟的网络环境下，如连接卫星的网络环境。但对于正常宽带连接的网络环境，提升效果却不是很明显。因为对于客户端并行发送的网络请求，服务端还是需要以相同的顺序响应，这就有可能造成了 HOL blocking（Head-of-line blocking，队头阻塞）。
 
@@ -185,7 +185,7 @@ PS：在理想情况下，HTTP 响应报文是作为整包且有序地发送给�
 
 ---
 
-## HTTP 压缩
+### HTTP 压缩
 
 [HTTP 压缩](https://en.wikipedia.org/wiki/HTTP_compression)（HTTP compression） 是一种在客户端和服务端之间使用压缩算法传输内容的数据传输机制，它可以充分利用带宽，提升网络传输速率。
 
@@ -202,7 +202,7 @@ Wireshark 抓包示意图：
 
 ---
 
-## HTTP 分块传输编码
+### HTTP 分块传输编码
 
 [HTTP 分块传输编码](https://en.wikipedia.org/wiki/Chunked_transfer_encoding)（HTTP Chunked transfer encoding）是一种允许服务端将 `Response` 数据分块传输给客户端的数据传输机制。在分块传输编码中，数据流被分成一系列不重叠的「数据块」，以字节为单位被发送，且彼此独立地被客户端接收。
 
@@ -214,7 +214,7 @@ Wireshark 抓包示意图：
 
 ---
 
-## HTTP 缓存
+### HTTP 缓存
 
 [HTTP 缓存](https://en.wikipedia.org/wiki/Web_cache)（HTTP cache）是一种为了减少网络请求的带宽延迟，从而对页面进行临时存储的技术。通过缓存技术，可以使 `Request` 在满足特定条件的情况下，直接从缓存中获取 `Response` 信息，以此提升页面加载速度和减少对服务器的压力。HTTP 协议定义了三种控制缓存的基本机制：`freshness`、`validation`、`invalidation`。
 
@@ -234,22 +234,22 @@ Wireshark 抓包示意图：
 
 ---
 
-# 安全问题
+## 安全问题
 
-## 被窃听
+### 被窃听
 
-## 被伪装
+### 被伪装
 
-## 被篡改
+### 被篡改
 
 ---
 
-# 其它
+## 其它
 
-## HTTPS
+### HTTPS
 
-## HTTP2
+### HTTP2
 
-## REST
+### REST
 
-## WebSocket
+### WebSocket

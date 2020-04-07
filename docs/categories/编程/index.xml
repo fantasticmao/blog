@@ -6,10 +6,25 @@
     <description>Recent content in 编程 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 14 Nov 2018 10:21:22 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vue 初次体验</title>
+      <link>/posts/vue-qa/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
+      
+      <guid>/posts/vue-qa/</guid>
+      <description>因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element-UI，学完之后之后便匆匆上手了，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
+ Vue 相关 v-bing 指令和 v-on 指令的作用 v-bind 指令的缩写是 :，用于动态绑定一个或多个属性，或者是一个组件的 prop 属性。当 v-bind 绑定的属性是 class 或 style 的时候，表达式的值可以是数组或对象。代码示例和修饰符描述请见 官方文档。
+v-on 指令的缩写是 @，用于绑定事件监听器。v-on 被用于普通元素上时只能监听 原生 DOM 事件，被用于自定义组件元素上时可以监听子组件触发的 自定义事件 （由 $emit 定义的事件）。v-on 指令支持的修饰符有 .stop、.prevent、.once 等等，代码示例和更多修饰符描述请见 官方文档。
+watch 属性和 computed 属性的区别 Vue 实例的 watch 属性用于监听实例对象上的数据，代码示例请见 官方文档。
+Vue 实例的 computed 属性用于计算和生成实例对象的数据，代码示例请见 官方文档。
+父组件如何给子组件传递数据 在 Vue 中，父组件可以使用 prop 属性给子组件传递数据，代码示例请见 官方文档。
+子组件如何反馈数据给父组件 在 Vue 中，子组件可以使用 emit 属性通过事件给父组件反馈数据，代码示例请见 官方文档。</description>
+    </item>
     
     <item>
       <title>GC 对性能的影响对比</title>
@@ -59,25 +74,6 @@
 参考：Wikipedia、java-design-patterns、菜鸟教程
 实现：
  java.lang.StringBuilder &amp;amp; java.lang.StringBuffer org.springframework.boot.web.client.RestTemplateBuilder org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder  工厂方法模式 Factory Method Pattern 意图：定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。Define an interface for creating an object, but let subclasses decide which class to instantiate.</description>
-    </item>
-    
-    <item>
-      <title>如何快速上手一个框架</title>
-      <link>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
-      <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
-      
-      <guid>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
-      <description>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。
-有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。
-开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的主题 —— 关于使用框架的方法论。 一 在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。
-使用 JSON 序列化框架，我们就需要知道 JSON 对象的定义和其序列化机制，如此调用 Jackson、Gson、FastJson 等系列框架的 API 才能明白原理。
-使用 Web 框架，则需要知道 HTTP 协议，知道 HTTP 报文、Cookie - Session 机制、持久连接机制等等，了解这一系列之后，我们使用 Servlet、Spring MVC、Struts 或者包括其它语言的 Web 框架，才能得心顺手。
-同理可得，当使用 Netty 网络编程框架，我们就需要知道必要的更底层的 TCP / IP 等网络知识，虽然我还没接触过。
-未了解过框架涉及领域的专业知识，茫然调用框架提供的 API，是一件很冲动和白费力气的事情。
- 二 第二个阶段是：开始使用框架，牛刀小试。
-这个阶段主要是依靠零碎知识和搜索引擎的帮助，开始使用框架。这期间可能会遇到很多问题，包括对框架概念的不理解、对应用程序抛的异常束手无策等等。在这个阶段，每解决一个问题，都是一次自己能力的小提升。在这个充满挑战的阶段，建议在 IDE 上配置相关 Jar 包的源代码，并在调试程序阶段，通过阅读源代码和注释（开源框架的注释总是很详细的），来理解框架 API 层面提供的功能。这个阶段也可以为后续从点到面地阅读框架源代码做准备。
-举个例子，在实践 Spring IoC 模块时候，起初可能会依靠各种比喻和解释来理解「依赖注入」这个概念，并且会生硬地参照着杂七杂八的 Demo，来编写一个 Spring 应用的代码。这便是我所说的使用框架的第二阶段。
- 三 第三个阶段是：阅读经典书籍，参阅官方文档。</description>
     </item>
     
     <item>

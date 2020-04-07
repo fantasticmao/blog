@@ -12,6 +12,33 @@
     
     
     <item>
+      <title>Java</title>
+      <link>/tags/java/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>/tags/javascript/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue</title>
+      <link>/tags/vue/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>MySQL</title>
       <link>/tags/mysql/</link>
       <pubDate>Sun, 24 Feb 2019 13:50:18 +0800</pubDate>
@@ -26,15 +53,6 @@
       <pubDate>Wed, 14 Nov 2018 10:21:22 +0800</pubDate>
       
       <guid>/tags/jvm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>/tags/java/</link>
-      <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
-      
-      <guid>/tags/java/</guid>
       <description></description>
     </item>
     
@@ -93,11 +111,11 @@
     </item>
     
     <item>
-      <title>JavaScript</title>
-      <link>/tags/javascript/</link>
-      <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
+      <title>Free Talk</title>
+      <link>/tags/free-talk/</link>
+      <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
       
-      <guid>/tags/javascript/</guid>
+      <guid>/tags/free-talk/</guid>
       <description></description>
     </item>
     
