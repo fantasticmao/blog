@@ -71,8 +71,8 @@ $('#icon').attr('src', 'icon.gif'); // 设置 src 属性
 $('#banner').attr({src:'banner.gif', alt:'Adverisement', width:720, height:64});
 $('a').attr('target', '_blank'); // 使所有链接在新窗口中打开
 $('a').attr('target', function () {
-    if (this.host == locaction.host) return '_self';
-    else return '_blank';
+  if (this.host == locaction.host) return '_self';
+  else return '_blank';
 }); // 非站内链接在新窗口中打开
 $('a').attr({target:function () {...}}); // 可以像这样传入函数
 $('a').removeAttr('target'); // 让所有连接在本窗口中打开
@@ -90,7 +90,7 @@ $('a').removeAttr('target'); // 让所有连接在本窗口中打开
 ('div.note').css('board', 'solid black 2px'); // 设置复合样式
 ('h1').css({backgroundColor:'black', textColor:'white', fontVariant:'small-caps', padding:'10px 2px 4px 20px'. boarder:'dotted black 4px'});
 ('h1').css('font-size', function (i, curval) {
-    return Math.round(1.25 * parseInt(vurval));
+  return Math.round(1.25 * parseInt(vurval));
 }); // 使所有的 <h1> 字体增加 25%
 ```
 
@@ -589,7 +589,7 @@ jQuery 的 Ajax 函数还会在 Ajax 请求的每一个相同阶段触发自定�
 
 在 CSS 选择器标准草案定义的选择器语法中，jQuery 支持相当完整的一套子集，同时还添加了一些非标准但很有用的伪类。
 
-选择器语法有三层结构。`#test` 选取 id 属性为 test 的元素，`blockquote` 选取文档中的所有 blockquote 元素，而 `div.note` 则选取所有 class 属性为 note 的 div 元素。简单选择器可以组成「组合选择器」，比如 `div.note>p` 和 `blockquote i`。
+选择器语法有三层结构。`#test` 选取 id 属性为 test 的元素，`blockquote` 选取文档中的所有 blockquote 元素，而 `div.note` 则选取所有 class 属性为 note 的 div 元素。简单选择器可以组成「组合选择器」，比如 `div.note > p` 和 `blockquote i`。
 
 #### 简单选择器
 
@@ -672,7 +672,7 @@ jQuery 的 Ajax 函数还会在 Ajax 请求的每一个相同阶段触发自定�
 "h1, h2, h3"; // 匹配 <h1>、<h2> 和 <h3> 元素
 "#p1 ,#p2, #p3"; // 匹配 id 为 p1、p2 或 p3 的元素
 "div.note, p.note"; // 匹配 class="note" 的 <div> 和 <p> 元素
-"body>p, div.note>p"; // <body> 和 <div class="note"> 的 <p> 子元素
+"body > p, div.note > p"; // <body> 和 <div class="note"> 的 <p> 子元素
 ```
 
 ### 选取方法
