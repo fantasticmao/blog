@@ -11,10 +11,10 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Vim 常用命令"/>
-<meta name="twitter:description" content="本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl &#43; b、PgUp 向上翻页   Ctrl &#43; f、PgDn 向下翻页   Ctrl &#43; u 向上翻半页   Ctrl &#43; d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y &#43; 移动光标 复制光标移动过程中的内容   选中内容 &#43; y 复制光标选中的内容   p 执行 a／向下，再粘贴剪贴板内容   P 执行 i／向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn &#43; Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d &#43; 移动光标 删除光标移动过程中的内容   选中内容 &#43; d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?"/>
+<meta name="twitter:description" content="本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl &#43; b、PgUp 向上翻页   Ctrl &#43; f、PgDn 向下翻页   Ctrl &#43; u 向上翻半页   Ctrl &#43; d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y &#43; 移动光标 复制光标移动过程中的内容   选中内容 &#43; y 复制光标选中的内容   p 执行 a / 向下，再粘贴剪贴板内容   P 执行 i / 向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn &#43; Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d &#43; 移动光标 删除光标移动过程中的内容   选中内容 &#43; d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?"/>
 
     <meta property="og:title" content="Vim 常用命令" />
-<meta property="og:description" content="本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl &#43; b、PgUp 向上翻页   Ctrl &#43; f、PgDn 向下翻页   Ctrl &#43; u 向上翻半页   Ctrl &#43; d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y &#43; 移动光标 复制光标移动过程中的内容   选中内容 &#43; y 复制光标选中的内容   p 执行 a／向下，再粘贴剪贴板内容   P 执行 i／向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn &#43; Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d &#43; 移动光标 删除光标移动过程中的内容   选中内容 &#43; d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?" />
+<meta property="og:description" content="本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl &#43; b、PgUp 向上翻页   Ctrl &#43; f、PgDn 向下翻页   Ctrl &#43; u 向上翻半页   Ctrl &#43; d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y &#43; 移动光标 复制光标移动过程中的内容   选中内容 &#43; y 复制光标选中的内容   p 执行 a / 向下，再粘贴剪贴板内容   P 执行 i / 向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn &#43; Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d &#43; 移动光标 删除光标移动过程中的内容   选中内容 &#43; d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
 <meta property="article:published_time" content="2018-03-31T21:51:23+08:00" />
@@ -137,10 +137,10 @@
 
       <div>
         
-        <p>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 <a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>。<!-- raw HTML omitted --></p>
+        <p>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 <a href="#%E9%99%84">参考资料</a>。<!-- raw HTML omitted --></p>
 <hr>
-<h1 id="normal-模式">Normal 模式</h1>
-<h2 id="移动光标">移动光标</h2>
+<h2 id="normal-模式">Normal 模式</h2>
+<h3 id="移动光标">移动光标</h3>
 <table>
 <thead>
 <tr>
@@ -191,11 +191,11 @@
 </tr>
 <tr>
 <td>^</td>
-<td>移动光标至当前行的第一个 <a href="#%E9%99%84%E5%BD%95">非 blank 字符</a> 位置</td>
+<td>移动光标至当前行的第一个 <a href="#%E9%99%84">非 blank 字符</a> 位置</td>
 </tr>
 <tr>
 <td>g_</td>
-<td>移动光标至当前行的最后一个 <a href="#%E9%99%84%E5%BD%95">非 blank 字符</a> 位置</td>
+<td>移动光标至当前行的最后一个 <a href="#%E9%99%84">非 blank 字符</a> 位置</td>
 </tr>
 <tr>
 <td>${n}G</td>
@@ -227,7 +227,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="复制粘贴删除">复制、粘贴、删除</h2>
+<h3 id="复制粘贴删除">复制、粘贴、删除</h3>
 <table>
 <thead>
 <tr>
@@ -250,11 +250,11 @@
 </tr>
 <tr>
 <td>p</td>
-<td>执行 a／向下，再粘贴剪贴板内容</td>
+<td>执行 a / 向下，再粘贴剪贴板内容</td>
 </tr>
 <tr>
 <td>P</td>
-<td>执行 i／向上，再粘贴剪贴板内容</td>
+<td>执行 i / 向上，再粘贴剪贴板内容</td>
 </tr>
 <tr>
 <td>x</td>
@@ -278,7 +278,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="搜索">搜索</h2>
+<h3 id="搜索">搜索</h3>
 <table>
 <thead>
 <tr>
@@ -305,7 +305,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="普通命令">普通命令</h2>
+<h3 id="普通命令">普通命令</h3>
 <table>
 <thead>
 <tr>
@@ -361,8 +361,8 @@
 </tbody>
 </table>
 <hr>
-<h1 id="visual-模式">Visual 模式</h1>
-<h2 id="选中内容">选中内容</h2>
+<h2 id="visual-模式">Visual 模式</h2>
+<h3 id="选中内容">选中内容</h3>
 <table>
 <thead>
 <tr>
@@ -386,7 +386,7 @@
 </tbody>
 </table>
 <hr>
-<h1 id="insert-模式">Insert 模式</h1>
+<h2 id="insert-模式">Insert 模式</h2>
 <table>
 <thead>
 <tr>
@@ -401,7 +401,7 @@
 </tr>
 <tr>
 <td>I</td>
-<td>从光标所在的第一个 <a href="#%E9%99%84%E5%BD%95">非 blank 字符</a> 位置进入 INSERT 模式</td>
+<td>从光标所在的第一个 <a href="#%E9%99%84">非 blank 字符</a> 位置进入 INSERT 模式</td>
 </tr>
 <tr>
 <td>a</td>
@@ -442,7 +442,7 @@
 </tbody>
 </table>
 <hr>
-<h1 id="command-line-模式">Command-line 模式</h1>
+<h2 id="command-line-模式">Command-line 模式</h2>
 <table>
 <thead>
 <tr>
@@ -530,13 +530,13 @@
 </tbody>
 </table>
 <hr>
-<h1 id="附">#附</h1>
+<h2 id="附">附</h2>
 <ul>
-<li>组合使用 Vim 命令会有很神奇的效果。</li>
-<li>blank 字符指空格符、制表符、回车符、换行符等。</li>
-<li>本文中的 <code>$</code> 表示美元符号；<code>${}</code> 表示占位符，其内容是实际变量。</li>
-<li>本文中的按键以 MacBook 自带键盘为例，与一般键盘有些不同。例如 MacBook 键盘的 Delete 键对应一般键盘的 Backspace、fn + Delete 对应一般键盘的 Delete。</li>
-<li>参考资料
+<li>组合使用 Vim 命令会有很神奇的效果；</li>
+<li>blank 字符指空格符、制表符、回车符、换行符等；</li>
+<li>本文中的 <code>$</code> 表示美元符号；<code>${}</code> 表示占位符，其内容是实际变量；</li>
+<li>本文中的按键以 MacBook 自带键盘为例，与一般键盘有些不同。例如 MacBook 键盘的 Delete 键对应一般键盘的 Backspace、fn + Delete 对应一般键盘的 Delete；</li>
+<li>参考资料：
 <ul>
 <li>Vim :help —— VIM main help file</li>
 <li><!-- raw HTML omitted -->Vim (text editor)<!-- raw HTML omitted --> —— Wikipedia</li>

@@ -149,11 +149,10 @@ public int binarySearch(int[] arr, int low, int high, int key) { // 算法退出
 
       <div>
         
-        <!-- raw HTML omitted -->
-<p>最近留意到关于实现 <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">二分查找算法（Binary Search Algorithm）</a> 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。</p>
+        <p>最近留意到关于实现 <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">二分查找算法（Binary Search Algorithm）</a> 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。</p>
 <p>本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。<!-- raw HTML omitted --></p>
 <hr>
-<h1 id="简单介绍">简单介绍</h1>
+<h2 id="简单介绍">简单介绍</h2>
 <p>在计算机科学中，二分查找也被称为折半查找、对数查找，是一种在有序数组中查找目标元素的搜索算法。</p>
 <p>二分查找会将目标元素与数组中间元素进行比较，若不相等，则目标元素不存在的半段数组会被淘汰，并且查询会在目标元素存在的半段数组中继续进行，直到比较成功为止。如果查询以空数组为结束，则表示目标元素不存在。一次二分查找的具体过程可以参考下图（图片来源自维基百科）：</p>
 <p><img src="../../images/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/1.png" alt="iamge"></p>
@@ -161,7 +160,7 @@ public int binarySearch(int[] arr, int low, int high, int key) { // 算法退出
 <p>二分查找有许多不同的变种版本，例如 <a href="https://en.wikipedia.org/wiki/Fractional_cascading">Fractional Cascading</a> 加速了二分查找在多个数组中对相同数值的搜索速度，有效解决了计算机几何以及其它领域中的一系列搜索相关问题；<a href="https://en.wikipedia.org/wiki/Exponential_search">Exponential Search</a> 扩展了二分查找算法，使其可以应用于无界列表。</p>
 <p>二分查找的算法思想也衍生出了许多其它数据结构和算法，例如 <a href="https://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree</a> 和 <a href="https://en.wikipedia.org/wiki/B-tree">B-Tree</a>。</p>
 <hr>
-<h1 id="初步实现">初步实现</h1>
+<h2 id="初步实现">初步实现</h2>
 <p>以 Java 语言为例，初步实现一个简单的二分查找算法，演示代码如下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 算法退出条件
@@ -183,12 +182,12 @@ public int binarySearch(int[] arr, int low, int high, int key) { // 算法退出
 <span style="color:#f92672">}</span>
 </code></pre></div><p>依据文章开头的小提醒 review 上例代码，可以发现其中存在着的细节问题：</p>
 <ol>
-<li>缺少参数校验<!-- raw HTML omitted -->当输入参数 <code>low</code> 或 <code>high</code> 的数值小于零时，程序会存在逻辑错误。</li>
-<li>递归查找的栈溢出<!-- raw HTML omitted -->当查找的次数足够多时，程序会抛出 <code>java.lang.StackOverflowError</code> 异常。</li>
+<li>缺少参数校验<!-- raw HTML omitted -->当输入参数 <code>low</code> 或 <code>high</code> 的数值小于零时，程序会存在逻辑错误；</li>
+<li>递归查找的栈溢出<!-- raw HTML omitted -->当查找的次数足够多时，程序会抛出 <code>java.lang.StackOverflowError</code> 异常；</li>
 <li>中值计算的整型溢出<!-- raw HTML omitted -->当查找的数组足够大时，直接使用 <code>(low + high) / 2</code> 计算二分查找过程中的中间数值，程序会存在整型数值溢出的问题。</li>
 </ol>
 <hr>
-<h1 id="正确实现">正确实现</h1>
+<h2 id="正确实现">正确实现</h2>
 <p>修复上述提及的三个问题，演示代码如下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 参数校验

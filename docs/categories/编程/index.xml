@@ -18,11 +18,8 @@
       
       <guid>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
       <description>本篇文章记录一个普通 Web 应用在访问量逐渐增加的情况下，不同类型 GC 对应用性能影响的趋势对比。在比较应用性能时，仅以响应时间（Latency）和吞吐量（Throughput）为应用的性能指标。
- 由于不同类型 GC 本该适用于不同类型的应用（例如 Serial GC 适合运行单核 CPU 机器上的小应用，G1 GC 适合运行大内存的应用），所以此次比较结果不能得出各个 GC 谁优谁劣的绝对结论。
-  以响应时间为性能指标
- 以吞吐量为性能指标
- 比较测试结果，总结得出
- Serial GC 在不同强度的并发下，吞吐量和响应时间表现均为最差； Parallel GC 号称是吞吐量优先 GC，但表现却并没有比 CMS GC 和 G1 GC 好很多； 在并发强度逐渐增高的情况下，CMS GC 和 G1 GC 相比 Serial GC 和 Parallel GC 的响应时间表现更好； 在并发强度不高的情况下，CMS GC 相比 G1 GC 的吞吐量表现要稍微好一些。  </description>
+由于不同类型 GC 本该适用于不同类型的应用（例如 Serial GC 适合运行单核 CPU 机器上的小应用，G1 GC 适合运行大内存的应用），所以此次比较结果不能得出各个 GC 谁优谁劣的绝对结论。
+ 以响应时间为性能指标  以吞吐量为性能指标  比较测试结果，总结得出  Serial GC 在不同强度的并发下，吞吐量和响应时间表现均为最差； Parallel GC 号称是吞吐量优先 GC，但表现却并没有比 CMS GC 和 G1 GC 好很多； 在并发强度逐渐增高的情况下，CMS GC 和 G1 GC 相比 Serial GC 和 Parallel GC 的响应时间表现更好； 在并发强度不高的情况下，CMS GC 相比 G1 GC 的吞吐量表现要稍微好一些。  </description>
     </item>
     
     <item>
@@ -46,7 +43,7 @@
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
       <guid>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <description>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl + b、PgUp 向上翻页   Ctrl + f、PgDn 向下翻页   Ctrl + u 向上翻半页   Ctrl + d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y + 移动光标 复制光标移动过程中的内容   选中内容 + y 复制光标选中的内容   p 执行 a／向下，再粘贴剪贴板内容   P 执行 i／向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn + Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d + 移动光标 删除光标移动过程中的内容   选中内容 + d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?</description>
+      <description>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl + b、PgUp 向上翻页   Ctrl + f、PgDn 向下翻页   Ctrl + u 向上翻半页   Ctrl + d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y + 移动光标 复制光标移动过程中的内容   选中内容 + y 复制光标选中的内容   p 执行 a / 向下，再粘贴剪贴板内容   P 执行 i / 向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn + Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d + 移动光标 删除光标移动过程中的内容   选中内容 + d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?</description>
     </item>
     
     <item>
@@ -55,7 +52,7 @@
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
       <guid>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
-      <description>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。 创建型 Creational Patterns 抽象工厂模式 Abstract Factory Pattern 意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
+      <description>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。 创建型 Creational Patterns 抽象工厂模式 Abstract Factory Pattern 意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
 参考：Wikipedia、java-design-patterns、菜鸟教程
 实现：
  org.springframework.beans.factory.FactoryBean#getObject()  生成器模式 Builder Pattern 意图：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。Separate the construction of a complex object from its representation so that the same construction process can create different representations.
@@ -72,10 +69,10 @@
       <guid>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
       <description>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。
 有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。
-开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的 Topic —— 关于使用框架的方法论。 一 在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。
+开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的主题 —— 关于使用框架的方法论。 一 在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。
 使用 JSON 序列化框架，我们就需要知道 JSON 对象的定义和其序列化机制，如此调用 Jackson、Gson、FastJson 等系列框架的 API 才能明白原理。
 使用 Web 框架，则需要知道 HTTP 协议，知道 HTTP 报文、Cookie - Session 机制、持久连接机制等等，了解这一系列之后，我们使用 Servlet、Spring MVC、Struts 或者包括其它语言的 Web 框架，才能得心顺手。
-同理可得，当使用 Netty 网络编程框架，我们就需要知道必要的更底层的 TCP/IP 等网络知识，虽然我还没接触过。
+同理可得，当使用 Netty 网络编程框架，我们就需要知道必要的更底层的 TCP / IP 等网络知识，虽然我还没接触过。
 未了解过框架涉及领域的专业知识，茫然调用框架提供的 API，是一件很冲动和白费力气的事情。
  二 第二个阶段是：开始使用框架，牛刀小试。
 这个阶段主要是依靠零碎知识和搜索引擎的帮助，开始使用框架。这期间可能会遇到很多问题，包括对框架概念的不理解、对应用程序抛的异常束手无策等等。在这个阶段，每解决一个问题，都是一次自己能力的小提升。在这个充满挑战的阶段，建议在 IDE 上配置相关 Jar 包的源代码，并在调试程序阶段，通过阅读源代码和注释（开源框架的注释总是很详细的），来理解框架 API 层面提供的功能。这个阶段也可以为后续从点到面地阅读框架源代码做准备。
