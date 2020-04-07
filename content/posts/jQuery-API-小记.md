@@ -11,23 +11,23 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 
 ---
 
-# jQuery 基础
+## jQuery 基础
 
 jQuery 类库定义了一个全局函数：`jQuery()`。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：`$()`。这是 jQuery 在全局命名空间中定义的唯一两个变量。
 
 在 jQuery 类库中，最重要的方法是 `jQuery()`，也就是 `$()`。它的功能很强大，有 4 中不同的调用方式：
 
-1. 传递 CSS 选择器字符串给 `$()`。当通过这种方式调用时，`$()` 返回当前文档中匹配该选择器的元素集。
-2. 传递一个 Element、Document 或 Window 对象给 `$()`。在这种情况下，`$()` 只须简单地将 Element、Document、Window 对象封装成 jQuery 对象并返回。
-3. 传递 HTML 文本字符串给 `$()`。在这种调用方式下 jQuery 会根据传入的文本创建好 HTML 元素并封装成 jQuery 对象返回。
+1. 传递 CSS 选择器字符串给 `$()`。当通过这种方式调用时，`$()` 返回当前文档中匹配该选择器的元素集；
+2. 传递一个 Element、Document 或 Window 对象给 `$()`。在这种情况下，`$()` 只须简单地将 Element、Document、Window 对象封装成 jQuery 对象并返回；
+3. 传递 HTML 文本字符串给 `$()`。在这种调用方式下 jQuery 会根据传入的文本创建好 HTML 元素并封装成 jQuery 对象返回；
 4. 传入一个函数给 `$()`。此时，文档加载完毕且 DOM 可操作时，传入的函数将被调用。
 
-```javascript
-jQuery(function () {
-  // 文档加载完毕时调用
-  // 所有 jQuery 代码放在这里
-});
-```
+   ```javascript
+   jQuery(function () {
+     // 文档加载完毕时调用
+     // 所有 jQuery 代码放在这里
+   });
+   ```
 
 传递 CSS 选择器字符串给 `$()`，它返回的 jQuery 对象表示匹配该选择器的元素集。**jQuery 对象是类数组，它们拥有 length 属性和介于 0 - length - 1 之间的数值属性。这意味着可以使用标准的数组标识方括号来访问 jQuery 对象的内容**。如果不想把数组标识用在 jQuery 对象上，可以使用 `size()` 来替代 length 属性，用 `get()` 来替代方括号索引。可以使用 `toArray()` 将 jQuery 对象转化为真实数组。
 
@@ -51,19 +51,19 @@ $("div").each(function () {
 
 ---
 
-# jQeury 的 getter 和 setter
+## jQeury 的 getter 和 setter
 
 jQuery 对象上最简单、最常见的操作是获取（get）或设置（set）HTML 属性、CSS 样式、元素内容和位置高宽的值。jQuery 中的 getter 和 setter：
 
-- **jQuery 使用同一个方法即当 getter 用又当 setter 用，而不是定义一对方法**。如果传入一个新值给该方法，则它设置此值；如果没有指定值，则它返回当前值。
-- 用作 setter 时，这些方法会给 jQuery 对象中的每一个元素设置值，然后返回该 jQuery 对象以便链式调用。
-- 用作 setter 时，这些方法经常接收对象参数。在这种情况下，该对象的每个属性都需指定一个将要被设置的键值对。
-- 用作 setter 时，这些方法经常接收函数参数。在这种情况下，会调用该函数来计算需要被设置的值。调用该函数传入的 this 值是对应的元素，第一个参数是该元素的索引值，第二个参数是该元素的当前值。
+- **jQuery 使用同一个方法即当 getter 用又当 setter 用，而不是定义一对方法**。如果传入一个新值给该方法，则它设置此值；如果没有指定值，则它返回当前值；
+- 用作 setter 时，这些方法会给 jQuery 对象中的每一个元素设置值，然后返回该 jQuery 对象以便链式调用；
+- 用作 setter 时，这些方法经常接收对象参数。在这种情况下，该对象的每个属性都需指定一个将要被设置的键值对；
+- 用作 setter 时，这些方法经常接收函数参数。在这种情况下，会调用该函数来计算需要被设置的值。调用该函数传入的 this 值是对应的元素，第一个参数是该元素的索引值，第二个参数是该元素的当前值；
 - 用作 getter 时，这些方法只会查询元素集中的第一个元素，返回单个值。如果需要遍历所有元素，请使用 `map()`。
 
-## 获取和设置 HTML 属性
+### 获取和设置 HTML 属性
 
-`attr()` 是 jQuery 中用于 HTML 属性的 getter/setter。`attr()` 处理浏览器的兼容性和一些特殊情况，还可以让 HTML 属性名和 JavaScript 属性名可以等同使用，如 "for" - "htmlfor"、"class" - "className"。一个相关的函数是 `removeAttr()`。例子：
+`attr()` 是 jQuery 中用于 HTML 属性的 getter / setter。`attr()` 处理浏览器的兼容性和一些特殊情况，还可以让 HTML 属性名和 JavaScript 属性名可以等同使用，如 "for" - "htmlfor"、"class" - "className"。一个相关的函数是 `removeAttr()`。例子：
 
 ```javascript
 $('form').attr('action'); // 获取第一个 form 元素的 action 属性
@@ -78,7 +78,7 @@ $('a').attr({target:function () {...}}); // 可以像这样传入函数
 $('a').removeAttr('target'); // 让所有连接在本窗口中打开
 ```
 
-## 获取和设置 CSS 属性
+### 获取和设置 CSS 属性
 
 `css()` 和 `attr()` 很类似，只是 `css()` 作用于元素的 CSS 样式，而不是元素的 HTML 属性。`css()` 返回元素的当前的样式，返回值可能来自 style 属性也可能来自样式表。`css()` 允许在 CSS 样式名中使用连字符或驼峰格式的 JavaScript 样式名。
 
@@ -94,7 +94,7 @@ $('a').removeAttr('target'); // 让所有连接在本窗口中打开
 }); // 使所有的 <h1> 字体增加 25%
 ```
 
-## 获取和设置 CSS 类
+### 获取和设置 CSS 类
 
 `addClass()` 和 `removeClass()` 用来从选中元素中添加和删除类。`toggleClass()` 在当元素还没有某些类时，给元素添加这些类，反之则删除。`hasClass()` 用来判断某类是否存在。例子：
 
@@ -132,7 +132,7 @@ $("#lead").is(".first"); // 功能和上面类似
 $("#lead").is(".first.hilite"); // is() 比 hasClass() 更灵活
 ```
 
-## 获取和设置 HTML 表单值
+### 获取和设置 HTML 表单值
 
 `val()` 用来获取和设置 HTML 表单元素的 value 属性，还可以用于获取和设置复选框、单选按钮以及 `<select>` 元素的选中状态。
 
@@ -149,7 +149,7 @@ $("input:text").val(function () {
 });
 ```
 
-## 获取和设置元素的内容
+### 获取和设置元素的内容
 
 `text()` 和 `html()` 用来获取和设置元素的纯文本或 HTML 内容。当不带参数调用时，`text()` 返回所有匹配元素的子孙文本节点的纯文本内容，`html()` 返回第一个匹配元素的 HTML 内容。如果传入字符串给 `text()` 或 `html()`，该字符串会用作该元素的纯文本或格式化 HTML 文本内容。
 
@@ -162,19 +162,19 @@ $("h1").text(function (n, current) {
 });
 ```
 
-## 获取和设置元素的位置高宽
+### 获取和设置元素的位置高宽
 
 使用 `offset()` 可以获取或设置元素的位置。该方法相对文档来计算位置值，返回一个对象，带有 left 和 top 属性，代表 X 和 Y 坐标。
 
 `position()` 很像 `offset()`，但它只能用作 getter，返回的元素是相对于其偏移父元素的，而不是相对于文档的。
 
-用于获取元素宽度和高度的 getter/setter 共有 3 个。`width()` 和 `height()` 返回基本的宽度和高度，不包含内边距、边框、外边距。`innerWidth()` 和 `innerHeight()` 返回元素的宽度和高度，包含内边距的宽度和高度。`outerWidth()` 和 `outerHeight()` 通常返回的是包含元素内边距和边框的尺寸。
+用于获取元素宽度和高度的 getter / setter 共有 3 个。`width()` 和 `height()` 返回基本的宽度和高度，不包含内边距、边框、外边距。`innerWidth()` 和 `innerHeight()` 返回元素的宽度和高度，包含内边距的宽度和高度。`outerWidth()` 和 `outerHeight()` 通常返回的是包含元素内边距和边框的尺寸。
 
 `scrollTop()` 和 `scrollLeft()` 可获取或设置元素的滚动条位置。这些方法可用在 Window 对象以及 Document 元素上。当用在 Document 对象上时，会获取或设置存放该 Document 的 Window 对象的滚动条位置。
 
-## 获取和设置元素数据
+### 获取和设置元素数据
 
-jQuery 定义了一个名为 `data()` 的 getter/setter 方法，可用来获取或设置与文档元素、Document、Window 对象相关的数据。
+jQuery 定义了一个名为 `data()` 的 getter / setter 方法，可用来获取或设置与文档元素、Document、Window 对象相关的数据。
 
 `removeData()` 用来从元素中删除数据。如果不带参数调用 `removeData()`，它会删除与元素相关联的所有数据。
 
@@ -186,7 +186,7 @@ var x = $("#mydiv").data(x); // 获取一些数据
 
 ---
 
-# 修改文档结构
+## 修改文档结构
 
 HTML 文档表示为一棵节点树，而不是一个字符的线性序列，因此插入、删除、替换操作不会像操作字符串和数组一样简单。
 
@@ -213,11 +213,11 @@ jQuery 定义了 3 种包装函数。`warp()` 包装每一个选中元素，`wra
 
 ---
 
-# 使用 jQuery 处理事件
+## 使用 jQuery 处理事件
 
 jQuery 定义了一个统一事件 API，可兼容 IE（包括 IE9 以下），并能在所有浏览器中工作。jQuery API 具有简单的形式，比标准或 IE 的事件 API 更容易使用。jQuery API 还具有更复杂、功能更齐全的形式，比标准 API 更强大。
 
-## 事件处理程序的简单注册
+### 事件处理程序的简单注册
 
 jQuery 定义了简单的事件注册方法，可用于常用和普适的每一个浏览器事件。比如，给单击事件注册一个事件处理程序，只要调用 `click()` ：
 
@@ -244,17 +244,16 @@ resize 和 unload 事件类型只在 Window 对象中触发，如果想要给这
 
 除了这些简单的事件注册方法外，还有两个特殊形式的方法，有时很有用：
 
-- `hover()` 用来给 mouseenter 和 mouseleave 事件注册处理程序。调用 `hover(f, g)` 就和先调用 `mouseenter(f)` 然后调用 `mouseleave(g)` 一样。如果仅传入一个参数，该参数函数会同时用做 enter 和 leave 事件的处理程序。
-
+- `hover()` 用来给 mouseenter 和 mouseleave 事件注册处理程序。调用 `hover(f, g)` 就和先调用 `mouseenter(f)` 然后调用 `mouseleave(g)` 一样。如果仅传入一个参数，该参数函数会同时用做 enter 和 leave 事件的处理程序；
 - `toggle()` 将事件处理程序绑定到单击事件。可以指定两个或多个处理程序函数，当单击事件发生时，jQuery 每次会调用一个处理程序函数。例如，如果调用 `toggle(f, g, h)`，第一次单击事件触发时，会调用函数 `f()`，第二次会调用 `g()`，第三次会调用 `h()`，然后第四次会再调用 `f()`。
 
-## jQuery 事件处理程序
+### jQuery 事件处理程序
 
 上面例子中的事件处理程序函数被当作是不带参数以及不返回值的，但 jQuery 调用每一个事件处理程序，实际上都传入了一个或多个参数，并且对处理程序的返回值进行了处理。**需要知道的最重要的一件事情是，每个事件处理程序都传入了一个 [jQuery 事件对象](#jQuery-事件对象) 作为第一个参数**。该对象的字段提供了与该事件相关的详细信息，比如鼠标指针的坐标。jQuery 模拟标准 Event 对象，即便在不支持的标准事件对象的浏览器中（像 IE8 及其以下），jQuery 事件对象在所有浏览器上都拥有一组相同的字段。
 
 jQuery 事件处理程序函数的返回值始终是有意义的。如果处理程序返回 false，则与该事件相关联的默认行为，以及该事件接下来的冒泡都会被取消。也就是说，返回 false 等同于调用 Event 对象的 `preventDefault()` 和 `stopPropagation()`。同样，当事件处理程序返回一个值（非 undefined 值）时，jQuery 会将该值存储在 Event 对象的 result 属性中，该属性可以被后续调用的事件处理程序访问。
 
-## jQuery 事件对象
+### jQuery 事件对象
 
 jQuery 通过定义自己的 Event 对象来隐藏浏览器之间的实现差异。当一个 jQuery 事件处理程序被调用时，总会传入一个 jQuery 事件对象作为其第一个参数。jQuery 会将以下所有字段从原声 Event 对象中复制到 jQuery 事件对象上，尽管对于特定事件类型来说，有些字段值为 undefined。
 
@@ -278,7 +277,7 @@ stopPropagation()           isPropagationStopped()
 stopImmediatePropagation()  isImmediatePropagationStopped()
 ```
 
-## 触发事件
+### 触发事件
 
 手动触发事件最简单的方式是不带参数调用事件注册的简单方法，比如 `click()` 或 `mouseover()`。与很多 jQuery 方法可以同时用做 getter 和 setter 一样，这些事件方法在带有一个参数时会注册事件处理程序，不带参数调用时则会触发事件处理程序。例如：
 
@@ -292,13 +291,13 @@ $("#my_form").submit(); // 就和用户单击提交按钮一样
 
 同时需要注意，jQuery 的事件触发机制是同步的（不涉及事件队列）。
 
-## 事件处理程序的高级注册 & 实时事件
+### 事件处理程序的高级注册 & 实时事件
 
 书中介绍使用 `bind()`，但实际建议使用 `on()`。
 
 ---
 
-# 动画效果
+## 动画效果
 
 jQuery 定义了 `fadeIn()` 和 `fadeOut()` 等简单的方法实现常见视觉效果。除了简单动画方法，jQuery 还定义了一个 `animate()`，用来实现更复杂的自定义动画。
 
@@ -308,20 +307,26 @@ jQuery 定义了 `fadeIn()` 和 `fadeOut()` 等简单的方法实现常见视觉
 $("#blinker").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 ```
 
-## 简单动画
+### 简单动画
 
 - `fadeIn()`、`fadeOut()`、`fadeTo()`
+
   这是最简单的动画：`fadeIn()` 和 `fadeOut()` 简单地改变 CSS 的 opacity 属性显示或隐藏元素。两者都接受可选的时长和回调参数。`fadeTo()` 稍有不同，它需要传入一个 opacity 目标值，`fadeTo()` 会将元素的当前 opacity 值变化到目标之。调用 `fadeTo()` 时，第一参数必须是时长或选项对象，第二参数是 opacity 目标值，第三参数是回调函数。
+
 - `show()`、`hide()`、`toggle()`
+
   `hide()` 和 `show()` 只是简单地立刻隐藏或显示选中元素，带有时长或选项对象时，它们会隐藏或显示有个动画过程。`toggle()` 可以改变在上面调用它的元素的可视状态：如果隐藏，则调用 `show()`，如果显示，则调用 `hide()`。
+
 - `slideDown()`、`slideUp()`、`slideToggle()`
+
   `slideUp()` 会隐藏 jQuery 对象中的元素，方式是将其高度动态变化到 0 ，然后设置 CSS 的 display 属性为 none。`slideDown()` 执行反向操作，来使得隐藏的元素再次可见。`slideToggle()` 使用向上滑动或向下滑动动画来切换元素的可见性。
 
-## 自定义动画
+### 自定义动画
 
 `animate()` 可以实现更多通用的动画效果。第一个参数是必需的，它必须是一个对象，该对象的属性指定要变化的 CSS 属性和它们的目标值。第二个参数是可选的，可以传入一个选项对象给 `animate()`。通常，`animate()` 接收两个对象参数，第一个指定动画内容，第二个指定如何定制动画。
 
 1. 动画属性对象
+
    该对象的属性名必须是 CSS 属性，这些属性的值必须是动画的目标值。动画只支持数值属性：对于颜色、字体或 display 等枚举属性是无法实现动画效果的。如果属性值是数值，则默认单位是像素。如果属性值是字符串，可以指定单位。还可以指定相对值，用「+=」前缀表示增加，用「-=」前缀表示减少。jQuery 动画属性对象中，还可以使用 hide、show、toggle 这三个属性值。
 
    ```javascript
@@ -339,15 +344,16 @@ $("#blinker").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
    ```
 
 2. 动画选项对象
+
    该选项对象用来指定动画如何执行。duration 属性指定动画持续的毫秒时间，其值可以是 fast、slow 或任何 jQuery.fx.speeds 中定义的名称。complete 属性指定动画完成时的回调函数。setp 属性指定在动画每一步或每一帧调用的回调函数。在回调函数中，this 指向正在连续变化的元素，第一个参数则是正在变化的属性值。queue 属性指定动画是否需要队列化，即是否需要等到所有尚未发生的动画都完成后再执行该动画。默认情况下，所有动画都是队列化的。easing 属性指定缓动函数名，jQuery 默认使用的是命为 swing 的正弦函数。
 
 ---
 
-# jQuery 中的 Ajax
+## jQuery 中的 Ajax
 
 在 Web 应用编程技术里，Ajax 很流行，它使用 HTTP 脚本来按需加载数据，而不需要刷新整个页面。jQuery 定义了一个高级工具方法和四个高级工具函数。这些高级工具都基于同一个强大的底层函数：`jQuery.ajax()`。
 
-## load() 方法
+### load() 方法
 
 `load()` 是所有 jQuery 工具中最简单的：向它传入一个 URL，它会异步加载该 URL 的内容，然后将内容插入每一个选中的元素，替换掉已经存在的任何内容。例如：
 
@@ -377,11 +383,11 @@ $("#temp").load("wheather_report.html #temperature");
 | timout        | 如果 Ajax 请求没有在选定的超时时间内完成，会调用错误回调，并传入该状态码。                                          |
 | parsererror   | 该状态码表示 HTTP 请求已经成功完成，但 jQuery 无法按照期望的方式解析。                                              |
 
-## Ajax 工具函数
+### Ajax 工具函数
 
 jQuery 的其它 Ajax 高级工具不是方法，而是函数，可以通过 `jQuery` 或 `$` 直接调用，而不是在 jQuery 对象上调用。
 
-### jQuery.getScript()
+#### jQuery.getScript()
 
 `jQuery.getScript()` 函数的第一个参数是 JavaScript 代码文件的 URL。它会异步加载文件，加载完成之后在全局作用域执行该代码。它能同时适用于同源和跨源脚本：
 
@@ -401,7 +407,7 @@ jQuery.getScript("js/jquery.my.plugin.js", function () {
 
 传递给 `jQuery.getScript()` 的回调函数，仅在请求成功完成时才会被调用。
 
-### jQuery.getJSON()
+#### jQuery.getJSON()
 
 `jQuery.getJSON()` 和 `jQuery.getScript()` 类似：它会获取文本，然后特殊处理一下，再调用指定的回调函数。`jQuery.getJSON()` 获取到文本之后，不会将其当作脚本执行，而会将其解析为 JSON。`jQuery.getJSON()` 只有在传入了回调函数时才有用。当成功加载 URL，以及将内容成功解析为 JSON 后，解析的结果会作为第一个参数传入回调函数中。
 
@@ -414,7 +420,7 @@ jQuery.getJSON("data.json", function (data) {
 
 与 `jQuery.getScript()` 不同，`jQuery.getJSON()` 接受一个可选的数据对象参数，就和传入 `load()` 中的一样。
 
-### jQuery.get() 和 jQuery.post()
+#### jQuery.get() 和 jQuery.post()
 
 `jQuery.get()` 和 `jQuery.post()` 获取指定 URL 的内容，如果有数据的话，还可以传入指定数据，最后则将结果传递给指定的回调函数。`jQuery.get()` 使用 HTTP GET 请求来实现，`jQuery.post()` 使用 HTTP POST 请求实现。与 `jQuery.getJSON()` 一样，这两个方法也接受相同的三个参数：必须的回调函数，可选的数据字符串或对象，以及一个技术上可选但实际上总会使用的回调函数。调用的回调函数会被传入三个参数：第一个参数是返回的数据，第二个是 success 字符串，第三个则是 XMLHttpRequest 对象。
 
@@ -429,7 +435,7 @@ jQuery.getJSON("data.json", function (data) {
 | json     | 请求的 URL 被认为指向 JSON 格式的数据文件                                                                      |
 | jsonp    | 请求的 URL 被认为指向服务器脚本，该脚本支持 JSONP 协议，可以将 JSON 格式的数据作为参数传递给客户端指定的函数。 |
 
-## jQuery.ajax() 函数
+### jQuery.ajax() 函数
 
 jQuery 的所有 Ajax 工具最后都会调用 `jQuery.ajax()` —— 这是整个类库中最复杂的函数。`jQuery.ajax()` 仅接受一个参数：一个选项对象，该对象的属性指定 Ajax 请求如何执行的很多细节。例如，`jQuery.getScript(url, callback)` 与下面 `jQuery.ajax()` 的调用等价：
 
@@ -454,68 +460,111 @@ jQuery.ajaxSetup({
 
 运行以上代码后，指定的 timeout 和 cache 选项会在所有未指定这两个选项值的 Ajax 请求中使用，包括 `jQuery.get()` 和 `load()` 等高级工具。
 
-### 通用选项
+#### 通用选项
 
 `jQuery.ajax()` 中最常用的选项如下：
 
 - type
+
   指定 HTTP 的请求方法。默认是 GET，另一个常用值是 POST。可以指定其它 HTTP 的请求方法，比如 DELETE 或 PUSH，但不是所有浏览器都支持它们。
+
 - url
+
   要获取的 URL。对于 GET 请求，data 选项会添加到该 URL 后。
+
 - data
+
   添加到 URL 中（GET 请求）或在请求体中（POST 请求）发送的数据。
+
 - dataType
+
   指定响应数据的预期类型，以及 jQuery 处理该数据的方式。
+
 - contentType
+
   指定请求的 HTTP Content-Type 头。默认值是 application/x-www-form-urlencoded，这是 HTML 表单和绝大部分服务器脚本使用的正常值。
+
 - timeout
+
   超时时间，单位是毫秒。
+
 - cache
+
   对于 GET 请求，如果该选项设置为 false，jQuery 会添加一个「\_=」参数到 URL 中，或者替换已经存在的同名参数。该参数的值是当前时间（毫秒格式），这可以禁用基于浏览器的缓存。
+
 - ifModified
+
   当选项值设置为 true 时，jQuery 会为请求的每一个 URL 记录 Last-Modified 和 If-None-Match 响应头的值，并会在接下来的请求中为相同的 URL 设置这些头部信息。这可以使得，如果上次请求后 URL 的内容没有改变，则服务器会发送回 HTTP 304 Not-Modified 响应。
+
 - global
+
   该选项指定 jQuery 是否应该触发上面描述的 Ajax 请求过程中的事件。默认值是 true，设置该选项为 false 会禁用 Ajax 相关的所有事件。
 
-### 回调
+#### 回调
 
 下面的选项指定在 Ajax 请求的不同阶段调用的函数。
 
 - context
+
   该选项指定回调函数在调用时的上下文对象 —— 就是 this。该选项没有默认值，如果不设置，this 会指向选项对象。
+
 - beforeSend
+
   该选项指定 Ajax 请求发送到服务器之前激活的回调函数。第一个参数是 XMLHttpRequest 对象，第二个参数是该请求的选项对象。如果该回调函数返回 false，Ajax 请求会取消。注意跨域的 script 和 jsonp 请求没有使用 XMLHttpRequest 对象，因此不会触发 beforeSend 回调。
+
 - success
+
   该选项指定 Ajax 请求成功完成时调用的回调函数。第一个参数是服务器发送的数据，第二个参数是 jQuery 状态码，第三个参数是用来发送该请求的 XMLHttpRequest 对象。
+
 - error
+
   该选项指定 Ajax 请求不成功时调用的回调函数。该回调函数的第一个参数是该请求 XMLHttpRequest 对象，第二个参数是 jQuery 状态码。
+
 - complete
+
   该选项指定 Ajax 请求完成时激活的回调函数。每一个 Ajax 请求或者成功时调用 success 回调，或者失败时调用 error 回调。在调用 success 或 error 后，jQuery 会调用 complete 回调。第一个参数是 XMLHttpRequest 对象，第二个参数是 jQuery 状态码。
 
-### 不常用的选项和钩子
+#### 不常用的选项和钩子
 
 下述的 Ajax 选项不经常使用。
 
 - async
+
   脚本化的 HTTP 请求本身就是异步的。然而，XMLHttpRequest 对象提供了一个选项，可用来阻塞当前进程，直到接收到响应。如果想开启这一阻塞行为，可以设置该选项为 false。
+
 - dataFilter
+
   该选项指定一个函数，用来过滤或预处理服务器返回的数据。第一个参数是从服务器返回的原始数据，第二个参数是 dataType 选项的值。
+
 - jsonp
+
   跨域问题应由服务端解决，略。
+
 - jsonpCallback
+
   跨域问题应由服务端解决，略。
+
 - processData
+
   当设置 data 选项为对象时，jQuery 通常会将该对象转换成字符串，该字符串遵守标准的 application/x-www-form-urlencoded 格式。如果想省略掉该步骤，可以设置该选项为 false。
+
 - scriptCharset
+
   对于跨域的 script 和 jsonp 请求，会使用 `<script>` 元素，该选项用来指定 `<script>` 元素的 charset 属性值。
+
 - tranditional
+
   jQuery 1.4 改变了数据对象序列化为 application/x-wwww-form-urlencoded 字符串的方式。设置该选项为 true，可以让 jQuery 恢复到原来的方式。
+
 - username, password
+
   如果请求需要密码验证，可以使用这两个选项来指定用户名和密码。
+
 - xhr
+
   该选项指定一个工厂函数，用来获取 XMLHttpRequest 对象。
 
-## Ajax 事件
+### Ajax 事件
 
 jQuery 的 Ajax 函数还会在 Ajax 请求的每一个相同阶段触发自定义事件。下面的表格展示了这些回调函数和响应的事件。
 
@@ -534,15 +583,15 @@ jQuery 的 Ajax 函数还会在 Ajax 请求的每一个相同阶段触发自定�
 
 ---
 
-# jQuery 选择器和选取方法
+## jQuery 选择器和选取方法
 
-## jQuery 选择器
+### jQuery 选择器
 
 在 CSS 选择器标准草案定义的选择器语法中，jQuery 支持相当完整的一套子集，同时还添加了一些非标准但很有用的伪类。
 
 选择器语法有三层结构。`#test` 选取 id 属性为 test 的元素，`blockquote` 选取文档中的所有 blockquote 元素，而 `div.note` 则选取所有 class 属性为 note 的 div 元素。简单选择器可以组成「组合选择器」，比如 `div.note>p` 和 `blockquote i`。
 
-### 简单选择器
+#### 简单选择器
 
 | 过滤器           | 含义                                                                          |
 | ---------------- | ----------------------------------------------------------------------------- |
@@ -593,7 +642,7 @@ jQuery 的 Ajax 函数还会在 Ajax 请求的每一个相同阶段触发自定�
 
 通常来说，指定标签类型前缀，可以让过滤器运行得更高效。ID 过滤器是个例外，不添加标签前缀时，它会更高效。
 
-### 组合选择器
+#### 组合选择器
 
 使用特殊操作符或「组合符」可以将简单选择器组合起来，表达文档树中元素之间的关系。
 
@@ -613,7 +662,7 @@ jQuery 的 Ajax 函数还会在 Ajax 请求的每一个相同阶段触发自定�
 "div.note > h1 + p"; // 紧跟 <h1> 的 <p> 元素，在 <div class="note"> 里面
 ```
 
-### 选择器组
+#### 选择器组
 
 传递给 `$()` 函数，或在样式表中使用的选择器，就是选择器组。这是一个逗号分隔的列表，由一个或多个简单选择器或组合选择器构成。
 
@@ -626,7 +675,7 @@ jQuery 的 Ajax 函数还会在 Ajax 请求的每一个相同阶段触发自定�
 "body>p, div.note>p"; // <body> 和 <div class="note"> 的 <p> 子元素
 ```
 
-## 选取方法
+### 选取方法
 
 jQuery 还定义了一些选取方法，这些选取方法提供的多数功能与选择器语法的功能是一样的。
 
@@ -650,8 +699,8 @@ $("div").slice(-3); // 选取最后 3 个 <div> 元素
 
 `filter()` 是通用的选区过滤方法，有 3 种调用方式：
 
-- 传递选择器字符串，`filter()` 会返回匹配该选择器字符串的新 jQuery 对象。
-- 传递另一个 jQuery 对象，`filter()` 会返回一个包含这两个对象交集的新 jQuery 对象。
+- 传递选择器字符串，`filter()` 会返回匹配该选择器字符串的新 jQuery 对象；
+- 传递另一个 jQuery 对象，`filter()` 会返回一个包含这两个对象交集的新 jQuery 对象；
 - 传递判断函数，`filter()` 会为每一个元素调用该判断函数，并返回包含所有函数执行结果为 true 的元素的新 jQuery 对象。
 
 ```javascript
@@ -685,7 +734,7 @@ var paras = document.getElementByTagName("p"); // 类数组对象
 $("div").add(paras); // 给 add() 传入元素数组
 ```
 
-### 将选中元素集用作上下文
+#### 将选中元素集用作上下文
 
 jQuery 还定义了一些选取方法，可将当前选中元素作为上下文来使用。这些方法会使用该选中元素作为上下文或起始点，来得到新的选中元素，然后返回一个包含新选中元素并集的 jQuery 对象。
 
@@ -731,12 +780,12 @@ $("li").parent(); // 列表元素的父节点，比如 <ul> 和 <ol> 元素
 $("a[href]").parents("p"); // 含有链接的 <p> 元素
 ```
 
-### 恢复到之前的选中元素集
+#### 恢复到之前的选中元素集
 
 为了实现方法的链式调用，很多 jQuery 对象的方法最后都会返回调用对象。虽然可以链式调用下去，但必须清楚地意识到，在链式调用后面所操作的元素集，可能已经不是该链式调用开始时的元素集了。
 
 ---
 
-# 总结
+## 总结
 
 即使是现在，面对诸如 Vue.js、Angular.js 等 MVVM 框架的兴起，jQuery 库依然很流行。可见掌握 jQuery 的使用对于一名 Web 开发人员的重要性。

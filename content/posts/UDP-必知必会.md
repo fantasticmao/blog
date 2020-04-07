@@ -1,7 +1,7 @@
 ---
 title: "UDP 必知必会"
 date: 2017-12-23T15:39:28+08:00
-categories: ["网络基础"]
+categories: ["网络"]
 tags: ["UDP"]
 ---
 
