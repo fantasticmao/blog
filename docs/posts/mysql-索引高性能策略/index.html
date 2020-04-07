@@ -65,7 +65,7 @@ CREATE TABLE People ( last_name VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="../../css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -90,7 +90,7 @@ CREATE TABLE People ( last_name VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="/">
+    <a class="navigation-title" href="../../">
       FantasticMao&#39;s Blog
     </a>
     
@@ -150,11 +150,11 @@ CREATE TABLE People ( last_name VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT
           </div>
           <div class="categories">
   <i class="fas fa-folder"></i>
-    <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div>
+    <a href="../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div>
 
           <div class="tags">
   <i class="fas fa-tag"></i>
-    <a href="/tags/mysql/">MySQL</a></div>
+    <a href="../../tags/mysql/">MySQL</a></div>
 
         </div>
       </header>
@@ -172,7 +172,7 @@ CREATE TABLE People ( last_name VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT
 <h2 id="索引的类型">索引的类型</h2>
 <p>索引有很多种类型，可以为不同的场景提供更好的性能。在 MySQL 中，索引是在存储引擎层而不是服务器层实现的。所以，并没有统一的索引标准，不同存储引擎的索引的工作方式并不一样，也不是所有的存储引擎都支持所有类型的索引，即使多个存储引擎支持同一种类型的索引，其底层实现也可能不同。</p>
 <p>MySQL 逻辑架构可以参考下图（图片来源自 <a href="https://www.rathishkumar.in/2016/04/understanding-mysql-architecture.html">网络</a>）:</p>
-<p><img src="/images/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/1.png" alt="image"></p>
+<p><img src="../../images/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/1.png" alt="image"></p>
 <h3 id="b-tree-索引">B-Tree 索引</h3>
 <p>当人们谈论索引的时候，如果没有特别指明类型，多半说的是 <a href="https://en.wikipedia.org/wiki/B-tree">B-Tree</a> 索引，它使用 B-Tree 数据结构来存储数据。底层的存储引擎也可能使用不同的存储结构，例如 NDB 群集存储引擎内部实际上使用了 <a href="https://en.wikipedia.org/wiki/T-tree">T-Tree</a> 结构存储索引，InnoDB 则使用的是 <a href="https://en.wikipedia.org/wiki/B%2B_tree">B+Tree</a> 数据结构。</p>
 <p>存储引擎以不同的方式使用 B-Tree 索引，性能也各有不同、各有优劣。例如 MyISAM 使用前缀压缩技术使得索引更小，但 InnoDB 则按照原数据格式进行存储。再如 MyISAM 索引通过数据的物理位置引用被索引的行，而 InnoDB 则根据主键引用被索引的行。</p>
@@ -392,7 +392,7 @@ possible_keys: rental_date
       
         · CDN
         <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
-          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+          <img src="../../images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
         </a>
       
       

@@ -53,7 +53,7 @@ public class Generic&lt;T&gt; { private T t; public T getT() { return t; } publi
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="../../css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -78,7 +78,7 @@ public class Generic&lt;T&gt; { private T t; public T getT() { return t; } publi
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="/">
+    <a class="navigation-title" href="../../">
       FantasticMao&#39;s Blog
     </a>
     
@@ -138,11 +138,11 @@ public class Generic&lt;T&gt; { private T t; public T getT() { return t; } publi
           </div>
           <div class="categories">
   <i class="fas fa-folder"></i>
-    <a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
+    <a href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
 
           <div class="tags">
   <i class="fas fa-tag"></i>
-    <a href="/tags/java/">Java</a></div>
+    <a href="../../tags/java/">Java</a></div>
 
         </div>
       </header>
@@ -217,7 +217,7 @@ public class Generic&lt;T&gt; { private T t; public T getT() { return t; } publi
 <p>It is misleading, because the declaration of a generic is never actually expanded in this way. There aren&rsquo;t multiple copies of the code&ndash;not in source, not in binary, not on disk and not in memory. If you are a C++ programmer, you&rsquo;ll understand that this is very different than a C++ template.</p>
 </blockquote>
 <p>反编译例 <a href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB">Generic 泛型类</a> 中的代码，可见结果如下图。这也证实了 Java 在字节码文件中存储泛型类的 <strong>具体类型</strong> 确实只是简单的 <code>java.lang.Object</code> 类型，也就意味着类在运行时的 <strong>具体类型</strong> 已经被擦除了。</p>
-<p><img src="/images/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/1.png" alt="image"></p>
+<p><img src="../../images/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/1.png" alt="image"></p>
 <p>由于擦除现象的存在，泛型代码在不指定边界的情况下，其类定义的 <strong>参数类型</strong> 在代码运行时只能被作为 <code>java.lang.Object</code> 使用，我们因此也无法使用反射获取 <strong>具体类型</strong> 的任何信息。</p>
 <p>在 Java 泛型的具体实现中，编译器将会把泛型类在运行时的 <code>java.lang.Object</code> 类型转成编译期的 <strong>具体类型</strong>。Java 泛型的这种实现机制就好似 <a href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB">Generic 泛型类</a> 代码是如下这样编写的：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Generic</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
@@ -233,7 +233,7 @@ public class Generic&lt;T&gt; { private T t; public T getT() { return t; } publi
 <span style="color:#f92672">}</span>
 </code></pre></div><h3 id="如何弥补擦除">如何弥补擦除</h3>
 <p>为了明确类在运行时的 <strong>具体类型</strong>，我们可以使用 Java 泛型的 <a href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%92%8C%E8%BE%B9%E7%95%8C">边界</a> 来指定擦除的边界。将 <a href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB">Generic 泛型类</a> 的 <strong>参数类型</strong> 调整为 <code>&lt;T extends Number&gt;</code> 然后再次进行反编译，结果如下图。可见此时的 <strong>参数类型</strong> 在代码运行时确实仅被擦除到了 <code>java.lang.Number</code> 类型，我们也由此可以在泛型代码中调用 <code>java.lang.Number</code> 的所有属性和方法。</p>
-<p><img src="/images/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/2.png" alt="image"></p>
+<p><img src="../../images/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/2.png" alt="image"></p>
 <p>除此之外，我们还可以通过显示地传入 <code>java.lang.Class</code> 对象，结合使用反射来弥补一些泛型擦导致的缺陷。以及，数组类型的泛型定义可以通过 <code>List&lt;T&gt;</code> 来替换。如下所示：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Erased</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> T t<span style="color:#f92672">;</span>
@@ -313,7 +313,7 @@ public class Generic&lt;T&gt; { private T t; public T getT() { return t; } publi
       
         · CDN
         <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
-          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+          <img src="../../images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
         </a>
       
       
