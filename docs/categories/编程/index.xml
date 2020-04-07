@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编程 on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/</link>
+    <link>/categories/%E7%BC%96%E7%A8%8B/</link>
     <description>Recent content in 编程 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 14 Nov 2018 10:21:22 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>GC 对性能的影响对比</title>
-      <link>https://blog.fantasticmao.cn/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</link>
+      <link>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</link>
       <pubDate>Wed, 14 Nov 2018 10:21:22 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
+      <guid>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
       <description>本篇文章记录一个普通 Web 应用在访问量逐渐增加的情况下，不同类型 GC 对应用性能影响的趋势对比。在比较应用性能时，仅以响应时间（Latency）和吞吐量（Throughput）为应用的性能指标。
  由于不同类型 GC 本该适用于不同类型的应用（例如 Serial GC 适合运行单核 CPU 机器上的小应用，G1 GC 适合运行大内存的应用），所以此次比较结果不能得出各个 GC 谁优谁劣的绝对结论。
   以响应时间为性能指标
@@ -27,10 +27,10 @@
     
     <item>
       <title>Java 内存模型与线程</title>
-      <link>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <link>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
       <description>摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。
 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。 硬件的效率与一致性 计算机的大部分运算任务都不可能只靠处理器（CPU）计算就能完成。因为大部分情况下，处理器都需要与存储设备（内存）进行交互，例如读取数据、存储运算结果等。
 由于计算的 CPU 与内存的运算速度存在几个数量级的差距，所以现代大部分计算机系统都加入了一层读写速度尽可能接近 CPU 运算速度的 高速缓存（Cache），用来作为 CPU 和内存的缓冲。这种缓冲的运行机制是：将 CPU 运算所需要使用到的数据复制到缓存中，让运算能快速进行；当运算结束之后再从缓冲同步回内存之中。通过这种方式，CPU 就无需等待对内存的缓慢读写了。
@@ -42,19 +42,19 @@
     
     <item>
       <title>Vim 常用命令</title>
-      <link>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl + b、PgUp 向上翻页   Ctrl + f、PgDn 向下翻页   Ctrl + u 向上翻半页   Ctrl + d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y + 移动光标 复制光标移动过程中的内容   选中内容 + y 复制光标选中的内容   p 执行 a／向下，再粘贴剪贴板内容   P 执行 i／向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn + Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d + 移动光标 删除光标移动过程中的内容   选中内容 + d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?</description>
     </item>
     
     <item>
       <title>设计模式概览</title>
-      <link>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
+      <link>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
+      <guid>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
       <description>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的实现。 创建型 Creational Patterns 抽象工厂模式 Abstract Factory Pattern 意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
 参考：Wikipedia、java-design-patterns、菜鸟教程
 实现：
@@ -66,10 +66,10 @@
     
     <item>
       <title>如何快速上手一个框架</title>
-      <link>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
+      <link>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
+      <guid>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
       <description>大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 System.out.println() 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。
 有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。
 开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的 Topic —— 关于使用框架的方法论。 一 在我认为，适应或者说上手一个框架的第一个阶段是：了解框架背后涉及的专业知识。
@@ -85,10 +85,10 @@
     
     <item>
       <title>jQuery API 小记</title>
-      <link>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
+      <link>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
+      <guid>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
       <description>摘自《JavaScript 权威指南》第 19 章 jQuery 类库。
 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。 jQuery 基础 jQuery 类库定义了一个全局函数：jQuery()。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：$()。这是 jQuery 在全局命名空间中定义的唯一两个变量。
 在 jQuery 类库中，最重要的方法是 jQuery()，也就是 $()。它的功能很强大，有 4 中不同的调用方式：
@@ -101,10 +101,10 @@ jQuery(function () { // 文档加载完毕时调用  // 所有 jQuery 代码放�
     
     <item>
       <title>Java 泛型的擦除</title>
-      <link>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
+      <link>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
       <pubDate>Mon, 02 Jan 2017 20:12:26 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
+      <guid>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
       <description>本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。摘自《Java 编程思想》15 章。
  泛型简介 泛型程序设计是程序设计语言的一种风格或范式。泛型允许程序员在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类型。
 Java 泛型的参数只可以代表类，不能代表个别对象。由于 Java 泛型的类型参数之实际类型在编译时会被消除，所以无法在运行时得知其类型参数的类型，而且无法直接使用基本值类型作为泛型类型参数。Java 编译程序在编译泛型时会自动加入类型转换的编码，故运行速度不会因为使用泛型而加快。—— 摘自 维基百科

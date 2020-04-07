@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>网络 on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/categories/%E7%BD%91%E7%BB%9C/</link>
+    <link>/categories/%E7%BD%91%E7%BB%9C/</link>
     <description>Recent content in 网络 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 23 Dec 2017 15:39:28 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/categories/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>UDP 必知必会</title>
-      <link>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</link>
+      <link>/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</link>
       <pubDate>Sat, 23 Dec 2017 15:39:28 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</guid>
+      <guid>/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</guid>
       <description>摘自《计算机网络》 第 5 章 传输层，并参考自维基百科与 RFC-768。协议概述 UDP（User Datagram Protocol，用户数据报协议）是 OSI 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠的数据传送服务，是 TCP/IP 协议族的核心成员之一，由 David P. Reed 于 1980 设计，并在 RFC-768 中正式定义。
 UDP 使用最小协议机制的简单无连接通信模型，可以使分组交换的计算机在 IP 网络上使用数据报通信。它提供 checksum 字段用于保证数据完整性，提供 port number 字段用于区分源地址和目标地址不同功能的应用进程。UDP 适用于对错误校验和错误纠正要求不高的应用场景，如多媒体应用、IP 电话等等。UDP 在通讯时不需要像 TCP 一样进行握手，因此减少了网络通信的开销和发送数据之前的延迟，但它也是不可靠的传输协议，即不保证数据可靠的交付和时序。
 UDP 只在 IP 的数据服务之上增加了很少的一点功能，其主要特点是：

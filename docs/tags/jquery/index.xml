@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>jQuery on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/tags/jquery/</link>
+    <link>/tags/jquery/</link>
     <description>Recent content in jQuery on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 21 Apr 2017 15:44:01 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>jQuery API 小记</title>
-      <link>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
+      <link>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
+      <guid>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
       <description>摘自《JavaScript 权威指南》第 19 章 jQuery 类库。
 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。 jQuery 基础 jQuery 类库定义了一个全局函数：jQuery()。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：$()。这是 jQuery 在全局命名空间中定义的唯一两个变量。
 在 jQuery 类库中，最重要的方法是 jQuery()，也就是 $()。它的功能很强大，有 4 中不同的调用方式：
