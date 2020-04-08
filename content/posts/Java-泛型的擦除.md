@@ -3,7 +3,7 @@ title: "Java 泛型的擦除"
 date: 2017-01-02T20:12:26+08:00
 categories: ["编程"]
 tags: ["Java"]
-keywords: ["Java", 泛型"]
+keywords: ["Java", "泛型"]
 ---
 
 本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。<!--more-->摘自《Java 编程思想》15 章。
