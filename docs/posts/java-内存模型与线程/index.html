@@ -147,7 +147,7 @@
 <p><img src="../../images/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.png" alt="iamge"></p>
 <p>由于计算的 CPU 与内存的运算速度存在几个数量级的差距，所以现代大部分计算机系统都加入了一层读写速度尽可能接近 CPU 运算速度的 <a href="https://en.wikipedia.org/wiki/CPU_cache">高速缓存（Cache）</a>，用来作为 CPU 和内存的缓冲。这种缓冲的运行机制是：将 CPU 运算所需要使用到的数据复制到缓存中，让运算能快速进行；当运算结束之后再从缓冲同步回内存之中。通过这种方式，CPU 就无需等待对内存的缓慢读写了。</p>
 <p><img src="../../images/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.png" alt="image"></p>
-<p>不过这种运行机制也引入了一个新的问题：<a href="https://en.wikipedia.org/wiki/Cache_coherence">缓存一致性（Cache Coherence）</a>。当多个 CPU 的运算任务都涉及同一块内存区域时，将可能导致 CPU 的寄存器、高速缓存、内存中的数据不一致问题。为了解决内存一致性问题，需要各个 CPU 在访问内存时都遵循一致的协议，在读写数据时需要根据协议来进行操作，类似的协议有 <a href="https://en.wikipedia.org/wiki/MSI_protocol">MSI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MESI_protocol">MESI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MOSI_protocol">MOSI Protocol</a>、<!-- raw HTML omitted -->Firefly<!-- raw HTML omitted -->、<a href="https://en.wikipedia.org/wiki/Dragon_protocol">Dragon Protocol</a> 等。</p>
+<p>不过这种运行机制也引入了一个新的问题：<a href="https://en.wikipedia.org/wiki/Cache_coherence">缓存一致性（Cache Coherence）</a>。当多个 CPU 的运算任务都涉及同一块内存区域时，将可能导致 CPU 的寄存器、高速缓存、内存中的数据不一致问题。为了解决内存一致性问题，需要各个 CPU 在访问内存时都遵循一致的协议，在读写数据时需要根据协议来进行操作，类似的协议有 <a href="https://en.wikipedia.org/wiki/MSI_protocol">MSI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MESI_protocol">MESI Protocol</a>、<a href="https://en.wikipedia.org/wiki/MOSI_protocol">MOSI Protocol</a>、<a href="https://en.wikipedia.org/wiki/Firefly_(cache_coherence_protocol)" target="_blank" rel="noopener">Firefly</a>、<a href="https://en.wikipedia.org/wiki/Dragon_protocol">Dragon Protocol</a> 等。</p>
 <p><img src="../../images/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.png" alt="image"></p>
 <p><a href="https://en.wikipedia.org/wiki/Memory_module">内存模型（Memory Module）</a> 一词可以理解为在特定的操作协议下，计算机对特定的内存或高速缓存进行读写访问的抽象过程。不同架构的物理机器可以拥有不同的内存模型，Java 虚拟机也拥有自己的内存模型。</p>
 <p>除了增加高速缓存之外，为了使 CPU 内部的运算单元能尽可能地被充分利用，CPU 还会可能会对输入代码进行 <a href="https://en.wikipedia.org/wiki/Out-of-order_execution">乱序执行（Out-Of-Order Execution）</a> 优化。CPU 会在计算之后将乱序执行的结果重组，保证该结果与顺序执行的结果是一致的，但并不保证程序中各个语句计算的先后顺序与输入代码中的顺序一致。因此，如果存在一个计算任务依赖另一个计算任务的中间结果，那么其顺序性并不能靠代码的先后顺序来保证。与 CPU 的乱序执行优化类似，Java 虚拟机的即时编译（JIT）也有类似的指令重排序（Instruction Reorder）优化。</p>
@@ -269,7 +269,7 @@ volatile 变量在被赋值后，将会多执行一个相当于 <a href="https:/
 <p>轻量级进程则作为用户线程和内核线程之间的桥梁，这样可以使用内核提供的线程调度功能及处理器映射，并且用户线程的系统调用要通过轻量级进程来完成，大大降低了整个进程被完全阻塞的风险。</p>
 <hr>
 <h3 id="线程的调度">线程的调度</h3>
-<p><!-- raw HTML omitted -->线程调度<!-- raw HTML omitted --> 是指系统为线程分配 CPU 使用权的过程，主要调度有两种方式：<a href="https://en.wikipedia.org/wiki/Cooperative_multitasking">协同式线程调度</a> 和 <!-- raw HTML omitted -->抢占式线程调度<!-- raw HTML omitted -->。</p>
+<p><a href="https://en.wikipedia.org/wiki/Scheduling_(computing)" target="_blank" rel="noopener">线程调度</a> 是指系统为线程分配 CPU 使用权的过程，主要调度有两种方式：<a href="https://en.wikipedia.org/wiki/Cooperative_multitasking">协同式线程调度</a> 和 <a href="https://en.wikipedia.org/wiki/Preemption_(computing)" target="_blank" rel="noopener">抢占式线程调度</a>。</p>
 <p>使用协同式线程调度时，线程的执行时间是由线程本身控制的。线程把自己的工作执行完成以后，主动通知操作系统切换到另一个线程上。协同式调度的好处是实现简单：线程之间不存在同步问题，坏处是线程执行的时间不可控制：一个线程阻塞将会阻塞整个进程。</p>
 <p>使用抢占式线程调度时，线程的执行时间是由操作系统控制的，线程的切换不由线程本身来决定。抢占式调度不会存在一个线程阻塞整个进程的情况，Java 使用的线程调度方式就是抢占式调度。</p>
 <p>虽然 Java 线程调度是由系统自动完成的，但其实还是可以通过设置线程的优先级，来「建议」操作系统给某些线程多分配或者少分配些执行时间，例如后台线程 Finalizer 就是一个由虚拟机自动建立的低优先级线程。</p>

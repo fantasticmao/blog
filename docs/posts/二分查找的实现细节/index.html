@@ -121,7 +121,7 @@
             </span>
             <span class="reading-time">
               <i class="fas fa-clock"></i>
-              1 分钟阅读时间
+              2 分钟阅读时间
             </span>
           </div>
           <div class="categories">
@@ -170,9 +170,9 @@
 <span style="color:#f92672">}</span>
 </code></pre></div><p>依据文章开头的小提醒 review 上例代码，可以发现其中存在着的细节问题：</p>
 <ol>
-<li>缺少参数校验<!-- raw HTML omitted -->当输入参数 <code>low</code> 或 <code>high</code> 的数值小于零时，程序会存在逻辑错误；</li>
-<li>递归查找的栈溢出<!-- raw HTML omitted -->当查找的次数足够多时，程序会抛出 <code>java.lang.StackOverflowError</code> 异常；</li>
-<li>中值计算的整型溢出<!-- raw HTML omitted -->当查找的数组足够大时，直接使用 <code>(low + high) / 2</code> 计算二分查找过程中的中间数值，程序会存在整型数值溢出的问题。</li>
+<li>缺少参数校验<br>当输入参数 <code>low</code> 或 <code>high</code> 的数值小于零时，程序会存在逻辑错误；</li>
+<li>递归查找的栈溢出<br>当查找的次数足够多时，程序会抛出 <code>java.lang.StackOverflowError</code> 异常；</li>
+<li>中值计算的整型溢出<br>当查找的数组足够大时，直接使用 <code>(low + high) / 2</code> 计算二分查找过程中的中间数值，程序会存在整型数值溢出的问题。</li>
 </ol>
 <hr>
 <h2 id="正确实现">正确实现</h2>

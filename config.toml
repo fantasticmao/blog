@@ -13,16 +13,17 @@ enableEmoji = true
 googleAnalytics = "UA-89151446-1"
 disqusShortname = "fantasticmao"
 
+[markup]
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true
+
 [params]
     author = "FantasticMao"
     avatarurl = "/images/avatar.jpg"
     favicon_32 = "/favicons/favicon-32x32.png"
     favicon_16 = "/favicons/favicon-16x16.png"
     since = 2016
-
-[taxonomies]
-    category = "categories"
-    tag = "tags"
 
 [[params.social]]
     name = "GitHub"
