@@ -11,7 +11,11 @@
       <meta name="description" content="{{ . }}">
     {{ else }}
       {{ if .IsPage }}
-        <meta name="description" content="{{ .Summary }}">
+        {{ with .Params.description }}
+          <meta name="description" content="{{ . }}">
+        {{ else }}
+          <meta name="description" content="{{ .Summary }}">
+        {{ end }}
       {{ else }}
         <meta name="description" content="{{ .Site.Params.description }}">
       {{ end }}
