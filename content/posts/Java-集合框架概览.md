@@ -6,7 +6,7 @@ tags: ["Java", "Data Structure"]
 draft: true
 ---
 
-本篇文章记录我所理解和掌握的在 JDK8 Collection Library 中的常用集合类，及其所涉及的数据结构和实现原理。<!-- more -->
+本篇文章记录我所理解和掌握的在 JDK8 Collection Library 中的常用集合类，及其所涉及的数据结构和实现原理。<!--more-->
 
 ---
 

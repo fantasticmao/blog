@@ -6,18 +6,27 @@
     <description>Recent content in 编程 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 21 Feb 2020 20:00:00 +0800</lastBuildDate>
     
 	<atom:link href="/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>OpenSSH 相关命令</title>
+      <link>/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Fri, 21 Feb 2020 20:00:00 +0800</pubDate>
+      
+      <guid>/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
+      <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章的记录范围之内。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Vue 初次体验</title>
-      <link>/posts/vue-qa/</link>
+      <link>/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
       
-      <guid>/posts/vue-qa/</guid>
-      <description>因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element-UI，学完之后之后便匆匆上手了，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
+      <guid>/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</guid>
+      <description>因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
  Vue 相关 v-bing 指令和 v-on 指令的作用 v-bind 指令的缩写是 :，用于动态绑定一个或多个属性，或者是一个组件的 prop 属性。当 v-bind 绑定的属性是 class 或 style 的时候，表达式的值可以是数组或对象。代码示例和修饰符描述请见 官方文档。
 v-on 指令的缩写是 @，用于绑定事件监听器。v-on 被用于普通元素上时只能监听 原生 DOM 事件，被用于自定义组件元素上时可以监听子组件触发的 自定义事件 （由 $emit 定义的事件）。v-on 指令支持的修饰符有 .stop、.prevent、.once 等等，代码示例和更多修饰符描述请见 官方文档。
 watch 属性和 computed 属性的区别 Vue 实例的 watch 属性用于监听实例对象上的数据，代码示例请见 官方文档。
@@ -32,9 +41,7 @@ Vue 实例的 computed 属性用于计算和生成实例对象的数据，代码
       <pubDate>Wed, 14 Nov 2018 10:21:22 +0800</pubDate>
       
       <guid>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
-      <description>本篇文章记录一个普通 Web 应用在访问量逐渐增加的情况下，不同类型 GC 对应用性能影响的趋势对比。在比较应用性能时，仅以响应时间（Latency）和吞吐量（Throughput）为应用的性能指标。
-由于不同类型 GC 本该适用于不同类型的应用（例如 Serial GC 适合运行单核 CPU 机器上的小应用，G1 GC 适合运行大内存的应用），所以此次比较结果不能得出各个 GC 谁优谁劣的绝对结论。
- 以响应时间为性能指标  以吞吐量为性能指标  比较测试结果，总结得出  Serial GC 在不同强度的并发下，吞吐量和响应时间表现均为最差； Parallel GC 号称是吞吐量优先 GC，但表现却并没有比 CMS GC 和 G1 GC 好很多； 在并发强度逐渐增高的情况下，CMS GC 和 G1 GC 相比 Serial GC 和 Parallel GC 的响应时间表现更好； 在并发强度不高的情况下，CMS GC 相比 G1 GC 的吞吐量表现要稍微好一些。  </description>
+      <description>&lt;p&gt;本篇文章记录一个普通 Web 应用在访问量逐渐增加的情况下，不同类型 GC 对应用性能影响的趋势对比。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,13 +50,8 @@ Vue 实例的 computed 属性用于计算和生成实例对象的数据，代码
       <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
       
       <guid>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
-      <description>摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。
-并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。 硬件的效率与一致性 计算机的大部分运算任务都不可能只靠处理器（CPU）计算就能完成。因为大部分情况下，处理器都需要与存储设备（内存）进行交互，例如读取数据、存储运算结果等。
-由于计算的 CPU 与内存的运算速度存在几个数量级的差距，所以现代大部分计算机系统都加入了一层读写速度尽可能接近 CPU 运算速度的 高速缓存（Cache），用来作为 CPU 和内存的缓冲。这种缓冲的运行机制是：将 CPU 运算所需要使用到的数据复制到缓存中，让运算能快速进行；当运算结束之后再从缓冲同步回内存之中。通过这种方式，CPU 就无需等待对内存的缓慢读写了。
-不过这种运行机制也引入了一个新的问题：缓存一致性（Cache Coherence）。当多个 CPU 的运算任务都涉及同一块内存区域时，将可能导致 CPU 的寄存器、高速缓存、内存中的数据不一致问题。为了解决内存一致性问题，需要各个 CPU 在访问内存时都遵循一致的协议，在读写数据时需要根据协议来进行操作，类似的协议有 MSI Protocol、MESI Protocol、MOSI Protocol、Firefly、Dragon Protocol 等。
-内存模型（Memory Module） 一词可以理解为在特定的操作协议下，计算机对特定的内存或高速缓存进行读写访问的抽象过程。不同架构的物理机器可以拥有不同的内存模型，Java 虚拟机也拥有自己的内存模型。
-除了增加高速缓存之外，为了使 CPU 内部的运算单元能尽可能地被充分利用，CPU 还会可能会对输入代码进行 乱序执行（Out-Of-Order Execution） 优化。CPU 会在计算之后将乱序执行的结果重组，保证该结果与顺序执行的结果是一致的，但并不保证程序中各个语句计算的先后顺序与输入代码中的顺序一致。因此，如果存在一个计算任务依赖另一个计算任务的中间结果，那么其顺序性并不能靠代码的先后顺序来保证。与 CPU 的乱序执行优化类似，Java 虚拟机的即时编译（JIT）也有类似的指令重排序（Instruction Reorder）优化。
- Java 内存模型 Java 虚拟机规范中试图定义一种 Java 内存模型（Java Memory Module） 来屏蔽各种硬件和操作系统的内存访问差异，以实现让 Java 程序在各种平台下都能达到一致的内存访问效果。</description>
+      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt; 第 12 章 Java 内存模型与线程。&lt;/p&gt;
+&lt;p&gt;并发处理的广泛应用是使得 &lt;a href=&#34;https://en.wikipedia.org/wiki/Amdahl&#39;s_law&#34;&gt;Amdahl 定律&lt;/a&gt; 代替 &lt;a href=&#34;https://en.wikipedia.org/wiki/Moore&#39;s_law&#34;&gt;Moore 定律&lt;/a&gt; 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -58,7 +60,7 @@ Vue 实例的 computed 属性用于计算和生成实例对象的数据，代码
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
       <guid>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <description>本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 参考资料。 Normal 模式 移动光标    命令 描述     h、← 向左移动光标   j、↓ 向下移动光标   k、↑ 向上移动光标   l、→ 向右移动光标   Ctrl + b、PgUp 向上翻页   Ctrl + f、PgDn 向下翻页   Ctrl + u 向上翻半页   Ctrl + d 向下翻半页   0、Home 移动光标至当前行的第一个位置   $、End 移动光标至当前行的最后一个位置   ^ 移动光标至当前行的第一个 非 blank 字符 位置   g_ 移动光标至当前行的最后一个 非 blank 字符 位置   ${n}G 相当于 :${n}   gg 相当于 1G 和 :${1}   G 移动光标至当前文件的最后一行   f${char} 向右移动光标至下个 char 字符的位置   F${char} 向左移动光标至上个 char 字符的位置   t${char} 向右移动光标至下个 char 字符的前一个位置   T${char} 向左移动光标至上个 char 字符的前一个位置    复制、粘贴、删除    命令 描述     yy 复制当前行   y + 移动光标 复制光标移动过程中的内容   选中内容 + y 复制光标选中的内容   p 执行 a / 向下，再粘贴剪贴板内容   P 执行 i / 向上，再粘贴剪贴板内容   x 向右删除一个字符，相当于插入模式中的 fn + Delete   X 向左删除一个字符，相当于插入模式中的 Delete   dd 删除当前行，并把删除的内容保存至剪贴板中，相当于「剪切」功能   d + 移动光标 删除光标移动过程中的内容   选中内容 + d 删除光标选中的内容    搜索    命令 描述     / ${word} 向下搜索 word 关键字   ?</description>
+      <description>&lt;p&gt;本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 &lt;a href=&#34;#%E9%99%84&#34;&gt;参考资料&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -67,13 +69,7 @@ Vue 实例的 computed 属性用于计算和生成实例对象的数据，代码
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
       <guid>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
-      <description>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。 创建型 Creational Patterns 抽象工厂模式 Abstract Factory Pattern 意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
-参考：Wikipedia、java-design-patterns、菜鸟教程
-实现：
- org.springframework.beans.factory.FactoryBean#getObject()  生成器模式 Builder Pattern 意图：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。Separate the construction of a complex object from its representation so that the same construction process can create different representations.
-参考：Wikipedia、java-design-patterns、菜鸟教程
-实现：
- java.lang.StringBuilder &amp;amp; java.lang.StringBuffer org.springframework.boot.web.client.RestTemplateBuilder org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder  工厂方法模式 Factory Method Pattern 意图：定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。Define an interface for creating an object, but let subclasses decide which class to instantiate.</description>
+      <description>&lt;p&gt;本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -82,14 +78,8 @@ Vue 实例的 computed 属性用于计算和生成实例对象的数据，代码
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
       <guid>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
-      <description>摘自《JavaScript 权威指南》第 19 章 jQuery 类库。
-JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。 jQuery 基础 jQuery 类库定义了一个全局函数：jQuery()。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：$()。这是 jQuery 在全局命名空间中定义的唯一两个变量。
-在 jQuery 类库中，最重要的方法是 jQuery()，也就是 $()。它的功能很强大，有 4 中不同的调用方式：
-  传递 CSS 选择器字符串给 $()。当通过这种方式调用时，$() 返回当前文档中匹配该选择器的元素集；
-  传递一个 Element、Document 或 Window 对象给 $()。在这种情况下，$() 只须简单地将 Element、Document、Window 对象封装成 jQuery 对象并返回；
-  传递 HTML 文本字符串给 $()。在这种调用方式下 jQuery 会根据传入的文本创建好 HTML 元素并封装成 jQuery 对象返回；
-  传入一个函数给 $()。此时，文档加载完毕且 DOM 可操作时，传入的函数将被调用。
-jQuery(function () { // 文档加载完毕时调用  // 所有 jQuery 代码放在这里 });   传递 CSS 选择器字符串给 $()，它返回的 jQuery 对象表示匹配该选择器的元素集。jQuery 对象是类数组，它们拥有 length 属性和介于 0 - length - 1 之间的数值属性。这意味着可以使用标准的数组标识方括号来访问 jQuery 对象的内容。如果不想把数组标识用在 jQuery 对象上，可以使用 size() 来替代 length 属性，用 get() 来替代方括号索引。可以使用 toArray() 将 jQuery 对象转化为真实数组。</description>
+      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/10549733/&#34;&gt;《JavaScript 权威指南》&lt;/a&gt;第 19 章 jQuery 类库。&lt;/p&gt;
+&lt;p&gt;JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,14 +88,7 @@ jQuery(function () { // 文档加载完毕时调用  // 所有 jQuery 代码放�
       <pubDate>Mon, 02 Jan 2017 20:12:26 +0800</pubDate>
       
       <guid>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
-      <description>本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。摘自《Java 编程思想》15 章。
- 泛型简介 泛型程序设计是程序设计语言的一种风格或范式。泛型允许程序员在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类型。
-Java 泛型的参数只可以代表类，不能代表个别对象。由于 Java 泛型的类型参数之实际类型在编译时会被消除，所以无法在运行时得知其类型参数的类型，而且无法直接使用基本值类型作为泛型类型参数。Java 编译程序在编译泛型时会自动加入类型转换的编码，故运行速度不会因为使用泛型而加快。—— 摘自 维基百科
-一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型名称的标识符。 因为他们接受一个或多个参数，这些类被称为参数化的类或参数化的类型。—— 摘自 菜鸟教程
-我的简单理解：泛型在编程语言概念中是顾名思义的 泛化的类型，而在 Java 的实现中则是一个为了 参数化类型 的语法。它可以使我们编写更健壮更抽象的 Java 代码，但同时它因为存在缺陷而经常被人诟病。
- 基本语法 泛型类 定义泛型类时，需在类名后添加一个尖括号包裹的 参数类型，然后在实例化类时，需要使用 具体类型 替换 参数类型。在代码中 参数类型 代表的就是类实例化时的 具体类型，如下是一个泛型类：
-public class Generic&amp;lt;T&amp;gt; { private T t; public T getT() { return t; } public void setT(T t) { this.t = t; } } 泛型接口 同上，泛型接口的定义与泛型类并没什么区别。
-泛型方法 泛型类／接口对类型的泛化应用于整个类之上，而泛型方法则仅限于当前方法。《Java 编程思想》书中提供了一个编写泛型代码的基本原则：无论何时，只要你能做到，你就应该尽量使用泛型方法。这也意味着我们应该尽可能地缩小类型泛化的应用范围。</description>
+      <description>&lt;p&gt;本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。&lt;/p&gt;</description>
     </item>
     
   </channel>

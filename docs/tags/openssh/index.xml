@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on FantasticMao&#39;s Blog</title>
-    <link>/tags/linux/</link>
-    <description>Recent content in Linux on FantasticMao&#39;s Blog</description>
+    <title>OpenSSH on FantasticMao&#39;s Blog</title>
+    <link>/tags/openssh/</link>
+    <description>Recent content in OpenSSH on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 21 Feb 2020 20:00:00 +0800</lastBuildDate>
     
-	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/openssh/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章的记录范围之内。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Vim 常用命令</title>
-      <link>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
-      <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
-      
-      <guid>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <description>&lt;p&gt;本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 &lt;a href=&#34;#%E9%99%84&#34;&gt;参考资料&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
   </channel>
