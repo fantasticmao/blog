@@ -3,6 +3,7 @@ title: "UDP 必知必会"
 date: 2017-12-23T15:39:28+08:00
 categories: ["网络"]
 tags: ["UDP"]
+keywords: ["网络", "UDP"]
 ---
 
 摘自[《计算机网络》](https://book.douban.com/subject/26960678/) 第 5 章 传输层，并参考自维基百科与 RFC-768。<!--more-->
