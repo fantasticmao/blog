@@ -7,7 +7,7 @@ tags: ["Java", "JVM"]
 
 摘自[《深入理解 Java 虚拟机》](https://book.douban.com/subject/24722612/) 第 12 章 Java 内存模型与线程。
 
-并发处理的广泛应用是使得 [Amdahl 定律](https://en.wikipedia.org/wiki/Amdahl's_law) 代替 [Moore 定律](https://en.wikipedia.org/wiki/Moore's_law) 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。<!-- more -->
+并发处理的广泛应用是使得 [Amdahl 定律](https://en.wikipedia.org/wiki/Amdahl's_law) 代替 [Moore 定律](https://en.wikipedia.org/wiki/Moore's_law) 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。<!--more-->
 
 ---
 

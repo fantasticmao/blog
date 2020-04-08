@@ -5,7 +5,7 @@ categories: ["编程"]
 tags: ["JavaScript", "Vue"]
 ---
 
-因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 [Vue](https://vuejs.bootcss.com/v2/guide/) 和 [Element-UI](https://element.eleme.cn/#/zh-CN)，学完之后之后便匆匆上手了，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
+因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 [Vue](https://vuejs.bootcss.com/v2/guide/) 和 [Element](https://element.eleme.cn/#/zh-CN)，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
 
 ---
 
@@ -55,9 +55,9 @@ App.vue
 
 ```vue
 <template>
-  <navigation-link url="/profile">
+  <NavigationLink url="/profile">
     Your Profile
-  </navigation-link>
+  </NavigationLink>
 </template>
 
 <script>
@@ -87,15 +87,17 @@ export default {
 
 ### 响应式实现原理
 
-ECMAScript5 定义了一个属性描述符（property descriptor）对象，支持使用 getter / setter 方法替代属性的定义。可以通过调用 [`Object.getOwnPropertyDescriptor()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) 和 [`Object.getOwnPropertyDescriptors()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors) 获取某个对象的属性描述符，通过调用 [`Object.defineProperty()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 和 [`Object.defineProperties()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) 设置某个对象的属性和属性描述符。示例代码如下：
+ECMAScript5 定义了一个属性描述符（property descriptor）对象，支持使用 getter / setter 方法替代属性的定义。可以通过调用 [`Object.getOwnPropertyDescriptor()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) 和 [`Object.getOwnPropertyDescriptors()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors) 获取某个对象的属性描述符，通过调用 [`Object.defineProperty()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 和 [`Object.defineProperties()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) 设置某个对象的属性和属性描述符。
+
+《JavaScript 权威指南》第六章中将 JavaScript 普通对象的属性称为 **数据属性**，将由 getter / setter 定义的属性称为 **存储器属性**。数据属性拥有一个名字和四个特性：值（value）、可写（writable）、可枚举（enumerable）、可配置（configurable），存储器属性相对于数据属性缺少了值和可写的特性，但增加了读取（get）、写入（set）的特性。在 ECMAScript5 中使用 getter / setter 方法替代属性定义的示例代码如下：
 
 ```javascript
 const obj = {
   get name() {
-    return "FantasticMao";
+    return "MaoMao";
   },
 };
-window.console.log(obj.name); // FantasticMao
+window.console.log(obj.name); // MaoMao
 ```
 
 Vue 在内部通过调用 `Object.defineProperty()` 把 `data` 定义的 **数据属性** 转换成 **存储器属性**，以此来追踪依赖，实现在属性被访问和修改时通知变化。简单版本的实现代码如下，更多关于响应式原理的内容请见 [官方文档](https://vuejs.bootcss.com/v2/guide/reactivity.html)。

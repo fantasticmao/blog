@@ -17,14 +17,8 @@
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
       <guid>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
-      <description>摘自《JavaScript 权威指南》第 19 章 jQuery 类库。
-JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。 jQuery 基础 jQuery 类库定义了一个全局函数：jQuery()。该函数使用频繁，因此在类库中还给它定义了一个快捷别名：$()。这是 jQuery 在全局命名空间中定义的唯一两个变量。
-在 jQuery 类库中，最重要的方法是 jQuery()，也就是 $()。它的功能很强大，有 4 中不同的调用方式：
-  传递 CSS 选择器字符串给 $()。当通过这种方式调用时，$() 返回当前文档中匹配该选择器的元素集；
-  传递一个 Element、Document 或 Window 对象给 $()。在这种情况下，$() 只须简单地将 Element、Document、Window 对象封装成 jQuery 对象并返回；
-  传递 HTML 文本字符串给 $()。在这种调用方式下 jQuery 会根据传入的文本创建好 HTML 元素并封装成 jQuery 对象返回；
-  传入一个函数给 $()。此时，文档加载完毕且 DOM 可操作时，传入的函数将被调用。
-jQuery(function () { // 文档加载完毕时调用  // 所有 jQuery 代码放在这里 });   传递 CSS 选择器字符串给 $()，它返回的 jQuery 对象表示匹配该选择器的元素集。jQuery 对象是类数组，它们拥有 length 属性和介于 0 - length - 1 之间的数值属性。这意味着可以使用标准的数组标识方括号来访问 jQuery 对象的内容。如果不想把数组标识用在 jQuery 对象上，可以使用 size() 来替代 length 属性，用 get() 来替代方括号索引。可以使用 toArray() 将 jQuery 对象转化为真实数组。</description>
+      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/10549733/&#34;&gt;《JavaScript 权威指南》&lt;/a&gt;第 19 章 jQuery 类库。&lt;/p&gt;
+&lt;p&gt;JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。&lt;/p&gt;</description>
     </item>
     
   </channel>

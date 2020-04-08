@@ -13,11 +13,11 @@
     
     <item>
       <title>Vue 初次体验</title>
-      <link>/posts/vue-qa/</link>
+      <link>/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
       
-      <guid>/posts/vue-qa/</guid>
-      <description>因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element-UI，学完之后之后便匆匆上手了，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
+      <guid>/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</guid>
+      <description>因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
  Vue 相关 v-bing 指令和 v-on 指令的作用 v-bind 指令的缩写是 :，用于动态绑定一个或多个属性，或者是一个组件的 prop 属性。当 v-bind 绑定的属性是 class 或 style 的时候，表达式的值可以是数组或对象。代码示例和修饰符描述请见 官方文档。
 v-on 指令的缩写是 @，用于绑定事件监听器。v-on 被用于普通元素上时只能监听 原生 DOM 事件，被用于自定义组件元素上时可以监听子组件触发的 自定义事件 （由 $emit 定义的事件）。v-on 指令支持的修饰符有 .stop、.prevent、.once 等等，代码示例和更多修饰符描述请见 官方文档。
 watch 属性和 computed 属性的区别 Vue 实例的 watch 属性用于监听实例对象上的数据，代码示例请见 官方文档。

@@ -6,7 +6,7 @@ tags: ["HTTP"]
 draft: true
 ---
 
-摘自 [《图解 HTTP》](https://book.douban.com/subject/25863515/)，并参考自维基百科与各系列 RFC。<!-- more -->
+摘自 [《图解 HTTP》](https://book.douban.com/subject/25863515/)，并参考自维基百科与各系列 RFC。<!--more-->
 
 为了避免阅读歧义，本篇文章中术语「请求」、「响应」、「连接」均会用英文术语 `Request`、`Response`、`Connection` 表达。
 
