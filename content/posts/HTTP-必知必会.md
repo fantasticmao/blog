@@ -194,7 +194,7 @@ PS：在理想情况下，HTTP 响应报文是作为整包且有序地发送给�
 - gzip：基于 GNU zip 的压缩方式；
 - deflate：基于 deflate 算法的压缩方式；
 - compress：基于 UNIX compress 的压缩方式（不推荐大多数应用使用）；
-- identity：默认值，不压缩内容；
+- identity：默认值，不压缩内容。
 
 Wireshark 抓包示意图：
 
