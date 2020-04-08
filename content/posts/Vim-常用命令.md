@@ -3,6 +3,7 @@ title: "Vim 常用命令"
 date: 2018-03-31T21:51:23+08:00
 categories: ["编程"]
 tags: ["Linux", "Vim"]
+keywords: ["Linux", "Vim"]
 ---
 
 本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 [参考资料](#附)。<!--more-->

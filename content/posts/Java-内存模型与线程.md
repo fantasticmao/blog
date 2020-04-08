@@ -3,6 +3,15 @@ title: "Java 内存模型与线程"
 date: 2018-07-01T19:16:50+08:00
 categories: ["编程"]
 tags: ["Java", "JVM"]
+keywords:
+  - "Java"
+  - "JVM"
+  - "内存模型"
+  - "volatile"
+  - "synchronized"
+  - "线程"
+  - "并发"
+  - "Happens Before"
 ---
 
 摘自[《深入理解 Java 虚拟机》](https://book.douban.com/subject/24722612/) 第 12 章 Java 内存模型与线程。

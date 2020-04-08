@@ -3,6 +3,7 @@ title: "GC 对性能的影响对比"
 date: 2018-11-14T10:21:22+08:00
 categories: ["编程"]
 tags: ["Java", "JVM"]
+keywords: ["Java", "JVM", "GC", "垃圾收集器"]
 ---
 
 本篇文章记录一个普通 Web 应用在访问量逐渐增加的情况下，不同类型 GC 对应用性能影响的趋势对比。<!--more-->在比较应用性能时，仅以响应时间（Latency）和吞吐量（Throughput）为应用的性能指标。

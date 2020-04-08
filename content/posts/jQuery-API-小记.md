@@ -3,6 +3,7 @@ title: "jQuery API 小记"
 date: 2017-04-21T15:44:01+08:00
 categories: ["编程"]
 tags: ["JavaScript", "jQuery"]
+keywords: ["JavaScript", "jQuery"]
 ---
 
 摘自[《JavaScript 权威指南》](https://book.douban.com/subject/10549733/)第 19 章 jQuery 类库。

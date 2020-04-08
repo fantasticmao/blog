@@ -3,6 +3,7 @@ title: "MySQL 索引高性能策略"
 date: 2017-02-03T16:24:07+08:00
 categories: ["数据库"]
 tags: ["MySQL"]
+keywords: ["MySQL", "数据库", "索引", "覆盖索引", "SQL 优化"]
 ---
 
 摘自[《高性能 MySQL》](https://book.douban.com/subject/23008813/)第 5 章 创建高性能的索引。<!--more-->

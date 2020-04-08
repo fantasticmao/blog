@@ -3,9 +3,10 @@ title: "Vue 初次体验"
 date: 2019-12-16T00:00:00+08:00
 categories: ["编程"]
 tags: ["JavaScript", "Vue"]
+keywords: ["JavaScript", "Vue", "Vue Devtools", "Vue Router", "Vue CLI"]
 ---
 
-因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 [Vue](https://vuejs.bootcss.com/v2/guide/) 和 [Element](https://element.eleme.cn/#/zh-CN)，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。
+因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 [Vue](https://vuejs.bootcss.com/v2/guide/) 和 [Element](https://element.eleme.cn/#/zh-CN)，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。<!--more-->
 
 ---
 

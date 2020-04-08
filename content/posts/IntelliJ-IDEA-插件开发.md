@@ -3,6 +3,7 @@ title: "IntelliJ IDEA 插件开发"
 date: 2019-05-19T23:25:08+08:00
 categories: ["编程"]
 tags: ["Java", "IntelliJ IDEA"]
+keywords: ["Java", "IntelliJ IDEA", "超越鼓励师"]
 draft: true
 ---
 
