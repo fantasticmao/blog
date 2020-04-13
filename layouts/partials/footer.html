@@ -27,6 +27,9 @@
           [<a href="{{ .Site.Params.commit }}/{{ .GitInfo.Hash }}">{{ .GitInfo.AbbreviatedHash }}</a>]
         {{ end }}
       {{ end }}
+      {{ with .Site.Params.icpRecord }}
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank" ref="nofollow">{{ . }}</a></p>
+      {{ end }}
     </section>
   </footer>
 {{ end }}

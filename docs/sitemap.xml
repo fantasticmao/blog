@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/tags/free-talk/</loc>
+    <lastmod>2020-04-08T00:03:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-04-08T00:03:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2020-04-08T00:03:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/%E9%97%B2%E8%81%8A/</loc>
+    <lastmod>2020-04-08T00:03:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/docker/</loc>
     <lastmod>2020-03-18T10:55:02+08:00</lastmod>
   </url>
@@ -14,11 +34,6 @@
   
   <url>
     <loc>/tags/java/</loc>
-    <lastmod>2020-03-18T10:55:02+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
     <lastmod>2020-03-18T10:55:02+08:00</lastmod>
   </url>
   
@@ -153,17 +168,7 @@
   </url>
   
   <url>
-    <loc>/tags/free-talk/</loc>
-    <lastmod>2017-09-14T01:10:06+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2017-09-14T01:10:06+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/%E9%97%B2%E8%81%8A/</loc>
     <lastmod>2017-09-14T01:10:06+08:00</lastmod>
   </url>
   

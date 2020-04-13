@@ -28,6 +28,8 @@ disqusShortname = "fantasticmao"
     favicon_16 = "/favicons/favicon-16x16.png"
     since = 2016
 
+    icpRecord = "浙ICP备17009730号"
+
 [[params.social]]
     name = "GitHub"
     icon = "fab fa-github fa-2x"
