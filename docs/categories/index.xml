@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>分类 on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in 分类 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 23 Nov 2016 21:41:22 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>闲聊</title>
-      <link>https://blog.fantasticmao.cn/categories/%E9%97%B2%E8%81%8A/</link>
+      <link>/categories/%E9%97%B2%E8%81%8A/</link>
       <pubDate>Wed, 08 Apr 2020 00:03:00 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/categories/%E9%97%B2%E8%81%8A/</guid>
+      <guid>/categories/%E9%97%B2%E8%81%8A/</guid>
       <description></description>
     </item>
     
     <item>
       <title>编程</title>
-      <link>https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/</link>
+      <link>/categories/%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Wed, 18 Mar 2020 10:55:02 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/</guid>
+      <guid>/categories/%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     
     <item>
       <title>数据库</title>
-      <link>https://blog.fantasticmao.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Sun, 24 Feb 2019 13:50:18 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <guid>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description></description>
     </item>
     
     <item>
       <title>算法</title>
-      <link>https://blog.fantasticmao.cn/categories/%E7%AE%97%E6%B3%95/</link>
+      <link>/categories/%E7%AE%97%E6%B3%95/</link>
       <pubDate>Sat, 10 Mar 2018 14:58:31 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/categories/%E7%AE%97%E6%B3%95/</guid>
+      <guid>/categories/%E7%AE%97%E6%B3%95/</guid>
       <description></description>
     </item>
     
     <item>
       <title>网络</title>
-      <link>https://blog.fantasticmao.cn/categories/%E7%BD%91%E7%BB%9C/</link>
+      <link>/categories/%E7%BD%91%E7%BB%9C/</link>
       <pubDate>Sat, 23 Dec 2017 15:39:28 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/categories/%E7%BD%91%E7%BB%9C/</guid>
+      <guid>/categories/%E7%BD%91%E7%BB%9C/</guid>
       <description></description>
     </item>
     
     <item>
       <title>设计</title>
-      <link>https://blog.fantasticmao.cn/categories/%E8%AE%BE%E8%AE%A1/</link>
+      <link>/categories/%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Wed, 04 Oct 2017 10:23:57 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/categories/%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>/categories/%E8%AE%BE%E8%AE%A1/</guid>
       <description></description>
     </item>
     
