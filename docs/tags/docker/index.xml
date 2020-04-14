@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on FantasticMao&#39;s Blog</title>
-    <link>https://blog.fantasticmao.cn/tags/docker/</link>
+    <link>/tags/docker/</link>
     <description>Recent content in Docker on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 18 Mar 2020 10:55:02 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.fantasticmao.cn/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker Compose 的 Java 版实践</title>
-      <link>https://blog.fantasticmao.cn/posts/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</link>
+      <link>/2020/03/18/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Wed, 18 Mar 2020 10:55:02 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/posts/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</guid>
+      <guid>/2020/03/18/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</guid>
       <description>&lt;p&gt;Docker Compose 是用于定义和运行多个 Docker Container 的工具。Docker 官方在 &lt;a href=&#34;https://docs.docker.com/compose/gettingstarted/&#34;&gt;《Get started with Docker Compose》&lt;/a&gt; 文档中，以创建一个基于 Flask 和 Redis 的 Python web 应用，为 Docker 新手提供了一个用于学习和实践 Docker Compose 的简单案例。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/FantasticMao/springboot-rocketmq-docker/&#34;&gt;SpringBoot-RocketMQ-Docker&lt;/a&gt; 使用 Docker Compose，创建了一个基于 Spring Boot 和 Apache RocketMQ 的 Java web 应用，旨在提供更适用于 Java 相关开发人员的 Docker Compose 实践案例。&lt;/p&gt;</description>
     </item>

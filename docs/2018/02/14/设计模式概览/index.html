@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="FantasticMao">
+    <meta name="description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。">
+    <meta name="keywords" content="Java,Spring Framework,设计模式">
+
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="设计模式概览"/>
+<meta name="twitter:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。"/>
+
+    <meta property="og:title" content="设计模式概览" />
+<meta property="og:description" content="本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2018/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/" />
+<meta property="article:published_time" content="2018-02-14T23:33:47+08:00" />
+<meta property="article:modified_time" content="2018-02-14T23:33:47+08:00" />
+
+
+    
+      <base href="/2018/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/">
+    
+    <title>
+  设计模式概览 · FantasticMao&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="/2018/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.68.3" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      FantasticMao&#39;s Blog
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/">首页</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">归档</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/categories/">分类</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/tags/">标签</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">关于</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">设计模式概览</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2018-02-14T23:33:47&#43;08:00'>
+                February 14, 2018
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              4 分钟阅读时间
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/java/">Java</a>
+      <span class="separator">•</span>
+    <a href="/tags/spring-framework/">Spring Framework</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <p>本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。</p>
+<hr>
+<h2 id="创建型-creational-patterns">创建型 Creational Patterns</h2>
+<h3 id="抽象工厂模式-abstract-factory-pattern">抽象工厂模式 Abstract Factory Pattern</h3>
+<p>意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。Provide an interface for creating families of related or dependent objects without specifying their concrete classes.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Abstract_factory_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/abstract-factory">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/abstract-factory-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>org.springframework.beans.factory.FactoryBean#getObject()</li>
+</ul>
+<h3 id="生成器模式-builder-pattern">生成器模式 Builder Pattern</h3>
+<p>意图：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。Separate the construction of a complex object from its representation so that the same construction process can create different representations.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Builder_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/builder">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/builder-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.StringBuilder &amp; java.lang.StringBuffer</li>
+<li>org.springframework.boot.web.client.RestTemplateBuilder</li>
+<li>org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder</li>
+<li>org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder</li>
+</ul>
+<h3 id="工厂方法模式-factory-method-pattern">工厂方法模式 Factory Method Pattern</h3>
+<p>意图：定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Factory_method_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/factory-method">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/factory-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.Object#getClass() &amp; java.lang.Object#toString()</li>
+<li>javax.sql.DataSource#getConnection()</li>
+<li>java.util.concurrent.ThreadFactory</li>
+<li>org.springframework.beans.factory.FactoryBean</li>
+</ul>
+<h3 id="原型模式-prototype-pattern">原型模式 Prototype Pattern</h3>
+<p>意图：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Prototype_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/prototype">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/prototype-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.Object#clone()</li>
+</ul>
+<h3 id="单例模式-singleton-pattern">单例模式 Singleton Pattern</h3>
+<p>意图：保证一个类仅有一个实例，并提供一个访问它的全局访问点。Ensure a class only has one instance, and provide a global point of access to it.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Singleton_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/singleton">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/singleton-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.Runtime#getRuntime()</li>
+</ul>
+<hr>
+<h2 id="结构型-structural-patterns">结构型 Structural Patterns</h2>
+<h3 id="适配器模式-adapter-pattern">适配器模式 Adapter Pattern</h3>
+<p>意图：将一个类的接口转换成客户希望的另外一个接口。Adapter 使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn&rsquo;t otherwise because of incompatible interfaces.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Adapter_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/adapter">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/adapter-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.util.Arrays#asList(Object[])</li>
+<li>java.lang.Throwable#Throwable(String, Throwable)</li>
+<li>java.io.InputStreamReader &amp; java.io.OutputStreamWriter</li>
+<li>java.util.Collections#enumeration(Collection) &amp; java.util.Collections#list(Enumeration)</li>
+</ul>
+<h3 id="桥接模式-bridge-pattern">桥接模式 Bridge Pattern</h3>
+<p>意图：将抽象部分与它的实现部分分离，使它们都可以独立地变化。Decouple an abstraction from its implementation so that the two can vary independently.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Bridge_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/bridge">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/bridge-pattern.html">菜鸟教程</a></p>
+<p>实现：待续</p>
+<h3 id="组合模式-composite-pattern">组合模式 Composite Pattern</h3>
+<p>意图：将对象组合成树形结构以表示 “部分-整体” 的层次结构。Composite 使得用户对单个对象和组合对象的使用具有一致性。Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Composite_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/composite">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/composite-pattern.html">菜鸟教程</a></p>
+<p>实现：待续</p>
+<h3 id="装饰器模式-decorator-pattern">装饰器模式 Decorator Pattern</h3>
+<p>意图：动态地给一个对象添加一些额外的职责。就增加功能来说，Decorator 模式相比生成子类更为灵活。Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Decorator_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/decorator">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/decorator-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.io.BufferedInputStream &amp; java.io.DataInputStream</li>
+<li>java.util.Collections#synchronizedCollection(Collection) &amp; java.util.Collections##unmodifiableCollection(Collection)</li>
+<li>javax.servlet.http.HttpServletRequestWrapper</li>
+<li>org.springframework.beans.BeanWrapper</li>
+</ul>
+<h3 id="外观模式-facade-pattern">外观模式 Facade Pattern</h3>
+<p>意图：为子系统中的一组接口提供一个一致的界面。Facade 定义了一个高层接口，这个接口使得这一子系统更加容易使用。Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Facade_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/facade">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/facade-pattern.html">菜鸟教程</a></p>
+<p>实现：待续</p>
+<h3 id="享元模式-flyweight-pattern">享元模式 Flyweight Pattern</h3>
+<p>意图：运用共享技术有效地支持大量细粒度的对象。Use sharing to support large numbers of fine-grained objects efficiently.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Flyweight_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/flyweight">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/flyweight-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.String</li>
+<li>java.lang.Integer#valueOf(int)</li>
+</ul>
+<h3 id="代理模式-proxy-pattern">代理模式 Proxy Pattern</h3>
+<p>意图：为其它对象提供一种代理以控制对这个对象的访问。Provide a surrogate or placeholder for another object to control access to it.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Proxy_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/proxy">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/proxy-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.reflect.Proxy</li>
+<li>org.springframework.aop.framework.AopProxy</li>
+</ul>
+<hr>
+<h2 id="行为型-behavioral-patterns">行为型 Behavioral Patterns</h2>
+<h3 id="责任链模式-chain-of-responsibility-pattern">责任链模式 Chain-of-Responsibility Pattern</h3>
+<p>意图：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/chain">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.util.logging.Logger#log(Level, String)</li>
+<li>javax.servlet.Filter#doFilter(ServletRequest, ServletResponse, FilterChain)</li>
+<li>org.springframework.web.servlet.HandlerInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)</li>
+</ul>
+<h3 id="命令模式-command-pattern">命令模式 Command Pattern</h3>
+<p>意图：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化，对请求排队或记录请求日志，以及支持可撤消的操作。Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Command_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/command">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/command-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.Runnable#run()</li>
+<li>org.springframework.web.servlet.HandlerExecutionChain</li>
+</ul>
+<h3 id="解释器模式-interpreter-pattern">解释器模式 Interpreter Pattern</h3>
+<p>意图：给定一个语言，定义它的文法表示，并定义一个解释器，这个解释器使用该标识来解释语言中的句子。Given a language, define a represention for its grammar along with an interpreter that uses the representation to interpret sentences in the language.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Interpreter_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/interpreter">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/interpreter-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.util.regex.Pattern#compile(String)</li>
+<li>org.springframework.scheduling.annotation.Scheduled#cron()</li>
+</ul>
+<h3 id="迭代器模式-iterator-pattern">迭代器模式 Iterator Pattern</h3>
+<p>意图：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示。Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Iterator_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/iterator">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/iterator-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.sql.ResultSet</li>
+<li>java.util.Iterator</li>
+<li>java.util.Enumeration</li>
+</ul>
+<h3 id="中介者模式-mediator-pattern">中介者模式 Mediator Pattern</h3>
+<p>意图：用一个中介对象来封装一系列的对象交互。Mediator 使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。Define an object that encapsulates how a set of objects interact. Mediator promotes loose coupling by keeping objects from referring toeach other explicitly, and it lets you vary their interaction independently.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Mediator_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/mediator">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/mediator-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.util.concurrent.Executor#execute(Runnable)</li>
+<li>java.util.concurrent.ExecutorService#submit(Callable) &amp; java.util.concurrent.ExecutorService#submit(Runnable)</li>
+</ul>
+<h3 id="备忘录模式-memento-pattern">备忘录模式 Memento Pattern</h3>
+<p>意图：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。Without violating encapsulation, capture and externalize an object&rsquo;s internal state so that the object can be restored to this state later.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Memento_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/memento">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/memento-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.util.Date</li>
+</ul>
+<h3 id="观察者模式-observer-pattern">观察者模式 Observer Pattern</h3>
+<p>意图：定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Observer_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/observer">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/observer-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.util.Observer#update(Observable, Object)</li>
+<li>java.util.Observable#notifyObservers()</li>
+<li>org.springframework.context.ApplicationEvent</li>
+<li>org.springframework.context.ApplicationEventPublisher</li>
+</ul>
+<h3 id="状态模式-state-pattern">状态模式 State Pattern</h3>
+<p>意图：允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。Allow an object to alter its behavior when its internal state changes. The object will appear to change its class.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/State_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/state">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/state-pattern.html">菜鸟教程</a></p>
+<p>实现：待续</p>
+<h3 id="策略模式-strategy-pattern">策略模式 Strategy Pattern</h3>
+<p>意图：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。Strategy 使得算法可独立于使用它的客户而变化。Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Strategy_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/strategy">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/strategy-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.lang.Comparable#compareTo(Object)</li>
+<li>java.lang.Object#hashCode() &amp; java.lang.Object#equals(Object)</li>
+<li>org.springframework.core.io.ResourceLoader#getResource(String)</li>
+<li>org.springframework.web.accept.ContentNegotiationStrategy#resolveMediaTypes(NativeWebRequest)</li>
+</ul>
+<h3 id="模板方法模式-template-method-pattern">模板方法模式 Template Method Pattern</h3>
+<p>意图：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。Template Method 使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template method lets subclasses redefine certain steps of an algorithm without changing the algorithm&rsquo;s structure.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Template_method_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/template-method">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/template-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>org.springframework.context.support.AbstractApplicationContext#refresh()</li>
+</ul>
+<h3 id="访问者模式-visitor-pattern">访问者模式 Visitor Pattern</h3>
+<p>意图：表示一个作用于某对象结构中的各元素的操作。Visitor 使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates.</p>
+<p>参考：<a href="https://en.wikipedia.org/wiki/Visitor_pattern">Wikipedia</a>、<a href="https://github.com/iluwatar/java-design-patterns/tree/master/visitor">java-design-patterns</a>、<a href="http://www.runoob.com/design-pattern/visitor-pattern.html">菜鸟教程</a></p>
+<p>实现：</p>
+<ul>
+<li>java.nio.file.FileVisitor</li>
+<li>org.springframework.beans.factory.config.BeanDefinitionVisitor</li>
+</ul>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+          2016 -
+        
+        2020
+         FantasticMao 
+      
+      
+         · 
+        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+      
+      
+        · CDN
+        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+        </a>
+      
+      
+      
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-89151446-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>
