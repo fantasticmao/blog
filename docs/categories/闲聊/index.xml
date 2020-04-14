@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>闲聊 on FantasticMao&#39;s Blog</title>
-    <link>/categories/%E9%97%B2%E8%81%8A/</link>
+    <link>https://blog.fantasticmao.cn/categories/%E9%97%B2%E8%81%8A/</link>
     <description>Recent content in 闲聊 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 08 Apr 2020 00:03:00 +0800</lastBuildDate>
     
-	<atom:link href="/categories/%E9%97%B2%E8%81%8A/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.fantasticmao.cn/categories/%E9%97%B2%E8%81%8A/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>这个博客的构建和部署</title>
-      <link>/posts/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</link>
+      <link>https://blog.fantasticmao.cn/posts/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Wed, 08 Apr 2020 00:03:00 +0800</pubDate>
       
-      <guid>/posts/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</guid>
       <description>&lt;p&gt;最近几天打理了荒废很久的博客，从原先的 Hexo 迁移到了 Hugo，添加了 RSS、CDN 以及其它乱七八糟的功能，顺带还给这个博客主题提交了一个 SEO 优化相关的 &lt;a href=&#34;https://github.com/luizdepra/hugo-coder/pull/300&#34;&gt;Pull Requests&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>如何快速上手一个框架</title>
-      <link>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
+      <link>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
       
-      <guid>/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
       <description>&lt;p&gt;大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 &lt;code&gt;System.out.println()&lt;/code&gt; 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。&lt;/p&gt;
 &lt;p&gt;有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。&lt;/p&gt;
 &lt;p&gt;开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的主题 —— 关于使用框架的方法论。&lt;/p&gt;</description>

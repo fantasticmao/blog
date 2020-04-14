@@ -2,96 +2,96 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编程 on FantasticMao&#39;s Blog</title>
-    <link>/categories/%E7%BC%96%E7%A8%8B/</link>
+    <link>https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/</link>
     <description>Recent content in 编程 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 18 Mar 2020 10:55:02 +0800</lastBuildDate>
     
-	<atom:link href="/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker Compose 的 Java 版实践</title>
-      <link>/posts/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</link>
+      <link>https://blog.fantasticmao.cn/posts/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Wed, 18 Mar 2020 10:55:02 +0800</pubDate>
       
-      <guid>/posts/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</guid>
       <description>&lt;p&gt;Docker Compose 是用于定义和运行多个 Docker Container 的工具。Docker 官方在 &lt;a href=&#34;https://docs.docker.com/compose/gettingstarted/&#34;&gt;《Get started with Docker Compose》&lt;/a&gt; 文档中，以创建一个基于 Flask 和 Redis 的 Python web 应用，为 Docker 新手提供了一个用于学习和实践 Docker Compose 的简单案例。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/FantasticMao/springboot-rocketmq-docker/&#34;&gt;SpringBoot-RocketMQ-Docker&lt;/a&gt; 使用 Docker Compose，创建了一个基于 Spring Boot 和 Apache RocketMQ 的 Java web 应用，旨在提供更适用于 Java 相关开发人员的 Docker Compose 实践案例。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenSSH 相关命令</title>
-      <link>/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.fantasticmao.cn/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Fri, 21 Feb 2020 20:00:00 +0800</pubDate>
       
-      <guid>/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章的记录范围之内。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue 初次体验</title>
-      <link>/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</link>
+      <link>https://blog.fantasticmao.cn/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
       
-      <guid>/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;p&gt;因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 &lt;a href=&#34;https://vuejs.bootcss.com/v2/guide/&#34;&gt;Vue&lt;/a&gt; 和 &lt;a href=&#34;https://element.eleme.cn/#/zh-CN&#34;&gt;Element&lt;/a&gt;，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>GC 对性能的影响对比</title>
-      <link>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</link>
+      <link>https://blog.fantasticmao.cn/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</link>
       <pubDate>Wed, 14 Nov 2018 10:21:22 +0800</pubDate>
       
-      <guid>/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/gc-%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%E5%AF%B9%E6%AF%94/</guid>
       <description>&lt;p&gt;本篇文章记录一个普通 Web 应用在访问量逐渐增加的情况下，不同类型 GC 对应用性能影响的趋势对比。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Java 内存模型与线程</title>
-      <link>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <link>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
       
-      <guid>/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt; 第 12 章 Java 内存模型与线程。&lt;/p&gt;
 &lt;p&gt;并发处理的广泛应用是使得 &lt;a href=&#34;https://en.wikipedia.org/wiki/Amdahl&#39;s_law&#34;&gt;Amdahl 定律&lt;/a&gt; 代替 &lt;a href=&#34;https://en.wikipedia.org/wiki/Moore&#39;s_law&#34;&gt;Moore 定律&lt;/a&gt; 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vim 常用命令</title>
-      <link>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
-      <guid>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;p&gt;本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 &lt;a href=&#34;#%E9%99%84&#34;&gt;参考资料&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>设计模式概览</title>
-      <link>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
+      <link>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
-      <guid>/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
       <description>&lt;p&gt;本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>jQuery API 小记</title>
-      <link>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
+      <link>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</link>
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
-      <guid>/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/jquery-api-%E5%B0%8F%E8%AE%B0/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/10549733/&#34;&gt;《JavaScript 权威指南》&lt;/a&gt;第 19 章 jQuery 类库。&lt;/p&gt;
 &lt;p&gt;JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Java 泛型的擦除</title>
-      <link>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
+      <link>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
       <pubDate>Mon, 02 Jan 2017 20:12:26 +0800</pubDate>
       
-      <guid>/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
       <description>&lt;p&gt;本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。&lt;/p&gt;</description>
     </item>
     

@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MySQL on FantasticMao&#39;s Blog</title>
-    <link>/tags/mysql/</link>
+    <link>https://blog.fantasticmao.cn/tags/mysql/</link>
     <description>Recent content in MySQL on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 24 Feb 2019 13:50:18 +0800</lastBuildDate>
     
-	<atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.fantasticmao.cn/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>从数据结构角度看索引</title>
-      <link>/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</link>
+      <link>https://blog.fantasticmao.cn/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Sun, 24 Feb 2019 13:50:18 +0800</pubDate>
       
-      <guid>/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</guid>
       <description>&lt;p&gt;上周和团队内部的同事分享了一则关于 MySQL 索引相关的知识。这个分享主要是从数据结构角度出发，学习和分析 MySQL 索引相关的一些特性和原理。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>MySQL 索引高性能策略</title>
-      <link>/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</link>
+      <link>https://blog.fantasticmao.cn/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</link>
       <pubDate>Fri, 03 Feb 2017 16:24:07 +0800</pubDate>
       
-      <guid>/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/23008813/&#34;&gt;《高性能 MySQL》&lt;/a&gt;第 5 章 创建高性能的索引。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>MySQL 数据类型优化</title>
-      <link>/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
+      <link>https://blog.fantasticmao.cn/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
       <pubDate>Wed, 25 Jan 2017 12:20:03 +0800</pubDate>
       
-      <guid>/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/23008813/&#34;&gt;《高性能 MySQL》&lt;/a&gt;第 4 章 Schema 与数据类型优化。&lt;/p&gt;</description>
     </item>
     

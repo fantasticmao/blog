@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on FantasticMao&#39;s Blog</title>
-    <link>/tags/vim/</link>
+    <link>https://blog.fantasticmao.cn/tags/vim/</link>
     <description>Recent content in Vim on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 31 Mar 2018 21:51:23 +0800</lastBuildDate>
     
-	<atom:link href="/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.fantasticmao.cn/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vim 常用命令</title>
-      <link>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
-      <guid>/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;p&gt;本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 &lt;a href=&#34;#%E9%99%84&#34;&gt;参考资料&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     

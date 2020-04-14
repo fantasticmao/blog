@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>UDP on FantasticMao&#39;s Blog</title>
-    <link>/tags/udp/</link>
+    <link>https://blog.fantasticmao.cn/tags/udp/</link>
     <description>Recent content in UDP on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 23 Dec 2017 15:39:28 +0800</lastBuildDate>
     
-	<atom:link href="/tags/udp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.fantasticmao.cn/tags/udp/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>UDP 必知必会</title>
-      <link>/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</link>
+      <link>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</link>
       <pubDate>Sat, 23 Dec 2017 15:39:28 +0800</pubDate>
       
-      <guid>/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</guid>
+      <guid>https://blog.fantasticmao.cn/posts/udp-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/26960678/&#34;&gt;《计算机网络》&lt;/a&gt; 第 5 章 传输层，并参考自维基百科与 RFC-768。&lt;/p&gt;</description>
     </item>
     
