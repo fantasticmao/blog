@@ -1,3 +1,4 @@
+baseURL = "https://blog.fantasticmao.cn"
 title = "FantasticMao's Blog"
 theme = "hugo-coder"
 
@@ -8,6 +9,7 @@ paginate = 20
 publishDir = "docs"
 enableRobotsTXT = true
 enableEmoji = true
+relativeURLs = true
 
 googleAnalytics = "UA-89151446-1"
 disqusShortname = "fantasticmao"

@@ -17,20 +17,20 @@
     <meta property="og:title" content="OpenSSH 相关命令" />
 <meta property="og:description" content="这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章的记录范围之内。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/" />
+<meta property="og:url" content="https://blog.fantasticmao.cn/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/" />
 <meta property="article:published_time" content="2020-02-21T20:00:00+08:00" />
 <meta property="article:modified_time" content="2020-02-21T20:00:00+08:00" />
 
 
     
-      <base href="/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">
+      <base href="https://blog.fantasticmao.cn/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">
     
     <title>
   OpenSSH 相关命令 · FantasticMao&#39;s Blog
 </title>
 
     
-      <link rel="canonical" href="/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">
+      <link rel="canonical" href="https://blog.fantasticmao.cn/posts/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">
     
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="../../css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -53,8 +53,8 @@
 
     
 
-    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-16x16.png" sizes="16x16">
 
     <meta name="generator" content="Hugo 0.68.3" />
   </head>
@@ -65,7 +65,7 @@
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="/">
+    <a class="navigation-title" href="../../">
       FantasticMao&#39;s Blog
     </a>
     
@@ -75,23 +75,23 @@
       
         
           <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
+            <a class="navigation-link" href="https://blog.fantasticmao.cn/">首页</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
+            <a class="navigation-link" href="https://blog.fantasticmao.cn/posts/">归档</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
+            <a class="navigation-link" href="https://blog.fantasticmao.cn/categories/">分类</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
+            <a class="navigation-link" href="https://blog.fantasticmao.cn/tags/">标签</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
+            <a class="navigation-link" href="https://blog.fantasticmao.cn/about/">关于</a>
           </li>
         
       
@@ -125,13 +125,13 @@
           </div>
           <div class="categories">
   <i class="fas fa-folder"></i>
-    <a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
+    <a href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
 
           <div class="tags">
   <i class="fas fa-tag"></i>
-    <a href="/tags/linux/">Linux</a>
+    <a href="../../tags/linux/">Linux</a>
       <span class="separator">•</span>
-    <a href="/tags/openssh/">OpenSSH</a></div>
+    <a href="../../tags/openssh/">OpenSSH</a></div>
 
         </div>
       </header>
@@ -178,7 +178,7 @@ Port <span style="color:#ae81ff">22222</span>
 </blockquote>
 <p>SSH 协议使用公共密钥加密（public key cryptography）技术对主机和用户进行身份认证，其中的认证密钥被叫做 SSH 密钥（包含公钥和私钥），需要使用 <code>ssh-keygen</code> 命令创建。SSH 密钥可以用于自动登录、单点登录和主机认证。</p>
 <p>创建 SSH 密钥最简单的方式是不带任何参数地直接运行 <code>ssh-keygen</code> 命令，在这种情况下，<code>ssh-keygen</code> 命令会提示用户 SSH 密钥文件的存储位置，如下图所示：</p>
-<p><img src="/images/OpenSSH%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/1.png" alt="image"></p>
+<p><img src="../../images/OpenSSH%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/1.png" alt="image"></p>
 <p><code>ssh-keygen</code> 首先会主动询问用户密钥文件的存储位置，默认地址是 <code>~/.ssh/</code> 目录。其次会要求用户输入用于加密生成 SSH 密钥的密码短语，这个密码应该具备足够的加密强度。SSH.COM 站点上提供了一个用于生成足够强度的密码短语的在线服务，地址是：<a href="https://www.ssh.com/iam/password/generator">https://www.ssh.com/iam/password/generator</a>。</p>
 <p>SSH 支持多种用于认证密钥的公共密钥算法，包括 <code>rsa</code>、<code>dsa</code>、<code>ecdsa</code>、<code>ed25519</code>。在 <code>ssh-keygen</code> 中，提供了 <code>-t</code> 选项用于择选择这些算法（默认值为 <code>rsa</code>），还有 <code>-b</code> 选项用于指定密钥的字节长度。</p>
 <h2 id="ssh-copy-id">ssh-copy-id</h2>
@@ -274,7 +274,7 @@ Port <span style="color:#ae81ff">22222</span>
       
         · CDN
         <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
-          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+          <img src="../../images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
         </a>
       
       
