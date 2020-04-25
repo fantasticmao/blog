@@ -8,7 +8,10 @@
     {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
     <meta name="keywords" content="{{ with .Keywords }}{{ delimit . "," }}{{ else }}{{ if .IsPage }}{{ with .Params.keywords }}{{ delimit . "," }}{{ else }}{{ .Site.Params.keywords }}{{ end }}{{ else }}{{ .Site.Params.keywords }}{{ end }}{{ end }}">
-
+    {{ if hasPrefix .RelPermalink "/posts" }}<meta name="robots" content="noindex">{{ end }}
+    {{ if hasPrefix .RelPermalink "/categories" }}<meta name="robots" content="noindex">{{ end }}
+    {{ if hasPrefix .RelPermalink "/tags" }}<meta name="robots" content="noindex">{{ end }}
+    {{ if hasPrefix .RelPermalink "/about" }}<meta name="robots" content="noindex">{{ end }}
 
     {{ template "_internal/twitter_cards.html" . }}
     {{ template "_internal/opengraph.html" . }}
