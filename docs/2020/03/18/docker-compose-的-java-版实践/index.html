@@ -9,7 +9,10 @@
     <meta name="description" content="Docker Compose 是用于定义和运行多个 Docker Container 的工具。Docker 官方在 《Get started with Docker Compose》 文档中，以创建一个基于 Flask 和 Redis 的 Python web 应用，为 Docker 新手提供了一个用于学习和实践 Docker Compose 的简单案例。
 SpringBoot-RocketMQ-Docker 使用 Docker Compose，创建了一个基于 Spring Boot 和 Apache RocketMQ 的 Java web 应用，旨在提供更适用于 Java 相关开发人员的 Docker Compose 实践案例。">
     <meta name="keywords" content="Java,Docker,Docker Compose,Spring Boot,Apache RocketMQ">
-
+    
+    
+    
+    
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Docker Compose 的 Java 版实践"/>
@@ -416,7 +419,7 @@ SpringBoot-RocketMQ-Docker 使用 Docker Compose，创建了一个基于 Spring 
     <span style="color:#66d9ef">depends_on</span>:
       - name-server
 </code></pre></div><h3 id="定义-service-springboot-mq-producer">定义 service: springboot-mq-producer</h3>
-<p>在工程根目录的 <code>docker-compose.yml</code> 文件中，定义 mq-produce 模块的 Service:</p>
+<p>在工程根目录的 <code>docker-compose.yml</code> 文件中，定义 mq-producer 模块的 Service:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">services</span>:
   <span style="color:#66d9ef">producer</span>:
     <span style="color:#66d9ef">build</span>:

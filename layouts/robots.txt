@@ -1,7 +1,3 @@
 User-Agent: *
-Disallow: /posts/
-Disallow: /categories/
-Disallow: /tags/
-Disallow: /about/
 
 Sitemap: https://blog.fantasticmao.cn/sitemap.xml

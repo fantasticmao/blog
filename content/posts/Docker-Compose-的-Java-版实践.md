@@ -349,7 +349,7 @@ services:
 
 ### 定义 service: springboot-mq-producer
 
-在工程根目录的 `docker-compose.yml` 文件中，定义 mq-produce 模块的 Service:
+在工程根目录的 `docker-compose.yml` 文件中，定义 mq-producer 模块的 Service:
 
 ```yml
 services:
