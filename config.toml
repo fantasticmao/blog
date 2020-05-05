@@ -37,7 +37,7 @@ disqusShortname = "fantasticmao"
     name = "GitHub"
     icon = "fab fa-github fa-2x"
     weight = 1
-    url = "https://github.com/FantasticMao/"
+    url = "https://github.com/fantasticmao/"
 [[params.social]]
     name = "WeChat"
     icon = "fab fa-weixin fa-2x"
@@ -47,7 +47,7 @@ disqusShortname = "fantasticmao"
     name = "Twitter"
     icon = "fab fa-twitter fa-2x"
     weight = 3
-    url = "https://twitter.com/FantasticMao/"
+    url = "https://twitter.com/fantasticmao/"
 [[params.social]]
     name = "Instagram"
     icon = "fab fa-instagram fa-2x"
