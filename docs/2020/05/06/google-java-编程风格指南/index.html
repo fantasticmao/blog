@@ -7,14 +7,9 @@
     <meta http-equiv="Content-Language" content="zh-cn">
 
     <meta name="author" content="FantasticMao">
-    <meta name="description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准。
- 简介 本文档是 Google Java 语言编程规范的 完整 定义。一个 Java 源文件当且仅当遵守本规范时，才可被描述为 Google 风格。
-与其它编程规范指南类似，本文档讨论的不仅涉及代码对齐的美观问题，同时还包含其它类型约定和编码规范。然而，本文档侧重于讨论我们普遍遵循的 硬性规定，也避免提供那些无法明确执行的建议。
-术语说明 在本文档中，除非另有说明：
- class 类 表示 ordinary class 普通的类、enum class 枚举类、interface 接口或 annotation 注解类型。 member 成员 表示 nested class 嵌套类、field 属性、method 方法或 constructor 者构造方法，即除初始化方法和注释之外，类的所有最顶层内容。 comment 注释 表示 implementation comments 实现注释。我们不使用术语 documentation comments，而是使用（在 Java 中）更通用的术语 javadoc。  其它出现在本文档中的术语将另作说明。
-指南说明 本文档中的示例代是 不规范 的。也就是说，虽然示例代码是属于 Google 风格，但并不意味着这是编写优雅代码的唯一方式。示例中代码的风格不应被作为执行的准则。
- 源文件准则 文件名 源文件的名称包含了区分大小写的（并且是 唯一 的）顶级类的类名和 .java 扩展名组成。
-文件编码：UTF-8 源文件使用 UTF-8 编码。">
+    <meta name="description" content="
+转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准。
+">
     <meta name="keywords" content="FantasticMao,个人博客,程序员,后端,Java">
     
     
@@ -23,24 +18,14 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Google Java 编程风格指南"/>
-<meta name="twitter:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准。
- 简介 本文档是 Google Java 语言编程规范的 完整 定义。一个 Java 源文件当且仅当遵守本规范时，才可被描述为 Google 风格。
-与其它编程规范指南类似，本文档讨论的不仅涉及代码对齐的美观问题，同时还包含其它类型约定和编码规范。然而，本文档侧重于讨论我们普遍遵循的 硬性规定，也避免提供那些无法明确执行的建议。
-术语说明 在本文档中，除非另有说明：
- class 类 表示 ordinary class 普通的类、enum class 枚举类、interface 接口或 annotation 注解类型。 member 成员 表示 nested class 嵌套类、field 属性、method 方法或 constructor 者构造方法，即除初始化方法和注释之外，类的所有最顶层内容。 comment 注释 表示 implementation comments 实现注释。我们不使用术语 documentation comments，而是使用（在 Java 中）更通用的术语 javadoc。  其它出现在本文档中的术语将另作说明。
-指南说明 本文档中的示例代是 不规范 的。也就是说，虽然示例代码是属于 Google 风格，但并不意味着这是编写优雅代码的唯一方式。示例中代码的风格不应被作为执行的准则。
- 源文件准则 文件名 源文件的名称包含了区分大小写的（并且是 唯一 的）顶级类的类名和 .java 扩展名组成。
-文件编码：UTF-8 源文件使用 UTF-8 编码。"/>
+<meta name="twitter:description" content="
+转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准。
+"/>
 
     <meta property="og:title" content="Google Java 编程风格指南" />
-<meta property="og:description" content="转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准。
- 简介 本文档是 Google Java 语言编程规范的 完整 定义。一个 Java 源文件当且仅当遵守本规范时，才可被描述为 Google 风格。
-与其它编程规范指南类似，本文档讨论的不仅涉及代码对齐的美观问题，同时还包含其它类型约定和编码规范。然而，本文档侧重于讨论我们普遍遵循的 硬性规定，也避免提供那些无法明确执行的建议。
-术语说明 在本文档中，除非另有说明：
- class 类 表示 ordinary class 普通的类、enum class 枚举类、interface 接口或 annotation 注解类型。 member 成员 表示 nested class 嵌套类、field 属性、method 方法或 constructor 者构造方法，即除初始化方法和注释之外，类的所有最顶层内容。 comment 注释 表示 implementation comments 实现注释。我们不使用术语 documentation comments，而是使用（在 Java 中）更通用的术语 javadoc。  其它出现在本文档中的术语将另作说明。
-指南说明 本文档中的示例代是 不规范 的。也就是说，虽然示例代码是属于 Google 风格，但并不意味着这是编写优雅代码的唯一方式。示例中代码的风格不应被作为执行的准则。
- 源文件准则 文件名 源文件的名称包含了区分大小写的（并且是 唯一 的）顶级类的类名和 .java 扩展名组成。
-文件编码：UTF-8 源文件使用 UTF-8 编码。" />
+<meta property="og:description" content="
+转载并翻译自 https://google.github.io/styleguide/javaguide.html。个人英语水平有限，应以原文档为标准。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/2020/05/06/google-java-%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" />
 <meta property="article:published_time" content="2020-05-06T00:00:00+08:00" />
@@ -173,8 +158,8 @@
 <p>在本文档中，除非另有说明：</p>
 <ol>
 <li><em>class</em> 类 表示 <em>ordinary class</em> 普通的类、<em>enum class</em> 枚举类、<em>interface</em> 接口或 <em>annotation</em> 注解类型。</li>
-<li><em>member</em> 成员 表示 <em>nested class</em> 嵌套类、<em>field</em> 属性、<em>method</em> 方法或 <em>constructor</em> 者构造方法，即除初始化方法和注释之外，类的所有最顶层内容。</li>
-<li><em>comment</em> 注释 表示 <em>implementation comments</em> 实现注释。我们不使用术语 <em>documentation comments</em>，而是使用（在 Java 中）更通用的术语 <em>javadoc</em>。</li>
+<li><em>member</em> 成员 表示 <em>nested class</em> 嵌套类、<em>field</em> 字段、<em>method</em> 方法或 <em>constructor</em> 者构造方法，即除初始化方法和注释之外，类的所有最顶层内容。</li>
+<li><em>comment</em> 注释 表示 <em>implementation comments</em> 实现注释。我们不使用术语 <em>documentation comments</em>，而是使用（在 Java 中）更通用的术语 <em>Javadoc</em>。</li>
 </ol>
 <p>其它出现在本文档中的术语将另作说明。</p>
 <h3 id="指南说明">指南说明</h3>
@@ -745,7 +730,6 @@ Foo<span style="color:#f92672">.</span><span style="color:#a6e22e">aStaticMethod
 <p>其它的类和成员根据实际需要或者期望来编写 Javadoc。</p>
 <p>每当使用实现注释来定义一个类或者成员的总体目的或者行为的时候，这个注释改为用 Javadoc 来编写（使用 <code>/**</code> ）。</p>
 <p>非必需的 Javadoc 内容不是严格要求遵守 <a href="#%E6%AE%B5%E8%90%BD">段落</a> 章节、<a href="#%E5%9D%97%E6%A0%87%E7%AD%BE">块标签</a> 章节以及 <a href="#%E6%91%98%E8%A6%81%E7%89%87%E6%AE%B5">摘要片段</a> 章节的格式化规则，尽管这当然是推荐的。</p>
-
       </div>
 
 
