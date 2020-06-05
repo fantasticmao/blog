@@ -1,0 +1,152 @@
+---
+title: "Java JNI 简单实践"
+date: 2020-05-18T20:40:21+08:00
+categories: ["编程"]
+tags: ["Java"]
+keywords: ["Java", "JNI"]
+---
+
+本篇文章介绍 Java JNI 的基本概念和技术要点，并开发一个简单的示例程序作为实践。<!--more-->
+
+---
+
+## JNI 简介
+
+JNI (Java Native Interface) 是 Java 编程语言中的一种本地程序接口，它允许运行在 JVM 中的 Java 代码与基于其它编程语言（例如 C、C++）编写的应用或者类库交互。
+
+JNI 与 JVM 的底层实现无关，JVM 供应商可以在添加对 JNI 支持的同时，不影响虚拟机的其它部分。开发者可以编写一个基于 JNI 的本地应用或者类库，同时期望它可以运行在所有支持 JNI 的 JVM 中。
+
+开发者通过使用 JNI 编写的 native methods，可以实现仅使用 Java 语言时无法实现的功能，例如以下场景：
+
+- 应用需要使用 Java 标准类库不支持的平台相关的特性；
+- 希望通过 Java 代码访问一个已有的使用其它语言编写的类库；
+- 希望使用低级语言（例如汇编语言）实现一部分性能敏感的代码。
+
+开发者使用 JNI 时，可以通过调用 [JNI functions](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/functions.html)，用于访问 JVM 的特性，实现包括但不限于以下操作：
+
+- 创建、检查、更新 Java 对象（包括数组和字符串）；
+- 调用 Java 方法；
+- 捕获和抛出异常；
+- 加载类、获取类信息；
+- 执行运行时的类型检查。
+
+开发者甚至还可以通过调用 [Invocation API](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/invocation.html)，用于把 JVM 内嵌到本地应用中。
+
+本篇文章主要关注于 Java 中的 native methods 是如何与和其它语言（以 C 为例）的 native libraries 交互的，关于 JNI functions 和 Invocation API 的详细内容请见 Oracle 的 [官方文档](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html)。
+
+---
+
+## native methods 与 native libraries
+
+### native libraries 编译
+
+native libraries 的编译工作是由该库的语言自己负责的，不过由于 JVM 是支持多线程的，所以 native libraries 也需要使用 multithread aware 的编译器来编译和链接。例如，如果使用 Sun Studio 编译器来编译 C++ 代码的话，需要加上 `-mt` 选项。如果使用 GUN gcc 编译器来编译的话，需要加上 `-D_REENTRANT` 或者 `-D_POSIX_C_SOURCE` 选项。
+
+### native methods 加载和链接
+
+在 Java 代码中，native methods 是由 [`System.loadLibrary()`](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-) 方法来加载的。例如以下例子，该类在初始化方法中加载了一个由 native method `f(int, String)` 定义的平台相关的 native library：
+
+```java
+package pkg;
+
+class Cls {
+    native double f(int i, String s);
+    static {
+        System.loadLibrary("pkg_Cls");
+    }
+}
+```
+
+[`System.loadLibrary()`](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-) 方法的参数是由开发者指定的 library 名称。JVM 会依据平台相关的标准，将 library 名称转换成 native library 的名称。例如，在 Solaris 系统中会将 `pkg_Cls` 转换成 `libpkg_Cls.so`，在 Win32 系统中会将 `pkg_Cls` 转换成 `pkg_Cls.dll`。
+
+开发者可以使用一个 native library 存储任意数量的类所需要的所有 native methods，只要这些类是使用同一个 [ClassLoader](https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html) 加载的即可。虚拟机内部会为每一个 ClassLoader 维护一组已经加载的 native libraries，这也意味着不同的 ClassLoader 会分别加载和使用不同的 native libraries。
+
+### native methods 名称
+
+[动态链接器](https://en.wikipedia.org/wiki/Dynamic_linker) 会基于名称来解析 native methods，native libraries 中的方法名称由以下部分组成：
+
+- 固定的前缀 `Java_`；
+- 完整的全限定类名；
+- 作为分隔符的下划线 `_` ；
+- 完整的方法名；
+- 对于被重载的 native methods，需要加上两个下划线 `__` 和完整的参数签名。
+
+虚拟机会在 native libraries 的所有方法中检查是否有匹配 native method 名称的方法。虚拟机首先会查找没有参数签名的方法短名称，然后再查找带有参数签名的方法长名称。只有当 native method 被重载的情况下，开发者才需要使用方法的长名称。然而，当 native method 和 nonnative method （即普通的 Java 方法）重名的时候，开发者可以忽略这种情况。因为 nonnative method 不会出现在 native libraries 中。
+
+例如以下例子，native method `g(double)` 不需要使用方法的长名称来链接，因为另一个方法 `g(int)` 是一个 nonnative method：
+
+```java
+class Cls1 {
+    int g(int i);
+    native int g(double d);
+}
+```
+
+JNI 的设计者采用了一种简单的处理方式，确保能将 native methods 名称中所有的 Unicode 字符都转换为有效的 C 函数名称：
+
+- 使用下划线 `_` 代替类的全限定名中的斜杠 `/` 分隔符；
+- 由于类名和方法名不会以数字开头，所以可以使用 `_0` 到 `_9` 作为转义序列，如下表所示：
+
+  | Escape Sequence | Denotes                   |
+  | --------------- | ------------------------- |
+  | \_0XXXX         | 值为 XXXX 的 Unicode 字符 |
+  | \_1             | `_` 字符                  |
+  | \_2             | 参数签名中的 `;` 字符     |
+  | \_3             | 参数签名中的 `[` 字符     |
+
+### native methods 参数
+
+native methods 的第一个参数是 [`JNIEnv`](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/functions.html#interface_function_table) 类型的 JNI interface 指针，第二个参数的类型与 native methods 是否静态有关。如果 native methods 是非静态的，第二个参数则是对象实例的引用。如果 native methods 是静态的，第二个参数则是 Class 的引用。
+
+native methods 的剩余参数与方法的参数列表一一对应，具体的映射关系请见 [JNI Types and Data Structures](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html)。
+
+native methods 通过返回值将方法的执行结果返回给调用程序。
+
+---
+
+## JNI 实践
+
+Java native methods 与 C native libraries 的整体交互流程如下图所示，并且下例通过实现一个计算两数之合的 native method `sum(int, int)` 来作具体演示。
+
+![1.svg](/images/JavaJNI简单实践/1.svg)
+
+### 定义 native method
+
+在根目录创建包 `cn.fantasticmao.jni` 的目录，并在包目录中创建一个含有 native method `sum(int, int)` 的类 SumNative.java：
+
+{{< gist fantasticmao f6147a60f1b35b4442ca29e73b6627f8 "SumNative.java" >}}
+
+### 编译 Java 源文件
+
+在根目录执行 `javac cn/fantasticmao/jni/SumNative.java` 命令编译 SumNative.java，生成 SumNative.class。
+
+### 生成 C 头文件
+
+在根目录执行 `javah cn.fantasticmao.jni.SumNative` 命令，生成 cn_fantasticmao_jni_SumNative.h 头文件：
+
+{{< gist fantasticmao f6147a60f1b35b4442ca29e73b6627f8 "cn_fantasticmao_jni_SumNative.h" >}}
+
+### 实现 native library
+
+在根目录创建 cn_fantasticmao_jni_SumNative.c，导入 cn_fantasticmao_jni_SumNative.h 和 jni.h 头文件，并实现 native method 对应的函数接口：
+
+{{< gist fantasticmao f6147a60f1b35b4442ca29e73b6627f8 "cn_fantasticmao_jni_SumNative.c" >}}
+
+需要注意的是，jni.h 头文件位于 JDK 的 include 目录中，需要在编译时显示指定。
+
+### 编译 native library
+
+在根目录执行 `gcc -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/darwin" -D_REENTRANT -dynamiclib -o libsum.dylib cn_fantasticmao_jni_SumNative.c` 编译 cn_fantasticmao_jni_SumNative.c，生成名为 libsum.dylib 的平台相关（以 macOS 为例）的动态链接库。
+
+### 运行 Java 程序
+
+最后在根目录执行 `java cn.fantasticmao.jni.SumNative` 命令，便可以验证 SumNative.java 通过调用了基于 C 实现的 libsum.dylib，成功得到了 `1 + 2 = 3` 的执行结果。
+
+![2.png](/images/JavaJNI简单实践/2.png)
+
+---
+
+## 附录
+
+- [Java Native Interface Specification Contents](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html)
+- [《Java 核心技术 卷 II》](https://book.douban.com/subject/27165931/) 第十二章
