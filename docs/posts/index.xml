@@ -6,10 +6,19 @@
     <description>Recent content in 归档 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 06 May 2020 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 20:40:21 +0800</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java JNI 简单实践</title>
+      <link>/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Mon, 18 May 2020 20:40:21 +0800</pubDate>
+      
+      <guid>/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</guid>
+      <description>&lt;p&gt;本篇文章介绍 Java JNI 的基本概念和技术要点，并开发一个简单的示例程序作为实践。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Google Java 编程风格指南</title>
@@ -178,7 +187,7 @@
       <pubDate>Mon, 02 Jan 2017 20:12:26 +0800</pubDate>
       
       <guid>/2017/01/02/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
-      <description>&lt;p&gt;本篇记录 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章介绍 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。&lt;/p&gt;</description>
     </item>
     
   </channel>
