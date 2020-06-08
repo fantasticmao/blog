@@ -228,7 +228,7 @@
 <p>native methods 通过返回值将方法的执行结果返回给调用程序。</p>
 <hr>
 <h2 id="jni-实践">JNI 实践</h2>
-<p>Java native methods 与 C native libraries 的整体交互流程如下图所示，并且下例通过实现一个计算两数之合的 native method <code>sum(int, int)</code> 来作具体演示。</p>
+<p>Java native methods 与 C native libraries 的整体交互流程如下图所示，下例通过实现一个计算两数之合的 native method <code>sum(int, int)</code> 来作具体演示。</p>
 <p><img src="/images/JavaJNI%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/1.svg" alt="1.svg"></p>
 <h3 id="定义-native-method">定义 native method</h3>
 <p>在根目录创建包 <code>cn.fantasticmao.jni</code> 的目录，并在包目录中创建一个含有 native method <code>sum(int, int)</code> 的类 SumNative.java：</p>
@@ -250,6 +250,21 @@
 <h3 id="运行-java-程序">运行 Java 程序</h3>
 <p>最后在根目录执行 <code>java cn.fantasticmao.jni.SumNative</code> 命令，便可以验证 SumNative.java 通过调用了基于 C 实现的 libsum.dylib，成功得到了 <code>1 + 2 = 3</code> 的执行结果。</p>
 <p><img src="/images/JavaJNI%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/2.png" alt="2.png"></p>
+<hr>
+<h2 id="在-openjdk-中查找-jdk-native-libraries">在 OpenJDK 中查找 JDK native libraries</h2>
+<p>按照 native methods 名称的解析规则，便可以在 OpenJDK 源码工程中快速查找 native methods 对应的实现代码，以 <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#intern--"><code>java.lang.String#intern()</code></a> 方法为例：</p>
+<ol>
+<li>
+<p>由于 <code>intern()</code> 没有被重载，所以 <code>java.lang.String#intern()</code> 在 native libraries 中对应的方法名称为固定字符串：<code>Java_java_lang_String_intern</code>；</p>
+</li>
+<li>
+<p>使用 <code>find</code> 命令和 <code>grep</code> 命令，查找源码工程目录下内容包含字符串 <code>Java_java_lang_String_intern</code> 的所有文件：<code>find . -name '*.c' | xargs grep -n 'Java_java_lang_String_intern'</code>;</p>
+<p><img src="/images/JavaJNI%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/3.png" alt="3.png"></p>
+</li>
+<li>
+<p>依据查询结果可知，<code>java.lang.String#intern()</code> 对应的实现源码文件是 <a href="http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/file/72a1a252527b/src/share/native/java/lang/String.c"><code>src/share/native/java/lang/String.c</code></a>。</p>
+</li>
+</ol>
 <hr>
 <h2 id="附录">附录</h2>
 <ul>
