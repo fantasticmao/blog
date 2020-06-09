@@ -17,7 +17,7 @@
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
       <guid>/2018/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
-      <description>&lt;p&gt;本篇文章记录我所理解和掌握的设计模式，及其在 JDK 和 Spring 中的一些实现。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章记录我所理解和掌握的在 &lt;a href=&#34;https://book.douban.com/subject/1436745/&#34;&gt;《Design Patterns》&lt;/a&gt; 书中提及的一些设计模式，及其在 JDK 和 Spring 中的一些实现。&lt;/p&gt;</description>
     </item>
     
   </channel>
