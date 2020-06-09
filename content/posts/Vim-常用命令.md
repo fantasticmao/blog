@@ -2,11 +2,13 @@
 title: "Vim 常用命令"
 date: 2018-03-31T21:51:23+08:00
 categories: ["编程"]
-tags: ["Linux", "Vim"]
-keywords: ["Linux", "Vim"]
+tags: ["Vim"]
+keywords: ["Vim"]
 ---
 
-本篇文章记录我所理解和掌握的 Vim 常用命令。另外，对于新手推荐阅读附录中的 [参考资料](#附)。<!--more-->
+本篇文章记录我所理解和掌握的 Vim 常用命令。<!--more-->
+
+在本文中，blank 字符指空格符、制表符、回车符、换行符等等，`$` 表示美元符号，`${}` 表示占位符。
 
 ---
 
@@ -14,27 +16,27 @@ keywords: ["Linux", "Vim"]
 
 ### 移动光标
 
-| 命令           | 描述                                                 |
-| -------------- | ---------------------------------------------------- |
-| h、←           | 向左移动光标                                         |
-| j、↓           | 向下移动光标                                         |
-| k、↑           | 向上移动光标                                         |
-| l、→           | 向右移动光标                                         |
-| Ctrl + b、PgUp | 向上翻页                                             |
-| Ctrl + f、PgDn | 向下翻页                                             |
-| Ctrl + u       | 向上翻半页                                           |
-| Ctrl + d       | 向下翻半页                                           |
-| 0、Home        | 移动光标至当前行的第一个位置                         |
-| \$、End        | 移动光标至当前行的最后一个位置                       |
-| ^              | 移动光标至当前行的第一个 [非 blank 字符](#附) 位置   |
-| g\_            | 移动光标至当前行的最后一个 [非 blank 字符](#附) 位置 |
-| \${n}G         | 相当于 `:${n}`                                       |
-| gg             | 相当于 1G 和 `:${1}`                                 |
-| G              | 移动光标至当前文件的最后一行                         |
-| f\${char}      | 向右移动光标至下个 char 字符的位置                   |
-| F\${char}      | 向左移动光标至上个 char 字符的位置                   |
-| t\${char}      | 向右移动光标至下个 char 字符的前一个位置             |
-| T\${char}      | 向左移动光标至上个 char 字符的前一个位置             |
+| 命令           | 描述                                        |
+| -------------- | ------------------------------------------- |
+| h、←           | 向左移动光标                                |
+| j、↓           | 向下移动光标                                |
+| k、↑           | 向上移动光标                                |
+| l、→           | 向右移动光标                                |
+| Ctrl + b、PgUp | 向上翻页                                    |
+| Ctrl + f、PgDn | 向下翻页                                    |
+| Ctrl + u       | 向上翻半页                                  |
+| Ctrl + d       | 向下翻半页                                  |
+| 0、Home        | 移动光标至当前行的第一个位置                |
+| \$、End        | 移动光标至当前行的最后一个位置              |
+| ^              | 移动光标至当前行的第一个非 blank 字符位置   |
+| g\_            | 移动光标至当前行的最后一个非 blank 字符位置 |
+| \${n}G         | 相当于 `:${n}`                              |
+| gg             | 相当于 1G 和 `:${1}`                        |
+| G              | 移动光标至当前文件的最后一行                |
+| f\${char}      | 向右移动光标至下个 char 字符的位置          |
+| F\${char}      | 向左移动光标至上个 char 字符的位置          |
+| t\${char}      | 向右移动光标至下个 char 字符的前一个位置    |
+| T\${char}      | 向左移动光标至上个 char 字符的前一个位置    |
 
 ### 复制、粘贴、删除
 
@@ -92,19 +94,19 @@ keywords: ["Linux", "Vim"]
 
 ## Insert 模式
 
-| 命令     | 描述                                                         |
-| -------- | ------------------------------------------------------------ |
-| i        | 从光标所在的位置进入 INSERT 模式                             |
-| I        | 从光标所在的第一个 [非 blank 字符](#附) 位置进入 INSERT 模式 |
-| a        | 从光标所在的下一个位置进入 INSERT 模式                       |
-| A        | 从光标所在的当前行的最后一个位置进入 INSERT 模式             |
-| o        | 从光标所在的下一行位置进入 INSERT 模式                       |
-| O        | 从光标所在的上一行位置进入 INSERT 模式                       |
-| r        | 替换光标所在的位置的第一个字符，并进入 INSERT 模式           |
-| R        | 从光标所在的位置进入 REPLACE 模式                            |
-| Esc      | 退出 Insert 模式，回到 Normal 模式                           |
-| Ctrl + n | 开启自动补全                                                 |
-| Ctrl + p | 开启自动补全，并跳至最后一个选项                             |
+| 命令     | 描述                                                |
+| -------- | --------------------------------------------------- |
+| i        | 从光标所在的位置进入 INSERT 模式                    |
+| I        | 从光标所在的第一个非 blank 字符位置进入 INSERT 模式 |
+| a        | 从光标所在的下一个位置进入 INSERT 模式              |
+| A        | 从光标所在的当前行的最后一个位置进入 INSERT 模式    |
+| o        | 从光标所在的下一行位置进入 INSERT 模式              |
+| O        | 从光标所在的上一行位置进入 INSERT 模式              |
+| r        | 替换光标所在的位置的第一个字符，并进入 INSERT 模式  |
+| R        | 从光标所在的位置进入 REPLACE 模式                   |
+| Esc      | 退出 Insert 模式，回到 Normal 模式                  |
+| Ctrl + n | 开启自动补全                                        |
+| Ctrl + p | 开启自动补全，并跳至最后一个选项                    |
 
 ---
 
@@ -134,16 +136,12 @@ keywords: ["Linux", "Vim"]
 
 ---
 
-## 附录
+## 参考资料
 
-- 组合使用 Vim 命令会有很神奇的效果；
-- blank 字符指空格符、制表符、回车符、换行符等；
-- 本文中的 `$` 表示美元符号；`${}` 表示占位符，其内容是实际变量；
-- 本文中的按键以 MacBook 自带键盘为例，与一般键盘有些不同。例如 MacBook 键盘的 Delete 键对应一般键盘的 Backspace、fn + Delete 对应一般键盘的 Delete；
-- 参考资料：
-  - Vim :help —— VIM main help file
-  - <a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" ref="external">Vim (text editor)</a> —— Wikipedia
-  - [Vim 程式編輯器](http://linux.vbird.org/linux_basic/0310vi.php) —— 鳥哥的 Linux 私房菜
-  - [Vim 的分屏功能](https://coolshell.cn/articles/1679.html) —— 酷 壳 - CoolShell
-  - [简明 Vim 练级攻略](https://coolshell.cn/articles/5426.html) —— 酷 壳 - CoolShell
-  - [无插件 Vim 编程技巧](https://coolshell.cn/articles/11312.html) —— 酷 壳 - CoolShell
+- Vim :help —— VIM main help file
+- <a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" ref="external">Vim
+  (text editor)</a> —— Wikipedia
+- [Vim 程式編輯器](http://linux.vbird.org/linux_basic/0310vi.php) —— 鳥哥的 Linux 私房菜
+- [Vim 的分屏功能](https://coolshell.cn/articles/1679.html) —— 酷 壳 - CoolShell
+- [简明 Vim 练级攻略](https://coolshell.cn/articles/5426.html) —— 酷 壳 - CoolShell
+- [无插件 Vim 编程技巧](https://coolshell.cn/articles/11312.html) —— 酷 壳 - CoolShell
