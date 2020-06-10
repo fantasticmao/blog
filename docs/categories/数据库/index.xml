@@ -21,20 +21,20 @@
     </item>
     
     <item>
-      <title>MySQL 索引高性能策略</title>
-      <link>/2017/02/03/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</link>
+      <title>《高性能 MySQL》摘录 —— 创建高性能的索引</title>
+      <link>/2017/02/03/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E6%91%98%E5%BD%95-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Fri, 03 Feb 2017 16:24:07 +0800</pubDate>
       
-      <guid>/2017/02/03/mysql-%E7%B4%A2%E5%BC%95%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5/</guid>
+      <guid>/2017/02/03/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E6%91%98%E5%BD%95-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/23008813/&#34;&gt;《高性能 MySQL》&lt;/a&gt;第 5 章 创建高性能的索引。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>MySQL 数据类型优化</title>
-      <link>/2017/01/25/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
+      <title>《高性能 MySQL》摘录 —— Schema 与数据类型优化</title>
+      <link>/2017/01/25/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E6%91%98%E5%BD%95-schema-%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
       <pubDate>Wed, 25 Jan 2017 12:20:03 +0800</pubDate>
       
-      <guid>/2017/01/25/mysql-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
+      <guid>/2017/01/25/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E6%91%98%E5%BD%95-schema-%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/23008813/&#34;&gt;《高性能 MySQL》&lt;/a&gt;第 4 章 Schema 与数据类型优化。&lt;/p&gt;</description>
     </item>
     

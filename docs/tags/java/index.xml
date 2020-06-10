@@ -21,32 +21,11 @@
     </item>
     
     <item>
-      <title>Google Java 编程风格指南</title>
-      <link>/2020/05/06/google-java-%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/</link>
-      <pubDate>Wed, 06 May 2020 00:00:00 +0800</pubDate>
-      
-      <guid>/2020/05/06/google-java-%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;转载并翻译自 &lt;a href=&#34;https://google.github.io/styleguide/javaguide.html&#34;&gt;https://google.github.io/styleguide/javaguide.html&lt;/a&gt;。个人英语水平有限，应以原文档为标准。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>Docker Compose 的 Java 版实践</title>
-      <link>/2020/03/18/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</link>
-      <pubDate>Wed, 18 Mar 2020 10:55:02 +0800</pubDate>
-      
-      <guid>/2020/03/18/docker-compose-%E7%9A%84-java-%E7%89%88%E5%AE%9E%E8%B7%B5/</guid>
-      <description>&lt;p&gt;Docker Compose 是用于定义和运行多个 Docker Container 的工具。Docker 官方在 &lt;a href=&#34;https://docs.docker.com/compose/gettingstarted/&#34;&gt;《Get started with Docker Compose》&lt;/a&gt; 文档中，以创建一个基于 Flask 和 Redis 的 Python web 应用，为 Docker 新手提供了一个用于学习和实践 Docker Compose 的简单案例。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/FantasticMao/springboot-rocketmq-docker/&#34;&gt;SpringBoot-RocketMQ-Docker&lt;/a&gt; 使用 Docker Compose，创建了一个基于 Spring Boot 和 Apache RocketMQ 的 Java web 应用，旨在提供更适用于 Java 相关开发人员的 Docker Compose 实践案例。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java 内存模型与线程</title>
-      <link>/2018/07/01/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <title>《深入理解 Java 虚拟机》摘录 —— Java 内存模型与线程</title>
+      <link>/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%91%98%E5%BD%95-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
       
-      <guid>/2018/07/01/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%91%98%E5%BD%95-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
       <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt; 第 12 章 Java 内存模型与线程。&lt;/p&gt;
 &lt;p&gt;并发处理的广泛应用是使得 &lt;a href=&#34;https://en.wikipedia.org/wiki/Amdahl&#39;s_law&#34;&gt;Amdahl 定律&lt;/a&gt; 代替 &lt;a href=&#34;https://en.wikipedia.org/wiki/Moore&#39;s_law&#34;&gt;Moore 定律&lt;/a&gt; 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。&lt;/p&gt;</description>
     </item>
