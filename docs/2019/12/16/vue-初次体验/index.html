@@ -144,15 +144,15 @@
 <hr>
 <h2 id="vue-相关">Vue 相关</h2>
 <h3 id="v-bing-指令和-v-on-指令的作用">v-bing 指令和 v-on 指令的作用</h3>
-<p>v-bind 指令的缩写是 <code>:</code>，用于动态绑定一个或多个属性，或者是一个组件的 <code>prop</code> 属性。当 v-bind 绑定的属性是 <code>class</code> 或 <code>style</code> 的时候，表达式的值可以是数组或对象。代码示例和修饰符描述请见 <a href="https://vuejs.bootcss.com/v2/api/#v-bind">官方文档</a>。</p>
-<p>v-on 指令的缩写是 <code>@</code>，用于绑定事件监听器。v-on 被用于普通元素上时只能监听 <strong>原生 DOM 事件</strong>，被用于自定义组件元素上时可以监听子组件触发的 <strong>自定义事件</strong> （由 <code>$emit</code> 定义的事件）。v-on 指令支持的修饰符有 <code>.stop</code>、<code>.prevent</code>、<code>.once</code> 等等，代码示例和更多修饰符描述请见 <a href="https://vuejs.bootcss.com/v2/api/#v-on">官方文档</a>。</p>
+<p><a href="https://vuejs.bootcss.com/api/#v-bind">v-bind</a> 指令的缩写是 <code>:</code>，用于动态绑定一个或多个属性，或者是一个组件的 <code>prop</code> 属性。当 v-bind 绑定的属性是 <code>class</code> 或 <code>style</code> 的时候，表达式的值可以是数组或对象。代码示例和修饰符描述请见 <a href="https://vuejs.bootcss.com/v2/api/#v-bind">官方文档</a>。</p>
+<p><a href="https://vuejs.bootcss.com/api/#v-on">v-on</a> 指令的缩写是 <code>@</code>，用于绑定事件监听器。v-on 被用于普通元素上时只能监听 <strong>原生 DOM 事件</strong>，被用于自定义组件元素上时可以监听子组件触发的 <strong>自定义事件</strong> （由 <code>$emit</code> 定义的事件）。v-on 指令支持的修饰符有 <code>.stop</code>、<code>.prevent</code>、<code>.once</code> 等等，代码示例和更多修饰符描述请见 <a href="https://vuejs.bootcss.com/v2/api/#v-on">官方文档</a>。</p>
 <h3 id="watch-属性和-computed-属性的区别">watch 属性和 computed 属性的区别</h3>
-<p>Vue 实例的 <code>watch</code> 属性用于监听实例对象上的数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/api/#watch">官方文档</a>。</p>
-<p>Vue 实例的 <code>computed</code> 属性用于计算和生成实例对象的数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/api/#computed">官方文档</a>。</p>
+<p>Vue 实例的 <a href="https://vuejs.bootcss.com/api/#watch"><code>watch</code></a> 属性用于监听实例对象上的数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/api/#watch">官方文档</a>。</p>
+<p>Vue 实例的 <a href="https://vuejs.bootcss.com/api/#computed"><code>computed</code></a> 属性用于计算和生成实例对象的数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/api/#computed">官方文档</a>。</p>
 <h3 id="父组件如何给子组件传递数据">父组件如何给子组件传递数据</h3>
-<p>在 Vue 中，父组件可以使用 <code>prop</code> 属性给子组件传递数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/guide/components.html#%E9%80%9A%E8%BF%87-Prop-%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE">官方文档</a>。</p>
+<p>在 Vue 中，父组件可以使用 <a href="https://vuejs.bootcss.com/api/#props"><code>prop</code></a> 属性给子组件传递数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/guide/components.html#%E9%80%9A%E8%BF%87-Prop-%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE">官方文档</a>。</p>
 <h3 id="子组件如何反馈数据给父组件">子组件如何反馈数据给父组件</h3>
-<p>在 Vue 中，子组件可以使用 <code>emit</code> 属性通过事件给父组件反馈数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/guide/components.html#%E9%80%9A%E8%BF%87%E4%BA%8B%E4%BB%B6%E5%90%91%E7%88%B6%E7%BA%A7%E7%BB%84%E4%BB%B6%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF">官方文档</a>。</p>
+<p>在 Vue 中，子组件可以使用 <a href="https://vuejs.bootcss.com/api/#vm-emit"><code>$emit()</code></a> 方法通过事件给父组件反馈数据，代码示例请见 <a href="https://vuejs.bootcss.com/v2/guide/components.html#%E9%80%9A%E8%BF%87%E4%BA%8B%E4%BB%B6%E5%90%91%E7%88%B6%E7%BA%A7%E7%BB%84%E4%BB%B6%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF">官方文档</a>。</p>
 <h3 id="如何使用-slot-分发内容">如何使用 &lt;slot&gt; 分发内容</h3>
 <p>在 Vue 中，可以使用 <code>&lt;slot&gt;</code> 元素实现父子组件之间的内容分发，<a href="https://vuejs.bootcss.com/v2/guide/components-slots.html">官方文档</a> 提供了一份精简的代码示例，完善之后的内容如下：</p>
 <p>NavigationLink.vue</p>
@@ -190,7 +190,7 @@
   &lt;/<span style="color:#f92672">a</span>&gt;
 &lt;/<span style="color:#f92672">template</span>&gt;
 </code></pre></div><h3 id="如何访问元素和组件">如何访问元素和组件</h3>
-<p>在 Vue 中，可以使用 <code>$root</code> 属性访问根实例，使用 <code>$parent</code> 属性从子组件访问父组件，结合使用 <code>ref</code> 属性和 <code>$refs</code> 属性从父组件访问子组件。更多访问元素和组件的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/components-edge-cases.html#%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0-amp-%E7%BB%84%E4%BB%B6">官方文档</a>。</p>
+<p>在 Vue 中，可以使用 <a href="https://vuejs.bootcss.com/api/#vm-root"><code>$root</code></a> 属性访问根实例，使用 <a href="https://vuejs.bootcss.com/api/#vm-parent"><code>$parent</code></a> 属性从子组件访问父组件，使用 <a href="https://vuejs.bootcss.com/api/#vm-refs"><code>$refs</code></a> 属性从父组件访问子组件。更多访问元素和组件的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/components-edge-cases.html#%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0-amp-%E7%BB%84%E4%BB%B6">官方文档</a>。</p>
 <h3 id="响应式实现原理">响应式实现原理</h3>
 <p>ECMAScript5 定义了一个属性描述符（property descriptor）对象，支持使用 getter / setter 方法替代属性的定义。可以通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor"><code>Object.getOwnPropertyDescriptor()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors"><code>Object.getOwnPropertyDescriptors()</code></a> 获取某个对象的属性描述符，通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><code>Object.defineProperty()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties"><code>Object.defineProperties()</code></a> 设置某个对象的属性和属性描述符。</p>
 <p>《JavaScript 权威指南》第六章中将 JavaScript 普通对象的属性称为 <strong>数据属性</strong>，将由 getter / setter 定义的属性称为 <strong>存储器属性</strong>。数据属性拥有一个名字和四个特性：值（value）、可写（writable）、可枚举（enumerable）、可配置（configurable），存储器属性相对于数据属性缺少了值和可写的特性，但增加了读取（get）、写入（set）的特性。在 ECMAScript5 中使用 getter / setter 方法替代属性定义的示例代码如下：</p>
@@ -199,7 +199,7 @@
     <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;MaoMao&#34;</span>;
   },
 };
-window.<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">name</span>); <span style="color:#75715e">// MaoMao
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">name</span>); <span style="color:#75715e">// MaoMao
 </span></code></pre></div><p>Vue 在内部通过调用 <code>Object.defineProperty()</code> 把 <code>data</code> 定义的 <strong>数据属性</strong> 转换成 <strong>存储器属性</strong>，以此来追踪依赖，实现在属性被访问和修改时通知变化。简单版本的实现代码如下，更多关于响应式原理的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/reactivity.html">官方文档</a>。</p>
 
 
@@ -223,16 +223,28 @@ window.<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">lo
 <h2 id="vue-devtools-相关">Vue Devtools 相关</h2>
 <h3 id="如何查看-vue-组件">如何查看 Vue 组件</h3>
 <p><img src="/images/Vue%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/1.png" alt="image"></p>
-<h3 id="如何查看-vue-自定义事件">如何查看 Vue 自定义事件</h3>
+<h3 id="如何查看-vuex-管理的状态">如何查看 Vuex 管理的状态</h3>
 <p><img src="/images/Vue%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/2.png" alt="image"></p>
-<h3 id="如何查看-vue-router-路由">如何查看 Vue Router 路由</h3>
+<h3 id="如何查看-vue-自定义事件">如何查看 Vue 自定义事件</h3>
 <p><img src="/images/Vue%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/3.png" alt="image"></p>
+<h3 id="如何查看-vue-router-路由">如何查看 Vue Router 路由</h3>
+<p><img src="/images/Vue%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/4.png" alt="image"></p>
 <hr>
 <h2 id="vue-router-相关">Vue Router 相关</h2>
 <h3 id="hash-模式-和-history-模式的区别">hash 模式 和 history 模式的区别</h3>
 <p>Vue Router 的 hash 模式使用 URL 的 hash 来模拟一个完整的 URL，为了实现当 URL 改变时，页面不会重新加载。hash 模式的 URL 类似于 <code>localhost:8080/#/home</code>、<code>localhost:8080/#/about</code>。</p>
-<p>Vue Router 的 history 模式使用 <code>history.pushState</code> API 实现和 hash 模式一样的功能。并且，history 模式的 URL 不会再带有 <code>#</code> 符号，URL 会类似于 <code>localhost:8080/home</code>、<code>localhost:8080/about</code>。</p>
+<p>Vue Router 的 history 模式使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState"><code>history.pushState</code></a> API 实现和 hash 模式一样的功能。并且，history 模式的 URL 不会再带有 <code>#</code> 符号，URL 会类似于 <code>localhost:8080/home</code>、<code>localhost:8080/about</code>。</p>
 <p>当使用 Vue Router 的 history 模式时，可能会导致访问路由时后端返回 HTTP 404，此时需要后端额外支持：如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面。更多详细内容请见 <a href="https://router.vuejs.org/zh/guide/essentials/history-mode.html">官方文档</a>。</p>
+<h3 id="如何使用嵌套路由">如何使用嵌套路由</h3>
+<p>在 Vue Router 中，可以使用 <code>RouteConfig</code> 的 <a href="https://github.com/vuejs/vue-router/blob/ce955d9322d54c9e1f05ea5f8566aaa408587b71/types/router.d.ts#L81"><code>children</code> 属性</a> 配置嵌套路由，代码示例请见 <a href="https://router.vuejs.org/zh/guide/essentials/nested-routes.html">官方文档</a>。</p>
+<h3 id="如何传递路由参数">如何传递路由参数</h3>
+<p>在 Vue Router 中，可以使用 <code>RouteConfig</code> 的 <a href="https://github.com/vuejs/vue-router/blob/ce955d9322d54c9e1f05ea5f8566aaa408587b71/types/router.d.ts#L104"><code>props</code> 属性</a> 给组件传递路由参数，代码示例请见 <a href="https://router.vuejs.org/zh/guide/essentials/passing-props.html">官方文档</a>。</p>
+<hr>
+<h2 id="vuex-相关">Vuex 相关</h2>
+<h3 id="理解-vuex">理解 Vuex</h3>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</p>
+<p>Vuex 主要为了解决在「多个组件共享状态」场景下，应用状态的「单向数据流」会被破坏的问题。例如当多个组件依赖同一个状态时，组件传参的方式对于多层嵌套组件会非常繁琐，并且无法在兄弟组件的之间传递状态。例如当多个组件的行为需要修改同一个状态时，父子组件直接引用的方式和通过事件触发的方式，都会导致代码变得异常复杂。</p>
+<p>Vuex 把组件的共享状态抽取出来，以一个全局单例模式管理，通过定义和隔离状态管理中的各种概念，并通过强制规则维持视图和状态间的独立性，来使代码变得更具结构化和更易维护。更多详细内容请见 <a href="https://vuex.vuejs.org/zh/">官方文档</a>。</p>
 <hr>
 <h2 id="vue-cli-相关">Vue CLI 相关</h2>
 <h3 id="如何使用-vue-cli-service">如何使用 vue-cli-service</h3>
