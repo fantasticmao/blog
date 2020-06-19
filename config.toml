@@ -3,7 +3,7 @@ theme = "hugo-coder"
 
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"
-paginate = 20
+paginate = 15
 
 publishDir = "docs"
 enableRobotsTXT = true
