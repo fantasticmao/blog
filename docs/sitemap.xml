@@ -3,17 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.fantasticmao.cn/</loc>
+    <lastmod>2020-06-19T17:26:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/tags/innodb/</loc>
+    <lastmod>2020-06-19T17:26:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/tags/mysql/</loc>
+    <lastmod>2020-06-19T17:26:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/2020/06/19/mysql-innodb-acid-%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2020-06-19T17:26:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/posts/</loc>
+    <lastmod>2020-06-19T17:26:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2020-06-19T17:26:26+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.fantasticmao.cn/tags/java/</loc>
     <lastmod>2020-05-18T20:40:21+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.fantasticmao.cn/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</loc>
-    <lastmod>2020-05-18T20:40:21+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/posts/</loc>
     <lastmod>2020-05-18T20:40:21+08:00</lastmod>
   </url>
   
@@ -68,17 +93,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fantasticmao.cn/tags/mysql/</loc>
-    <lastmod>2019-02-24T13:50:18+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.fantasticmao.cn/2019/02/24/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</loc>
-    <lastmod>2019-02-24T13:50:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2019-02-24T13:50:18+08:00</lastmod>
   </url>
   
@@ -170,11 +185,6 @@
   <url>
     <loc>https://blog.fantasticmao.cn/2017/01/02/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</loc>
     <lastmod>2017-01-02T20:12:26+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/</loc>
-    <lastmod>2016-11-23T21:42:50+08:00</lastmod>
   </url>
   
   <url>
