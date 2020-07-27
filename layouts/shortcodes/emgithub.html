@@ -1,0 +1,7 @@
+{{/* DEFAULTS */}}
+{{ $style           := "github" }}
+{{ $showBorder      := "on" }}
+{{ $showLineNumbers := "on" }}
+{{ $showFileMeta    := "on" }}
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target={{ .Get "url" }}&style={{ $style }}&showBorder={{ $showBorder }}&showLineNumbers={{ $showLineNumbers }}&showFileMeta={{ $showFileMeta }}"></script>
