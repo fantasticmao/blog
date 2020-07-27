@@ -1,0 +1,6 @@
+.emgithub-container table td,
+.emgithub-container table th,
+.gist table td,
+.gist table th {
+  border: 0;
+}
