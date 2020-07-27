@@ -1,4 +1,4 @@
-# 这个博客的构建和部署
+# [这个博客的构建和部署](https://blog.fantasticmao.cn/2020/04/08/这个博客的构建和部署/)
 
 这个博客是以 Markdown 编写的，使用 Hugo 构建并且部署在 Github Pages 上，整个站点的运行架构如下：
 
