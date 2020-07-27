@@ -31,6 +31,8 @@ disqusShortname = "fantasticmao"
     favicon_16 = "/favicons/favicon-16x16.png"
     since = 2016
 
+    custom_css = ["css/custom.css"]
+
     icpRecord = "浙ICP备17009730号"
 
 [[params.social]]
