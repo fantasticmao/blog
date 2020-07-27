@@ -1,0 +1,73 @@
+# 这个博客的构建和部署
+
+这个博客是以 Markdown 编写的，使用 Hugo 构建并且部署在 Github Pages 上，整个站点的运行架构如下：
+
+![image](static/images/这个博客的构建和部署/1.png)
+
+---
+
+## 构建
+
+在使用 Hugo 构建博客的静态资源时，主要有以下个性化配置：
+
+- 支持原始 HTML 标签
+
+  Hugo 在 0.60 版本之后默认使用 [Goldmark](https://github.com/yuin/goldmark/) 来解析 Markdown，这个组件默认不会渲染 Markdown 中的原始 HTML 标签，所以需要显式开启该功能。
+
+- 定制 footer.html
+
+  需要按 [又拍云联盟](https://www.upyun.com/league) 和信息产业部的要求调整 footer 内容，所以定制了 [footer.html](layouts/partials/footer.html) 页面。
+
+- 配置 robots.txt
+
+  需要禁止搜索引擎爬取 /categories、/tags 等页面，所以配置了 [robots.txt](layouts/robots.txt) 文件。
+
+- 配置 URL 风格
+
+  为了兼容博客在 Hexo 时期已经被搜索引擎收录的 URL，所以配置了 `/:year/:month/:day/:title/` 格式的 URL 风格。
+
+- 使用相对 URL
+
+  站点被部署在多个域名之下，所以需要在站内使用相对 URL，禁止使用 HTML 的 `<base>` 标签，即禁止使用 Hugo 的 `baseURL` 配置项。
+
+- publishDir
+
+  站点被托管于 GitHub Pages 仓库的 master 分支的 /docs 目录下，所以需要将生成静态资源的目录从默认的 /public 显式配置为 /docs。
+
+- RSS
+
+  Hugo 默认开启 RSS 功能。
+
+- Disqus
+
+  Hugo 模版中内置支持 Disqus，配置 Disqus Website Shortname 即可开启。
+
+- Google Analytics
+
+  Hugo 模版中内置支持 Google Analytics，配置 Google Analytics 中的 Property Tracking ID 即可开启。
+
+---
+
+## 部署
+
+使用 GitHub Pages 部署站点主要有以下三种方式，详细内容可以参考 Hugo 的官方文档 [Host on GitHub](https://gohugo.io/hosting-and-deployment/hosting-on-github/)。
+
+1. 站点被托管在 `<USERNAME>.github.io` 仓库的 master 分支下；
+2. 站点被托管在 `<USERNAME>.github.io/<PROJECT>/` 仓库的 master 分支下，并且可以选择将 /docs 目录作为站点的发布目录；
+3. 站点被托管在 `<USERNAME>.github.io/<PROJECT>/` 仓库的 master 分支下，并且可以选择将 gh-pages 分支作为站点的发布分支。
+
+这个博客选择的是第二种方案，并且还给 GitHub Pages 配置了一个 [origin.blog.fantasticmao.cn](https://origin.blog.fantasticmao.cn) 域名，主要是为了解决 CDN 厂商在回源时无法使用 URL 转发功能的问题。
+
+最终在部署博客时，需要先使用 `rm -rf ./docs/` 命令清空资源目录，再使用 `hugo` 命令构建站点，然后使用 `git push origin master` 命令部署至 GitHub Pages。这一系列操作命令对应的 Shell Script 是 [deploy.sh](deploy.sh)，是我参考 Hugo 官方文档改写的。
+
+在部署博客至 GitHub Pages 成功，并且可以通过 origin.blog.fantasticmao.cn 域名访问成功之后，还需要在又拍云控制台中配置 CDN 服务的加速域名和回源地址。一言概之就是，需要在 DNS 服务商中将 blog.fantasticmao.cn 域名解析至又拍云 CDN 服务中提供的 CNAME，随后需要在又拍云控制台中配置 CDN 服务的回源地址为 origin.blog.fantasticmao.cn，详细内容可以参考又拍云的 [帮助文档](https://help.upyun.com/knowledge-base/cdn-create-service/)。需要注意的是，**在又拍云控制台中配置回源地址时，需要额外配置回源 Host，否则访问站点会显示 404**。
+
+---
+
+## SEO
+
+博客部署成功之后，还需要在百度和 Google 两大中文 / 英文搜索引擎中提交博客站点，便于用户根据关键字搜索。
+
+百度需要在它的 [资源搜索平台](https://ziyuan.baidu.com/) 中提交站点，可以通过 DNS CNAME 解析的方式验证站点拥有权。
+
+Google 需要在它的 [Google Search Console](https://search.google.com/search-console) 中提交站点，可以通过 DNS TXT 解析的方式验证站点拥有权。
