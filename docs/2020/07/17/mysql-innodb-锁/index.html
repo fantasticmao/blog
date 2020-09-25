@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+
+    <meta name="author" content="FantasticMao">
+    <meta name="description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 锁的一些笔记。">
+    <meta name="keywords" content="MySQL,InnoDB,锁">
+    
+    
+    
+    
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL InnoDB 锁"/>
+<meta name="twitter:description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 锁的一些笔记。"/>
+
+    <meta property="og:title" content="MySQL InnoDB 锁" />
+<meta property="og:description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 锁的一些笔记。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2020/07/17/mysql-innodb-%E9%94%81/" />
+<meta property="article:published_time" content="2020-07-17T14:02:28+08:00" />
+<meta property="article:modified_time" content="2020-07-17T14:02:28+08:00" />
+
+
+    
+      <base href="/2020/07/17/mysql-innodb-%E9%94%81/">
+    
+    <title>
+  MySQL InnoDB 锁 · FantasticMao&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="/2020/07/17/mysql-innodb-%E9%94%81/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      FantasticMao&#39;s Blog
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/">首页</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">归档</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/categories/">分类</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/tags/">标签</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">关于</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">MySQL InnoDB 锁</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-07-17T14:02:28&#43;08:00'>
+                July 17, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              4 分钟阅读时间
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/mysql/">MySQL</a>
+      <span class="separator">•</span>
+    <a href="/tags/innodb/">InnoDB</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <p>本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 锁的一些笔记。</p>
+<hr>
+<h2 id="锁的类型">锁的类型</h2>
+<p>在 InnoDB 中涉及的锁有以下类型：</p>
+<ul>
+<li><a href="#%E5%85%B1%E4%BA%AB%E9%94%81%E5%92%8C%E6%8E%92%E5%AE%83%E9%94%81">Shared and Exclusive Locks</a> 共享锁和排它锁</li>
+<li><a href="#%E6%84%8F%E5%90%91%E9%94%81">Intention Locks</a> 意向锁</li>
+<li><a href="#%E8%AE%B0%E5%BD%95%E9%94%81">Record Locks</a> 记录锁</li>
+<li><a href="#%E9%97%B4%E9%9A%99%E9%94%81">Gap Locks</a> 间隙锁</li>
+<li><a href="#%E5%90%8E%E9%94%AE%E9%94%81">Next-Key Locks</a> 后键锁</li>
+<li><a href="#%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81">Insert Intention Locks</a> 插入意向锁</li>
+<li><a href="#%E8%87%AA%E5%A2%9E%E9%94%81">AUTO-INC Locks</a> 自增锁</li>
+<li><a href="#%E7%B4%A2%E5%BC%95%E7%A9%BA%E9%97%B4%E7%9A%84%E8%B0%93%E8%AF%8D%E9%94%81">Predicate Locks for Spatial Indexes</a> 索引空间的谓词锁</li>
+</ul>
+<h3 id="共享锁和排它锁">共享锁和排它锁</h3>
+<p>InnoDB 实现了标准的行级锁，包括共享锁（shared locks，S）和排它锁（exclusive locks，X）：</p>
+<ul>
+<li>共享锁允许持有该锁的事务读取行数据；</li>
+<li>排它锁允许持有该锁的事务更新或者删除行数据。</li>
+</ul>
+<p>如果事务 T1 在行 r 上持有共享锁，那么来自不同事务 T2 对行 r 上锁的请求，会按照如下方式处理：</p>
+<ul>
+<li>可以立即授予 T2 对共享锁的请求。结果会导致 T1 和 T2 在行 r 上都会持有共享锁；</li>
+<li>不可以立即授予 T2 对排它锁的请求。</li>
+</ul>
+<p>如果事务 T1 在行 r 上持有排它锁，那么来自不同事务 T2 对行 r 上任何类型锁的请求都不会被立即授予。相反的，事务 T2 必须等待 T1 事务释放在行 r 上的锁。</p>
+<h3 id="意向锁">意向锁</h3>
+<p>InnoDB 支持多种粒度的锁，允许行锁和表锁同时存在。例如 <code>LOCK TABLES ... WRITE</code> 语句会在指定的表上设置排它锁。InnoDB 使用意向锁来实现多种粒度的锁。意向锁是表级锁，用于指定事务稍后在表中某行上需要持有锁的类型（共享锁或者排它锁）。意向锁有两种类型：</p>
+<ul>
+<li>意向共享锁（intention shared lock，IS）表示事务打算在表中的各行上设置共享锁；</li>
+<li>意向排它锁（intention exclusive lock，IX）表示事务打算在表中的各行上设置排它锁。</li>
+</ul>
+<p>例如 <code>SELECT ... FOR SHARE</code> 语句会设置 IS 锁，<code>SELECT ... FOR UPDATE</code> 语句会设置 IX 锁。</p>
+<p>意向锁的使用规则如下：</p>
+<ul>
+<li>事务在表中的行上获取共享锁之前，它必须先在表上获取 IS 锁或者更高强度的锁；</li>
+<li>事务在表中的行上获取排它锁之前，它必须先在表上获取 IX 锁。</li>
+</ul>
+<p>各种表级锁类型的兼容性如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>X</th>
+<th>IX</th>
+<th>S</th>
+<th>IS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X</td>
+<td>Conflict</td>
+<td>Conflict</td>
+<td>Conflict</td>
+<td>Conflict</td>
+</tr>
+<tr>
+<td>IX</td>
+<td>Conflict</td>
+<td>Compatible</td>
+<td>Conflict</td>
+<td>Compatible</td>
+</tr>
+<tr>
+<td>S</td>
+<td>Conflict</td>
+<td>Conflict</td>
+<td>Compatible</td>
+<td>Compatible</td>
+</tr>
+<tr>
+<td>IS</td>
+<td>Conflict</td>
+<td>Compatible</td>
+<td>Compatible</td>
+<td>Compatible</td>
+</tr>
+</tbody>
+</table>
+<p>如果事务请求的锁与现有的锁互相兼容，则授予锁，如果冲突则不授予锁。事务会持续等待直到现有冲突的锁被释放。如果事务请求的锁与现有的锁发生冲突，并且是由于可能会导致 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_deadlock">死锁</a> 而无法被授予的情况时，MySQL 会反馈一个错误。</p>
+<p>除了对全表的请求（例如 <code>LOCK TABLES ... WRITE</code>）之外，意向锁不会锁定任何内容。意向锁的主要用途是表示有人正在锁定表中的行，或者是打算锁定表中的行。</p>
+<p>意向锁中的事务数据类似于如下 <code>SHOW ENGINE INNODB STATUS</code> 语句和 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-standard-monitor.html">InnoDB monitor</a> 的输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">LOCK</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">`</span>test<span style="color:#f92672">`</span>.<span style="color:#f92672">`</span>t<span style="color:#f92672">`</span> trx id <span style="color:#ae81ff">10080</span> <span style="color:#66d9ef">lock</span> <span style="color:#66d9ef">mode</span> IX
+</code></pre></div><h3 id="记录锁">记录锁</h3>
+<p>记录锁是对一条索引记录的锁。例如 <code>SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE;</code> 语句会阻止任何其它事务插入、更新，或者删除 <code>t.c1</code> 值为 <code>10</code> 的行。</p>
+<p>记录锁总是会锁定索引记录，即使表中没有定义索引。在这种情况下，InnoDB 会创建一个隐式的聚簇索引，并将这个索引用于记录锁。更多内容请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-index-types.html">Clustered and Secondary Indexes</a>。</p>
+<p>记录锁中的事务数据类似于如下 <code>SHOW ENGINE INNODB STATUS</code> 语句和 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-standard-monitor.html">InnoDB monitor</a> 的输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">RECORD LOCKS <span style="color:#66d9ef">space</span> id <span style="color:#ae81ff">58</span> page <span style="color:#66d9ef">no</span> <span style="color:#ae81ff">3</span> n bits <span style="color:#ae81ff">72</span> <span style="color:#66d9ef">index</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">PRIMARY</span><span style="color:#f92672">`</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">`</span>test<span style="color:#f92672">`</span>.<span style="color:#f92672">`</span>t<span style="color:#f92672">`</span>
+trx id <span style="color:#ae81ff">10078</span> lock_mode X locks rec but <span style="color:#66d9ef">not</span> gap
+Record <span style="color:#66d9ef">lock</span>, heap <span style="color:#66d9ef">no</span> <span style="color:#ae81ff">2</span> PHYSICAL RECORD: n_fields <span style="color:#ae81ff">3</span>; compact format; info bits <span style="color:#ae81ff">0</span>
+ <span style="color:#ae81ff">0</span>: len <span style="color:#ae81ff">4</span>; hex <span style="color:#ae81ff">8000000</span>a; <span style="color:#66d9ef">asc</span>     ;;
+ <span style="color:#ae81ff">1</span>: len <span style="color:#ae81ff">6</span>; hex <span style="color:#ae81ff">00000000274</span>f; <span style="color:#66d9ef">asc</span>     <span style="color:#e6db74">&#39;O;;
+</span><span style="color:#e6db74"> 2: len 7; hex b60000019d0110; asc        ;;
+</span></code></pre></div><h3 id="间隙锁">间隙锁</h3>
+<p>间隙锁是对一个索引记录的区间的锁，或者是对第一个索引之前和最后一个索引之后的区间的锁。例如 <code>SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE;</code> 语句会阻止其它事务在 <code>t.c1</code> 列中插入值为 <code>15</code> 的记录，而不论列中是否已有这样的值，因为该范围内所有已有值的区间已经被锁定了。</p>
+<p>间隙锁跨越的区间可能是单个索引值、多个索引值，甚至可能为空。</p>
+<p>间隙锁是权衡性能和并发的一部分，并被用于某些特定的事务隔离级别。</p>
+<p>使用唯一索引来锁定行从而进行查找唯一记录的语句，不需要锁定区间。但这不包括查询条件仅包含了多列唯一索引中部分列的情况。在这种情况下，还是会锁定区间。例如，如果 <code>id</code> 列具有唯一索引，如下语句仅会对 <code>id</code> 值为 <code>100</code> 的行使用记录锁进行锁定，并且这与其它事务是否会在前一个区间内插入记录无关。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> child <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
+</code></pre></div><p>如果 <code>id</code> 列没有索引或者具有非唯一的索引，那么这条语句是会锁定前一个区间的。</p>
+<p>还值得注意的是，不同事务可以在相同区间上持有互相冲突的锁。例如，事务 A 可以在一段区间上持有共享间隙锁（gap-S-lock），同时事务 B 也可以在相同区间上持有排它间隙锁（gap-X-lock）。允许间隙锁冲突的原因是，如果记录从索引上被清除了，那么不同事务在这个记录上持有的间隙锁必须被合并。</p>
+<p>InnoDB 中的间隙锁是「完全抑制」的，这意味着使用间隙锁的唯一目的是防止其它事务在区间内插入数据。间隙锁是可以共存的。一个事务设置了的间隙锁不会阻止另一个事务在相同区间设置间隙锁。在这一点上，共享间隙锁和排它间隙锁没有区别。它们不会互相冲突，并且执行相同的功能。</p>
+<p>间隙锁可以被显式禁用。这会发生在将事务的隔离级别设置为 READ COMMITTED 的时候。在这种情况下，间隙锁在查找和索引扫描时是禁用的，并且只会被用于外键约束检查和重复键检查。</p>
+<p>使用 READ COMMITTED 隔离级别还有其它影响。在 MySQL 评估 WHERE 条件之后，不匹配的行上的记录锁会被释放。对于 UPDATE 语句，InnoDB 会采取「半一致性」读取，它会将最新提交的版本返回给 MySQL，以便 MySQL 可以确定该行是否与 UPDATE 语句里的 WHERE 条件匹配。</p>
+<h3 id="后键锁">后键锁</h3>
+<p>后键锁是索引记录上的记录锁和索引记录之前区间的间隙锁的组合。</p>
+<p>InnoDB 设置行级锁的方式是，当它在查找或者扫描表中的索引时，会在遇到的索引记录上设置共享锁或者排它锁。因此行级锁实际上是索引记录锁。索引记录上的后键锁也会影响该索引记录之前的「区间」。这也就是说，后键锁就是索引记录锁加上该索引记录之前的区间上的间隙锁。如果一个事务在索引记录 R 上持有共享锁或者排它锁，那么任何事务都不能在以索引顺序中 R 之前的区间内插入新的索引记录。</p>
+<p>假设一个索引包含了值 <code>10</code>、<code>11</code>、<code>13</code> 和 <code>20</code>。该索引中可能的后键锁包括了以下区间，其中圆括号表示排除区间的端点，方括号表示包含区间的端点。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(negative infinity, 10]
+(10, 11]
+(11, 13]
+(13, 20]
+(20, positive infinity)
+</code></pre></div><p>对于最后一个的区间，后键锁将锁定索引中大于最大值的区间，并且「极限」伪记录的值大于实际的任何值。极限值不是真实的索引记录，因此，实际上，此时的后键锁仅会锁定跟随最大索引值的区间。</p>
+<p>默认情况下，InnoDB 会在 REPEATABLE READ 事务隔离级别下运行。在这种情况下，InnoDB 会使用后键锁来查找和索引扫描，从而避免发生幻行（更多请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-next-key-locking.html">Phantom Rows</a>）。</p>
+<p>后键锁中的事务数据类似于如下 <code>SHOW ENGINE INNODB STATUS</code> 语句和 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-standard-monitor.html">InnoDB monitor</a> 的输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">RECORD LOCKS <span style="color:#66d9ef">space</span> id <span style="color:#ae81ff">58</span> page <span style="color:#66d9ef">no</span> <span style="color:#ae81ff">3</span> n bits <span style="color:#ae81ff">72</span> <span style="color:#66d9ef">index</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">PRIMARY</span><span style="color:#f92672">`</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">`</span>test<span style="color:#f92672">`</span>.<span style="color:#f92672">`</span>t<span style="color:#f92672">`</span>
+trx id <span style="color:#ae81ff">10080</span> lock_mode X
+Record <span style="color:#66d9ef">lock</span>, heap <span style="color:#66d9ef">no</span> <span style="color:#ae81ff">1</span> PHYSICAL RECORD: n_fields <span style="color:#ae81ff">1</span>; compact format; info bits <span style="color:#ae81ff">0</span>
+ <span style="color:#ae81ff">0</span>: len <span style="color:#ae81ff">8</span>; hex <span style="color:#ae81ff">73757072656</span>d756d; <span style="color:#66d9ef">asc</span> supremum;;
+
+Record <span style="color:#66d9ef">lock</span>, heap <span style="color:#66d9ef">no</span> <span style="color:#ae81ff">2</span> PHYSICAL RECORD: n_fields <span style="color:#ae81ff">3</span>; compact format; info bits <span style="color:#ae81ff">0</span>
+ <span style="color:#ae81ff">0</span>: len <span style="color:#ae81ff">4</span>; hex <span style="color:#ae81ff">8000000</span>a; <span style="color:#66d9ef">asc</span>     ;;
+ <span style="color:#ae81ff">1</span>: len <span style="color:#ae81ff">6</span>; hex <span style="color:#ae81ff">00000000274</span>f; <span style="color:#66d9ef">asc</span>     <span style="color:#e6db74">&#39;O;;
+</span><span style="color:#e6db74"> 2: len 7; hex b60000019d0110; asc        ;;
+</span></code></pre></div><h3 id="插入意向锁">插入意向锁</h3>
+<p>插入意向锁是在插入行之前由 INSERT 操作设置的一种间隙锁。该锁以这种方式表示准备插入行的意向，以便在同一段索引区间内插入行的多个事务不需要互相等待，如果它们不会在区间内的相同位置插入行的话。假设一个索引包含了值 <code>4</code> 和 <code>7</code>，并且有两个独立的事务尝试插入值 <code>5</code> 和 <code>6</code>，那么各自得，在获取待插入行上的排它锁之前，每个事务都会使用插入意向锁来锁定 <code>4</code> 和 <code>7</code> 之间的区间，而不会互相阻塞，因为这两个事务插入的行是不冲突的。</p>
+<p>下面的示例演示了一个事务在获取待插入记录上的排它锁之前，设置了插入意向锁。这个示例涉及了两个客户端 A 和 B。</p>
+<p>客户端 A 创建了一张表，包含两个索引记录（<code>90</code> 和 <code>102</code>），并且开始了一个事务，该事务会对 ID 大于 100 的索引记录设置排它锁。排它锁包括了在记录 <code>102</code> 之前的间隙锁：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> child (id int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>(id)) ENGINE<span style="color:#f92672">=</span>InnoDB;
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> child (id) <span style="color:#66d9ef">values</span> (<span style="color:#ae81ff">90</span>),(<span style="color:#ae81ff">102</span>);
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">START</span> <span style="color:#66d9ef">TRANSACTION</span>;
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> child <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>;
+<span style="color:#f92672">+</span><span style="color:#75715e">-----+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id  <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-----+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#ae81ff">102</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-----+
+</span></code></pre></div><p>客户端 B 开始了一个事务，该事务会在区间内插入一条记录。这个事务在等待获取排它锁的同时，会设置一个插入意向锁。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">START</span> <span style="color:#66d9ef">TRANSACTION</span>;
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> child (id) <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">101</span>);
+</code></pre></div><p>插入意向锁中的事务数据类似于如下 <code>SHOW ENGINE INNODB STATUS</code> 语句和 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-standard-monitor.html">InnoDB monitor</a> 的输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">RECORD LOCKS <span style="color:#66d9ef">space</span> id <span style="color:#ae81ff">31</span> page <span style="color:#66d9ef">no</span> <span style="color:#ae81ff">3</span> n bits <span style="color:#ae81ff">72</span> <span style="color:#66d9ef">index</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">PRIMARY</span><span style="color:#f92672">`</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">`</span>test<span style="color:#f92672">`</span>.<span style="color:#f92672">`</span>child<span style="color:#f92672">`</span>
+trx id <span style="color:#ae81ff">8731</span> lock_mode X locks gap <span style="color:#66d9ef">before</span> rec <span style="color:#66d9ef">insert</span> intention waiting
+Record <span style="color:#66d9ef">lock</span>, heap <span style="color:#66d9ef">no</span> <span style="color:#ae81ff">3</span> PHYSICAL RECORD: n_fields <span style="color:#ae81ff">3</span>; compact format; info bits <span style="color:#ae81ff">0</span>
+ <span style="color:#ae81ff">0</span>: len <span style="color:#ae81ff">4</span>; hex <span style="color:#ae81ff">80000066</span>; <span style="color:#66d9ef">asc</span>    f;;
+ <span style="color:#ae81ff">1</span>: len <span style="color:#ae81ff">6</span>; hex <span style="color:#ae81ff">000000002215</span>; <span style="color:#66d9ef">asc</span>     <span style="color:#e6db74">&#34; ;;
+</span><span style="color:#e6db74"> 2: len 7; hex 9000000172011c; asc     r  ;;...
+</span></code></pre></div><h3 id="自增锁">自增锁</h3>
+<p>自增锁是一种特殊的表级锁，由插入到具有 AUTO_INCREMENT 列的表中的事务所使用的。在最简单的情况下，如果一个事务正在向表中插入数据，那么任何其它事务都必须等待执行它们自身向表中的插入操作，以便第一个事务插入的行可以接收到连续的主键值。</p>
+<p><code>innodb_autoinc_lock_mode</code> 配置项可以控制使用自增锁的算法。它可以允许你选择如何权衡可预测的自增值序列与插入操作的最大并发性。</p>
+<p>更多详细信息请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-auto-increment-handling.html">AUTO_INCREMENT Handling in InnoDB</a>。</p>
+<h3 id="索引空间的谓词锁">索引空间的谓词锁</h3>
+<p>InnoDB 支持对空间列进行空间索引（更多请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/optimizing-spatial-analysis.html">Optimizing Spatial Analysis</a>）。</p>
+<p>涉及处理空间索引的锁定操作时，后键锁不能很好地支持 REPEATABLE READ 和 SERIALIZABLE 事务隔离级别。在多维数据中没有绝对的排序概念，因此并不清楚哪一个才是「后」键。</p>
+<p>为了开启对包含空间索引的表的隔离级别的支持，InnoDB 会使用谓词锁。一个空间索引包含最小边界矩形（minimum bounding rectangle，MBR）值，因此 InnoDB 会通过在用于查询的 MBR 值上设置谓词锁来强制对索引进行一致性读取。其它事务不能插入或者修改将会匹配查询条件的行。</p>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html">InnoDB Locking</a></li>
+</ul>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+          2016 -
+        
+        2020
+         FantasticMao 
+      
+      
+         · 
+        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+      
+      
+        · CDN
+        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+        </a>
+      
+      
+      
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-89151446-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>

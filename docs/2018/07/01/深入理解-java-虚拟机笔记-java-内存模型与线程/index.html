@@ -16,28 +16,28 @@
     
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="《深入理解 Java 虚拟机》摘录 —— Java 内存模型与线程"/>
+<meta name="twitter:title" content="《深入理解 Java 虚拟机》笔记 - Java 内存模型与线程"/>
 <meta name="twitter:description" content="摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。
 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。"/>
 
-    <meta property="og:title" content="《深入理解 Java 虚拟机》摘录 —— Java 内存模型与线程" />
+    <meta property="og:title" content="《深入理解 Java 虚拟机》笔记 - Java 内存模型与线程" />
 <meta property="og:description" content="摘自《深入理解 Java 虚拟机》 第 12 章 Java 内存模型与线程。
 并发处理的广泛应用是使得 Amdahl 定律 代替 Moore 定律 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%91%98%E5%BD%95-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" />
+<meta property="og:url" content="/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" />
 <meta property="article:published_time" content="2018-07-01T19:16:50+08:00" />
 <meta property="article:modified_time" content="2018-07-01T19:16:50+08:00" />
 
 
     
-      <base href="/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%91%98%E5%BD%95-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
+      <base href="/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
     
     <title>
-  《深入理解 Java 虚拟机》摘录 —— Java 内存模型与线程 · FantasticMao&#39;s Blog
+  《深入理解 Java 虚拟机》笔记 - Java 内存模型与线程 · FantasticMao&#39;s Blog
 </title>
 
     
-      <link rel="canonical" href="/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%91%98%E5%BD%95-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
+      <link rel="canonical" href="/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
     
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
@@ -115,7 +115,7 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">《深入理解 Java 虚拟机》摘录 —— Java 内存模型与线程</h1>
+          <h1 class="title">《深入理解 Java 虚拟机》笔记 - Java 内存模型与线程</h1>
         </div>
         <div class="post-meta">
           <div class="date">

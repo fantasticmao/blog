@@ -1,5 +1,5 @@
 ---
-title: "《高性能 MySQL》摘录 —— 创建高性能的索引"
+title: "《高性能 MySQL》笔记 - 创建高性能的索引"
 date: 2017-02-03T16:24:07+08:00
 categories: ["数据库"]
 tags: ["MySQL"]

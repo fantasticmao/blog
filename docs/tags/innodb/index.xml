@@ -6,10 +6,19 @@
     <description>Recent content in InnoDB on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 19 Jun 2020 17:26:26 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2020 14:02:28 +0800</lastBuildDate>
     
 	<atom:link href="/tags/innodb/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MySQL InnoDB 锁</title>
+      <link>/2020/07/17/mysql-innodb-%E9%94%81/</link>
+      <pubDate>Fri, 17 Jul 2020 14:02:28 +0800</pubDate>
+      
+      <guid>/2020/07/17/mysql-innodb-%E9%94%81/</guid>
+      <description>&lt;p&gt;本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 锁的一些笔记。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>MySQL InnoDB ACID 模型</title>
