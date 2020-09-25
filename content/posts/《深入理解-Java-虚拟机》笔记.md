@@ -1,5 +1,5 @@
 ---
-title: "《深入理解 Java 虚拟机》摘录 —— Java 内存模型与线程"
+title: "《深入理解 Java 虚拟机》笔记 - Java 内存模型与线程"
 date: 2018-07-01T19:16:50+08:00
 categories: ["编程"]
 tags: ["Java", "JVM"]

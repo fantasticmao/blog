@@ -1,5 +1,5 @@
 ---
-title: "《高性能 MySQL》摘录 —— Schema 与数据类型优化"
+title: "《高性能 MySQL》笔记 - Schema 与数据类型优化"
 date: 2017-01-25T12:20:03+08:00
 categories: ["数据库"]
 tags: ["MySQL"]

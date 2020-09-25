@@ -1,5 +1,5 @@
 ---
-title: "《JavaScript 权威指南》摘录 —— jQuery 类库"
+title: "《JavaScript 权威指南》笔记 - jQuery 类库"
 date: 2017-04-21T15:44:01+08:00
 categories: ["编程"]
 tags: ["JavaScript", "jQuery"]
