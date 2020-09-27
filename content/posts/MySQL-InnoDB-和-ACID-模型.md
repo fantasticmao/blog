@@ -1,5 +1,5 @@
 ---
-title: "MySQL InnoDB ACID 模型"
+title: "MySQL InnoDB 和 ACID 模型"
 date: 2020-06-19T17:26:26+08:00
 categories: ["数据库"]
 tags: ["MySQL", "InnoDB"]
@@ -65,7 +65,7 @@ ACID 是代表了原子性（Atomicity）、一致性（Consistency）、隔离�
 
 ### 自动提交
 
-自动提交（autocommit）是 MySQL 会在每个 SQL 执行之后触发提交操作的设置选项。不建议在对 InnoDB 表执行多个 SQL 语句的事务中开启自动提交。自动提交有助于提高对 InnoDB 表的只读事务的性能，从而最大程度地减少锁的使用和回滚日志（undo log）数据的产生。对于不支持事务的 MyISAM 表，开启自动提交也是可以正常工作的。
+自动提交（autocommit）是 MySQL 会在每个 SQL 执行之后触发提交操作的设置选项。不建议在对 InnoDB 表执行多个 SQL 语句的事务中开启自动提交。自动提交有助于提高对 InnoDB 表的只读事务的性能，从而最大程度地减少锁的使用和撤销日志（undo log）数据的产生。对于不支持事务的 MyISAM 表，开启自动提交也是可以正常工作的。
 
 ### 双写缓冲区
 

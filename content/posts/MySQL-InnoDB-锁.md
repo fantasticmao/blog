@@ -3,7 +3,7 @@ title: "MySQL InnoDB 锁"
 date: 2020-07-17T14:02:28+08:00
 categories: ["数据库"]
 tags: ["MySQL", "InnoDB"]
-keywords: ["MySQL", "InnoDB", "锁"]
+keywords: ["MySQL", "InnoDB", "locking", "锁"]
 ---
 
 本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 锁的一些笔记。<!--more-->
