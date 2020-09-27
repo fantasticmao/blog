@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+
+    <meta name="author" content="FantasticMao">
+    <meta name="description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 多版本的一些笔记。">
+    <meta name="keywords" content="MySQL,InnoDB,Multi-Versioning,多版本">
+    
+    
+    
+    
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL InnoDB 多版本"/>
+<meta name="twitter:description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 多版本的一些笔记。"/>
+
+    <meta property="og:title" content="MySQL InnoDB 多版本" />
+<meta property="og:description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 多版本的一些笔记。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2020/06/26/mysql-innodb-%E5%A4%9A%E7%89%88%E6%9C%AC/" />
+<meta property="article:published_time" content="2020-06-26T01:03:00+08:00" />
+<meta property="article:modified_time" content="2020-06-26T01:03:00+08:00" />
+
+
+    
+      <base href="/2020/06/26/mysql-innodb-%E5%A4%9A%E7%89%88%E6%9C%AC/">
+    
+    <title>
+  MySQL InnoDB 多版本 · FantasticMao&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="/2020/06/26/mysql-innodb-%E5%A4%9A%E7%89%88%E6%9C%AC/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      FantasticMao&#39;s Blog
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/">首页</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">归档</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/categories/">分类</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/tags/">标签</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">关于</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">MySQL InnoDB 多版本</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-06-26T01:03:00&#43;08:00'>
+                June 26, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              1 分钟阅读时间
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/mysql/">MySQL</a>
+      <span class="separator">•</span>
+    <a href="/tags/innodb/">InnoDB</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <p>本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 多版本的一些笔记。</p>
+<hr>
+<h2 id="多版本">多版本</h2>
+<p>InnoDB 是一个 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_mvcc">多版本的存储引擎</a>：它会保留已更改行的旧版本信息，用于支持事务的特性，例如并发和回滚。这些信息以被称为 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_rollback_segment">回滚段</a>（一种与 Oracle 中类似的数据结构）的数据结构存储在表空间中。InnoDB 使用回滚段中的信息来执行在事务回滚中所需要的回滚操作。它还会使用这些信息来构建行的早期版本，用于实现一致性读取。</p>
+<p>InnoDB 会在内部为存储于数据库中的每行添加三个字段。一个 6 字节的 DB_TRX_ID 字段，用于表示插入或更新该行的最后一次事务的事务标识符。此外，删除操作在内部会被视为更新操作，此时该行中的一个特殊位会被标记成已删除。每行还包含了一个 7 字节的 DB_ROLL_PTR 字段，被称为滚动指针。滚动指针指向了一条写在回滚段中的撤销日志（undo log）记录。如果该行被更新了，那么包含了信息的撤销日志记录可以在必要的时候，把该行的内容重建到它被更新之前的版本。一个 6 字节的 DB_ROW_ID 字段，包含了一个行的 ID，会随着插入新行而单调增加。如果 InnoDB 自动生成了聚簇索引，那么该索引会包含行的 ID 值。否者，DB_ROW_ID 不会出现在任何索引中。</p>
+<p>回滚段中的撤销日志分为插入和更新的撤销日志。插入撤销日志只会在事务回滚时被需要，并且在事务提交后可以被立即丢弃。更新撤销日志会被用于一致性读取，但仅当在没有 InnoDB 为已经分配了的快照（在一致性读取中，可能需要这个更新撤销日志中的快照信息来构建数据库行的早期版本）而存在的事务之后，才可以丢弃它们。</p>
+<p>建议经常提交你的事务，包括仅会发出一致性读取的事务。否则，InnoDB 不会丢弃更新撤销日志中的数据，并且回滚段可能会变得太大从而填满了表空间。</p>
+<p>回滚段中的撤销日志记录的物理大小通常小于它对应的插入或者更新的行。你可以使用这个信息来计算回滚段所需的空间大小。</p>
+<p>在 InnoDB 多版本的体系中，当你使用 SQL 语句删除行的时候，该行并不会被立即从数据库中物理删除。当 InnoDB 丢弃为删除操作而写入的更新撤销日志记录的时候，它只会物理删除对应的行和索引记录。这个删除操作被称为 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_purge">清除</a>，它运行速度非常快，通常会和执行删除操作的 SQL 语句所花费的时间相同。</p>
+<p>如果你在表中以大约相同的速率，小批量地插入和删除行的时候，清除线程可能会落后于创建线程，并且表空间可能会由于这些「死」行而变得越来越大，从而使所有内容都受到磁盘的约束，变得非常缓慢。在这种情况下，请限制插入新行的操作，并通过调整 innodb_max_purge_lag 系统变量来为清除线程分配更多资源。更多内容请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html">InnoDB Startup Options and System Variables</a>。</p>
+<hr>
+<h2 id="多版本和二级索引">多版本和二级索引</h2>
+<p>InnoDB 的多版本并发控制（multiversion concurrency control，MVCC）对待二级索引的处理方式与对待聚簇索引的方式不同。聚簇索引中的记录会被就地更新，并且它们所隐藏的系统列指向了撤销日志中的条目，这些条目可以被用于重建早期版本的记录。与聚簇索引不同的是，二级索引不包含隐藏的系统列，也不会就地更新记录。</p>
+<p>当二级记索引列被更新的时候，旧的二级索引记录会被标记成删除，新的记录会被插入，并且被标记删除的记录最终会被清除。当二级索引记录被标记成删除或者二级索引页被更（gèng）新的事务所更（gēng）新的时候，InnoDB 会在聚簇索引上查找数据库中的记录。在聚簇索引中，记录的 DB_TRX_ID 字段会被检查，并且会从撤销日志中检索记录的正确版本，如果记录在读取事务初始化之后被修改了的话。</p>
+<p>如果二级索引记录被标记成删除或者二级索引页被更新的事务所更新了，那么 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_covering_index">覆盖索引</a> 技术不会被使用。InnoDB 不会从索引结构中返回值，而是会在聚簇索引中查找记录。</p>
+<p>然而，如果开启了 <a href="https://dev.mysql.com/doc/refman/8.0/en/index-condition-pushdown-optimization.html">索引条件下推（index condition pushdown，ICP）</a> 优化，并且 WHERE 条件的一部分可以使用索引结构中的字段来被评估，那么 MySQL 服务会将 WHERE 条件的一部分下推给存储引擎，存储引擎会使用索引来进行评估。如果没有匹配到记录，那么在聚簇索引的查找可以被避免。如果匹配到了记录，那么 InnoDB 会在聚簇索引上查找记录，即使是在被标记删除的记录中。</p>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-multi-versioning.html">InnoDB Multi-Versioning</a></li>
+</ul>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+          2016 -
+        
+        2020
+         FantasticMao 
+      
+      
+         · 
+        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+      
+      
+        · CDN
+        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+        </a>
+      
+      
+      
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-89151446-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>
