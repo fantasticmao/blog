@@ -14,13 +14,13 @@ keywords:
 
 本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 事务模型的一些笔记。<!--more-->
 
-InnoDB 事务模型中的目标是将 [多版本](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_mvcc) 数据库的最佳特性与传统的两阶段锁定相结合。InnoDB 会以 Oracle 的风格，在行级别上执行锁定，并且默认运行非锁定的 [一致性读取](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_consistent_read)。InnoDB 中的锁信息会以节省空间的方式存储，因此它不需要锁升级。通常，InnoDB 允许多个用户锁定表中的每一行或者是随机子集的多行，同时也不会导致 InnoDB 内存耗尽。
+InnoDB 事务模型的目标是将 [多版本](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_mvcc) 数据库的最佳特性与传统的两阶段锁定相结合。InnoDB 会以 Oracle 的风格，在行级别上执行锁定，并且默认运行非锁定的 [一致性读取](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_consistent_read)。InnoDB 中的锁信息会以节省空间的方式存储，因此它不需要锁升级。通常，InnoDB 允许多个用户锁定表中的每一行或者是随机子集的多行，同时也不会导致 InnoDB 内存耗尽。
 
 ---
 
 ## 事务隔离级别
 
-事务的隔离性是数据库处理数据的基础功能之一。隔离性（Isolation）是 [ACID](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_acid) 首字母中的 I。隔离级别是一个在当多个事务同时进行更改和执行查询时，用于微调性能和可靠性、一致性和结果的可重复性的设置项。
+事务的隔离性是数据库处理数据的基础功能之一。隔离性（Isolation）是 [ACID](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_acid) 首字母中的 I。隔离级别是在当多个事务同时进行更改和执行查询时，用于微调性能和可靠性、一致性和结果可重复性的设置项。
 
 InnoDB 提供了 SQL 1992 标准中全部的四种隔离级别：READ UNCOMMITTED（未提交读）、READ COMMITTED（提交读）、REPEATABLE READ（可重复读）和 SERIALIZABLE（可串行化）。默认的隔离级别是 REPEATABLE READ。
 
@@ -198,7 +198,7 @@ SELECT * FROM t FOR SHARE;
 
 一致性读取不适用于某些 DDL 语句：
 
-- 一致性读取不适用于 DROP TABLE，因为 MySQL 无法使用已经删除并且被 InnoDB 破坏了的表。
+- 一致性读取不适用于 DROP TABLE，因为 MySQL 无法使用已经被删除并且被 InnoDB 销毁了的表。
 - 一致性读取不适用于会创建原表的临时副本的并且会在创建临时副本时删除原表的 ALTER TABLE 操作。当你在事务中重新发出一个一致性读取时，新表中的行会是不可见的，因为这些行在获取事务的快照时是不存在的。在这种情况下，事务会返回一个错误：ER_TABLE_DEF_CHANGED ——「表的定义已经被修改，请重试事务」。
 
 对于未指定 FOR UPDATE 或者 FOR SHARE 的查询子句，比如 INSERT INTO ... SELECT、UPDATE ... (SELECT)，和 CREATE TABLE ... SELECT，查询的类型会有所不同：
@@ -207,6 +207,38 @@ SELECT * FROM t FOR SHARE;
 - 为了在这种情况下执行非阻塞读取，需要将隔离级别设置为 READ UNCOMMITTED 或者 READ COMMITTED，用于避免在选择的表中的读取的行上设置锁。
 
 ## 锁定读取
+
+如果你在同一个事务中先查询数据，然后再插入或者更新相关的数据，那么常规的 SELECT 语句就不能提供足够的保护。其它事务可以更新或者删除你刚刚所查询的相同的行。InnoDB 支持两种类型的 [锁定读取](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_locking_read)，它们会提供额外的安全性：
+
+- SELECT ... FOR SHARE
+
+  在读取的任何行上设置共享模式的锁。其它会话可以读取这些行，但是直到你的事务提交之前不能修改这些行。如果这些行的任何一个被还未提交的另一个事务修改了，你的查询会一直等待直到那个事务结束，然后再使用这些行的最新值。
+
+  在 MySQL 8.0.22 之前，SELECT ... FOR SHARE 会需要 SELECT 权限和 DELETE、LOCK TABLES 或者 UPDATE 权限中的至少一个。从 MySQL 8.0.22 开始，只需要 SELECT 权限。
+
+  从 MySQL 8.0.22 开始，SELECT ... FOR SHARE 语句不会获取 MySQL 授权表上的读取锁。更多内容请见 [Grant Table Concurrency](https://dev.mysql.com/doc/refman/8.0/en/grant-tables.html#grant-tables-concurrency)。
+
+- SELECT ... FOR UPDATE
+
+  对于查询遇到的索引记录、被锁定的行和任何相关的索引条目，就好像你为这些行发出了 UPDATE 语句。其它事务会被阻塞去更新这些行、去执行 SELECT ... FOR SHARE、去在某些隔离级别下读取数据。一致性读取会忽略对存在于读取视图中的记录上设置的任何锁。（记录的旧版本不会被锁定，它们可以通过对记录在内存中的副本应用撤销日志来被重建。）
+
+  SELECT ... FOR UPDATE 需要 SELECT 权限和 DELETE、LOCK TABLES 或者 UPDATE 权限中的至少一个。
+
+这些子句在单个表或者被拆分的多个表中，处理树状结构或者图状结构的数据时特别有用。当你可以从树的边缘或者分支的一处遍历到另一处，同时还可以保留回退和更改任何这些「指针」值的权利。
+
+所有通过 FOR SHARE 和 FOR UPDATE 查询设置的锁，会在事务提交或者回滚的时候被释放。
+
+除非在子查询中也指定了锁定读取的子句，不然外部语句中的锁定读取不会锁定嵌套在子查询中的表中的行。例如，下面的语句不会锁定 t2 表中的行：
+
+```sql
+SELECT * FROM t1 WHERE c1 = (SELECT c1 FROM t2) FOR UPDATE;
+```
+
+为了锁定 t2 表中的行，需要在子查询中添加锁定读取的子句：
+
+```sql
+SELECT * FROM t1 WHERE c1 = (SELECT c1 FROM t2 FOR UPDATE) FOR UPDATE;
+```
 
 ---
 
