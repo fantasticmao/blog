@@ -6,10 +6,19 @@
     <description>Recent content on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 17 Jul 2020 14:02:28 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2020 13:11:00 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MySQL InnoDB 事务模型</title>
+      <link>/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sat, 15 Aug 2020 13:11:00 +0800</pubDate>
+      
+      <guid>/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/</guid>
+      <description>&lt;p&gt;本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 事务模型的一些笔记。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>MySQL InnoDB 锁</title>
