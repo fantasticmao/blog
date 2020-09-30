@@ -43,7 +43,7 @@ InnoDB 使用不同的锁定策略来支持此处描述的各个隔离级别。�
 
   即使是在同一个事务中，每个一致性读取都会设置和读取它自己的新快照。更多关于一致性读取的内容请见 [Consistent Nonlocking Reads](https://dev.mysql.com/doc/refman/8.0/en/innodb-consistent-read.html)。
 
-  对于锁定读取（带有 FOR UPDATE 或者 FOR SHARE 的 SELECT）、UPDATE 和 DELETE 语句，InnoDB 仅会锁定索引记录，而不是它们之前的区间，因此可以在锁定的记录旁边自由地插入新的记录。间隙锁只会被用于外键约束检查和重复键检查。
+  对于锁定读取（带有 FOR UPDATE 或者 FOR SHARE 的 SELECT）、UPDATE 和 DELETE 语句，InnoDB 仅会锁定索引记录，而不是它们之前的区间，因此可以在锁定的记录旁边随意地插入新的记录。间隙锁只会被用于外键约束检查和重复键检查。
 
   由于间隙锁被禁用了，因此可能会产生幻行问题，因为其它会话可以在区间内插入新的行。更多关于幻行的内容请见 [Phantom Rows](https://dev.mysql.com/doc/refman/8.0/en/innodb-next-key-locking.html)。
 
@@ -134,9 +134,9 @@ InnoDB 使用不同的锁定策略来支持此处描述的各个隔离级别。�
 
 ## 自动提交、提交、回滚
 
-在 InnoDB 中，所有的用户行为都是发生在事务中的。如果开启了 autocommit 模式的话，每个 SQL 语句自己会形成一个单独的事务。默认情况下，MySQL 会在每个新连接开始会话时开启 autocommit，所以如果 SQL 语句没有返回错误的话，MySQL 会在每个语句之后执行一次提交。如果一条语句返回了错误，提交或者回滚的行为则要取决于该错误。更多内容请见 [InnoDB Error Handling](https://dev.mysql.com/doc/refman/8.0/en/innodb-error-handling.html)。
+在 InnoDB 中，所有的用户行为都是发生在事务中的。如果开启了 autocommit 模式的话，每个 SQL 语句自己会形成一个单独的事务。默认情况下，MySQL 会在每个新连接开始会话时开启 autocommit，所以如果 SQL 语句没有返回错误的话，MySQL 会在每个语句之后执行一次提交。如果一条语句返回了错误，提交或者回滚的行为则具体取决于该错误。更多内容请见 [InnoDB Error Handling](https://dev.mysql.com/doc/refman/8.0/en/innodb-error-handling.html)。
 
-开启了 autocommit 的会话可以通过 START TRANSACTION 或者 BEGIN 语句开始一段多语句的事务，并且可以通过 COMMIT 或者 ROLLBACK 语句来结束它。更多内容请见 [START TRANSACTION, COMMIT, and ROLLBACK Statements](https://dev.mysql.com/doc/refman/8.0/en/commit.html)。
+开启了 autocommit 的会话，可以通过 START TRANSACTION 或者 BEGIN 语句开始一段多语句的事务，并且可以通过 COMMIT 或者 ROLLBACK 语句来结束它。更多内容请见 [START TRANSACTION, COMMIT, and ROLLBACK Statements](https://dev.mysql.com/doc/refman/8.0/en/commit.html)。
 
 如果在会话中使用 SET autocommit = 0 关闭了 autocommit 的话，那么该会话始终都会打开一个事务。 COMMIT 和 ROLLBACK 语句会结束该事务并且会开启一个新的事务。
 
@@ -144,23 +144,23 @@ InnoDB 使用不同的锁定策略来支持此处描述的各个隔离级别。�
 
 一些语句会隐式地结束事务，就像你在执行该语句之前已经执行了 COMMIT 一样。更多内容请见 [Statements That Cause an Implicit Commit](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)。
 
-COMMIT 语句表示当前事务中所做的更改会被持久化，并且会对其它会话可见。另一方面，ROLLBACK 语句会取消当前事务中所做的所有更改。COMMIT 和 ROLLBACK 语句都会释放当前事务中设置的 InnoDB 锁。
+COMMIT 语句表示当前事务中所做的更改将会被持久化，并且会对其它会话可见。另一方面，ROLLBACK 语句将会取消当前事务中所做的所有更改。COMMIT 和 ROLLBACK 语句都会释放当前事务中设置的 InnoDB 锁。
 
 ## 一致性非锁定读取
 
 [一致性读取](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_consistent_read) 意味着 InnoDB 会使用多版本来向查询呈现数据库在某个时刻的快照。该查询将会看到在这个时刻之前提交的事务所做的更改，之后所做的或者还未提交的事务所做的更改不会被看到。这个规则的例外是查询可以看到同一个事务中的之前语句所做的更改。这个例外情况会导致以下异常：如果你在表中更新了某些行，SELECT 会看到这些被更新的行的最新版本，但也可能会看到任何行的旧版本。如果其它会话同时更新了同一张表，这个异常意味着你可能会看到该表处于一个在数据库中永远不会存在的状态。
 
-如果事务的隔离级别是 REPEATABLE READ（默认级别），那么在同一事务中的所有一致性读取会读取由在该事务中的第一个读取所建立的快照。你可以通过提交当前事务然后发出新的查询，来为查询获取更新的快照。
+如果事务的隔离级别是 REPEATABLE READ（默认级别），那么在同一事务中的所有一致性读取会读取由在该事务中的第一次读取所建立的快照。你可以通过提交当前事务然后发出新的查询，来为查询获取更新的快照。
 
 在 READ COMMITTED 隔离级别中，事务中的每个一致性读取都会设置和读取它自己的新快照。
 
-一致性读取是 InnoDB 在 READ COMMITTED 和 REPEATABLE READ 隔离级别中处理 SELECT 语句的默认模式。一致性读取不会在它访问的表上设置任何锁，因此其它会话可以在执行一致性读取的的表上，同时自由地修改这些表。
+一致性读取是 InnoDB 在 READ COMMITTED 和 REPEATABLE READ 隔离级别中处理 SELECT 语句的默认模式。一致性读取不会在它访问的表上设置任何锁，因此其它会话可以在对表执行一致性读取的同时随意地修改这些表。
 
 假设你正在以默认的 REPEATABLE READ 隔离级别运行 MySQL 服务。当你发出一个一致性读取（即普通的 SELECT 语句）的时候，InnoDB 会为你的事务分配一个时间点，你的查询可以使用该时间点来查看数据库。如果其它事务删除了一行并在该时间点之后提交了事务，你则会看不到该行已经被删除了。插入和更新会以相似的方式被处理。
 
 你可以通过提交你的事务来推进你的时间点，然后执行另一个 SELECT 或者 START TRANSACTION WITH CONSISTENT SNAPSHOT。
 
-这被称为多版本并发控制（multi-versioned concurrency control，MVCC）。
+这被称为 **多版本并发控制（multi-versioned concurrency control，MVCC）**。
 
 在下面的例子中，会话 A 仅会在 B 已经提交了插入操作并且 A 也已经提交时，才能看到 B 插入的行，以便时间点被推进至 B 的提交之后。
 
@@ -199,12 +199,12 @@ SELECT * FROM t FOR SHARE;
 一致性读取不适用于某些 DDL 语句：
 
 - 一致性读取不适用于 DROP TABLE，因为 MySQL 无法使用已经删除并且被 InnoDB 破坏了的表。
-- 一致性读取不适用于会创建原表的临时副本的并且会在创建临时副本时删除原表的 ALTER TABLE 操作。当你在事务中重新发出一个一致性读取时，新表中的行会是不可见的，因为这些行在获取事务的快照时是不存在的。在这种情况下，事务会返回一个错误：ER_TABLE_DEF_CHANGED，「表的定义已经被修改，请重试事务」。
+- 一致性读取不适用于会创建原表的临时副本的并且会在创建临时副本时删除原表的 ALTER TABLE 操作。当你在事务中重新发出一个一致性读取时，新表中的行会是不可见的，因为这些行在获取事务的快照时是不存在的。在这种情况下，事务会返回一个错误：ER_TABLE_DEF_CHANGED ——「表的定义已经被修改，请重试事务」。
 
 对于未指定 FOR UPDATE 或者 FOR SHARE 的查询子句，比如 INSERT INTO ... SELECT、UPDATE ... (SELECT)，和 CREATE TABLE ... SELECT，查询的类型会有所不同：
 
 - 默认情况下，InnoDB 会对这些语句使用更强的锁，并且 SELECT 部分的行为会类似于 READ COMMITTED，即使是在同一个事务中，每个一致性读取都会设置和读取它自己的新快照。
-- 为了在这种情况下执行非阻塞读取，需要将隔离级别设置为 READ UNCOMMITTED 或者 READ COMMITTED，用于避免在选择的表中所读取的行上设置锁。
+- 为了在这种情况下执行非阻塞读取，需要将隔离级别设置为 READ UNCOMMITTED 或者 READ COMMITTED，用于避免在选择的表中的读取的行上设置锁。
 
 ## 锁定读取
 
