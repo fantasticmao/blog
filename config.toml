@@ -3,7 +3,7 @@ theme = "hugo-coder"
 
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"
-paginate = 15
+paginate = 20
 
 publishDir = "docs"
 enableRobotsTXT = true
@@ -22,13 +22,14 @@ disqusShortname = "fantasticmao"
 
 [params]
     author = "FantasticMao"
-    description = "我，一个 95 年、黑头发、戴眼镜的小伙子。2016 年参加工作，以 Java 谋生，也对 JavaScript、Python、Golang、Shell Script 感兴趣，想要学习网络编程、分布式架构、云原生领域的技术知识。"
+    description = "我，一个 95 年、黑头发、戴眼镜的小伙子。2016 年参加工作，以 Java 谋生，也对 JavaScript、Python、Golang 感兴趣，想要学习网络编程、分布式架构、云原生领域的技术知识。"
     keywords = "FantasticMao,个人博客,程序员,后端,Java"
     info = ""
 
     avatarurl = "/images/avatar.jpg"
     favicon_32 = "/favicons/favicon-32x32.png"
     favicon_16 = "/favicons/favicon-16x16.png"
+    favicon_apple_touch = "/favicons/apple-touch-icon.png"
     since = 2016
 
     custom_css = ["css/custom.css"]
