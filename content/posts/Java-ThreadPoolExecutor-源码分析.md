@@ -90,7 +90,7 @@ RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
                             |-------->| (调用 terminated() 已经完成)
 ```
 
-将 runState 设计成上述五个枚举值的原因在于 ThreadPoolExecutor 内部的工作机制。首先，ThreadPoolExecutor 包含了一个用于缓冲任务执行的 workQueue，所以在关闭线程池的时候也需要考虑到 workQueue 中的线程状态（是否需要中断线程）。此外，ThreadPoolExecutor 还提供了一些待实现的扩展方法：`beforeExecute`、`afterExecute`、`terminated`，因此这些方法的执行进度也需要被考虑在线程池的运行状态之内。ThreadPoolExecutor 源码中定义 runState 枚举值，以及判断当前运行状态的代码片段如下：
+将 runState 设计成上述五个枚举值的原因在于 ThreadPoolExecutor 内部的工作机制。首先，ThreadPoolExecutor 包含了一个用于缓冲任务执行的 workQueue，所以在关闭线程池的时候也需要考虑到 workQueue 中的线程状态（是否需要中断线程）。此外，ThreadPoolExecutor 还提供了一些待实现的扩展方法：`beforeExecute(Thread, Runnable)`、`afterExecute(Runnable, Throwable)`、`terminated()`，因此这些方法的执行进度也需要被考虑在线程池的运行状态之内。ThreadPoolExecutor 源码中定义 runState 枚举值，以及判断当前运行状态的代码片段如下：
 
 {{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L377-L382" >}}
 
@@ -98,7 +98,28 @@ RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
 
 ## 提交任务
 
+ThreadPoolExecutor 继承了 ExecutorService 接口，对外提供了四种提交任务的方法：`execute(Runnable)`、`submit(Callable<T>)`、`submit(Runnable, T)`、`submit(Runnable)`。然而，后三种方法均是先将任务封装成 RunnableFuture，然后再通过 `execute(Runnable)` 将任务提交至线程池中。因此从实现层面来看，ThreadPoolExecutor 所提供的提交任务的方法其实只有一种：`execute(Runnable)`。
+
+ThreadPoolExecutor 提交任务的内部逻辑并不复杂，可以简单概括为以下四个步骤：
+
+1. 当 workerCount 小于 ThreadPoolExecutor 的核心线程数 `corePoolSize` 时，ThreadPoolExecutor 会直接使用 `addWorker(command, true)` 方法来创建一个属于核心范围内的新的 Worker 线程。此时如果 `addWorker(command, true)` 方法执行成功，那么 ThreadPoolExecutor 会直接返回提交任务成功；
+2. 当 workerCount 不小于 `corePoolSize` 或者当 `addWorker(command, true)` 方法执行失败时，ThreadPoolExecutor 会使用 workQueue 的 `offer(command)` 方法来向队列中添加一个等待执行的任务；
+3. 如果 workQueue 的 `offer(command)` 方法执行失败（例如当队列已满时），ThreadPoolExecutor 会使用 `addWorker(command, false)` 方法来创建一个属于最大范围内的新的 Worker 线程；
+4. 如果 `addWorker(command, false)` 方法执行失败（例如当 workerCount 大于 ThreadPoolExecutor 的最大线程数 `maximumPoolSize` 时），ThreadPoolExecutor 会触发提交任务失败的拒绝策略。
+
+ThreadPoolExecutor 的核心线程数 `corePoolSize` 和最大线程数 `maximumPoolSize` 以及 workQueue 决定了任务在提交时的行为，这些参数均可以通过 ThreadPoolExecutor 构造方法进行配置，并且前两者可以在已经创建 ThreadPoolExecutor 实例之后使用对应的 setter 方法进行修改。
+
+ThreadPoolExecutor 的拒绝策略由 RejectedExecutionHandler 接口定义，ThreadPoolExecutor 同时也在内部提供了四种不同的拒绝策略：[CallerRunsPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L1975-L1993)、[AbortPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L1999-L2017)（默认）、[DiscardPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2023-L2037)、[DiscardOldestPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2044-L2066)。
+
+ThreadPoolExecutor 内部执行任务的最小单元是对 Thread 进行封装之后的 ThreadPoolExecutor.Worker，更多关于 Worker 分析请见 [执行任务](#执行任务)。
+
+ThreadPoolExecutor 源码中 `execute(Runnable)` 方法的代码片段如下：
+
+{{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L1323-L1337" >}}
+
 ## 执行任务
+
+ThreadPoolExecutor.Worker 类继承了 AbstractQueuedSynchronizer 类，并且实现了 Runnable 接口，是 ThreadPoolExecutor 用于执行线程池中的任务的最小单元，
 
 ## 拒绝任务
 
