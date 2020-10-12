@@ -103,25 +103,43 @@ ThreadPoolExecutor 继承了 ExecutorService 接口，对外提供了四种提�
 ThreadPoolExecutor 提交任务的内部逻辑并不复杂，可以简单概括为以下四个步骤：
 
 1. 当 workerCount 小于 ThreadPoolExecutor 的核心线程数 `corePoolSize` 时，ThreadPoolExecutor 会直接使用 `addWorker(command, true)` 方法来创建一个属于核心范围内的新的 Worker 线程。此时如果 `addWorker(command, true)` 方法执行成功，那么 ThreadPoolExecutor 会直接返回提交任务成功；
-2. 当 workerCount 不小于 `corePoolSize` 或者当 `addWorker(command, true)` 方法执行失败时，ThreadPoolExecutor 会使用 workQueue 的 `offer(command)` 方法来向队列中添加一个等待执行的任务；
+2. 当 workerCount 不小于 `corePoolSize` 时，或者如果 `addWorker(command, true)` 方法执行失败，ThreadPoolExecutor 会使用 workQueue 的 `offer(command)` 方法来向队列中添加一个等待执行的任务；
 3. 如果 workQueue 的 `offer(command)` 方法执行失败（例如当队列已满时），ThreadPoolExecutor 会使用 `addWorker(command, false)` 方法来创建一个属于最大范围内的新的 Worker 线程；
 4. 如果 `addWorker(command, false)` 方法执行失败（例如当 workerCount 大于 ThreadPoolExecutor 的最大线程数 `maximumPoolSize` 时），ThreadPoolExecutor 会触发提交任务失败的拒绝策略。
 
 ThreadPoolExecutor 的核心线程数 `corePoolSize` 和最大线程数 `maximumPoolSize` 以及 workQueue 决定了任务在提交时的行为，这些参数均可以通过 ThreadPoolExecutor 构造方法进行配置，并且前两者可以在已经创建 ThreadPoolExecutor 实例之后使用对应的 setter 方法进行修改。
 
-ThreadPoolExecutor 的拒绝策略由 RejectedExecutionHandler 接口定义，ThreadPoolExecutor 同时也在内部提供了四种不同的拒绝策略：[CallerRunsPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L1975-L1993)、[AbortPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L1999-L2017)（默认）、[DiscardPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2023-L2037)、[DiscardOldestPolicy](https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2044-L2066)。
+ThreadPoolExecutor 的拒绝策略由 RejectedExecutionHandler 接口定义，更多关于拒绝策略的分析请见 [拒绝任务](#拒绝任务)。
 
-ThreadPoolExecutor 内部执行任务的最小单元是对 Thread 进行封装之后的 ThreadPoolExecutor.Worker，更多关于 Worker 分析请见 [执行任务](#执行任务)。
+ThreadPoolExecutor 执行任务的最小单元是对 Thread 进行封装的 ThreadPoolExecutor.Worker，更多关于 Worker 的分析请见 [执行任务](#执行任务)。
 
-ThreadPoolExecutor 源码中 `execute(Runnable)` 方法的代码片段如下：
+ThreadPoolExecutor 源码中提交任务的方法 `execute(Runnable)` 的代码片段如下：
 
 {{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L1323-L1337" >}}
 
 ## 执行任务
 
-ThreadPoolExecutor.Worker 类继承了 AbstractQueuedSynchronizer 类，并且实现了 Runnable 接口，是 ThreadPoolExecutor 用于执行线程池中的任务的最小单元，
+ThreadPoolExecutor.Worker 继承了 AbstractQueuedSynchronizer，并且实现了 Runnable 接口，是 ThreadPoolExecutor 用于执行线程池中的任务的最小单元。
 
 ## 拒绝任务
+
+ThreadPoolExecutor 在内部提供了四种适用于不同场景的拒绝策略：CallerRunsPolicy、AbortPolicy（默认）、DiscardPolicy、DiscardOldestPolicy。
+
+CallerRunsPolicy 会将当前任务回退给调用线程，并且会在调用线程执中行任务，代码片段如下：
+
+{{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L1988-L1992" >}}
+
+AbortPolicy 是 ThreadPoolExecutor 默认的拒绝策略，会直接抛出一个异常，代码片段如下：
+
+{{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2012-L2017" >}}
+
+DiscardPolicy 会抛弃当前任务，代码片段如下：
+
+{{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2035-L2036" >}}
+
+DiscardOldestPolicy 会抛弃 workQueue 中队首的任务，然后再尝试重新提交任务，代码片段如下：
+
+{{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2059-L2064" >}}
 
 ## 回收线程
 
