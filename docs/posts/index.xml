@@ -6,10 +6,20 @@
     <description>Recent content in 归档 on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 15 Aug 2020 13:11:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2020 18:41:53 +0800</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java ThreadPoolExecutor 源码分析</title>
+      <link>/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 01 Oct 2020 18:41:53 +0800</pubDate>
+      
+      <guid>/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+      <description>本篇文章整理和分享 JDK8 线程池框架中 ThreadPoolExecutor 的源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 状态管理、提交任务、执行任务、回收线程 和 拒绝任务 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。ThreadPoolExecutor 的工作机制可以参考我摘记的 《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：
++------------------------------------------------------------------------+ runnbale | +-----------------------+ | --------&amp;gt;| True | +------+ +------+ | | |--&amp;gt; workerCount &amp;lt; corePoolSize? -------------&amp;gt;| |Worker| |Worker| ... | | runnbale | | new Worker() | +------+ +------+ | | --------&amp;gt;| False | +-----------------------+ | | | | | | ^ | runnbale | | workQueue.take | | --------&amp;gt;| | | | | | | | | v v v | | | | +---------------------------+ | | | v True | +--------+ +--------+ | | | | workQueue.</description>
+    </item>
     
     <item>
       <title>MySQL InnoDB 事务模型</title>
@@ -71,7 +81,7 @@
       <pubDate>Fri, 21 Feb 2020 20:00:00 +0800</pubDate>
       
       <guid>/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
-      <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章的记录范围之内。&lt;/p&gt;</description>
+      <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。&lt;/p&gt;</description>
     </item>
     
     <item>

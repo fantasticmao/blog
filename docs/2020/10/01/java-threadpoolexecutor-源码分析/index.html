@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+
+    <meta name="author" content="FantasticMao">
+    <meta name="description" content="本篇文章整理和分享 JDK8 线程池框架中 ThreadPoolExecutor 的源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 状态管理、提交任务、执行任务、回收线程 和 拒绝任务 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。ThreadPoolExecutor 的工作机制可以参考我摘记的 《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：
+&#43;------------------------------------------------------------------------&#43; runnbale | &#43;-----------------------&#43; | --------&gt;| True | &#43;------&#43; &#43;------&#43; | | |--&gt; workerCount &lt; corePoolSize? -------------&gt;| |Worker| |Worker| ... | | runnbale | | new Worker() | &#43;------&#43; &#43;------&#43; | | --------&gt;| False | &#43;-----------------------&#43; | | | | | | ^ | runnbale | | workQueue.take | | --------&gt;| | | | | | | | | v v v | | | | &#43;---------------------------&#43; | | | v True | &#43;--------&#43; &#43;--------&#43; | | | | workQueue.">
+    <meta name="keywords" content="Java,ThreadPoolExecutor,线程池">
+    
+    
+    
+    
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java ThreadPoolExecutor 源码分析"/>
+<meta name="twitter:description" content="本篇文章整理和分享 JDK8 线程池框架中 ThreadPoolExecutor 的源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 状态管理、提交任务、执行任务、回收线程 和 拒绝任务 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。ThreadPoolExecutor 的工作机制可以参考我摘记的 《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：
+&#43;------------------------------------------------------------------------&#43; runnbale | &#43;-----------------------&#43; | --------&gt;| True | &#43;------&#43; &#43;------&#43; | | |--&gt; workerCount &lt; corePoolSize? -------------&gt;| |Worker| |Worker| ... | | runnbale | | new Worker() | &#43;------&#43; &#43;------&#43; | | --------&gt;| False | &#43;-----------------------&#43; | | | | | | ^ | runnbale | | workQueue.take | | --------&gt;| | | | | | | | | v v v | | | | &#43;---------------------------&#43; | | | v True | &#43;--------&#43; &#43;--------&#43; | | | | workQueue."/>
+
+    <meta property="og:title" content="Java ThreadPoolExecutor 源码分析" />
+<meta property="og:description" content="本篇文章整理和分享 JDK8 线程池框架中 ThreadPoolExecutor 的源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 状态管理、提交任务、执行任务、回收线程 和 拒绝任务 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。ThreadPoolExecutor 的工作机制可以参考我摘记的 《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：
+&#43;------------------------------------------------------------------------&#43; runnbale | &#43;-----------------------&#43; | --------&gt;| True | &#43;------&#43; &#43;------&#43; | | |--&gt; workerCount &lt; corePoolSize? -------------&gt;| |Worker| |Worker| ... | | runnbale | | new Worker() | &#43;------&#43; &#43;------&#43; | | --------&gt;| False | &#43;-----------------------&#43; | | | | | | ^ | runnbale | | workQueue.take | | --------&gt;| | | | | | | | | v v v | | | | &#43;---------------------------&#43; | | | v True | &#43;--------&#43; &#43;--------&#43; | | | | workQueue." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" />
+<meta property="article:published_time" content="2020-10-01T18:41:53+08:00" />
+<meta property="article:modified_time" content="2020-10-01T18:41:53+08:00" />
+
+
+    
+      <base href="/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+    
+    <title>
+  Java ThreadPoolExecutor 源码分析 · FantasticMao&#39;s Blog
+</title>
+
+    
+      <link rel="canonical" href="/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="/css/custom.css" />
+    
+
+    
+
+    <link rel="shortcut icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" type="image/png" href="/favicons/apple-touch-icon.png" sizes="180x180">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      FantasticMao&#39;s Blog
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/">首页</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/posts/">归档</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/categories/">分类</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/tags/">标签</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">关于</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Java ThreadPoolExecutor 源码分析</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-10-01T18:41:53&#43;08:00'>
+                October 1, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              3 分钟阅读时间
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="/tags/java/">Java</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <p>本篇文章整理和分享 JDK8 线程池框架中 ThreadPoolExecutor 的源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 <a href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86">状态管理</a>、<a href="#%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1">提交任务</a>、<a href="#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1">执行任务</a>、<a href="#%E5%9B%9E%E6%94%B6%E7%BA%BF%E7%A8%8B">回收线程</a> 和 <a href="#%E6%8B%92%E7%BB%9D%E4%BB%BB%E5%8A%A1">拒绝任务</a> 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。<!-- more --></p>
+<p>ThreadPoolExecutor 的工作机制可以参考我摘记的 <a href="https://www.yuque.com/fantasticmao/tech/qmk0b2">《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor</a> 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">         +------------------------------------------------------------------------+
+runnbale |                                              +-----------------------+ |
+--------&gt;|                                 True         | +------+ +------+     | |
+         |--&gt; workerCount &lt; corePoolSize? -------------&gt;| |Worker| |Worker| ... | |
+runnbale |                 |               new Worker() | +------+ +------+     | |
+--------&gt;|           False |                            +-----------------------+ |
+         |                 |                               |   |   |         ^    |
+runnbale |                 |                            workQueue.take       |    |
+--------&gt;|                 |                               |   |   |         |    |
+         |                 |                               v   v   v         |    |
+         |                 |                 +---------------------------+   |    |
+         |                 v         True    | +--------+ +--------+     |   |    |
+         |         workQueue.offer? --------&gt;| |Runnable| |Runnable| ... |   |    |
+         |                 |                 | +--------+ +--------+     |   |    |
+         |           False |                 +---------------------------+   |    |
+         |                 |                      BlockingQueue&lt;Runnable&gt;    |    |
+         |                 |                                                 |    |
+         |                 V                    True                         |    |
+         |      workerCount &lt; maximumPoolSize? ------------------------------+    |
+         |                 |                    new Worker()                      |
+         |           False |                                                      |
+         |                 |                                                      |
+         |                 v                                                      |
+         |        +-------------+------------+--------------+                     |
+         |        |             |            |              |                     |
+         |        v             v            v              v                     |
+         |  CallerRunsPolicy  AbortPolicy  DiscardPolicy  DiscardOldestPolicy     |
+         +------------------------------------------------------------------------+
+</code></pre></div><hr>
+<h2 id="状态管理">状态管理</h2>
+<p>ThreadPoolExecutor 内部共有两个状态：workerCount 和 runState。workerCount 表示线程池中的有效线程数，是已经被允许运行并且还未结束的线程数量。runState 表示线程池在生命周期内的运行状态，具体的枚举值有 RUNNING、SHUTDOWN、STOP、TIDYING、TERMINATED。</p>
+<p>ThreadPoolExecutor 将 workerCount 和 runState 两个状态合并在同一个 <code>AtomicInteger</code> 类型的 <code>ctl</code> 字段中，并会通过一系列位运算来分别获取设置 workerCount 和 runState 的具体值。其中，runState 会占据 <code>ctl</code> 字段中 int 值的高 3 位，workerCount 会占据剩下的 29 位，因此 ThreadPoolExecutor 支持的最大线程数量是 <code>2^29 - 1</code> 个，而不是 <code>2^32 -1</code> 个。将 workerCount 和 runState 两个状态设计成同一个字段的好处是可以使用一次 CAS 操作同时修改两个状态，从而避免 <a href="https://en.wikipedia.org/wiki/Race_condition">竞态条件</a> 的发生和减少锁资源的占用。<code>ctl</code> 字段中具体的位分配如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[000][0 0000 0000 0000 0000 0000 0000 0000]
+  |                    |
+  v                    v
+runState          workerCount
+</code></pre></div><p><code>ctl</code> 字段中包含的 workerCount 初始值为 0，runState 初始值为 RUNNING。ThreadPoolExecutor 源码中定义 <code>ctl</code> 字段，以及通过位运算来获取 workerCount 和 runState 的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L373-L375&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L384-L387&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<h3 id="workercount">workerCount</h3>
+<p>workerCount 表示线程池中的有效线程数，会占据 <code>ctl</code> 字段中 int 值的低位，只需使用 <code>AtomicInteger</code> 的 CAS 操作即可线程安全地修改其值。ThreadPoolExecutor 源码中修改 workerCount 的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L406-L427&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<h3 id="runstate">runState</h3>
+<p>runState 表示线程池在生命周期内的运行状态，各个枚举值以及其对应的状态描述和状态之间的转换流程如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>枚举值</th>
+<th>数值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RUNNING</td>
+<td>111</td>
+<td>接收新的任务，处理队列中的任务</td>
+</tr>
+<tr>
+<td>SHUTDOWN</td>
+<td>000</td>
+<td>不再接收新的任务，但会处理队列中的任务</td>
+</tr>
+<tr>
+<td>STOP</td>
+<td>001</td>
+<td>不再接收新的任务，不会处理队列中的任务，会中断进行中的任务</td>
+</tr>
+<tr>
+<td>TIDYING</td>
+<td>010</td>
+<td>所有任务已经终止，workerCount 已经为零，准备调用 <code>terminated()</code> 钩子方法</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td>011</td>
+<td>调用 <code>terminated()</code> 钩子方法已经完成</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
+   |-------&gt;| (调用 shutdown())
+   |---------------&gt;| (调用 shutdownNow())
+            |------&gt;| (调用 shutdownNow())
+            |--------------&gt;| (当池中和队列中的任务都为空)
+                    |------&gt;| (当池中的任务为空)
+                            |--------&gt;| (调用 terminated() 已经完成)
+</code></pre></div><p>将 runState 设计成上述五个枚举值的原因在于 ThreadPoolExecutor 内部的工作机制。首先，ThreadPoolExecutor 包含了一个用于缓冲任务执行的 workQueue，所以在关闭线程池的时候也需要考虑到 workQueue 中的线程状态（是否需要中断线程）。此外，ThreadPoolExecutor 还提供了一些待实现的扩展方法：<code>beforeExecute(Thread, Runnable)</code>、<code>afterExecute(Runnable, Throwable)</code>、<code>terminated()</code>，因此这些方法的执行进度也需要被考虑在线程池的运行状态之内。ThreadPoolExecutor 源码中定义 runState 枚举值，以及判断当前运行状态的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L377-L382&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L389-L404&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<h2 id="提交任务">提交任务</h2>
+<p>ThreadPoolExecutor 继承了 ExecutorService 接口，对外提供了四种提交任务的方法：<code>execute(Runnable)</code>、<code>submit(Callable&lt;T&gt;)</code>、<code>submit(Runnable, T)</code>、<code>submit(Runnable)</code>。然而，后三种方法均是先将任务封装成 RunnableFuture，然后再通过 <code>execute(Runnable)</code> 将任务提交至线程池中。因此从实现层面来看，ThreadPoolExecutor 所提供的提交任务的方法其实只有一种：<code>execute(Runnable)</code>。</p>
+<p>ThreadPoolExecutor 提交任务的内部逻辑并不复杂，可以简单概括为以下四个步骤：</p>
+<ol>
+<li>当 workerCount 小于 ThreadPoolExecutor 的核心线程数 <code>corePoolSize</code> 时，ThreadPoolExecutor 会直接使用 <code>addWorker(command, true)</code> 方法来创建一个属于核心范围内的新的 Worker 线程。此时如果 <code>addWorker(command, true)</code> 方法执行成功，那么 ThreadPoolExecutor 会直接返回提交任务成功；</li>
+<li>当 workerCount 不小于 <code>corePoolSize</code> 时，或者如果 <code>addWorker(command, true)</code> 方法执行失败，ThreadPoolExecutor 会使用 workQueue 的 <code>offer(command)</code> 方法来向队列中添加一个等待执行的任务；</li>
+<li>如果 workQueue 的 <code>offer(command)</code> 方法执行失败（例如当队列已满时），ThreadPoolExecutor 会使用 <code>addWorker(command, false)</code> 方法来创建一个属于最大范围内的新的 Worker 线程；</li>
+<li>如果 <code>addWorker(command, false)</code> 方法执行失败（例如当 workerCount 大于 ThreadPoolExecutor 的最大线程数 <code>maximumPoolSize</code> 时），ThreadPoolExecutor 会触发提交任务失败的拒绝策略。</li>
+</ol>
+<p>ThreadPoolExecutor 的核心线程数 <code>corePoolSize</code> 和最大线程数 <code>maximumPoolSize</code> 以及 workQueue 决定了任务在提交时的行为，这些参数均可以通过 ThreadPoolExecutor 构造方法进行配置，并且前两者可以在已经创建 ThreadPoolExecutor 实例之后使用对应的 setter 方法进行修改。ThreadPoolExecutor 源码中提交任务的方法 <code>execute(Runnable)</code> 的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1323-L1337&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<p>ThreadPoolExecutor 执行任务的最小单元是对 Thread 进行了一层封装的 ThreadPoolExecutor.Worker，更多关于 Worker 的分析请见 <a href="#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1">执行任务</a>。ThreadPoolExecutor 通过使用 <code>addWorker(Runnable, boolean)</code> 方法来创建一个新的 Worker 线程，通过第二个布尔类型的参数来判断待创建 Worker 是属于核心范围内的线程还是属于最大范围内的线程（是应受到 <code>corePoolSize</code> 条件的限制，还是应受到 <code>maximumPoolSize</code> 条件的限制）。</p>
+<p>ThreadPoolExecutor 先会在 <code>addWorker(Runnable, boolean)</code> 方法内部校验线程池的状态，例如 runState 当前是否为 RUNNING 枚举值、workerCount 是否符合 <code>corePoolSize</code> 条件的限制。在校验状态通过之后，ThreadPoolExecutor 则会创建一个 Worker 实例，并且会将这个实例添加到 HashSet&lt;Worker&gt; 类型的 <code>workers</code> 中的。值得注意的是，ThreadPoolExecutor 正是使用此处的 <code>workers</code> 来存放线程池中所有的 Worker 实例，并且 ThreadPoolExecutor 在访问 <code>workers</code> 时都会使用一个 ReentrantLock 类型的 <code>mainLock</code> 锁，以此来保证并发安全。ThreadPoolExecutor 源码中创建 Worker 实例的方法 <code>addWorker(Runnable, boolean)</code> 的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L887-L911&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L913-L943&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<h2 id="执行任务">执行任务</h2>
+<p>ThreadPoolExecutor.Worker 继承了 AbstractQueuedSynchronizer，并且实现了 Runnable 接口，是 ThreadPoolExecutor 用于执行线程池中的任务的最小单元。</p>
+<p>Worker 内部包含了三个变量：<code>thread</code>、<code>firstTask</code>、<code>completedTasks</code>。<code>thread</code> 是在创建 Worker 时使用 ThreadPoolExecutor 的线程工厂 <code>threadFactory</code> 来创建的 Thread 实例。<code>firstTask</code> 是在创建 Worker 时首次提交的任务。<code>completedTasks</code> 是 Worker 已经运行完成的任务数量。需要注意的是，在创建 Worker 时，传递给 <code>threadFactory</code> 的 <code>newThread(Runnable)</code> 方法的参数并不是 <code>firstTask</code>，而是实现了 Runnable 接口的 Worker 本身。因此当 <code>thread</code> 的 <code>start()</code> 方法被调用之后，<code>thread</code> 将会运行的其实是 Worker 内部的 <code>run()</code> 方法。ThreadPoolExecutor 源码中定义 Worker 相关的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L586-L590&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L596-L599&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L602-L604&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<p>Worker 内部的 <code>run()</code> 方法是开启 Worker 线程的入口，它会将 Worker 线程的主循环委托给 ThreadPoolExecutor 的 <code>runWorker(Worker)</code> 方法。在 <code>runWorker(Worker)</code> 方法中，Worker 线程会首先执行 Worker 内部的 <code>firstTask</code> 任务，在这之后 Worker 线程会重复执行使用 <code>getTask()</code> 方法从 workQueue 中获取的任务。Worker 会在每个任务执行之前调用 <code>beforeExecute(Thread, Runnable)</code> 方法，在任务执行之后调用 <code>afterExecute(Runnable, Throwable)</code> 方法，这种设计使得 ThreadPoolExecutor 对外提供了更多的扩展能力。ThreadPoolExecutor 源码中运行 Worker 线程的方法 <code>runWorker(Worker)</code> 的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1098-L1130&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<h2 id="回收线程">回收线程</h2>
+<p>在 ThreadPoolExecutor 的 <code>runWorker(Worker)</code> 方法中，当 Worker 线程使用 <code>getTask()</code> 方法获取的任务为 NULL 时，Worker 线程便会退出主循环，继而该 Worker 线程便会结束和被回收。导致 <code>getTask()</code> 方法返回 NULL 的情况有以下两种：</p>
+<ul>
+<li>在 ThreadPoolExecutor 处于关闭的情况下，<code>getTask()</code> 方法会直接返回 NULL；</li>
+<li>在 ThreadPoolExecutor 正常运行的情况下，如果 <code>getTask()</code> 方法中的 workQueue 的 <code>poll(long, TimeUnit)</code> 方法返回 NULL，那么 <code>getTask()</code> 方法会先使用 CAS 操作将 workerCount 值减一之后再返回 NULL；</li>
+</ul>
+<p>如果 ThreadPoolExecutor 中的 <code>allowCoreThreadTimeOut</code> 参数为 true，那么核心范围内的线程将也会参与回收机制。ThreadPoolExecutor 源码中获取等待执行的任务的方法 <code>getTask()</code> 的代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1012-L1053&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<h2 id="拒绝任务">拒绝任务</h2>
+<p>ThreadPoolExecutor 的拒绝策略由 RejectedExecutionHandler 接口定义，并且 ThreadPoolExecutor 在内部提供了四种适用于不同场景的拒绝策略：CallerRunsPolicy、AbortPolicy（默认）、DiscardPolicy、DiscardOldestPolicy。</p>
+<p>CallerRunsPolicy 会将当前任务回退给调用线程，并且会在调用线程执中行任务，代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1988-L1992&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<p>AbortPolicy 是 ThreadPoolExecutor 默认的拒绝策略，会直接抛出一个异常，代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2012-L2017&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<p>DiscardPolicy 会抛弃当前任务，代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2035-L2036&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<p>DiscardOldestPolicy 会抛弃 workQueue 中队首的任务，然后再尝试重新提交任务，代码片段如下：</p>
+
+
+
+
+
+
+<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2059-L2064&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java">java.util.concurrent.ThreadPoolExecutor</a></li>
+<li><a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html">Java 线程池实现原理及其在美团业务中的实践</a></li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+          2016 -
+        
+        2020
+         FantasticMao 
+      
+      
+         · 
+        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+      
+      
+        · CDN
+        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+        </a>
+      
+      
+      
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-89151446-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>

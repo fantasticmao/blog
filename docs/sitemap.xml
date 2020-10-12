@@ -4,7 +4,27 @@
   
   <url>
     <loc>https://blog.fantasticmao.cn/</loc>
-    <lastmod>2020-08-15T13:11:00+08:00</lastmod>
+    <lastmod>2020-10-01T18:41:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/tags/java/</loc>
+    <lastmod>2020-10-01T18:41:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2020-10-01T18:41:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/posts/</loc>
+    <lastmod>2020-10-01T18:41:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-10-01T18:41:53+08:00</lastmod>
   </url>
   
   <url>
@@ -19,11 +39,6 @@
   
   <url>
     <loc>https://blog.fantasticmao.cn/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2020-08-15T13:11:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/posts/</loc>
     <lastmod>2020-08-15T13:11:00+08:00</lastmod>
   </url>
   
@@ -48,17 +63,7 @@
   </url>
   
   <url>
-    <loc>https://blog.fantasticmao.cn/tags/java/</loc>
-    <lastmod>2020-05-18T20:40:21+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.fantasticmao.cn/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</loc>
-    <lastmod>2020-05-18T20:40:21+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2020-05-18T20:40:21+08:00</lastmod>
   </url>
   
