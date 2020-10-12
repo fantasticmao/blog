@@ -4,3 +4,8 @@
 .gist table th {
   border: 0;
 }
+
+.emgithub-container table td,
+.emgithub-container table th {
+  font-size: 12px;
+}
