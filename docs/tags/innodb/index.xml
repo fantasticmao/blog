@@ -6,10 +6,19 @@
     <description>Recent content in InnoDB on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 15 Aug 2020 13:11:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 15:58:10 +0800</lastBuildDate>
     
 	<atom:link href="/tags/innodb/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MySQL InnoDB 事务隔离级别实践</title>
+      <link>/2020/09/10/mysql-innodb-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Thu, 10 Sep 2020 15:58:10 +0800</pubDate>
+      
+      <guid>/2020/09/10/mysql-innodb-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/</guid>
+      <description>&lt;p&gt;本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>MySQL InnoDB 事务模型</title>
