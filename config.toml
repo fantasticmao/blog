@@ -38,28 +38,33 @@ disqusShortname = "fantasticmao"
 
 [[params.social]]
     name = "GitHub"
-    icon = "fab fa-github fa-2x"
+    icon = "fab fa-github"
     weight = 1
     url = "https://github.com/fantasticmao/"
 [[params.social]]
-    name = "WeChat"
-    icon = "fab fa-weixin fa-2x"
+    name = "语雀"
+    icon = "iconfont iconfont-yuque"
     weight = 2
+    url = "https://www.yuque.com/fantasticmao/tech"
+[[params.social]]
+    name = "WeChat"
+    icon = "fab fa-weixin"
+    weight = 3
     url = "images/weixin.png"
 [[params.social]]
     name = "Twitter"
-    icon = "fab fa-twitter fa-2x"
-    weight = 3
+    icon = "fab fa-twitter"
+    weight = 4
     url = "https://twitter.com/fantasticmao/"
 [[params.social]]
     name = "Instagram"
-    icon = "fab fa-instagram fa-2x"
-    weight = 4
+    icon = "fab fa-instagram"
+    weight = 5
     url = "https://www.instagram.com/wonderfulmao/"
 [[params.social]]
     name = "RSS"
-    icon = "fas fa-rss fa-2x"
-    weight = 5
+    icon = "fas fa-rss"
+    weight = 6
     url = "/index.xml"
 
 [[menu.main]]
