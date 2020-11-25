@@ -139,8 +139,8 @@ Worker 内部的 `run()` 方法是开启 Worker 线程的入口，它会将 Work
 
 在 ThreadPoolExecutor 的 `runWorker(Worker)` 方法中，当 Worker 线程使用 `getTask()` 方法获取的任务为 NULL 时，Worker 线程便会退出主循环，继而该 Worker 线程便会结束和被回收。导致 `getTask()` 方法返回 NULL 的情况有以下两种：
 
--  在 ThreadPoolExecutor 处于关闭的情况下，`getTask()` 方法会直接返回 NULL；
--  在 ThreadPoolExecutor 正常运行的情况下，如果 `getTask()` 方法中的 workQueue 的 `poll(long, TimeUnit)` 方法返回 NULL，那么 `getTask()` 方法会先使用 CAS 操作将 workerCount 值减一之后再返回 NULL；
+- 在 ThreadPoolExecutor 处于关闭的情况下，`getTask()` 方法会直接返回 NULL；
+- 在 ThreadPoolExecutor 正常运行的情况下，如果 `getTask()` 方法中的 workQueue 的 `poll(long, TimeUnit)` 方法返回 NULL，那么 `getTask()` 方法会先使用 CAS 操作将 workerCount 值减一之后再返回 NULL；
 
 如果 ThreadPoolExecutor 中的 `allowCoreThreadTimeOut` 参数为 true，那么核心范围内的线程将也会参与回收机制。ThreadPoolExecutor 源码中获取等待执行的任务的方法 `getTask()` 的代码片段如下：
 

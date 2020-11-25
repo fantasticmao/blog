@@ -6,10 +6,19 @@
     <description>Recent content on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 18 Nov 2020 11:14:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2020 23:00:00 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java GC 案例两则</title>
+      <link>/2020/11/25/java-gc-%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/</link>
+      <pubDate>Wed, 25 Nov 2020 23:00:00 +0800</pubDate>
+      
+      <guid>/2020/11/25/java-gc-%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/</guid>
+      <description>&lt;p&gt;本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 &lt;code&gt;-XX:+UseConcMarkSweepGC&lt;/code&gt; 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>《Unix 环境高级编程》谈及的几种 I/O 模型</title>
