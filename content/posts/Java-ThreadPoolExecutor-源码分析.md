@@ -6,7 +6,7 @@ tags: ["Java"]
 keywords: ["Java", "ThreadPoolExecutor", "线程池"]
 ---
 
-本篇文章整理和分享 JDK8 线程池框架中 ThreadPoolExecutor 的源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 [状态管理](#状态管理)、[提交任务](#提交任务)、[执行任务](#执行任务)、[回收线程](#回收线程) 和 [拒绝任务](#拒绝任务) 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。<!--more-->
+本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 [状态管理](#状态管理)、[提交任务](#提交任务)、[执行任务](#执行任务)、[回收线程](#回收线程) 和 [拒绝任务](#拒绝任务) 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。<!--more-->
 
 ThreadPoolExecutor 的工作机制可以参考我摘记的 [《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor](https://www.yuque.com/fantasticmao/tech/qmk0b2) 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：
 
