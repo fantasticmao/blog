@@ -57,10 +57,10 @@ disqusShortname = "fantasticmao"
     weight = 4
     url = "https://twitter.com/fantasticmao/"
 [[params.social]]
-    name = "Instagram"
-    icon = "fab fa-instagram"
+    name = "Steam"
+    icon = "fab fa-steam"
     weight = 5
-    url = "https://www.instagram.com/wonderfulmao/"
+    url = "https://steamcommunity.com/id/fantasticmao/"
 [[params.social]]
     name = "RSS"
     icon = "fas fa-rss"
