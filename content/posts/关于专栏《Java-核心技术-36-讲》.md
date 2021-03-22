@@ -118,7 +118,7 @@ finalize() 是基础类 `java.lang.Object` 的一个方法，它的设计目的�
 
 ---
 
-## Java 提供了哪些 I/O 方式，NIO 如何实现多路复用
+## Java 提供了哪些 IO 方式，NIO 如何实现多路复用
 
 ---
 
