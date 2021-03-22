@@ -71,7 +71,7 @@ ACID 是代表了原子性（Atomicity）、一致性（Consistency）、隔离�
 
 InnoDB 会使用的一种叫做双写（doublewrite）的刷新文件缓冲区的技术。在写入 page 数据至 data files 之前，InnoDB 会首先将数据写入至一个叫做双写缓冲区（doublewrite buffer）的区域。只有在写入和刷新数据至双写缓冲区完成之后，InnoDB 才会将 page 数据写入至 data files 中。如果操作系统、存储子系统或者 MySQL 服务进程在写入 page 数据期间崩溃了，InnoDB 稍后可以在 [崩溃恢复](#崩溃恢复) 期间从双写缓冲区中查找到完整的 page 数据副本。
 
-虽然数据会被写入两次，但并不需要两倍的 I/O 开销或者两次 I/O 操作。数据会通过一次 `fsync()` 系统调用，以一个较大的顺序块写入缓冲区。
+虽然数据会被写入两次，但并不需要两倍的 IO 开销或者两次 IO 操作。数据会通过一次 `fsync()` 系统调用，以一个较大的顺序块写入缓冲区。
 
 可以通过指定 `innodb_doublewrite=0` 来关闭双写缓冲区功能。
 

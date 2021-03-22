@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>IO</title>
+      <link>/tags/io/</link>
+      <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
+      
+      <guid>/tags/io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Linux</title>
       <link>/tags/linux/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
@@ -134,15 +143,6 @@
       <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
       
       <guid>/tags/jquery/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>I/O</title>
-      <link>/tags/i/o/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/i/o/</guid>
       <description></description>
     </item>
     

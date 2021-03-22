@@ -109,7 +109,7 @@ MyISAM 存储引擎支持空间索引。和 B-Tree 索引不同，空间索引�
 
 1. 大大减少了服务器需要扫描的数据量；
 2. 可以帮助服务器避免排序和临时表；
-3. 可以将随机 I/O 变为顺序 I/O。
+3. 可以将随机 IO 变为顺序 IO。
 
 [《Relational Database Index Design and the Optimizers》](https://book.douban.com/subject/26419771/)书中介绍了如何评定一个索引是否适合某个查询的「三星系统」：
 
