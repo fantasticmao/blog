@@ -195,6 +195,18 @@
 <td>移动光标至当前行的最后一个位置</td>
 </tr>
 <tr>
+<td>H</td>
+<td>移动光标至当前页的第一列的第一个字符位置</td>
+</tr>
+<tr>
+<td>M</td>
+<td>移动光标至当前页的中间列的第一个字符位置</td>
+</tr>
+<tr>
+<td>L</td>
+<td>移动光标至当前页的最后一列的第一个字符位置</td>
+</tr>
+<tr>
 <td>^</td>
 <td>移动光标至当前行的第一个非 blank 字符位置</td>
 </tr>
@@ -213,6 +225,10 @@
 <tr>
 <td>G</td>
 <td>移动光标至当前文件的最后一行</td>
+</tr>
+<tr>
+<td>${n} + Space</td>
+<td>向右移动光标至之后 n 个字符的位置</td>
 </tr>
 <tr>
 <td>f${char}</td>
@@ -360,7 +376,7 @@
 <td>重复执行 n 次 <code>command</code> 命令</td>
 </tr>
 <tr>
-<td>ZZ</td>
+<td><strong>ZZ</strong>、:wq</td>
 <td>相当于 <code>:wq</code></td>
 </tr>
 </tbody>
@@ -387,6 +403,10 @@
 <tr>
 <td>Ctrl + v</td>
 <td>选择块</td>
+</tr>
+<tr>
+<td><strong>Ctrl + z</strong></td>
+<td>挂起 Vim（相当于执行 <code>bg</code> 命令，使用 <code>fg</code> 命令返回 Vim）</td>
 </tr>
 </tbody>
 </table>
@@ -466,7 +486,7 @@
 </tr>
 <tr>
 <td>:sh、:shell</td>
-<td>挂起 Vim，执行多条 <code>shell</code> 命令</td>
+<td>挂起 Vim，执行多条 <code>shell</code> 命令（退出当前 <code>shell</code> 即返回 vim）</td>
 </tr>
 <tr>
 <td>:pwd</td>
@@ -505,6 +525,10 @@
 <td>强制退出 Vim</td>
 </tr>
 <tr>
+<td>:wq、ZZ</td>
+<td>保存并退出 Vim</td>
+</tr>
+<tr>
 <td>:n</td>
 <td>编辑下一个文件</td>
 </tr>
@@ -538,8 +562,7 @@
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li>Vim :help —— VIM main help file</li>
-<li><a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" ref="external">Vim
-(text editor)</a> —— Wikipedia</li>
+<li><a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" ref="external">Vim (text editor)</a> —— Wikipedia</li>
 <li><a href="http://linux.vbird.org/linux_basic/0310vi.php">Vim 程式編輯器</a> —— 鳥哥的 Linux 私房菜</li>
 <li><a href="https://coolshell.cn/articles/1679.html">Vim 的分屏功能</a> —— 酷 壳 - CoolShell</li>
 <li><a href="https://coolshell.cn/articles/5426.html">简明 Vim 练级攻略</a> —— 酷 壳 - CoolShell</li>

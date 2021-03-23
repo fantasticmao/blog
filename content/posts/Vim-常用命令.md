@@ -28,11 +28,15 @@ keywords: ["Vim"]
 | Ctrl + d       | 向下翻半页                                  |
 | 0、Home        | 移动光标至当前行的第一个位置                |
 | \$、End        | 移动光标至当前行的最后一个位置              |
+| H              | 移动光标至当前页的第一列的第一个字符位置    |
+| M              | 移动光标至当前页的中间列的第一个字符位置    |
+| L              | 移动光标至当前页的最后一列的第一个字符位置  |
 | ^              | 移动光标至当前行的第一个非 blank 字符位置   |
 | g\_            | 移动光标至当前行的最后一个非 blank 字符位置 |
 | \${n}G         | 相当于 `:${n}`                              |
 | gg             | 相当于 1G 和 `:${1}`                        |
 | G              | 移动光标至当前文件的最后一行                |
+| ${n} + Space   | 向右移动光标至之后 n 个字符的位置           |
 | f\${char}      | 向右移动光标至下个 char 字符的位置          |
 | F\${char}      | 向左移动光标至上个 char 字符的位置          |
 | t\${char}      | 向右移动光标至下个 char 字符的前一个位置    |
@@ -76,7 +80,7 @@ keywords: ["Vim"]
 | Ctrl + r                   | redo，撤销 u 操作            |
 | .                          | 重复执行上一次命令           |
 | \${n}`command`             | 重复执行 n 次 `command` 命令 |
-| ZZ                         | 相当于 `:wq`                 |
+| **ZZ**、:wq                | 相当于 `:wq`                 |
 
 ---
 
@@ -84,11 +88,12 @@ keywords: ["Vim"]
 
 ### 选中内容
 
-| 命令     | 描述   |
-| -------- | ------ |
-| v        | 选择字 |
-| V        | 选择行 |
-| Ctrl + v | 选择块 |
+| 命令         | 描述                                                     |
+| ------------ | -------------------------------------------------------- |
+| v            | 选择字                                                   |
+| V            | 选择行                                                   |
+| Ctrl + v     | 选择块                                                   |
+| **Ctrl + z** | 挂起 Vim（相当于执行 `bg` 命令，使用 `fg` 命令返回 Vim） |
 
 ---
 
@@ -112,35 +117,35 @@ keywords: ["Vim"]
 
 ## Command-line 模式
 
-| 命令                     | 描述                                                 |
-| ------------------------ | ---------------------------------------------------- |
-| :\${n}                   | 移动光标至当前文件的第 n 行                          |
-| :! + \${shell}           | 执行一条 `shell` 命令                                |
-| :sh、:shell              | 挂起 Vim，执行多条 `shell` 命令                      |
-| :pwd                     | 打印当前目录                                         |
-| :cd \${dir}              | 改变当前目录                                         |
-| :e \${fileName}          | 打开新的文件                                         |
-| :r \${fileName}          | 读取文件内容至当前文件中                             |
-| :r! \${shell}            | 读取 `shell` 命令的输出内容至当前文件中              |
-| :w                       | 保存当前文件内容                                     |
-| :w \${fileName}          | 保存当前文件内容为新的文件，类似于「文件另存为」功能 |
-| :q                       | 退出 Vim                                             |
-| :q!                      | 强制退出 Vim                                         |
-| :n                       | 编辑下一个文件                                       |
-| :N                       | 编辑上一个文件                                       |
-| :files                   | 列出打开的所有文件                                   |
-| :sp、:split              | 创建水平分屏                                         |
-| :vsp、:vsplit            | 创建垂直分屏                                         |
-| :Ctrl + w + [h, j, k, l] | 在分屏窗口中移动光标                                 |
-| :Ctrl + w + [H, J, K, L] | 移动分屏窗口                                         |
+| 命令                     | 描述                                                           |
+| ------------------------ | -------------------------------------------------------------- |
+| :\${n}                   | 移动光标至当前文件的第 n 行                                    |
+| :! + \${shell}           | 执行一条 `shell` 命令                                          |
+| :sh、:shell              | 挂起 Vim，执行多条 `shell` 命令（退出当前 `shell` 即返回 vim） |
+| :pwd                     | 打印当前目录                                                   |
+| :cd \${dir}              | 改变当前目录                                                   |
+| :e \${fileName}          | 打开新的文件                                                   |
+| :r \${fileName}          | 读取文件内容至当前文件中                                       |
+| :r! \${shell}            | 读取 `shell` 命令的输出内容至当前文件中                        |
+| :w                       | 保存当前文件内容                                               |
+| :w \${fileName}          | 保存当前文件内容为新的文件，类似于「文件另存为」功能           |
+| :q                       | 退出 Vim                                                       |
+| :q!                      | 强制退出 Vim                                                   |
+| :wq、ZZ                  | 保存并退出 Vim                                                 |
+| :n                       | 编辑下一个文件                                                 |
+| :N                       | 编辑上一个文件                                                 |
+| :files                   | 列出打开的所有文件                                             |
+| :sp、:split              | 创建水平分屏                                                   |
+| :vsp、:vsplit            | 创建垂直分屏                                                   |
+| :Ctrl + w + [h, j, k, l] | 在分屏窗口中移动光标                                           |
+| :Ctrl + w + [H, J, K, L] | 移动分屏窗口                                                   |
 
 ---
 
 ## 参考资料
 
 - Vim :help —— VIM main help file
-- <a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" ref="external">Vim
-  (text editor)</a> —— Wikipedia
+- <a href="https://en.wikipedia.org/wiki/Vim_(text_editor)" target="_blank" ref="external">Vim (text editor)</a> —— Wikipedia
 - [Vim 程式編輯器](http://linux.vbird.org/linux_basic/0310vi.php) —— 鳥哥的 Linux 私房菜
 - [Vim 的分屏功能](https://coolshell.cn/articles/1679.html) —— 酷 壳 - CoolShell
 - [简明 Vim 练级攻略](https://coolshell.cn/articles/5426.html) —— 酷 壳 - CoolShell
