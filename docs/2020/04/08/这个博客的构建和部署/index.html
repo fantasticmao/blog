@@ -44,7 +44,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -74,34 +74,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -113,27 +115,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">这个博客的构建和部署</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2020/04/08/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/">
+              这个博客的构建和部署
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2020-04-08T00:03:00&#43;08:00'>
                 April 8, 2020
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              2 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：2 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E9%97%B2%E8%81%8A/">闲聊</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/free-talk/">Free Talk</a></div>
 
         </div>
@@ -144,11 +151,21 @@
         <p>最近几天打理了荒废很久的博客，从原先的 Hexo 迁移到了 Hugo，添加了 RSS、CDN 以及其它乱七八糟的功能，顺带还给这个博客主题提交了一个 SEO 优化相关的 <a href="https://github.com/luizdepra/hugo-coder/pull/300">Pull Requests</a>。</p>
 <p>整个博客迁移的过程费了挺多时间和精力，所以决定还是写一篇文章，主要记录这个博客构建和部署过程中的一些个性化配置相关内容。</p>
 <hr>
-<h2 id="概览">概览</h2>
+<h2 id="概览">
+  概览
+  <a class="heading-link" href="#%e6%a6%82%e8%a7%88">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>这个博客是以 Markdown 编写的，使用 Hugo 构建并且部署在 Github Pages 上，整个站点的运行架构如下：</p>
 <p><img src="/images/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/1.png" alt="image"></p>
 <hr>
-<h2 id="构建">构建</h2>
+<h2 id="构建">
+  构建
+  <a class="heading-link" href="#%e6%9e%84%e5%bb%ba">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>在使用 Hugo 构建博客的静态资源时，主要有以下个性化配置：</p>
 <ul>
 <li>
@@ -189,7 +206,12 @@
 </li>
 </ul>
 <hr>
-<h2 id="部署">部署</h2>
+<h2 id="部署">
+  部署
+  <a class="heading-link" href="#%e9%83%a8%e7%bd%b2">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>使用 GitHub Pages 部署站点主要有以下三种方式，详细内容可以参考 Hugo 的官方文档 <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub</a>。</p>
 <ol>
 <li>站点被托管在 <code>&lt;USERNAME&gt;.github.io</code> 仓库的 master 分支下；</li>
@@ -200,7 +222,12 @@
 <p>最终在部署博客时，需要先使用 <code>rm -rf ./docs/</code> 命令清空资源目录，再使用 <code>hugo</code> 命令构建站点，然后使用 <code>git push origin master</code> 命令部署至 GitHub Pages。这一系列操作命令对应的 Shell Script 是 <a href="https://github.com/FantasticMao/blog/blob/master/deploy.sh">deploy.sh</a>，是我参考 Hugo 官方文档改写的。</p>
 <p>在部署博客至 GitHub Pages 成功，并且可以通过 origin.blog.fantasticmao.cn 域名访问成功之后，还需要在又拍云控制台中配置 CDN 服务的加速域名和回源地址。一言概之就是，需要在 DNS 服务商中将 blog.fantasticmao.cn 域名解析至又拍云 CDN 服务中提供的 CNAME，随后需要在又拍云控制台中配置 CDN 服务的回源地址为 origin.blog.fantasticmao.cn，详细内容可以参考又拍云的 <a href="https://help.upyun.com/knowledge-base/cdn-create-service/">帮助文档</a>。需要注意的是，<strong>在又拍云控制台中配置回源地址时，需要额外配置回源 Host，否则访问站点会显示 404</strong>。</p>
 <hr>
-<h2 id="seo">SEO</h2>
+<h2 id="seo">
+  SEO
+  <a class="heading-link" href="#seo">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>博客部署成功之后，还需要在百度和 Google 两大中文 / 英文搜索引擎中提交博客站点，便于用户根据关键字搜索。</p>
 <p>百度需要在它的 <a href="https://ziyuan.baidu.com/">资源搜索平台</a> 中提交站点，可以通过 DNS CNAME 解析的方式验证站点拥有权。</p>
 <p>Google 需要在它的 <a href="https://search.google.com/search-console">Google Search Console</a> 中提交站点，可以通过 DNS TXT 解析的方式验证站点拥有权。</p>
@@ -211,28 +238,16 @@
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 

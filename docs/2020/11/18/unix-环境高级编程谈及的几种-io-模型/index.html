@@ -44,7 +44,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -74,34 +74,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -113,27 +115,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">《Unix 环境高级编程》谈及的几种 IO 模型</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2020/11/18/unix-%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%B0%88%E5%8F%8A%E7%9A%84%E5%87%A0%E7%A7%8D-io-%E6%A8%A1%E5%9E%8B/">
+              《Unix 环境高级编程》谈及的几种 IO 模型
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2020-11-18T11:14:00&#43;08:00'>
                 November 18, 2020
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              1 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：1 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/linux/">Linux</a>
       <span class="separator">•</span>
     <a href="/tags/io/">IO</a></div>
@@ -145,14 +152,24 @@
         
         <p>本篇文章记录自己在阅读 <a href="https://book.douban.com/subject/25900403/">《Unix 环境高级编程》</a> 时候，关于书中谈及的几种 IO 模型的一些笔记。</p>
 <hr>
-<h2 id="阻塞-io">阻塞 IO</h2>
+<h2 id="阻塞-io">
+  阻塞 IO
+  <a class="heading-link" href="#%e9%98%bb%e5%a1%9e-io">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>Unix 系统中的文件 IO 函数 <code>open</code>、<code>read</code>、<code>write</code>，以及标准 IO 库中的函数 <code>getc</code> / <code>putc</code>、<code>fgets</code> / <code>fputs</code>、<code>fread</code> / <code>fwrite</code> 都属于阻塞 IO，这些函数可能会使进程永远阻塞，例如在以下场景时：</p>
 <ul>
 <li>如果某些文件类型（例如读管道、终端设备、网络代理）的数据并不存在，读操作可能会使调用者永远阻塞；</li>
 <li>如果数据不能被相同的文件类型立即接收（例如管道中没有空间、网络流量控制），写操作可能会使调用者永远阻塞。</li>
 </ul>
 <p>通常会基于「多线程」的方式来避免在单线程中发生阻塞，不过这种方式将会需要处理线程之间的同步工作。</p>
-<h2 id="非阻塞-io">非阻塞 IO</h2>
+<h2 id="非阻塞-io">
+  非阻塞 IO
+  <a class="heading-link" href="#%e9%9d%9e%e9%98%bb%e5%a1%9e-io">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>非阻塞 IO 可以使 <code>open</code>、<code>read</code>、<code>write</code> 这类 IO 操作不会永远阻塞，在这类操作无法完成的时候，它会立即给调用者返回一个错误，表示该操作如果继续执行的话将会导致阻塞。</p>
 <p>对于一个给定的描述符，有两种方式可以将其指定为非阻塞 IO：</p>
 <ol>
@@ -160,7 +177,12 @@
 <li>对于已经打开的描述符，可以通过调用 <code>fcntl</code> 函数来添加 <code>O_NOBLOCK</code> 标志。</li>
 </ol>
 <p>通常会基于「轮询」的方式来使用非阻塞 IO 进行读写，不过这种方式将会消耗额外的 CPU 资源。</p>
-<h2 id="io-多路复用">IO 多路复用</h2>
+<h2 id="io-多路复用">
+  IO 多路复用
+  <a class="heading-link" href="#io-%e5%a4%9a%e8%b7%af%e5%a4%8d%e7%94%a8">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>以 telnet 命令为例来讲述多路复用机制的适用场景。首先介绍 telnet 命令的工作机制：</p>
 <ol>
 <li>本地机器上的 telnet 命令从终端（标准输入）中读取用户的输入，将所读的数据写入到网络连接，然后发送给远程的 telnetd 守护进程；</li>
@@ -175,11 +197,21 @@
 <li>可以使用非阻塞 IO 来轮询读取两个输入的数据，但是这样会消耗额外的 CPU 资源；</li>
 </ul>
 <p>对于 telnet 命令的工作机制，一种比较好的实现方式是使用 IO 多路复用。在使用 IO 多路复用的时候，开发者需要先构建一个感兴趣的描述符（通常不止一个）列表，然后调用一个函数，该函数会在列表中某个描述符已经准备好进行 IO 操作时才会返回。用于执行 IO 多路复用的函数有 <code>poll</code>、<code>pselect</code>、<code>select</code>，当从这些函数返回时，进程会被告知哪些描述符已经准备好可以进行 IO 操作。</p>
-<h2 id="异步-io">异步 IO</h2>
+<h2 id="异步-io">
+  异步 IO
+  <a class="heading-link" href="#%e5%bc%82%e6%ad%a5-io">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>信号机制提供了一种以异步形式通知某种事件已经发生的方法。由 BSD 和 System V 派生的所有系统都提供了某种形式的异步 IO，支持使用一个信号（在 System V 中是 SIGPOLL，在 BSD 中是 SIGIO）通知进程，对某个描述符所关心的某个事件已经发生。</p>
 <p>但是，这些形式的异步 IO 是受限制的：它们不能用在所有的文件类型上，而且只能使用一个信号。因此如果要对一个以上的描述符进行异步 IO 时，那么进程在接收到该信号时不会知道该信号对应了哪一个描述符。</p>
 <hr>
-<h2 id="参考资料">参考资料</h2>
+<h2 id="参考资料">
+  参考资料
+  <a class="heading-link" href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <ul>
 <li><a href="https://book.douban.com/subject/25900403/">《UNIX 环境高级编程》</a>
 <ul>
@@ -197,28 +229,16 @@
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 
