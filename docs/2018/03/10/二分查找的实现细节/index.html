@@ -47,7 +47,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -77,34 +77,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -116,27 +118,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">二分查找的实现细节</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2018/03/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/">
+              二分查找的实现细节
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2018-03-10T14:58:31&#43;08:00'>
                 March 10, 2018
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              2 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：2 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/algorithm/">Algorithm</a></div>
 
         </div>
@@ -147,7 +154,12 @@
         <p>最近留意到关于实现 <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">二分查找算法（Binary Search Algorithm）</a> 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。</p>
 <p>本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。</p>
 <hr>
-<h2 id="简单介绍">简单介绍</h2>
+<h2 id="简单介绍">
+  简单介绍
+  <a class="heading-link" href="#%e7%ae%80%e5%8d%95%e4%bb%8b%e7%bb%8d">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>在计算机科学中，二分查找也被称为折半查找、对数查找，是一种在有序数组中查找目标元素的搜索算法。</p>
 <p>二分查找会将目标元素与数组中间元素进行比较，若不相等，则目标元素不存在的半段数组会被淘汰，并且查询会在目标元素存在的半段数组中继续进行，直到比较成功为止。如果查询以空数组为结束，则表示目标元素不存在。一次二分查找的具体过程可以参考下图（图片来源自维基百科）：</p>
 <p><img src="/images/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/1.png" alt="iamge"></p>
@@ -155,7 +167,12 @@
 <p>二分查找有许多不同的变种版本，例如 <a href="https://en.wikipedia.org/wiki/Fractional_cascading">Fractional Cascading</a> 加速了二分查找在多个数组中对相同数值的搜索速度，有效解决了计算机几何以及其它领域中的一系列搜索相关问题；<a href="https://en.wikipedia.org/wiki/Exponential_search">Exponential Search</a> 扩展了二分查找算法，使其可以应用于无界列表。</p>
 <p>二分查找的算法思想也衍生出了许多其它数据结构和算法，例如 <a href="https://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree</a> 和 <a href="https://en.wikipedia.org/wiki/B-tree">B-Tree</a>。</p>
 <hr>
-<h2 id="初步实现">初步实现</h2>
+<h2 id="初步实现">
+  初步实现
+  <a class="heading-link" href="#%e5%88%9d%e6%ad%a5%e5%ae%9e%e7%8e%b0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>以 Java 语言为例，初步实现一个简单的二分查找算法，演示代码如下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 算法退出条件
@@ -191,7 +208,12 @@
 </li>
 </ol>
 <hr>
-<h2 id="正确实现">正确实现</h2>
+<h2 id="正确实现">
+  正确实现
+  <a class="heading-link" href="#%e6%ad%a3%e7%a1%ae%e5%ae%9e%e7%8e%b0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>修复上述提及的三个问题，演示代码如下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 参数校验
@@ -226,28 +248,16 @@
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 

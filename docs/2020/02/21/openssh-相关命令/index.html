@@ -44,7 +44,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -74,34 +74,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -113,27 +115,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">OpenSSH 相关命令</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">
+              OpenSSH 相关命令
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2020-02-21T20:00:00&#43;08:00'>
                 February 21, 2020
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              2 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：2 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/linux/">Linux</a>
       <span class="separator">•</span>
     <a href="/tags/openssh/">OpenSSH</a></div>
@@ -145,7 +152,12 @@
         
         <p>这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。</p>
 <hr>
-<h2 id="ssh">ssh</h2>
+<h2 id="ssh">
+  ssh
+  <a class="heading-link" href="#ssh">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <blockquote>
 <p>官方文档：<a href="https://www.ssh.com/ssh/command">https://www.ssh.com/ssh/command</a>。</p>
 </blockquote>
@@ -177,7 +189,12 @@ User app
 Port <span style="color:#ae81ff">22222</span>
 </code></pre></div><p>更多关于 <code>ssh</code> 配置文件的信息请查看 <a href="https://man.openbsd.org/OpenBSD-current/man5/ssh_config.5">man ssh_config</a>。</p>
 <hr>
-<h2 id="ssh-keygen">ssh-keygen</h2>
+<h2 id="ssh-keygen">
+  ssh-keygen
+  <a class="heading-link" href="#ssh-keygen">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <blockquote>
 <p>官方文档：<a href="https://www.ssh.com/ssh/keygen">https://www.ssh.com/ssh/keygen</a></p>
 </blockquote>
@@ -186,14 +203,24 @@ Port <span style="color:#ae81ff">22222</span>
 <p><img src="/images/OpenSSH%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/1.png" alt="image"></p>
 <p><code>ssh-keygen</code> 首先会主动询问用户密钥文件的存储位置，默认地址是 <code>~/.ssh/</code> 目录。其次会要求用户输入用于加密生成 SSH 密钥的密码短语，这个密码应该具备足够的加密强度。SSH.COM 站点上提供了一个用于生成足够强度的密码短语的在线服务，地址是：<a href="https://www.ssh.com/iam/password/generator">https://www.ssh.com/iam/password/generator</a>。</p>
 <p>SSH 支持多种用于认证密钥的公共密钥算法，包括 <code>rsa</code>、<code>dsa</code>、<code>ecdsa</code>、<code>ed25519</code>。在 <code>ssh-keygen</code> 中，提供了 <code>-t</code> 选项用于择选择这些算法（默认值为 <code>rsa</code>），还有 <code>-b</code> 选项用于指定密钥的字节长度。</p>
-<h2 id="ssh-copy-id">ssh-copy-id</h2>
+<h2 id="ssh-copy-id">
+  ssh-copy-id
+  <a class="heading-link" href="#ssh-copy-id">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <blockquote>
 <p>官方文档：<a href="https://www.ssh.com/ssh/copy-id">https://www.ssh.com/ssh/copy-id</a></p>
 </blockquote>
 <p>在 SSH 中为了使用公共密钥认证（public key authentication）技术来对用户进行身份认证，公钥必须被拷贝至服务端，并需要被添加到 <code>./ssh/authorized_keys</code> 文件中。可以使用 <code>ssh-copy-id</code> 命令很方便地完成此操作，如下所示：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh-copy-id -i ~/.ssh/id_rsa user@host
 </code></pre></div><p>在服务端配置了公钥之后，服务端将会允许携带密钥的所有正在连接中的用户登录。在登录过程中，客户端通过对 <a href="https://en.wikipedia.org/wiki/Key_exchange">密钥交换（Key Exchange）</a> 进行 <a href="https://en.wikipedia.org/wiki/Digital_signature">数字签名（Digitally Signing）</a> 来证明客户端是拥有密钥的。</p>
-<h2 id="ssh-agent">ssh-agent</h2>
+<h2 id="ssh-agent">
+  ssh-agent
+  <a class="heading-link" href="#ssh-agent">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <blockquote>
 <p>官方文档：<a href="https://www.ssh.com/ssh/agent">https://www.ssh.com/ssh/agent</a></p>
 </blockquote>
@@ -201,14 +228,24 @@ Port <span style="color:#ae81ff">22222</span>
 <p><code>ssh-agent</code> 被用于 SSH 公共密钥认证，它需要使用 SSH 密钥。用户可以使用 <code>ssh-kengen</code> 命令创建 SSH 密钥，然后使用 <code>ssh-copy-id</code> 命令在远程主机上安装 SSH 密钥。</p>
 <p>在大部分 Linux 系统中，<code>ssh-agent</code> 会被自动配置，并且会在用户登录时自动运行，用户不需要其它操作既可直接使用 <code>ssh-agent</code>。如果 <code>ssh-agent</code> 没有被配置为在登录时运行，它也可以通过以下命令手动运行：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">eval <span style="color:#e6db74">`</span>ssh-agent<span style="color:#e6db74">`</span>
-</code></pre></div><h2 id="ssh-add">ssh-add</h2>
+</code></pre></div><h2 id="ssh-add">
+  ssh-add
+  <a class="heading-link" href="#ssh-add">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <blockquote>
 <p>官方文档：<a href="https://www.ssh.com/ssh/add">https://www.ssh.com/ssh/add</a></p>
 </blockquote>
 <p><code>ssh-agent</code> 默认会使用 <code>~/.ssh/</code> 目录下的 SSH 密钥，但用户可以使用 <code>ssh-add</code> 命令主动添加密钥至 <code>ssh-agent</code> 中。</p>
 <p>运行 <code>ssh-add</code> 命令时如果不带任何参数的话，<code>ssh-add</code> 会默认添加 <code>~/.ssh/id_rsa</code>、<code>~/.ssh/id_dsa</code>、<code>~/.ssh/id_ecdsa</code>、<code>~/.ssh/id_ed25519</code>、<code>~/.ssh/identity</code> 文件，也可以通过参数指定私钥的文件。</p>
 <p><code>ssh-addd -l</code> 命令可以列出当前 <code>ssh-agent</code> 允许访问的私钥。</p>
-<h2 id="scp">scp</h2>
+<h2 id="scp">
+  scp
+  <a class="heading-link" href="#scp">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <blockquote>
 <p>官方文档：<a href="https://www.ssh.com/ssh/scp">https://www.ssh.com/ssh/scp</a></p>
 </blockquote>
@@ -219,9 +256,19 @@ Port <span style="color:#ae81ff">22222</span>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>file<span style="color:#f92672">]</span> ... path
 </code></pre></div><p>使用 <code>scp</code> 复制整个目录时，需要添加 <code>-r</code> 选项：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp -r <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>path/directory<span style="color:#f92672">]</span> path
-</code></pre></div><h2 id="sftp">sftp</h2>
+</code></pre></div><h2 id="sftp">
+  sftp
+  <a class="heading-link" href="#sftp">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>略，详细内容请查看 <a href="https://www.ssh.com/ssh/sftp">官方文档</a>。</p>
-<h2 id="sshd">sshd</h2>
+<h2 id="sshd">
+  sshd
+  <a class="heading-link" href="#sshd">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>略，详细内容请查看 <a href="https://www.ssh.com/ssh/sshd">官方文档</a>。</p>
       </div>
 
@@ -230,28 +277,16 @@ Port <span style="color:#ae81ff">22222</span>
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 

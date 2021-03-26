@@ -44,7 +44,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -74,34 +74,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -113,27 +115,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">MySQL InnoDB 事务隔离级别实践</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2020/09/10/mysql-innodb-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/">
+              MySQL InnoDB 事务隔离级别实践
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2020-09-10T15:58:10&#43;08:00'>
                 September 10, 2020
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              2 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：2 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/mysql/">MySQL</a>
       <span class="separator">•</span>
     <a href="/tags/innodb/">InnoDB</a></div>
@@ -152,7 +159,12 @@
 ## 聚簇索引和二级索引
 -->
 <hr>
-<h2 id="事务和加锁信息">事务和加锁信息</h2>
+<h2 id="事务和加锁信息">
+  事务和加锁信息
+  <a class="heading-link" href="#%e4%ba%8b%e5%8a%a1%e5%92%8c%e5%8a%a0%e9%94%81%e4%bf%a1%e6%81%af">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>依据 MySQL 官方参考手册中的描述，在 MySQL 中可以通过 information_schema.innodb_trx 表、performance_schema.data_locks 表以及 performance_schema.data_lock_waits 表来查看事务信息和事务中加锁信息。参考手册的原文请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-information-schema-transactions.html">InnoDB INFORMATION_SCHEMA Transaction and Locking Information</a>。</p>
 <p>information_schema 数据库的 innodb_trx 表存储了 InnoDB 内部当前正在执行的每个事务的信息，包括事务的执行状态（具体的枚举值有 RUNNING、LOCK WAIT、ROLLING BACK 和 COMMITTING）、事务的开始时间和正在执行的 SQL 语句等等。</p>
 <p>在下图的示例中，事务当前的执行状态 <code>trx_state</code> 是 RUNNING，事务的开始时间是 <code>trx_started</code> 是 2020-09-10 17:35:35，事务当前正在执行的 SQL 语句 <code>trx_query</code> 是 SELECT SLEEP(5)，事务当前的隔离级别 <code>trx_isolation_level</code> 是 REPEATABLE READ。</p>
@@ -178,16 +190,31 @@
 <p>在下图的示例中，ID 为 271844 的事务请求获取 ID 为 140668958213080:868:4:2:140669205682208 的锁，并且被 ID 为 271843 事务中的 ID 为 140668958212240:868:4:2:140669205601312 的锁所阻塞。</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/performance_schema-data_lock_waits.png" alt="image"></p>
 <hr>
-<h2 id="隔离级别实践">隔离级别实践</h2>
+<h2 id="隔离级别实践">
+  隔离级别实践
+  <a class="heading-link" href="#%e9%9a%94%e7%a6%bb%e7%ba%a7%e5%88%ab%e5%ae%9e%e8%b7%b5">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>InnoDB 提供了 SQL 1992 标准中全部的四种隔离级别：READ UNCOMMITTED（未提交读）、READ COMMITTED（提交读）、REPEATABLE READ（可重复读）和 SERIALIZABLE（可串行化），并且默认的隔离级别是 REPEATABLE READ。</p>
 <p>MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不同的隔离级别对数据的一致性和查询结果的可重复性有着不同的表现，开发者可以通过设置不同的隔离级别来权衡事务的一致性与可用性。下面通过几个案例来实践和观察各种隔离级别的特性。</p>
 <p>在以下所有案例中，演示表的结构和初始数据都如下图中所示，其中 id 字段为自增主键，a 字段具有唯一索引，b 字段具有普通索引，c 字段不具有索引：</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/init-table-and-data.png" alt="image"></p>
-<h3 id="read-uncommitted">READ UNCOMMITTED</h3>
+<h3 id="read-uncommitted">
+  READ UNCOMMITTED
+  <a class="heading-link" href="#read-uncommitted">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>在 READ UNCOMMITTED 隔离级别下，SELECT 语句会以非阻塞的方式运行，当前事务可能会读取到其它事务中尚未提交的数据。这种现象被称为 <strong>脏读</strong>。</p>
 <p>在下图的示例中，左半图中的事务在执行第二个 SELECT 语句的时候，便可以读取到右半图中的事务所更改的尚未提交的数据。</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/read-uncommitted.png" alt="image"></p>
-<h3 id="read-committed">READ COMMITTED</h3>
+<h3 id="read-committed">
+  READ COMMITTED
+  <a class="heading-link" href="#read-committed">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>在 READ COMMITTED 隔离级别下，SELECT 语句会以一致性非锁定读取的方式运行，当前事务不会读取到其它事务中尚未提交的数据，但可以读取到其它事务中已经提交的数据，因此查询结果是不具有可重复性的。这种现象被称为 <strong>不可重复读</strong>。</p>
 <p>在下图的示例中，左半图中的事务在执行第二个 SELECT 语句的时候，不会读取到右半图中的事务所更改的尚未提交的数据，但是当左半图中的事务在执行第三个 SELECT 语句的时候，便可以读取到右半图中的事务所更改的已经提交的数据。</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/read-committed.png" alt="image"></p>
@@ -195,7 +222,12 @@
 <p>在下图的示例中，左半图中的事务使用了 SELECT &hellip; FOR UPDATE 语句来锁定读取 a ∈ (25, +∞) 范围内的记录，然而该事务在二级索引上加锁的模式 <code>LOCK_MODE</code> 却是 X 和 REC_NOT_GAP，这说明了该事务并没有使用间隙锁或者后键锁来锁定 a ∈ (25, +∞) 区间，因此此时右半图中的事务便可以在 a ∈ (25, +∞) 范围内任意地执行插入操作（但是不能执行修改或者删除操作，因为现有的数据已经被锁定了），并且不会被阻塞。</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/read-committed-phantom-rows-1.png" alt="image"></p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/read-committed-phantom-rows-2.png" alt="image"></p>
-<h3 id="repeatable-read">REPEATABLE READ</h3>
+<h3 id="repeatable-read">
+  REPEATABLE READ
+  <a class="heading-link" href="#repeatable-read">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>在 REPEATABLE READ 隔离级别下，SELECT 语句会以一致性非锁定读取的方式运行，会读取事务在被建立时刻的快照数据，当前事务不会读取到其它事务中所更改的数据，其它事务也无法更改当前事务中所读取的数据，因此查询结果是具有可重复性的。但由于当前事务中所读取的仅是快照中的数据，与此同时，其它事务中所更改的数据也的确生效了，因此可能会产生所谓的 <strong>幻读（Phantom Reads）</strong> 问题。</p>
 <p>在下图的示例中，左半图中的事务在执行第二个和第三个 SELECT 语句的时候，均不会读取到右半图中的事务所更改的数据，但是当左半图中的事务在执行 UPDATE 语句的时候，便会受到右半图中的事务所更改的数据带来的影响。</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/repeatable-read.png" alt="image"></p>
@@ -207,12 +239,22 @@
 <p>在下图的示例中，左半图中的事务使用了 SELECT &hellip; FOR UPDATE 语句来锁定读取 a ∈ (25, +∞) 范围内的记录，并且该事务在二级索引上加锁的模式 <code>LOCK_MODE</code> 是 X，这说明了该事务使用了间隙锁或者后键锁来锁定 a ∈ (25, +∞) 区间，因此此时右半图中的事务在 a ∈ (25, +∞) 范围内执行的插入操作会被阻塞。</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/repeatable-read-phantom-reads-1.png" alt="image"></p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/repeatable-read-phantom-reads-2.png" alt="image"></p>
-<h3 id="serializable">SERIALIZABLE</h3>
+<h3 id="serializable">
+  SERIALIZABLE
+  <a class="heading-link" href="#serializable">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>在 REPEATABLE READ 隔离级别下，SELECT 语句会以锁定读取的方式运行，InnoDB 会隐式地将所有普通的 SELECT 语句转换成 SELECT &hellip; FOR SHARE 语句，当前事务中所读取的数据不会被其它事务所更改。</p>
 <p>在下图的示例中，左半图中的事务在执行普通的 SELECT 语句的时候，会锁定查询所涉及的记录，并且右半图中的事务在更改该记录时会被阻塞。</p>
 <p><img src="/images/MySQLInnoDB%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/serializable.png" alt="image"></p>
 <hr>
-<h2 id="参考资料">参考资料</h2>
+<h2 id="参考资料">
+  参考资料
+  <a class="heading-link" href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <ul>
 <li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-index-types.html">Clustered and Secondary Indexes</a></li>
 <li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html">InnoDB Locking</a></li>
@@ -227,28 +269,16 @@
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 

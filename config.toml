@@ -10,7 +10,6 @@ enableRobotsTXT = true
 enableEmoji = true
 
 googleAnalytics = "UA-89151446-1"
-disqusShortname = "fantasticmao"
 
 [permalinks]
     posts = "/:year/:month/:day/:title/"
@@ -35,6 +34,12 @@ disqusShortname = "fantasticmao"
     custom_css = ["css/custom.css"]
 
     icpRecord = "浙ICP备17009730号"
+
+[params.utterances]
+    repo = "fantasticmao/blog"
+    issueTerm = "pathname"
+    label = "comment"
+    theme = "github-light"
 
 [[params.social]]
     name = "GitHub"

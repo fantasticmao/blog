@@ -44,7 +44,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -74,34 +74,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -113,27 +115,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">Java GC 案例两则</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2020/11/25/java-gc-%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/">
+              Java GC 案例两则
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2020-11-25T23:00:00&#43;08:00'>
                 November 25, 2020
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              3 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：3 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/java/">Java</a>
       <span class="separator">•</span>
     <a href="/tags/jvm/">JVM</a></div>
@@ -145,21 +152,51 @@
         
         <p>本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 <code>-XX:+UseConcMarkSweepGC</code> 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。</p>
 <hr>
-<h2 id="知识储备">知识储备</h2>
-<h3 id="heap-空间划分">Heap 空间划分</h3>
+<h2 id="知识储备">
+  知识储备
+  <a class="heading-link" href="#%e7%9f%a5%e8%af%86%e5%82%a8%e5%a4%87">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="heap-空间划分">
+  Heap 空间划分
+  <a class="heading-link" href="#heap-%e7%a9%ba%e9%97%b4%e5%88%92%e5%88%86">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>JVM 中采用的分代收集算法有两个假设：绝大多数的对象都是朝生夕灭的，熬过多次 GC 的对象就越难以消亡。基于这种假设，在应用配置了 <code>-XX:+UseConcMarkSweepGC</code> 参数的场景下，JVM 会将 Heap 空间划分为 Young Generation（新生代）和 Old Generation（老年代），并且 Young Generation 空间会再被划分为 Eden、From Survivor 和 To Survivor，如下图所示：</p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/java-heap.svg" alt="image"></p>
 <p>在默认情况下，Young Generation 空间与 Old Generation 空间的大小比例为 1:2，即 Young Generation 空间会占用整个 Heap 空间占用 1/3，Old Generation 会占用整个 Heap 空间占用 2/3，该比例可以通过 <code>-XX:NewRatio=${ratio}</code> 参数来调节，同时也可以通过 <code>-Xmn${size}</code> 参数来直接指定 Young Generation 空间的大小。Young Generation 空间内的 Eden 空间与 From Survivor 空间、To Survivor 空间的大小比例为 8:1:1，该比例可以通过 <code>-XX:SurvivorRatio=${ratio}</code> 参数来调节。</p>
-<h3 id="分代-gc-过程">分代 GC 过程</h3>
+<h3 id="分代-gc-过程">
+  分代 GC 过程
+  <a class="heading-link" href="#%e5%88%86%e4%bb%a3-gc-%e8%bf%87%e7%a8%8b">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>基于分代收集算法的假设，JVM 会对 Young Generation 空间和 Old Generation 空间采用不同的 GC 策略，其中对于 Young Generation 空间的 GC 被称为 Minor GC，对于 Old Generation 空间的 GC 被成为 Major GC，对于整个 Heap 空间的 GC 被称为 Full GC。</p>
 <p>在 JVM 的设计中，新对象会优先被分配在 Young Generation 空间内的 Eden 空间。在经历一次 Minor GC 之后还存活的对象会通过「标记-复制」算法，和 From Survivor 空间内的对象一起，被 JVM 复制到 To Survivor 空间，同时 JVM 会直接清空 From Survivor 空间，并将当前使用的 To Survivor 空间作为下次 Minor GC 时的 From Survivor 空间。在经历多次 Minor GC 之后还存活的对象便会从 Young Generation 空间晋升至 Old Generation 空间，该最大晋升阈值可以通过 <code>-XX:MaxTenuringThreshold=${threshold}</code> 参数来调节。</p>
 <p>Old Generation 空间比 Young Generation 空间更大，并且对象填充的速度也更慢，因此 Old Generation 空间发生 Major GC 的频率也会更低，但是在 Old Generation 空间所发生的 Major GC 会比在 Young Generation 空间所发生的 Minor GC 更加耗时。一次 Minor GC 耗时可能只需要几毫秒，然而一次 Major GC 耗时可能需要几十毫秒到几秒（取决于 Old Generation 的大小）。</p>
 <p>在应用配置了 <code>-XX:+UseConcMarkSweepGC</code> 参数的场景下，JVM 会采用 ParNew 收集器来回收 Young Generation 空间内的对象，采用 CMS + Serial Old 收集器来回收 Old Generation 区域的对象。ParNew 收集器是一种多线程并行收集器，它在默认情况下开启的收集器线程数量与处理器的核心数量相同。在处理器核心非常多的环境中，可以通过参数 <code>-XX:ParallelGCThreads=${threads}</code> 参数来限制 ParNew 收集器开启的线程数量。CMS 收集器是一种以获取最短停顿时间为目标的增量式（Incremental）的收集器，GC 过程分为四个阶段：初始标记、并发标记、重新标记、并发清除，其中的初始标记和重新标记阶段需要 Stop The World（即停顿工作线程），并发标记和并发清除阶段则可以和工作线程一起运行。在 CMS 收集器运行期间，可能会由于无法处理「浮动垃圾（Floating Garbage）」而产生的「并发失败（Concurrent Mode Failure）」问题和基于「标记-清除」算法实现而带来的内存空间碎片化问题，导致 JVM 无法继续在 Old Generation 上分配新对象，从而导致 JVM 会采用 Serial Old 收集器来作为 CMS 收集器的备用选项，对整个 Heap 空间执行一次完全 Stop The World 的耗时更久的 Full GC。</p>
 <hr>
-<h2 id="问题案例频繁-major-gc">问题案例：频繁 Major GC</h2>
-<h3 id="问题表现">问题表现</h3>
+<h2 id="问题案例频繁-major-gc">
+  问题案例：频繁 Major GC
+  <a class="heading-link" href="#%e9%97%ae%e9%a2%98%e6%a1%88%e4%be%8b%e9%a2%91%e7%b9%81-major-gc">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="问题表现">
+  问题表现
+  <a class="heading-link" href="#%e9%97%ae%e9%a2%98%e8%a1%a8%e7%8e%b0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>钉钉群内收到持续的接口超时报警，全链路后台中查到大量接口调用超时的记录。</p>
-<h3 id="问题排查">问题排查</h3>
+<h3 id="问题排查">
+  问题排查
+  <a class="heading-link" href="#%e9%97%ae%e9%a2%98%e6%8e%92%e6%9f%a5">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>引起服务运行缓慢的原因有很多，诊断这类问题的大致方向如下：</p>
 <ol>
 <li>是否为网络问题；</li>
@@ -179,28 +216,58 @@
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/1-gc-minor.png" alt="image"></p>
 <p>通过对 gc.log 中的 Major GC 进行分析，发现该服务在使用 CMS 收集器执行一次 GC 时候，需要 Stop The World 的初始标记和重新标记阶段的耗时已经达到 500ms，并且连续发生两次 Major GC 的间隔时间不到 5s。</p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/1-gc-major.png" alt="image"></p>
-<h3 id="解决方式">解决方式</h3>
+<h3 id="解决方式">
+  解决方式
+  <a class="heading-link" href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e5%bc%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>在明确问题为流量增加而导致服务不堪重负之后，便通知运维对该服务进行扩容，将分配给该服务的 Heap 空间大小从原先的 1G 扩容至了现在的 4G。在对该服务进行扩容之后 GC 回归正常，接口超时问题也得到了解决。</p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/1-heap-normal.png" alt="image"></p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/1-gc-normal.png" alt="image"></p>
 <hr>
-<h2 id="调优案例优化-minor-gc">调优案例：优化 Minor GC</h2>
-<h3 id="优化目标">优化目标</h3>
+<h2 id="调优案例优化-minor-gc">
+  调优案例：优化 Minor GC
+  <a class="heading-link" href="#%e8%b0%83%e4%bc%98%e6%a1%88%e4%be%8b%e4%bc%98%e5%8c%96-minor-gc">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<h3 id="优化目标">
+  优化目标
+  <a class="heading-link" href="#%e4%bc%98%e5%8c%96%e7%9b%ae%e6%a0%87">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>对于一个底层服务的接口，期望该接口的调用耗时尽可能短，保证 99.99% 的耗时少于 10ms。在高峰时间段内对该接口的调用耗时进行统计之后，发现 99.9% 的调用耗时在 8ms 左右，但部分偏高的调用耗时均大于 20ms，因此怀疑可能是由于 GC 停顿导致。</p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/2-api-count.png" alt="image"></p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/2-api-trace.png" alt="image"></p>
-<h3 id="优化思路">优化思路</h3>
+<h3 id="优化思路">
+  优化思路
+  <a class="heading-link" href="#%e4%bc%98%e5%8c%96%e6%80%9d%e8%b7%af">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>首先在监控后台中看到该服务被分配了 615MB + 76.8MB * 2 + 1.25GB * 1024 = 2GB 的 JVM Heap 空间大小，并且在服务运行期间主要发生 Minor GC，该服务在 11:00 - 12:00 时间段内平均每分钟内发生 5 次 Minor GC，每分钟内 GC 停顿的时间大约为 100ms。</p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/2-heap-before.png" alt="image"></p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/2-gc-before.png" alt="image"></p>
 <p>然后尝试通过 gc.log 来查看该服务的具体 GC 情况，发现该服务自启动 20 多天以来没有发生过一次 Major GC，但是平均每 10s 左右会发生一次 Minor GC，每次 Minor GC 的耗时大约为 15ms。</p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/2-gc-major.png" alt="image"></p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/2-gc-minor.png" alt="image"></p>
-<h3 id="优化方式">优化方式</h3>
+<h3 id="优化方式">
+  优化方式
+  <a class="heading-link" href="#%e4%bc%98%e5%8c%96%e6%96%b9%e5%bc%8f">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h3>
 <p>在对该服务的 GC 情况进行分析之后，考虑到该服务的 Old Generation 空间内的对象占用量十分稳定，并且几乎不会发生 Major GC，于是便通知运维对该服务的 Young Generation 空间与 Old Generation 空间的大小比例进行调整，在保持整个 Heap 空间大小不变的情况下，下通过 <code>-Xmn${size}</code> 参数增加了 Young Generation 空间的大小。在对该服务进行 GC 参数优化之后，Young Generation 的执行频率从原先的每分钟 5 次降低至了每分钟 3.5 次，每分钟内 GC 停顿的时间也从原先的 100ms 降低至了 50ms。</p>
 <p><img src="/images/JavaGC%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/2-gc-after.png" alt="image"></p>
 <hr>
-<h2 id="参考资料">参考资料</h2>
+<h2 id="参考资料">
+  参考资料
+  <a class="heading-link" href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <ul>
 <li><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">Launches a Java application</a></li>
 <li><a href="https://tech.meituan.com/2017/12/29/jvm-optimize.html">从实际案例聊聊 Java 应用的 GC 优化</a></li>
@@ -213,28 +280,16 @@
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 

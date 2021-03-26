@@ -44,7 +44,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -74,34 +74,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -113,27 +115,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">MySQL InnoDB 事务模型</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/">
+              MySQL InnoDB 事务模型
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2020-08-15T13:11:00&#43;08:00'>
                 August 15, 2020
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              4 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：4 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/mysql/">MySQL</a>
       <span class="separator">•</span>
     <a href="/tags/innodb/">InnoDB</a></div>
@@ -146,7 +153,12 @@
         <p>本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 事务模型的一些笔记。</p>
 <p>InnoDB 事务模型的目标是将 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_mvcc">多版本</a> 数据库的最佳特性与传统的两阶段锁定相结合。InnoDB 会以 Oracle 的风格，在行级别上执行锁定，并且默认运行非锁定的 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_consistent_read">一致性读取</a>。InnoDB 中的锁信息会以节省空间的方式存储，因此它不需要锁升级。通常，InnoDB 允许多个用户锁定表中的每一行或者是随机子集的多行，同时也不会导致 InnoDB 内存耗尽。</p>
 <hr>
-<h2 id="事务隔离级别">事务隔离级别</h2>
+<h2 id="事务隔离级别">
+  事务隔离级别
+  <a class="heading-link" href="#%e4%ba%8b%e5%8a%a1%e9%9a%94%e7%a6%bb%e7%ba%a7%e5%88%ab">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>事务的隔离性是数据库处理数据的基础功能之一。隔离性（Isolation）是 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_acid">ACID</a> 首字母中的 I。隔离级别是在当多个事务同时进行更改和执行查询时，用于微调性能和可靠性、一致性和结果可重复性的设置项。</p>
 <p>InnoDB 提供了 SQL 1992 标准中全部的四种隔离级别：READ UNCOMMITTED（未提交读）、READ COMMITTED（提交读）、REPEATABLE READ（可重复读）和 SERIALIZABLE（可串行化）。默认的隔离级别是 REPEATABLE READ。</p>
 <p>用户可以使用 SET TRANSACTION 语句改变单个会话或者所有子连接中的隔离级别。可以在命令行或者选项文件中使用 --transaction-isolation 选项，来设置 MySQL 服务中的所有连接默认的隔离级别。有关隔离级别和级别设置语法的详细信息，请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/set-transaction.html">SET TRANSACTION Statement</a>。</p>
@@ -222,14 +234,24 @@ x-lock(5,2); unlock(5,2)
 <p>这个隔离级别类似于 REPEATABLE READ，但 InnoDB 会隐式地将所有普通的 SELECT 语句转换成 SELECT &hellip; FOR SHARE，如果关闭了 autocommit 的话。如果开启了 autocommit 的话，SELECT 自己本身就是一个事务。因此，它被认为是只读的，并且如果是执行一致性（非阻塞）读取和无需阻塞其它事务的话，那么它是可序列化的。（如果其它事务已经修改了选中的行，为了使普通 SELECT 被强制阻塞，请禁用 autocommit。）</p>
 </li>
 </ul>
-<h2 id="自动提交提交回滚">自动提交、提交、回滚</h2>
+<h2 id="自动提交提交回滚">
+  自动提交、提交、回滚
+  <a class="heading-link" href="#%e8%87%aa%e5%8a%a8%e6%8f%90%e4%ba%a4%e6%8f%90%e4%ba%a4%e5%9b%9e%e6%bb%9a">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>在 InnoDB 中，所有的用户行为都是发生在事务中的。如果开启了 autocommit 模式的话，每个 SQL 语句自己会形成一个单独的事务。默认情况下，MySQL 会在每个新连接开始会话时开启 autocommit，所以如果 SQL 语句没有返回错误的话，MySQL 会在每个语句之后执行一次提交。如果一条语句返回了错误，提交或者回滚的行为则具体取决于该错误。更多内容请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-error-handling.html">InnoDB Error Handling</a>。</p>
 <p>开启了 autocommit 的会话，可以通过 START TRANSACTION 或者 BEGIN 语句开始一段多语句的事务，并且可以通过 COMMIT 或者 ROLLBACK 语句来结束它。更多内容请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/commit.html">START TRANSACTION, COMMIT, and ROLLBACK Statements</a>。</p>
 <p>如果在会话中使用 SET autocommit = 0 关闭了 autocommit 的话，那么该会话始终都会打开一个事务。 COMMIT 和 ROLLBACK 语句会结束该事务并且会开启一个新的事务。</p>
 <p>如果关闭了 autocommit 的会话在结束时没有显式提交事务，MySQL 则会回滚该事务。</p>
 <p>一些语句会隐式地结束事务，就像你在执行该语句之前已经执行了 COMMIT 一样。更多内容请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html">Statements That Cause an Implicit Commit</a>。</p>
 <p>COMMIT 语句表示当前事务中所做的更改将会被持久化，并且会对其它会话可见。另一方面，ROLLBACK 语句将会取消当前事务中所做的所有更改。COMMIT 和 ROLLBACK 语句都会释放当前事务中设置的 InnoDB 锁。</p>
-<h2 id="一致性非锁定读取">一致性非锁定读取</h2>
+<h2 id="一致性非锁定读取">
+  一致性非锁定读取
+  <a class="heading-link" href="#%e4%b8%80%e8%87%b4%e6%80%a7%e9%9d%9e%e9%94%81%e5%ae%9a%e8%af%bb%e5%8f%96">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p><a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_consistent_read">一致性读取</a> 意味着 InnoDB 会使用多版本来向查询呈现数据库在某个时刻的快照。该查询将会看到在这个时刻之前提交的事务所做的更改，之后所做的或者还未提交的事务所做的更改不会被看到。这个规则的例外是查询可以看到同一个事务中的之前语句所做的更改。这个例外情况会导致以下异常：如果你在表中更新了某些行，SELECT 会看到这些被更新的行的最新版本，但也可能会看到任何行的旧版本。如果其它会话同时更新了同一张表，这个异常意味着你可能会看到该表处于一个在数据库中永远不会存在的状态。</p>
 <p>如果事务的隔离级别是 REPEATABLE READ（默认级别），那么在同一事务中的所有一致性读取会读取由在该事务中的第一次读取所建立的快照。你可以通过提交当前事务然后发出新的查询，来为查询获取更新的快照。</p>
 <p>在 READ COMMITTED 隔离级别中，事务中的每个一致性读取都会设置和读取它自己的新快照。</p>
@@ -272,7 +294,12 @@ v          <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672"
 <li>默认情况下，InnoDB 会对这些语句使用更强的锁，并且 SELECT 部分的行为会类似于 READ COMMITTED，即使是在同一个事务中，每个一致性读取都会设置和读取它自己的新快照。</li>
 <li>为了在这种情况下执行非阻塞读取，需要将隔离级别设置为 READ UNCOMMITTED 或者 READ COMMITTED，用于避免在选择的表中的读取的行上设置锁。</li>
 </ul>
-<h2 id="锁定读取">锁定读取</h2>
+<h2 id="锁定读取">
+  锁定读取
+  <a class="heading-link" href="#%e9%94%81%e5%ae%9a%e8%af%bb%e5%8f%96">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>如果你在同一个事务中先查询数据，然后再插入或者更新相关的数据，那么常规的 SELECT 语句就不能提供足够的保护。其它事务可以更新或者删除你刚刚所查询的相同的行。InnoDB 支持两种类型的 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_locking_read">锁定读取</a>，它们会提供额外的安全性：</p>
 <ul>
 <li>
@@ -294,7 +321,12 @@ v          <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672"
 </code></pre></div><p>为了锁定 t2 表中的行，需要在子查询中添加锁定读取的子句：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t1 <span style="color:#66d9ef">WHERE</span> c1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> c1 <span style="color:#66d9ef">FROM</span> t2 <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>) <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>;
 </code></pre></div><hr>
-<h2 id="参考资料">参考资料</h2>
+<h2 id="参考资料">
+  参考资料
+  <a class="heading-link" href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <ul>
 <li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-model.html">InnoDB Transaction Model</a></li>
 <li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html">Transaction Isolation Levels</a></li>
@@ -309,28 +341,16 @@ v          <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672"
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 

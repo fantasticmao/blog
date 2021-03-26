@@ -44,7 +44,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.eb7743f94930acfd17146aecc1f80e86fe35b3e451f2ec0c98485f9c4d962f34.css" integrity="sha256-63dD&#43;UkwrP0XFGrswfgOhv41s&#43;RR8uwMmEhfnE2WLzQ=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -74,34 +74,36 @@
       FantasticMao&#39;s Blog
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/">首页</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/">首页</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">归档</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">关于</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/posts/">归档</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="/categories/">分类</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/tags/">标签</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="/about/">关于</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
@@ -113,27 +115,32 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">从数据结构角度看索引</h1>
+          <h1 class="title">
+            <a class="title-link" href="/2019/02/24/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/">
+              从数据结构角度看索引
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
               <time datetime='2019-02-24T13:50:18&#43;08:00'>
                 February 24, 2019
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              1 分钟阅读时间
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              阅读时间：1 分钟
             </span>
           </div>
+          
           <div class="categories">
-  <i class="fas fa-folder"></i>
+  <i class="fa fa-folder" aria-hidden="true"></i>
     <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></div>
 
           <div class="tags">
-  <i class="fas fa-tag"></i>
+  <i class="fa fa-tag" aria-hidden="true"></i>
     <a href="/tags/mysql/">MySQL</a></div>
 
         </div>
@@ -143,16 +150,36 @@
         
         <p>上周和团队内部的同事分享了一则关于 MySQL 索引相关的知识。这个分享主要是从数据结构角度出发，学习和分析 MySQL 索引相关的一些特性和原理。</p>
 <hr>
-<h2 id="演讲稿">演讲稿</h2>
+<h2 id="演讲稿">
+  演讲稿
+  <a class="heading-link" href="#%e6%bc%94%e8%ae%b2%e7%a8%bf">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>浏览器内在线查看：<a href="/images/从数据结构角度看索引/从数据结构角度看索引.pdf" target="_blank">从数据结构角度看索引.pdf</a>。</p>
 <hr>
-<h2 id="b-tree-插入元素">B-Tree 插入元素</h2>
+<h2 id="b-tree-插入元素">
+  B-Tree 插入元素
+  <a class="heading-link" href="#b-tree-%e6%8f%92%e5%85%a5%e5%85%83%e7%b4%a0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p><video src="/images/从数据结构角度看索引/B-Tree-Insert.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
 <hr>
-<h2 id="b-tree-删除元素">B-Tree 删除元素</h2>
+<h2 id="b-tree-删除元素">
+  B-Tree 删除元素
+  <a class="heading-link" href="#b-tree-%e5%88%a0%e9%99%a4%e5%85%83%e7%b4%a0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p><video src="/images/从数据结构角度看索引/B-Tree-Remove.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
 <hr>
-<h2 id="b-tree-查找元素">B-Tree 查找元素</h2>
+<h2 id="b-tree-查找元素">
+  B-Tree 查找元素
+  <a class="heading-link" href="#b-tree-%e6%9f%a5%e6%89%be%e5%85%83%e7%b4%a0">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p><video src="/images/从数据结构角度看索引/B-Tree-Search.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
       </div>
 
@@ -161,28 +188,16 @@
         
 
 
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "fantasticmao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
         
+        <script src="https://utteranc.es/client.js"
+    repo= "fantasticmao/blog"
+    issue-term="pathname"
+    label="comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
       </footer>
     </article>
 
