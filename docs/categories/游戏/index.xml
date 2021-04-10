@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>游戏 on FantasticMao&#39;s Blog</title>
+    <link>/categories/%E6%B8%B8%E6%88%8F/</link>
+    <description>Recent content in 游戏 on FantasticMao&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 10 Apr 2021 01:18:33 +0800</lastBuildDate><atom:link href="/categories/%E6%B8%B8%E6%88%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我玩过的游戏</title>
+      <link>/2021/04/10/%E6%88%91%E7%8E%A9%E8%BF%87%E7%9A%84%E6%B8%B8%E6%88%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 01:18:33 +0800</pubDate>
+      
+      <guid>/2021/04/10/%E6%88%91%E7%8E%A9%E8%BF%87%E7%9A%84%E6%B8%B8%E6%88%8F/</guid>
+      <description>&lt;p&gt;在哔哩哔哩可以记录我看过的动画，在豆瓣可以记录我看过的电影和书，在 GitHub 可以记录我捣鼓过的代码，但是似乎没有一个地方可以很好地记录我玩过的游戏（Steam 个人资料中不会包含各大主机平台的独占游戏），这就是本篇博客文章诞生的原因了。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
