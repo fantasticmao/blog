@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on FantasticMao&#39;s Blog</title>
-    <link>/tags/linux/</link>
+    <link>https://blog.fantasticmao.cn/tags/linux/</link>
     <description>Recent content in Linux on FantasticMao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 18 Nov 2020 11:14:00 +0800</lastBuildDate><atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 11:14:00 +0800</lastBuildDate><atom:link href="https://blog.fantasticmao.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《Unix 环境高级编程》谈及的几种 IO 模型</title>
-      <link>/2020/11/18/unix-%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%B0%88%E5%8F%8A%E7%9A%84%E5%87%A0%E7%A7%8D-io-%E6%A8%A1%E5%9E%8B/</link>
+      <link>https://blog.fantasticmao.cn/2020/11/18/unix-%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%B0%88%E5%8F%8A%E7%9A%84%E5%87%A0%E7%A7%8D-io-%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
       
-      <guid>/2020/11/18/unix-%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%B0%88%E5%8F%8A%E7%9A%84%E5%87%A0%E7%A7%8D-io-%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/11/18/unix-%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%B0%88%E5%8F%8A%E7%9A%84%E5%87%A0%E7%A7%8D-io-%E6%A8%A1%E5%9E%8B/</guid>
       <description>&lt;p&gt;本篇文章记录自己在阅读 &lt;a href=&#34;https://book.douban.com/subject/25900403/&#34;&gt;《Unix 环境高级编程》&lt;/a&gt; 时候，关于书中谈及的几种 IO 模型的一些笔记。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenSSH 相关命令</title>
-      <link>/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.fantasticmao.cn/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Fri, 21 Feb 2020 20:00:00 +0800</pubDate>
       
-      <guid>/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。&lt;/p&gt;</description>
     </item>
     
