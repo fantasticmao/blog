@@ -5,15 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Language" content="zh-cn">
+    <meta name="color-scheme" content="light dark">
+
+    
 
     <meta name="author" content="FantasticMao">
     <meta name="description" content="最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
 本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。">
     <meta name="keywords" content="二分查找">
-    
-    
-    
-    
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="二分查找的实现细节"/>
@@ -25,14 +24,11 @@
 本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2018/03/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-03-10T14:58:31&#43;08:00" />
-<meta property="article:modified_time" content="2018-03-10T14:58:31&#43;08:00" />
+<meta property="article:published_time" content="2018-03-10T14:58:31+08:00" />
+<meta property="article:modified_time" content="2018-03-10T14:58:31+08:00" />
 
 
 
-    
-      <base href="https://blog.fantasticmao.cn/2018/03/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/">
-    
     <title>
   二分查找的实现细节 · FantasticMao&#39;s Blog
 </title>
@@ -41,36 +37,60 @@
       <link rel="canonical" href="https://blog.fantasticmao.cn/2018/03/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/">
     
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.c884c9ebf7b9aeed5fc748f64d6575016297c22227fb677bc4429bbed48d2d9b.css" integrity="sha256-yITJ6/e5ru1fx0j2TWV1AWKXwiIn&#43;2d7xEKbvtSNLZs=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
     
 
     
 
     
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.ccbbada2e264e4fdbf9b2181cccc2cdb289a63dc9520a1e96ac2b9a45778df29.css" integrity="sha256-zLutouJk5P2/myGBzMws2yiaY9yVIKHpasK5pFd43yk=" crossorigin="anonymous" media="screen" />
+      
+    
 
     
-      <link rel="stylesheet" href="/css/custom.css" />
+      
+        
+        <link rel="stylesheet" href="/css/custom.min.2685291725b6d042c0198f421a0525b7848d32a12d1b9820643b45b323a07f66.css" integrity="sha256-JoUpFyW20ELAGY9CGgUlt4SNMqEtG5ggZDtFsyOgf2Y=" crossorigin="anonymous" media="screen" />
+      
+    
+      
+        
+        <link rel="stylesheet" href="/css/iconfont.min.32b99889c89209520626825143ed9241cc4ffbe7b6f911b5a26e6a34c89721da.css" integrity="sha256-MrmYiciSCVIGJoJRQ&#43;2SQcxP&#43;&#43;e2&#43;RG1om5qNMiXIdo=" crossorigin="anonymous" media="screen" />
+      
     
 
     
 
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="apple-touch-icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.4" />
   </head>
 
   
   
-  <body class="colorscheme-light">
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
@@ -145,7 +165,9 @@
 
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/algorithm/">Algorithm</a></div>
+    <span class="tag">
+      <a href="/tags/algorithm/">Algorithm</a>
+    </span></div>
 
         </div>
       </header>
@@ -175,7 +197,7 @@
   </a>
 </h2>
 <p>以 Java 语言为例，初步实现一个简单的二分查找算法，演示代码如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 算法退出条件
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>low <span style="color:#f92672">&gt;</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
@@ -216,7 +238,7 @@
   </a>
 </h2>
 <p>修复上述提及的三个问题，演示代码如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 参数校验
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>arr <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> arr<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> 0 <span style="color:#f92672">||</span> low <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> high <span style="color:#f92672">&lt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
@@ -252,7 +274,7 @@
         
         
         <script src="https://utteranc.es/client.js"
-    repo= "fantasticmao/blog"
+    repo= "fantasticmao/fantasticmao.github.io"
     issue-term="pathname"
     label="comment"
     theme="github-light"
@@ -267,37 +289,34 @@
 
       </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-      
-        ©
-        
-          2016 -
-        
-        2021
-         FantasticMao 
-      
-      
-         · 
-        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
-      
-      
-        · CDN
-        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
-          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
-        </a>
-      
-      
-      
-        <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
-      
-    </section>
-  </footer>
-
-
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2016 -
+    
+    2021
+     FantasticMao 
+    ·
+    技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+    
+      · CDN
+      <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+        <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+      </a>
+    
+    
+    
+      <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+    
+  </section>
+</footer>
     </main>
+
+    
+      
+      <script src="/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js" integrity="sha256-A7F3afT5GuNWZ&#43;HyocqMFvUFYlds&#43;Q/zKzF5kmkU2qU="></script>
+    
 
     
 
@@ -317,6 +336,15 @@ if (!doNotTrack) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
   </body>
 
 </html>

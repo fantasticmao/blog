@@ -5,14 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Language" content="zh-cn">
+    <meta name="color-scheme" content="light dark">
+
+    
 
     <meta name="author" content="FantasticMao">
     <meta name="description" content="因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。">
     <meta name="keywords" content="JavaScript,Vue,Vue Devtools,Vue Router,Vue CLI">
-    
-    
-    
-    
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Vue 初次体验"/>
@@ -22,14 +21,11 @@
 <meta property="og:description" content="因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2019/12/16/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-12-16T00:00:00&#43;08:00" />
-<meta property="article:modified_time" content="2019-12-16T00:00:00&#43;08:00" />
+<meta property="article:published_time" content="2019-12-16T00:00:00+08:00" />
+<meta property="article:modified_time" content="2019-12-16T00:00:00+08:00" />
 
 
 
-    
-      <base href="https://blog.fantasticmao.cn/2019/12/16/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/">
-    
     <title>
   Vue 初次体验 · FantasticMao&#39;s Blog
 </title>
@@ -38,36 +34,60 @@
       <link rel="canonical" href="https://blog.fantasticmao.cn/2019/12/16/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/">
     
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.c884c9ebf7b9aeed5fc748f64d6575016297c22227fb677bc4429bbed48d2d9b.css" integrity="sha256-yITJ6/e5ru1fx0j2TWV1AWKXwiIn&#43;2d7xEKbvtSNLZs=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
     
 
     
 
     
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.ccbbada2e264e4fdbf9b2181cccc2cdb289a63dc9520a1e96ac2b9a45778df29.css" integrity="sha256-zLutouJk5P2/myGBzMws2yiaY9yVIKHpasK5pFd43yk=" crossorigin="anonymous" media="screen" />
+      
+    
 
     
-      <link rel="stylesheet" href="/css/custom.css" />
+      
+        
+        <link rel="stylesheet" href="/css/custom.min.2685291725b6d042c0198f421a0525b7848d32a12d1b9820643b45b323a07f66.css" integrity="sha256-JoUpFyW20ELAGY9CGgUlt4SNMqEtG5ggZDtFsyOgf2Y=" crossorigin="anonymous" media="screen" />
+      
+    
+      
+        
+        <link rel="stylesheet" href="/css/iconfont.min.32b99889c89209520626825143ed9241cc4ffbe7b6f911b5a26e6a34c89721da.css" integrity="sha256-MrmYiciSCVIGJoJRQ&#43;2SQcxP&#43;&#43;e2&#43;RG1om5qNMiXIdo=" crossorigin="anonymous" media="screen" />
+      
     
 
     
 
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="apple-touch-icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.4" />
   </head>
 
   
   
-  <body class="colorscheme-light">
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
@@ -142,9 +162,13 @@
 
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/javascript/">JavaScript</a>
+    <span class="tag">
+      <a href="/tags/javascript/">JavaScript</a>
+    </span>
       <span class="separator">•</span>
-    <a href="/tags/vue/">Vue</a></div>
+    <span class="tag">
+      <a href="/tags/vue/">Vue</a>
+    </span></div>
 
         </div>
       </header>
@@ -197,7 +221,7 @@
 </h3>
 <p>在 Vue 中，可以使用 <code>&lt;slot&gt;</code> 元素实现父子组件之间的内容分发，<a href="https://vuejs.bootcss.com/v2/guide/components-slots.html">官方文档</a> 提供了一份精简的代码示例，完善之后的内容如下：</p>
 <p>NavigationLink.vue</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
   &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
     &lt;<span style="color:#f92672">slot</span>&gt;&lt;/<span style="color:#f92672">slot</span>&gt;
   &lt;/<span style="color:#f92672">a</span>&gt;
@@ -209,7 +233,7 @@
 };
 &lt;/<span style="color:#f92672">script</span>&gt;
 </code></pre></div><p>App.vue</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
   &lt;<span style="color:#f92672">NavigationLink</span> <span style="color:#a6e22e">url</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/profile&#34;</span>&gt;
     <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
   &lt;/<span style="color:#f92672">NavigationLink</span>&gt;
@@ -225,7 +249,7 @@
 };
 &lt;/<span style="color:#f92672">script</span>&gt;
 </code></pre></div><p>在示例代码中，App.vue 中使用 NavigationLink.vue 的内容最终会被渲染成</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
   &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
     <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
   &lt;/<span style="color:#f92672">a</span>&gt;
@@ -245,14 +269,13 @@
 </h3>
 <p>ECMAScript5 定义了一个属性描述符（property descriptor）对象，支持使用 getter / setter 方法替代属性的定义。可以通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor"><code>Object.getOwnPropertyDescriptor()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors"><code>Object.getOwnPropertyDescriptors()</code></a> 获取某个对象的属性描述符，通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><code>Object.defineProperty()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties"><code>Object.defineProperties()</code></a> 设置某个对象的属性和属性描述符。</p>
 <p>《JavaScript 权威指南》第六章中将 JavaScript 普通对象的属性称为 <strong>数据属性</strong>，将由 getter / setter 定义的属性称为 <strong>存储器属性</strong>。数据属性拥有一个名字和四个特性：值（value）、可写（writable）、可枚举（enumerable）、可配置（configurable），存储器属性相对于数据属性缺少了值和可写的特性，但增加了读取（get）、写入（set）的特性。在 ECMAScript5 中使用 getter / setter 方法替代属性定义的示例代码如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
   <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">name</span>() {
     <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;MaoMao&#34;</span>;
   },
 };
 <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">name</span>); <span style="color:#75715e">// MaoMao
 </span></code></pre></div><p>Vue 在内部通过调用 <code>Object.defineProperty()</code> 把 <code>data</code> 定义的 <strong>数据属性</strong> 转换成 <strong>存储器属性</strong>，以此来追踪依赖，实现在属性被访问和修改时通知变化。简单版本的实现代码如下，更多关于响应式原理的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/reactivity.html">官方文档</a>。</p>
-
 
 
 
@@ -368,7 +391,7 @@
 <ul>
 <li>
 <p><code>vue-cli-service serve</code> 命令会启动一个开发服务器（基于 <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a>），并附带开箱即用的模块热重载。可以通过 <code>vue-cli-service serve [options]</code> 选项或者 <code>vue.config.js</code> 配置文件的 <a href="https://cli.vuejs.org/zh/config/#devserver"><code>devServer</code></a> 属性配置开发服务器。简单配置文件的示例如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
   <span style="color:#a6e22e">devServer</span><span style="color:#f92672">:</span> {
     <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
     <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,
@@ -422,7 +445,7 @@
         
         
         <script src="https://utteranc.es/client.js"
-    repo= "fantasticmao/blog"
+    repo= "fantasticmao/fantasticmao.github.io"
     issue-term="pathname"
     label="comment"
     theme="github-light"
@@ -437,37 +460,34 @@
 
       </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-      
-        ©
-        
-          2016 -
-        
-        2021
-         FantasticMao 
-      
-      
-         · 
-        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
-      
-      
-        · CDN
-        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
-          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
-        </a>
-      
-      
-      
-        <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
-      
-    </section>
-  </footer>
-
-
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2016 -
+    
+    2021
+     FantasticMao 
+    ·
+    技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+    
+      · CDN
+      <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+        <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+      </a>
+    
+    
+    
+      <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+    
+  </section>
+</footer>
     </main>
+
+    
+      
+      <script src="/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js" integrity="sha256-A7F3afT5GuNWZ&#43;HyocqMFvUFYlds&#43;Q/zKzF5kmkU2qU="></script>
+    
 
     
 
@@ -487,6 +507,15 @@ if (!doNotTrack) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
   </body>
 
 </html>

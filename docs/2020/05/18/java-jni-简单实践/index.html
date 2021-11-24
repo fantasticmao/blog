@@ -5,14 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Language" content="zh-cn">
+    <meta name="color-scheme" content="light dark">
+
+    
 
     <meta name="author" content="FantasticMao">
     <meta name="description" content="本篇文章介绍 Java JNI 的基本概念和技术要点，并开发一个简单的示例程序作为实践。">
     <meta name="keywords" content="Java,JNI">
-    
-    
-    
-    
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java JNI 简单实践"/>
@@ -22,14 +21,11 @@
 <meta property="og:description" content="本篇文章介绍 Java JNI 的基本概念和技术要点，并开发一个简单的示例程序作为实践。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-05-18T20:40:21&#43;08:00" />
-<meta property="article:modified_time" content="2020-05-18T20:40:21&#43;08:00" />
+<meta property="article:published_time" content="2020-05-18T20:40:21+08:00" />
+<meta property="article:modified_time" content="2020-05-18T20:40:21+08:00" />
 
 
 
-    
-      <base href="https://blog.fantasticmao.cn/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/">
-    
     <title>
   Java JNI 简单实践 · FantasticMao&#39;s Blog
 </title>
@@ -38,36 +34,60 @@
       <link rel="canonical" href="https://blog.fantasticmao.cn/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/">
     
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.c884c9ebf7b9aeed5fc748f64d6575016297c22227fb677bc4429bbed48d2d9b.css" integrity="sha256-yITJ6/e5ru1fx0j2TWV1AWKXwiIn&#43;2d7xEKbvtSNLZs=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
     
 
     
 
     
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.ccbbada2e264e4fdbf9b2181cccc2cdb289a63dc9520a1e96ac2b9a45778df29.css" integrity="sha256-zLutouJk5P2/myGBzMws2yiaY9yVIKHpasK5pFd43yk=" crossorigin="anonymous" media="screen" />
+      
+    
 
     
-      <link rel="stylesheet" href="/css/custom.css" />
+      
+        
+        <link rel="stylesheet" href="/css/custom.min.2685291725b6d042c0198f421a0525b7848d32a12d1b9820643b45b323a07f66.css" integrity="sha256-JoUpFyW20ELAGY9CGgUlt4SNMqEtG5ggZDtFsyOgf2Y=" crossorigin="anonymous" media="screen" />
+      
+    
+      
+        
+        <link rel="stylesheet" href="/css/iconfont.min.32b99889c89209520626825143ed9241cc4ffbe7b6f911b5a26e6a34c89721da.css" integrity="sha256-MrmYiciSCVIGJoJRQ&#43;2SQcxP&#43;&#43;e2&#43;RG1om5qNMiXIdo=" crossorigin="anonymous" media="screen" />
+      
     
 
     
 
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="apple-touch-icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.4" />
   </head>
 
   
   
-  <body class="colorscheme-light">
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
@@ -142,7 +162,9 @@
 
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/java/">Java</a></div>
+    <span class="tag">
+      <a href="/tags/java/">Java</a>
+    </span></div>
 
         </div>
       </header>
@@ -196,7 +218,7 @@
   </a>
 </h3>
 <p>在 Java 代码中，native methods 是由 <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-"><code>System.loadLibrary()</code></a> 方法来加载的。例如以下例子，该类在初始化方法中加载了一个由 native method <code>f(int, String)</code> 定义的平台相关的 native library：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> pkg<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> pkg<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cls</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">f</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">,</span> String s<span style="color:#f92672">);</span>
@@ -222,7 +244,7 @@
 </ul>
 <p>虚拟机会在 native libraries 的所有方法中检查是否有匹配 native method 名称的方法。虚拟机首先会查找没有参数签名的方法短名称，然后再查找带有参数签名的方法长名称。只有当 native method 被重载的情况下，开发者才需要使用方法的长名称。然而，当 native method 和 nonnative method （即普通的 Java 方法）重名的时候，开发者可以忽略这种情况。因为 nonnative method 不会出现在 native libraries 中。</p>
 <p>例如以下例子，native method <code>g(double)</code> 不需要使用方法的长名称来链接，因为另一个方法 <code>g(int)</code> 是一个 nonnative method：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cls1</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cls1</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">g</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">);</span>
     <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">g</span><span style="color:#f92672">(</span><span style="color:#66d9ef">double</span> d<span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span>
@@ -283,7 +305,7 @@
   </a>
 </h3>
 <p>在根目录创建包 <code>cn.fantasticmao.jni</code> 的目录，并在包目录中创建一个含有 native method <code>sum(int, int)</code> 的类 SumNative.java：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> cn.fantasticmao.jni<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> cn.fantasticmao.jni<span style="color:#f92672">;</span>
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SumNative</span> <span style="color:#f92672">{</span>
 
@@ -312,7 +334,7 @@
   </a>
 </h3>
 <p>在根目录执行 <code>javah cn.fantasticmao.jni.SumNative</code> 命令，生成 cn_fantasticmao_jni_SumNative.h 头文件：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
 <span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;jni.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#75715e">/* Header for class cn_fantasticmao_jni_SumNative */</span>
 
@@ -340,7 +362,7 @@ JNIEXPORT jint JNICALL Java_cn_fantasticmao_jni_SumNative_sum
   </a>
 </h3>
 <p>在根目录创建 cn_fantasticmao_jni_SumNative.c，导入 cn_fantasticmao_jni_SumNative.h 和 jni.h 头文件，并实现 native method 对应的函数接口：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;jni.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;jni.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;cn_fantasticmao_jni_SumNative.h&#34;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">/*
@@ -410,7 +432,7 @@ JNIEXPORT jint JNICALL <span style="color:#a6e22e">Java_cn_fantasticmao_jni_SumN
         
         
         <script src="https://utteranc.es/client.js"
-    repo= "fantasticmao/blog"
+    repo= "fantasticmao/fantasticmao.github.io"
     issue-term="pathname"
     label="comment"
     theme="github-light"
@@ -425,37 +447,34 @@ JNIEXPORT jint JNICALL <span style="color:#a6e22e">Java_cn_fantasticmao_jni_SumN
 
       </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-      
-        ©
-        
-          2016 -
-        
-        2021
-         FantasticMao 
-      
-      
-         · 
-        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
-      
-      
-        · CDN
-        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
-          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
-        </a>
-      
-      
-      
-        <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
-      
-    </section>
-  </footer>
-
-
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2016 -
+    
+    2021
+     FantasticMao 
+    ·
+    技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+    
+      · CDN
+      <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+        <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+      </a>
+    
+    
+    
+      <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+    
+  </section>
+</footer>
     </main>
+
+    
+      
+      <script src="/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js" integrity="sha256-A7F3afT5GuNWZ&#43;HyocqMFvUFYlds&#43;Q/zKzF5kmkU2qU="></script>
+    
 
     
 
@@ -475,6 +494,15 @@ if (!doNotTrack) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
   </body>
 
 </html>
