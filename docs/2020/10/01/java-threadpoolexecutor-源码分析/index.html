@@ -21,8 +21,8 @@
 <meta property="og:description" content="本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 状态管理、提交任务、执行任务、回收线程 和 拒绝任务 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-10-01T18:41:53+08:00" />
-<meta property="article:modified_time" content="2020-10-01T18:41:53+08:00" />
+<meta property="article:published_time" content="2020-10-01T18:41:53&#43;08:00" />
+<meta property="article:modified_time" content="2020-10-01T18:41:53&#43;08:00" />
 
 
 
@@ -39,7 +39,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.531b74bda2bd1e0562323a98f617314ce9c7cc8c8cffbc609f5f690abf6ac68c.css" integrity="sha256-Uxt0vaK9HgViMjqY9hcxTOnHzIyM/7xgn19pCr9qxow=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -66,7 +66,7 @@
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.82.0" />
   </head>
 
   
@@ -159,7 +159,7 @@
         
         <p>本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 <a href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86">状态管理</a>、<a href="#%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1">提交任务</a>、<a href="#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1">执行任务</a>、<a href="#%E5%9B%9E%E6%94%B6%E7%BA%BF%E7%A8%8B">回收线程</a> 和 <a href="#%E6%8B%92%E7%BB%9D%E4%BB%BB%E5%8A%A1">拒绝任务</a> 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。</p>
 <p>ThreadPoolExecutor 的工作机制可以参考我摘记的 <a href="https://www.yuque.com/fantasticmao/tech/qmk0b2">《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor</a> 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">         +------------------------------------------------------------------------+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">         +------------------------------------------------------------------------+
 runnbale |                                              +-----------------------+ |
 --------&gt;|                                 True         | +------+ +------+     | |
          |--&gt; workerCount &lt; corePoolSize? -------------&gt;| |Worker| |Worker| ... | |
@@ -196,7 +196,7 @@ runnbale |                 |                            workQueue.take       |  
 </h2>
 <p>ThreadPoolExecutor 内部共有两个状态：workerCount 和 runState。workerCount 表示线程池中的有效线程数，是已经被允许运行并且还未结束的线程数量。runState 表示线程池在生命周期内的运行状态，具体的枚举值有 RUNNING、SHUTDOWN、STOP、TIDYING、TERMINATED。</p>
 <p>ThreadPoolExecutor 将 workerCount 和 runState 两个状态合并在同一个 <code>AtomicInteger</code> 类型的 <code>ctl</code> 字段中，并会通过一系列位运算来分别获取设置 workerCount 和 runState 的具体值。其中，runState 会占据 <code>ctl</code> 字段中 int 值的高 3 位，workerCount 会占据剩下的 29 位，因此 ThreadPoolExecutor 支持的最大线程数量是 <code>2^29 - 1</code> 个，而不是 <code>2^32 -1</code> 个。将 workerCount 和 runState 两个状态设计成同一个字段的好处是可以使用一次 CAS 操作同时修改两个状态，从而避免 <a href="https://en.wikipedia.org/wiki/Race_condition">竞态条件</a> 的发生和减少锁资源的占用。<code>ctl</code> 字段中具体的位分配如下所示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[000][0 0000 0000 0000 0000 0000 0000 0000]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[000][0 0000 0000 0000 0000 0000 0000 0000]
   |                    |
   v                    v
 runState          workerCount
@@ -207,14 +207,18 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L373-L375&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L373-L375&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 
 
 
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L384-L387&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L384-L387&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <h3 id="workercount">
   workerCount
   <a class="heading-link" href="#workercount">
@@ -228,7 +232,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L406-L427&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L406-L427&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <h3 id="runstate">
   runState
   <a class="heading-link" href="#runstate">
@@ -272,7 +278,7 @@ runState          workerCount
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
    |-------&gt;| (调用 shutdown())
    |---------------&gt;| (调用 shutdownNow())
             |------&gt;| (调用 shutdownNow())
@@ -286,14 +292,18 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L377-L382&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L377-L382&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 
 
 
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L389-L404&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L389-L404&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <h2 id="提交任务">
   提交任务
   <a class="heading-link" href="#%e6%8f%90%e4%ba%a4%e4%bb%bb%e5%8a%a1">
@@ -315,7 +325,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1323-L1337&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1323-L1337&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <p>ThreadPoolExecutor 执行任务的最小单元是对 Thread 进行了一层封装的 ThreadPoolExecutor.Worker，更多关于 Worker 的分析请见 <a href="#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1">执行任务</a>。ThreadPoolExecutor 通过使用 <code>addWorker(Runnable, boolean)</code> 方法来创建一个新的 Worker 线程，通过第二个布尔类型的参数来判断待创建 Worker 是属于核心范围内的线程还是属于最大范围内的线程（是应受到 <code>corePoolSize</code> 条件的限制，还是应受到 <code>maximumPoolSize</code> 条件的限制）。</p>
 <p>ThreadPoolExecutor 先会在 <code>addWorker(Runnable, boolean)</code> 方法内部校验线程池的状态，例如 runState 当前是否为 RUNNING 枚举值、workerCount 是否符合 <code>corePoolSize</code> 条件的限制。在校验状态通过之后，ThreadPoolExecutor 则会创建一个 Worker 实例，并且会将这个实例添加到 HashSet&lt;Worker&gt; 类型的 <code>workers</code> 中的。值得注意的是，ThreadPoolExecutor 正是使用此处的 <code>workers</code> 来存放线程池中所有的 Worker 实例，并且 ThreadPoolExecutor 在访问 <code>workers</code> 时都会使用一个 ReentrantLock 类型的 <code>mainLock</code> 锁，以此来保证并发安全。ThreadPoolExecutor 源码中创建 Worker 实例的方法 <code>addWorker(Runnable, boolean)</code> 的代码片段如下：</p>
 
@@ -324,14 +336,18 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L887-L911&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L887-L911&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 
 
 
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L913-L943&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L913-L943&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <h2 id="执行任务">
   执行任务
   <a class="heading-link" href="#%e6%89%a7%e8%a1%8c%e4%bb%bb%e5%8a%a1">
@@ -346,21 +362,27 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L586-L590&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L586-L590&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 
 
 
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L596-L599&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L596-L599&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 
 
 
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L602-L604&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L602-L604&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <p>Worker 内部的 <code>run()</code> 方法是开启 Worker 线程的入口，它会将 Worker 线程的主循环委托给 ThreadPoolExecutor 的 <code>runWorker(Worker)</code> 方法。在 <code>runWorker(Worker)</code> 方法中，Worker 线程会首先执行 Worker 内部的 <code>firstTask</code> 任务，在这之后 Worker 线程会重复执行使用 <code>getTask()</code> 方法从 workQueue 中获取的任务。Worker 会在每个任务执行之前调用 <code>beforeExecute(Thread, Runnable)</code> 方法，在任务执行之后调用 <code>afterExecute(Runnable, Throwable)</code> 方法，这种设计使得 ThreadPoolExecutor 对外提供了更多的扩展能力。ThreadPoolExecutor 源码中运行 Worker 线程的方法 <code>runWorker(Worker)</code> 的代码片段如下：</p>
 
 
@@ -368,7 +390,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1098-L1130&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1098-L1130&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <h2 id="回收线程">
   回收线程
   <a class="heading-link" href="#%e5%9b%9e%e6%94%b6%e7%ba%bf%e7%a8%8b">
@@ -387,7 +411,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1012-L1053&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1012-L1053&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <h2 id="拒绝任务">
   拒绝任务
   <a class="heading-link" href="#%e6%8b%92%e7%bb%9d%e4%bb%bb%e5%8a%a1">
@@ -402,7 +428,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1988-L1992&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1988-L1992&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <p>AbortPolicy 是 ThreadPoolExecutor 默认的拒绝策略，会直接抛出一个异常，代码片段如下：</p>
 
 
@@ -410,7 +438,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2012-L2017&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2012-L2017&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <p>DiscardPolicy 会抛弃当前任务，代码片段如下：</p>
 
 
@@ -418,7 +448,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2035-L2036&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2035-L2036&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <p>DiscardOldestPolicy 会抛弃 workQueue 中队首的任务，然后再尝试重新提交任务，代码片段如下：</p>
 
 
@@ -426,7 +458,9 @@ runState          workerCount
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2059-L2064&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on"></script>
+
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/fantasticmao/embed-like-gist@master/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2059-L2064&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on&fetchFromJsDelivr=on"></script>
 <hr>
 <h2 id="参考资料">
   参考资料

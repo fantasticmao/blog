@@ -24,8 +24,8 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2017/04/21/javascript-%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0-jquery-%E7%B1%BB%E5%BA%93/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2017-04-21T15:44:01+08:00" />
-<meta property="article:modified_time" content="2017-04-21T15:44:01+08:00" />
+<meta property="article:published_time" content="2017-04-21T15:44:01&#43;08:00" />
+<meta property="article:modified_time" content="2017-04-21T15:44:01&#43;08:00" />
 
 
 
@@ -42,7 +42,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.531b74bda2bd1e0562323a98f617314ce9c7cc8c8cffbc609f5f690abf6ac68c.css" integrity="sha256-Uxt0vaK9HgViMjqY9hcxTOnHzIyM/7xgn19pCr9qxow=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -69,7 +69,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.82.0" />
   </head>
 
   
@@ -187,7 +187,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </li>
 <li>
 <p>传入一个函数给 <code>$()</code>。此时，文档加载完毕且 DOM 可操作时，传入的函数将被调用。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">jQuery</span>(<span style="color:#66d9ef">function</span> () {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">jQuery</span>(<span style="color:#66d9ef">function</span> () {
   <span style="color:#75715e">// 文档加载完毕时调用
 </span><span style="color:#75715e"></span>  <span style="color:#75715e">// 所有 jQuery 代码放在这里
 </span><span style="color:#75715e"></span>});
@@ -199,7 +199,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 <p>jQuery 的 <code>map()</code> 和 <code>Array.prototype.map()</code> 相近。它将接收回调函数作为参数，并为 jQuery 对象中的每一个元素都调用回调函数，同时将回调函数的返回值收集起来，并封装成一个新的 jQuery 对象返回。<code>map()</code> 调用回调函数的方式和 <code>each()</code> 相同：元素的索引值作为第一个参数，元素本身作为 this 和第二个参数。</p>
 <p>jQuery 的另一个基础方法是 <code>index()</code>。该方法接收一个元素作为参数，返回值是该元素在 jQuery 对象中的索引值，如果找不到的话，返回 -1。如果传递一个 jQuery 对象作为参数，<code>index()</code> 会对该对象的第一个元素进行搜索。如果传入的是字符串，<code>index()</code> 会把它当成 CSS 选择器，并返回 jQuery 对象中匹配该选择器的一组元素中第一个元素的索引值。如果什么都不传入，<code>index()</code> 会返回该 jQuery 对象中的第一个毗（pí）邻元素的索引值。</p>
 <p>还有一个通用的 jQuery 方法是 <code>is()</code>。它接收一个选择器作为参数，如果选中元素至少有一个匹配该选择器时，则返回 true。可以在 <code>each()</code> 回调函数中使用它，例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">each</span>(<span style="color:#66d9ef">function</span> () {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">each</span>(<span style="color:#66d9ef">function</span> () {
   <span style="color:#75715e">// 对于每一个 &lt;div&gt; 元素
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">is</span>(<span style="color:#e6db74">&#34;:hidden&#34;</span>)) <span style="color:#66d9ef">return</span>; <span style="color:#75715e">// 跳过隐藏元素
 </span><span style="color:#75715e"></span>  <span style="color:#75715e">// 对可见元素做点什么
@@ -226,7 +226,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p><code>attr()</code> 是 jQuery 中用于 HTML 属性的 getter / setter。<code>attr()</code> 处理浏览器的兼容性和一些特殊情况，还可以让 HTML 属性名和 JavaScript 属性名可以等同使用，如 &ldquo;for&rdquo; - &ldquo;htmlfor&rdquo;、&ldquo;class&rdquo; - &ldquo;className&rdquo;。一个相关的函数是 <code>removeAttr()</code>。例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;form&#39;</span>).<span style="color:#a6e22e">attr</span>(<span style="color:#e6db74">&#39;action&#39;</span>); <span style="color:#75715e">// 获取第一个 form 元素的 action 属性
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;form&#39;</span>).<span style="color:#a6e22e">attr</span>(<span style="color:#e6db74">&#39;action&#39;</span>); <span style="color:#75715e">// 获取第一个 form 元素的 action 属性
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#icon&#39;</span>).<span style="color:#a6e22e">attr</span>(<span style="color:#e6db74">&#39;src&#39;</span>, <span style="color:#e6db74">&#39;icon.gif&#39;</span>); <span style="color:#75715e">// 设置 src 属性
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#banner&#39;</span>).<span style="color:#a6e22e">attr</span>({<span style="color:#a6e22e">src</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;banner.gif&#39;</span>, <span style="color:#a6e22e">alt</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Adverisement&#39;</span>, <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span><span style="color:#ae81ff">720</span>, <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span><span style="color:#ae81ff">64</span>});
 <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;a&#39;</span>).<span style="color:#a6e22e">attr</span>(<span style="color:#e6db74">&#39;target&#39;</span>, <span style="color:#e6db74">&#39;_blank&#39;</span>); <span style="color:#75715e">// 使所有链接在新窗口中打开
@@ -243,7 +243,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p><code>css()</code> 和 <code>attr()</code> 很类似，只是 <code>css()</code> 作用于元素的 CSS 样式，而不是元素的 HTML 属性。<code>css()</code> 返回元素的当前的样式，返回值可能来自 style 属性也可能来自样式表。<code>css()</code> 允许在 CSS 样式名中使用连字符或驼峰格式的 JavaScript 样式名。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">(<span style="color:#e6db74">&#39;h1&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;font-weight&#39;</span>); <span style="color:#75715e">// 获取第一个 &lt;h1&gt; 的字体重量
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">(<span style="color:#e6db74">&#39;h1&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;font-weight&#39;</span>); <span style="color:#75715e">// 获取第一个 &lt;h1&gt; 的字体重量
 </span><span style="color:#75715e"></span>(<span style="color:#e6db74">&#39;h1&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;fontWeight&#39;</span>); <span style="color:#75715e">// 也可以采用驼峰格式
 </span><span style="color:#75715e"></span>(<span style="color:#e6db74">&#39;h1&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;font&#39;</span>); <span style="color:#75715e">// 错误：不可以获取复合样式
 </span><span style="color:#75715e"></span>(<span style="color:#e6db74">&#39;h1&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;font-variant&#39;</span>, <span style="color:#e6db74">&#39;smallcaps&#39;</span>); <span style="color:#75715e">// 将样式设置在所有 &lt;h1&gt; 元素上
@@ -259,7 +259,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p><code>addClass()</code> 和 <code>removeClass()</code> 用来从选中元素中添加和删除类。<code>toggleClass()</code> 在当元素还没有某些类时，给元素添加这些类，反之则删除。<code>hasClass()</code> 用来判断某类是否存在。例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 添加 CSS 类
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 添加 CSS 类
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#e6db74">&#34;hilite&#34;</span>);
 <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1+p&#34;</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#e6db74">&#34;hilite first&#34;</span>); <span style="color:#75715e">// 给 &lt;h1&gt; 后面的 &lt;p&gt; 添加两个类
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;section&#34;</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">n</span>) {
@@ -297,7 +297,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p><code>val()</code> 用来获取和设置 HTML 表单元素的 value 属性，还可以用于获取和设置复选框、单选按钮以及 <code>&lt;select&gt;</code> 元素的选中状态。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#surname&#34;</span>).<span style="color:#a6e22e">val</span>(); <span style="color:#75715e">// 获取 surname 文本域的值
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#surname&#34;</span>).<span style="color:#a6e22e">val</span>(); <span style="color:#75715e">// 获取 surname 文本域的值
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#usstate&#34;</span>).<span style="color:#a6e22e">val</span>(); <span style="color:#75715e">// 从 &lt;select&gt; 中获取单一值
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;select#extras&#34;</span>).<span style="color:#a6e22e">val</span>(); <span style="color:#75715e">// 从 &lt;select multiple&gt; 中获取一组值
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;input:radio[name=ship]:checked&#34;</span>).<span style="color:#a6e22e">val</span>(); <span style="color:#75715e">// 获取选中的单选按钮的值
@@ -314,7 +314,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p><code>text()</code> 和 <code>html()</code> 用来获取和设置元素的纯文本或 HTML 内容。当不带参数调用时，<code>text()</code> 返回所有匹配元素的子孙文本节点的纯文本内容，<code>html()</code> 返回第一个匹配元素的 HTML 内容。如果传入字符串给 <code>text()</code> 或 <code>html()</code>，该字符串会用作该元素的纯文本或格式化 HTML 文本内容。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;head title&#34;</span>).<span style="color:#a6e22e">text</span>(); <span style="color:#75715e">// 获取文档标题
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;head title&#34;</span>).<span style="color:#a6e22e">text</span>(); <span style="color:#75715e">// 获取文档标题
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">headline</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">html</span>(); <span style="color:#75715e">// 获取第一个 &lt;h1&gt; 元素的 html
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">text</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">current</span>) {
   <span style="color:#75715e">// 给每一个标题添加章节号
@@ -338,7 +338,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </h3>
 <p>jQuery 定义了一个名为 <code>data()</code> 的 getter / setter 方法，可用来获取或设置与文档元素、Document、Window 对象相关的数据。</p>
 <p><code>removeData()</code> 用来从元素中删除数据。如果不带参数调用 <code>removeData()</code>，它会删除与元素相关联的所有数据。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#ae81ff">1</span>); <span style="color:#75715e">// 设置一些数据
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#ae81ff">1</span>); <span style="color:#75715e">// 设置一些数据
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div.nodata&#34;</span>).<span style="color:#a6e22e">removeData</span>(<span style="color:#e6db74">&#34;x&#34;</span>); <span style="color:#75715e">// 删除一些数据
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#mydiv&#34;</span>).<span style="color:#a6e22e">data</span>(<span style="color:#a6e22e">x</span>); <span style="color:#75715e">// 获取一些数据
 </span></code></pre></div><hr>
@@ -350,7 +350,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </h2>
 <p>HTML 文档表示为一棵节点树，而不是一个字符的线性序列，因此插入、删除、替换操作不会像操作字符串和数组一样简单。</p>
 <p>下面演示的每一个方法都接收一个参数，用于指定需要插入文档中的内容。该参数可以是用于指定新内容的纯文本或 HTML 字符串，也可以是 jQuery 对象、元素、文本节点。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#log&#34;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;&lt;br&gt;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">message</span>); <span style="color:#75715e">// 在 #log元素结尾处添加内容
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#log&#34;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;&lt;br&gt;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">message</span>); <span style="color:#75715e">// 在 #log元素结尾处添加内容
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">prepend</span>(<span style="color:#e6db74">&#34;§&#34;</span>); <span style="color:#75715e">// 在每个 &lt;h1&gt; 的起始处添加章节标识
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">before</span>(<span style="color:#e6db74">&#34;&lt;hr&gt;&#34;</span>); <span style="color:#75715e">// 在每个 &lt;h1&gt; 的前面添加水平线
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">after</span>(<span style="color:#e6db74">&#34;&lt;hr&gt;&#34;</span>); <span style="color:#75715e">// 在每个 &lt;h1&gt; 的后面添加水平线
@@ -378,11 +378,11 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p>jQuery 定义了简单的事件注册方法，可用于常用和普适的每一个浏览器事件。比如，给单击事件注册一个事件处理程序，只要调用 <code>click()</code> ：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span> () {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span> () {
   <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#34;background-color&#34;</span>, <span style="color:#e6db74">&#34;gray&#34;</span>);
 });
 </code></pre></div><p>调用 jQuery 的事件注册方法可以给所有选中元素注册处理程序。下面是 jQuery 定义的简单事件处理程序注册的方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">blur</span>()      <span style="color:#a6e22e">focus</span>()     <span style="color:#a6e22e">mousedown</span>()     <span style="color:#a6e22e">mouseover</span>()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">blur</span>()      <span style="color:#a6e22e">focus</span>()     <span style="color:#a6e22e">mousedown</span>()     <span style="color:#a6e22e">mouseover</span>()
 <span style="color:#a6e22e">click</span>()     <span style="color:#a6e22e">focusion</span>()  <span style="color:#a6e22e">mouseup</span>()       <span style="color:#a6e22e">resize</span>()
 <span style="color:#a6e22e">dbclick</span>()   <span style="color:#a6e22e">focusout</span>()  <span style="color:#a6e22e">mouseenter</span>()    <span style="color:#a6e22e">scroll</span>()
 <span style="color:#a6e22e">change</span>()    <span style="color:#a6e22e">keydown</span>()   <span style="color:#a6e22e">mouseleave</span>()    <span style="color:#a6e22e">load</span>()
@@ -410,7 +410,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p>jQuery 通过定义自己的 Event 对象来隐藏浏览器之间的实现差异。当一个 jQuery 事件处理程序被调用时，总会传入一个 jQuery 事件对象作为其第一个参数。jQuery 会将以下所有字段从原声 Event 对象中复制到 jQuery 事件对象上，尽管对于特定事件类型来说，有些字段值为 undefined。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">altKey</span>      <span style="color:#a6e22e">ctrlKey</span>         <span style="color:#a6e22e">newValue</span>        <span style="color:#a6e22e">screenX</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">altKey</span>      <span style="color:#a6e22e">ctrlKey</span>         <span style="color:#a6e22e">newValue</span>        <span style="color:#a6e22e">screenX</span>
 <span style="color:#a6e22e">attrChange</span>  <span style="color:#a6e22e">currentTarget</span>   <span style="color:#a6e22e">offsetX</span>         <span style="color:#a6e22e">screenY</span>
 <span style="color:#a6e22e">attrName</span>    <span style="color:#a6e22e">detail</span>          <span style="color:#a6e22e">offsetY</span>         <span style="color:#a6e22e">shiftKey</span>
 <span style="color:#a6e22e">bubbles</span>     <span style="color:#a6e22e">eventPhase</span>      <span style="color:#a6e22e">originalTarget</span>  <span style="color:#a6e22e">srcElement</span>
@@ -420,7 +420,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 <span style="color:#a6e22e">clientX</span>     <span style="color:#a6e22e">layerY</span>          <span style="color:#a6e22e">relatedNode</span>     <span style="color:#a6e22e">whellDelta</span>
 <span style="color:#a6e22e">clientY</span>     <span style="color:#a6e22e">metaKey</span>         <span style="color:#a6e22e">relatedTarget</span>   <span style="color:#a6e22e">which</span>
 </code></pre></div><p>除了这些属性，jQuery 事件对象还定义了以下方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">preventDefault</span>()            <span style="color:#a6e22e">isDefaultPrevented</span>()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">preventDefault</span>()            <span style="color:#a6e22e">isDefaultPrevented</span>()
 <span style="color:#a6e22e">stopPropagation</span>()           <span style="color:#a6e22e">isPropagationStopped</span>()
 <span style="color:#a6e22e">stopImmediatePropagation</span>()  <span style="color:#a6e22e">isImmediatePropagationStopped</span>()
 </code></pre></div><h3 id="触发事件">
@@ -430,7 +430,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p>手动触发事件最简单的方式是不带参数调用事件注册的简单方法，比如 <code>click()</code> 或 <code>mouseover()</code>。与很多 jQuery 方法可以同时用做 getter 和 setter 一样，这些事件方法在带有一个参数时会注册事件处理程序，不带参数调用时则会触发事件处理程序。例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#my_form&#34;</span>).<span style="color:#a6e22e">submit</span>(); <span style="color:#75715e">// 就和用户单击提交按钮一样
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#my_form&#34;</span>).<span style="color:#a6e22e">submit</span>(); <span style="color:#75715e">// 就和用户单击提交按钮一样
 </span></code></pre></div><p>上面的 <code>submit()</code> 自己合成了一个 Event 对象，并触发了给 submit 事件注册的所有事件处理程序。如果这些事件处理程序没有返回 false 或调用 Event 对象的 <code>preventDefault()</code>，实际上将提交该表单。注意，通过这种方式手动调用时，冒泡事件依旧会冒泡。</p>
 <p>需要特别注意，jQuery 的事件触发方法会触发所有使用 jQuery 事件注册方法注册的处理程序，也会触发通过 onsubmit 等 HTML 属性或 Element 属性定义的处理程序。但是，不能手动触发使用 <code>addEventListen()</code> 或 <code>attachEvent()</code> 注册的事件处理程序。</p>
 <p>同时需要注意，jQuery 的事件触发机制是同步的（不涉及事件队列）。</p>
@@ -450,7 +450,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </h2>
 <p>jQuery 定义了 <code>fadeIn()</code> 和 <code>fadeOut()</code> 等简单的方法实现常见视觉效果。除了简单动画方法，jQuery 还定义了一个 <code>animate()</code>，用来实现更复杂的自定义动画。</p>
 <p><strong>jQuery 动画是异步的</strong>。调用 <code>fadeIn()</code> 等动画方法时，它会立刻返回，动画则在「后台」执行。如果一个元素已经在动画过程中，再调用一个动画方法时，新动画是不会立刻执行，而会延迟到当前动画结束后才执行。例如，可以让一个元素在持久显示前先闪烁一会：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#blinker&#34;</span>).<span style="color:#a6e22e">fadeIn</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeOut</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeIn</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeOut</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeIn</span>(<span style="color:#ae81ff">100</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#blinker&#34;</span>).<span style="color:#a6e22e">fadeIn</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeOut</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeIn</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeOut</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">fadeIn</span>(<span style="color:#ae81ff">100</span>);
 </code></pre></div><h3 id="简单动画">
   简单动画
   <a class="heading-link" href="#%e7%ae%80%e5%8d%95%e5%8a%a8%e7%94%bb">
@@ -482,7 +482,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 <li>
 <p>动画属性对象</p>
 <p>该对象的属性名必须是 CSS 属性，这些属性的值必须是动画的目标值。动画只支持数值属性：对于颜色、字体或 display 等枚举属性是无法实现动画效果的。如果属性值是数值，则默认单位是像素。如果属性值是字符串，可以指定单位。还可以指定相对值，用「+=」前缀表示增加，用「-=」前缀表示减少。jQuery 动画属性对象中，还可以使用 hide、show、toggle 这三个属性值。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">animate</span>({
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">animate</span>({
   <span style="color:#e6db74">&#34;margin-left&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;+=.5in&#34;</span>, <span style="color:#75715e">// 增加段落缩进
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">opacity</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;-=.1&#34;</span>, <span style="color:#75715e">// 同时减少不透明度
 </span><span style="color:#75715e"></span>});
@@ -514,13 +514,13 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p><code>load()</code> 是所有 jQuery 工具中最简单的：向它传入一个 URL，它会异步加载该 URL 的内容，然后将内容插入每一个选中的元素，替换掉已经存在的任何内容。例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 每隔 60 秒加载并显示最新的状态报告
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 每隔 60 秒加载并显示最新的状态报告
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">setInterval</span>(<span style="color:#66d9ef">function</span> () {
   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#status&#34;</span>).<span style="color:#a6e22e">load</span>(<span style="color:#e6db74">&#34;status_report.html&#34;</span>);
 }, <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
 </code></pre></div><p><code>load()</code> 可以用来注册 load 事件。如果传给方法的第一个参数是函数而不是字符串，则 <code>load()</code> 是注册事件处理程序而不是 Ajax 方法。</p>
 <p>如果只想显示被加载文档的一部分，可以在 URL 后面添加一个空格和一个 jQuery 选择器。当 URL 加载完成后，jQuery 会用指定的选择器来从加载好的 HTML 中选取需要显示的部分：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 加载并显示天气预告的温度部分
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 加载并显示天气预告的温度部分
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#temp&#34;</span>).<span style="color:#a6e22e">load</span>(<span style="color:#e6db74">&#34;wheather_report.html #temperature&#34;</span>);
 </code></pre></div><p>除了 URL 参数，<code>load()</code> 还接受两个可选参数。第一个可选参数表示的数据，可以追加到 URL 后面，或者与请求一起发送。另一个可选参数是回调函数。如果没有指定任何数据，回调函数可以作为第二个参数传入。否则，它必须是第三个参数。在 jQuery 对象的每一个元素上都会调用回调函数，并且每次调用都会传入三个参数：被加载 URL 的完整文本内容、状态码字符串、以及用来加载该 URL 的 XMLHttpRequest 对象。其中，状态参数是 jQuery 的状态码，不是 HTTP 的状态码，其值是类似 success、error 和 timeout 的字符串。</p>
 <table>
@@ -567,10 +567,10 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h4>
 <p><code>jQuery.getScript()</code> 函数的第一个参数是 JavaScript 代码文件的 URL。它会异步加载文件，加载完成之后在全局作用域执行该代码。它能同时适用于同源和跨源脚本：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 从其它服务器动态加载脚本
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 从其它服务器动态加载脚本
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">getScript</span>(<span style="color:#e6db74">&#34;http://example.com/js/widget.js&#34;</span>);
 </code></pre></div><p>可以传入回调函数作为第二个参数，在这种情况下，jQuery 会在代码加载和执行完成之后调用一次该回调函数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 加载一个类库，并在加载完成时立刻使用它
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 加载一个类库，并在加载完成时立刻使用它
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">getScript</span>(<span style="color:#e6db74">&#34;js/jquery.my.plugin.js&#34;</span>, <span style="color:#66d9ef">function</span> () {
   <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">my_plugin</span>(); <span style="color:#75715e">// 使用加载的类库
 </span><span style="color:#75715e"></span>});
@@ -582,7 +582,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h4>
 <p><code>jQuery.getJSON()</code> 和 <code>jQuery.getScript()</code> 类似：它会获取文本，然后特殊处理一下，再调用指定的回调函数。<code>jQuery.getJSON()</code> 获取到文本之后，不会将其当作脚本执行，而会将其解析为 JSON。<code>jQuery.getJSON()</code> 只有在传入了回调函数时才有用。当成功加载 URL，以及将内容成功解析为 JSON 后，解析的结果会作为第一个参数传入回调函数中。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 假设 data.json 包含文本：{&#34;x&#34;:1, &#34;y&#34;:2}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 假设 data.json 包含文本：{&#34;x&#34;:1, &#34;y&#34;:2}
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">getJSON</span>(<span style="color:#e6db74">&#34;data.json&#34;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">data</span>) {
   <span style="color:#75715e">// data 参数是对象 {x:1, y:2}
 </span><span style="color:#75715e"></span>});
@@ -636,7 +636,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
   </a>
 </h3>
 <p>jQuery 的所有 Ajax 工具最后都会调用 <code>jQuery.ajax()</code> —— 这是整个类库中最复杂的函数。<code>jQuery.ajax()</code> 仅接受一个参数：一个选项对象，该对象的属性指定 Ajax 请求如何执行的很多细节。例如，<code>jQuery.getScript(url, callback)</code> 与下面 <code>jQuery.ajax()</code> 的调用等价：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">ajax</span>({
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">ajax</span>({
   <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#75715e">// HTTP 请求方法
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">url</span>, <span style="color:#75715e">// 要获取数据的 URL
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>, <span style="color:#75715e">// 不给 URL 添加任何数据
@@ -644,7 +644,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">callback</span>, <span style="color:#75715e">// 完成时调用该函数
 </span><span style="color:#75715e"></span>});
 </code></pre></div><p>可以通过 <code>jQuery.ajaxSetup()</code> 传入一个选项对象来设置任意选项的默认值：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">ajaxSetup</span>({
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">jQuery</span>.<span style="color:#a6e22e">ajaxSetup</span>({
   <span style="color:#a6e22e">timeout</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2000</span>, <span style="color:#75715e">// 在两秒后取消所有 Ajax 请求
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">cache</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#75715e">// 通过给 URL 添加时间戳来禁用浏览器缓存
 </span><span style="color:#75715e"></span>});
@@ -1060,7 +1060,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </tbody>
 </table>
 <p>下面是组合选择器的一些例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#e6db74">&#34;blockquote i&#34;</span>; <span style="color:#75715e">// 匹配 &lt;blockquote&gt; 里的 &lt;i&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#e6db74">&#34;blockquote i&#34;</span>; <span style="color:#75715e">// 匹配 &lt;blockquote&gt; 里的 &lt;i&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;ol &gt; li&#34;</span>; <span style="color:#75715e">// &lt;li&gt; 元素是 &lt;ol&gt; 的直接子元素
 </span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;#output + *&#34;</span>; <span style="color:#75715e">// id=&#34;output&#34; 元素后面的兄弟元素
 </span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;div.note &gt; h1 + p&#34;</span>; <span style="color:#75715e">// 紧跟 &lt;h1&gt; 的 &lt;p&gt; 元素，在 &lt;div class=&#34;note&#34;&gt; 里面
@@ -1072,7 +1072,7 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </h4>
 <p>传递给 <code>$()</code> 函数，或在样式表中使用的选择器，就是选择器组。这是一个逗号分隔的列表，由一个或多个简单选择器或组合选择器构成。</p>
 <p>下面是选择器组的一些例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#e6db74">&#34;h1, h2, h3&#34;</span>; <span style="color:#75715e">// 匹配 &lt;h1&gt;、&lt;h2&gt; 和 &lt;h3&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#e6db74">&#34;h1, h2, h3&#34;</span>; <span style="color:#75715e">// 匹配 &lt;h1&gt;、&lt;h2&gt; 和 &lt;h3&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;#p1 ,#p2, #p3&#34;</span>; <span style="color:#75715e">// 匹配 id 为 p1、p2 或 p3 的元素
 </span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;div.note, p.note&#34;</span>; <span style="color:#75715e">// 匹配 class=&#34;note&#34; 的 &lt;div&gt; 和 &lt;p&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;body &gt; p, div.note &gt; p&#34;</span>; <span style="color:#75715e">// &lt;body&gt; 和 &lt;div class=&#34;note&#34;&gt; 的 &lt;p&gt; 子元素
@@ -1084,14 +1084,14 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </h3>
 <p>jQuery 还定义了一些选取方法，这些选取方法提供的多数功能与选择器语法的功能是一样的。</p>
 <p>提取选中元素最简单的方式是按位置提取。<code>first()</code> 仅返回选中元素中的第一个 jQuery 对象，<code>last()</code> 则返回最后一个 jQuery 对象，<code>eq()</code> 返回指定序号的 jQuery 对象。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">paras</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">paras</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>);
 <span style="color:#a6e22e">paras</span>.<span style="color:#a6e22e">first</span>(); <span style="color:#75715e">// 仅选取第一个 &lt;p&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">paras</span>.<span style="color:#a6e22e">last</span>(); <span style="color:#75715e">// 仅选取最后一个 &lt;p&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">paras</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#ae81ff">1</span>); <span style="color:#75715e">// 选取第二个 &lt;p&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">paras</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>); <span style="color:#75715e">// 选取倒数第二个 &lt;p&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">paras</span>[<span style="color:#ae81ff">1</span>]; <span style="color:#75715e">// 第二个 &lt;p&gt; 元素自身
 </span></code></pre></div><p>通过位置提取元素更通用的方法是 <code>slice()</code>。jQuery 的 <code>slice()</code> 与 <code>Array.slice()</code> 类似：接受开始和结束序号，返回从开始（包含）到结束（不包含）序号的 jQuery 对象。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>); <span style="color:#75715e">// 选取第 3、4、5 个 &lt;p&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>); <span style="color:#75715e">// 选取第 3、4、5 个 &lt;p&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">slice</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>); <span style="color:#75715e">// 选取最后 3 个 &lt;div&gt; 元素
 </span></code></pre></div><p><code>filter()</code> 是通用的选区过滤方法，有 3 种调用方式：</p>
 <ul>
@@ -1099,18 +1099,18 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 <li>传递另一个 jQuery 对象，<code>filter()</code> 会返回一个包含这两个对象交集的新 jQuery 对象；</li>
 <li>传递判断函数，<code>filter()</code> 会为每一个元素调用该判断函数，并返回包含所有函数执行结果为 true 的元素的新 jQuery 对象。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">filter</span>(<span style="color:#e6db74">&#34;.note&#34;</span>); <span style="color:#75715e">// 与 $(&#39;div.note&#39;) 一样
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">filter</span>(<span style="color:#e6db74">&#34;.note&#34;</span>); <span style="color:#75715e">// 与 $(&#39;div.note&#39;) 一样
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;.note&#34;</span>)); <span style="color:#75715e">// 与 $(&#39;div.note&#39;) 一样
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">filter</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">idx</span>) {
   <span style="color:#75715e">// 与 $(&#39;div:even&#39;) 一样
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">idx</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
 });
 </code></pre></div><p><code>not()</code> 与 <code>filter()</code> 一样，除了含义与 <code>filter()</code> 相反。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">not</span>(<span style="color:#e6db74">&#34;#header, #footer&#34;</span>); <span style="color:#75715e">// 除了两个特殊元素之外的所有 &lt;div&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">not</span>(<span style="color:#e6db74">&#34;#header, #footer&#34;</span>); <span style="color:#75715e">// 除了两个特殊元素之外的所有 &lt;div&gt; 元素
 </span></code></pre></div><p><code>has()</code> 如果传入选择器会返回一个新的 jQuery 对象，仅包含子孙元素中匹配该选择器的元素。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#34;a[href]&#34;</span>); <span style="color:#75715e">// 包含链接的段落
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>).<span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#34;a[href]&#34;</span>); <span style="color:#75715e">// 包含链接的段落
 </span></code></pre></div><p><code>add()</code> 会扩充选区，而不是对其进行过滤或提取。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div, p&#34;</span>); <span style="color:#75715e">// 使用选择器组
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div, p&#34;</span>); <span style="color:#75715e">// 使用选择器组
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 给 add() 传入选择器
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;p&#34;</span>)); <span style="color:#75715e">// 给 add() 传入 jQuery 对象
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">paras</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementByTagName</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 类数组对象
@@ -1123,22 +1123,22 @@ JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的�
 </h4>
 <p>jQuery 还定义了一些选取方法，可将当前选中元素作为上下文来使用。这些方法会使用该选中元素作为上下文或起始点，来得到新的选中元素，然后返回一个包含新选中元素并集的 jQuery 对象。</p>
 <p><code>find()</code> 会在每一个当前选中元素的子孙元素中，寻找与指定选择器匹配的元素，然后返回一个新的 jQuery 对象来代表所匹配的子孙元素集。<code>find()</code> 和 <code>filter()</code> 不同，<code>filter()</code> 不会选中新元素，只是简单地将当前选中的元素集进行缩减。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 在 &lt;div&gt; 中查找 &lt;p&gt; 元素，与 $(&#39;div p&#39;) 相同
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;div&#34;</span>).<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 在 &lt;div&gt; 中查找 &lt;p&gt; 元素，与 $(&#39;div p&#39;) 相同
 </span></code></pre></div><p><code>children()</code> 返回每一个选中元素的直接子元素，支持使用可选的选择器参数进行过滤。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 寻找 id 为 header 和 footer 元素的子节点元素中的所有 &lt;span&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 寻找 id 为 header 和 footer 元素的子节点元素中的所有 &lt;span&gt; 元素
 </span><span style="color:#75715e">// 与 $(&#39;#header&gt;span, #footer&gt;span&#39;) 相同
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#header, #fotter&#34;</span>).<span style="color:#a6e22e">childern</span>(<span style="color:#e6db74">&#34;span&#34;</span>);
 </code></pre></div><p><code>contents()</code> 与 <code>children()</code> 类似，不同的是它会返回每一个元素的所有子节点，包括文本及节点。</p>
 <p><code>next()</code> 和 <code>prev()</code> 返回每一个选中元素的下一个和上一个兄弟元素，如果传入了选择器字符串，则只会选中匹配该选择器的兄弟元素。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">next</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 与 $(&#39;h1+p&#39;) 相同
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">next</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 与 $(&#39;h1+p&#39;) 相同
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;h1&#34;</span>).<span style="color:#a6e22e">prev</span>(); <span style="color:#75715e">// &lt;h1&gt; 元素前面的兄弟元素
 </span></code></pre></div><p><code>nextAll()</code> 和 <code>prevAll()</code> 返回每一个选中元素的前面或后面所有兄弟元素。<code>siblings()</code> 则返回每一个选中元素的所有兄弟元素。如果给这些方法传入选择器，则只会返回匹配该选择器的兄弟元素。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#footer&#34;</span>).<span style="color:#a6e22e">nextAll</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 紧跟 #footer 元素的所有 &lt;p&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#footer&#34;</span>).<span style="color:#a6e22e">nextAll</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 紧跟 #footer 元素的所有 &lt;p&gt; 元素
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#footer&#34;</span>).<span style="color:#a6e22e">prevAll</span>(); <span style="color:#75715e">// #footer 元素前面的所有兄弟元素
 </span></code></pre></div><p><code>parent()</code> 返回每一个选中元素的父节点。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;li&#34;</span>).<span style="color:#a6e22e">parent</span>(); <span style="color:#75715e">// 列表元素的父节点，比如 &lt;ul&gt; 和 &lt;ol&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;li&#34;</span>).<span style="color:#a6e22e">parent</span>(); <span style="color:#75715e">// 列表元素的父节点，比如 &lt;ul&gt; 和 &lt;ol&gt; 元素
 </span></code></pre></div><p><code>parents()</code> 返回每一个选中元素的祖先节点。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;a[href]&#34;</span>).<span style="color:#a6e22e">parents</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 含有链接的 &lt;p&gt; 元素
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;a[href]&#34;</span>).<span style="color:#a6e22e">parents</span>(<span style="color:#e6db74">&#34;p&#34;</span>); <span style="color:#75715e">// 含有链接的 &lt;p&gt; 元素
 </span></code></pre></div><h4 id="恢复到之前的选中元素集">
   恢复到之前的选中元素集
   <a class="heading-link" href="#%e6%81%a2%e5%a4%8d%e5%88%b0%e4%b9%8b%e5%89%8d%e7%9a%84%e9%80%89%e4%b8%ad%e5%85%83%e7%b4%a0%e9%9b%86">
