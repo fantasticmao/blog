@@ -32,8 +32,8 @@ googleAnalytics = "UA-89151446-1"
     touchicon = "/favicons/apple-icon.png"
     since = 2016
 
-    colorScheme = "auto"
-    hideColorSchemeToggle = false
+    colorScheme = "light"
+    hideColorSchemeToggle = true
     customCSS = ["css/custom.css", "css/iconfont.css"]
 
     icpRecord = "浙ICP备17009730号"
