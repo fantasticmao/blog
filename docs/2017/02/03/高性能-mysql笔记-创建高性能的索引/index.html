@@ -21,8 +21,8 @@
 <meta property="og:description" content="摘自《高性能 MySQL》第 5 章 创建高性能的索引。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2017/02/03/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E7%AC%94%E8%AE%B0-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2017-02-03T16:24:07+08:00" />
-<meta property="article:modified_time" content="2017-02-03T16:24:07+08:00" />
+<meta property="article:published_time" content="2017-02-03T16:24:07&#43;08:00" />
+<meta property="article:modified_time" content="2017-02-03T16:24:07&#43;08:00" />
 
 
 
@@ -39,7 +39,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.531b74bda2bd1e0562323a98f617314ce9c7cc8c8cffbc609f5f690abf6ac68c.css" integrity="sha256-Uxt0vaK9HgViMjqY9hcxTOnHzIyM/7xgn19pCr9qxow=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -66,7 +66,7 @@
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.82.0" />
   </head>
 
   
@@ -192,7 +192,7 @@
 <p>B-Tree 索引能加快访问数据的速度，因为存储引擎不再需要进行全表扫描来获取需要的数据，取而代之的是从索引的根节点开始进行搜索。根节点的槽中存放了指向子节点的指针，存储引擎根据这些指针向下层查找。通过比较节点中的值和需要查找的值，找到合适的指针进入下层子节点。这些指针实际上定义了子节点中值的上限和下限。最终存储引擎要么是找到对应的值，要么是得出该值的记录不存在。</p>
 <p>B-Tree 对索引列是顺序组织存储的，所以很适合查找范围数据。例如，在一个基于文本域的索引树上，按字母顺序连续传递的值进行查找是非常合适的。索引对多个值进行排序的依据是 CREATE TABLE 语句中定义索引时列的顺序。</p>
 <p>假设有如下数据表：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> People (
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> People (
   last_name  VARCHAR(<span style="color:#ae81ff">50</span>)     <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
   first_name VARCHAR(<span style="color:#ae81ff">50</span>)     <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
   dob        DATE            <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
@@ -287,7 +287,7 @@
   </a>
 </h3>
 <p>MySQL 无法对非「独立的列」使用索引，「独立的列」指索引不能是表达式的一部分，也不能是函数的参数。例如以下的两个查询无法使用索引：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> actor_id <span style="color:#66d9ef">FROM</span> sakila.actor <span style="color:#66d9ef">WHERE</span> actor_id <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> actor_id <span style="color:#66d9ef">FROM</span> sakila.actor <span style="color:#66d9ef">WHERE</span> actor_id <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
 
 <span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">WHERE</span> TO_DAYS(<span style="color:#66d9ef">CURRENT_DATE</span>) <span style="color:#f92672">-</span> TO_DAYS(date_col) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">10</span>;
 </code></pre></div><p>我们应该养成简化 WHERE 条件的习惯，始终将索引列单独放在比较符号的一侧。</p>
@@ -301,7 +301,7 @@
 <p>不过前缀索引会降低「索引的选择性」，「索引的选择性」指不重复的索引值（基数）和数据表的记录总数（#T）的比值，范围在 1/#T 到 1 之间。索引的选择性越高则查询效率越高，因为选择性高的索引可以让 MySQL 在查找时过滤更多的行。对于 BLOB、TEXT 或者很长的 VARCHAR 类型的列，MySQL 要求必须使用索引。</p>
 <p>设计一个好的前缀索引，诀窍在于要选择足够长的前缀以保证较高的选择性，但同时也不能太长。In other words，就是要使得索引的前缀基数，尽可能地接近完整列的基数。</p>
 <p>前缀索引是一种能使索引更小，更快的有效办法，但也有其缺点：MySQL 无法使用前缀索引做 <code>ORDER BY</code> 和 <code>GROUP BY</code>，也无法使用前缀索引做覆盖扫描。下面演示一下前缀索引的语法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> db_demo <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">KEY</span> (foo(<span style="color:#ae81ff">7</span>));
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> db_demo <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">KEY</span> (foo(<span style="color:#ae81ff">7</span>));
 </code></pre></div><h3 id="多列索引">
   多列索引
   <a class="heading-link" href="#%e5%a4%9a%e5%88%97%e7%b4%a2%e5%bc%95">
@@ -309,10 +309,10 @@
   </a>
 </h3>
 <p>在多个列上建立独立的单列索引大部分情况下并不能提高 MySQL 的查询性能。例如，表 film_actor 在字段 film_id 和 actor_id 上各有一个单列索引。但对于下面这个查询 WHERE 条件，这两个单列索引都不是好的选择：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> film_id, actor_id <span style="color:#66d9ef">FROM</span> film_actor
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> film_id, actor_id <span style="color:#66d9ef">FROM</span> film_actor
 <span style="color:#66d9ef">WHERE</span> actor_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">OR</span> file_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
 </code></pre></div><p>旧版本的 MySQL 会对这个查询使用全表扫面，除非改写成如下的两个查询 UNION 的方式：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> film_id, actor_id <span style="color:#66d9ef">FROM</span> film_actor
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> film_id, actor_id <span style="color:#66d9ef">FROM</span> film_actor
 <span style="color:#66d9ef">WHERE</span> actor_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
 <span style="color:#66d9ef">SELECT</span> film_id, actor_id <span style="color:#66d9ef">FROM</span> film_actor
@@ -331,18 +331,18 @@
 </h3>
 <p>索引列的正确顺序依赖于使用该索引的查询语句，并且需要同时考虑如何更好地满足排序和分组操作。在一个多列的 B-Tree 索引中，索引列的顺序意味着索引首先按照最左列进行排序，之后是第二列，第三列等。因此索引可以按照升序或降序进行扫描，以精确满足符合查询列顺序的 <code>ORDER BY</code>、<code>GROUP BY</code> 和 <code>DISTINCT</code> 等子句的查询需求。</p>
 <p><strong>当不需要考虑排序和分组时，将选择性最高的列放在前面通常是很好的</strong>。此时索引可以作用于优化 WHERE 条件查询，从而更高效地过滤数据。然而，查询的性能并不仅是依赖于索引列的选择性（整体基数），也和查询的具体值有关（值的分布）。下面举一个列子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> payment <span style="color:#66d9ef">WHERE</span> staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">AND</span> customer_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">584</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> payment <span style="color:#66d9ef">WHERE</span> staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">AND</span> customer_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">584</span>;
 </code></pre></div><p>对于这个查询语句，该如何选择索引列的顺序呢？可以先执行一些查询，来确定查询中特定的条件值在这个表中的分布情况：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>), <span style="color:#66d9ef">SUM</span>(costomer_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">584</span>) <span style="color:#66d9ef">FROM</span> payment<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">G</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>), <span style="color:#66d9ef">SUM</span>(costomer_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">584</span>) <span style="color:#66d9ef">FROM</span> payment<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">G</span>
 <span style="color:#f92672">*************************</span> <span style="color:#ae81ff">1</span>. <span style="color:#66d9ef">row</span> <span style="color:#f92672">*************************</span>
      <span style="color:#66d9ef">SUM</span>(staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>): <span style="color:#ae81ff">7992</span>
 <span style="color:#66d9ef">SUM</span>(customer_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">584</span>): <span style="color:#ae81ff">30</span>;
 </code></pre></div><p>针对此结果，按以往的经验法则，应该将 customer_id 列放在前面，因为其条件值对应的数量更少，MySQL 可以依此过滤更多的行。这之后，我们再来看看 customer_id 条件值对应 staff_id 条件值的选择性：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">FROM</span> payment <span style="color:#66d9ef">WHERE</span> customer_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">584</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">G</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">FROM</span> payment <span style="color:#66d9ef">WHERE</span> customer_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">584</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">G</span>
 <span style="color:#f92672">*************************</span> <span style="color:#ae81ff">1</span>. <span style="color:#66d9ef">row</span> <span style="color:#f92672">*************************</span>
 <span style="color:#66d9ef">SUM</span>(staff_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>): <span style="color:#ae81ff">17</span>
 </code></pre></div><p>从以上结果得出，在 <code>customer_id = 584</code> 条件值下，<code>staff_id = 2</code> 条件值的选择性更高。但需要注意的是，这种查询结果非常依赖于某一具体的条件值。如果以这种方式优化，针对某些特定场景（如提取关键数据、查询 guest 用户）会很有效，但对于大多数业务场景，则会导致其它条件值的查询变慢，从而拖垮了服务器的整体性能。因此在选择索引列的顺序时，我们应该考虑列的整体基数和选择性，而不是仅依赖于某个查询条件的具体值：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
 <span style="color:#66d9ef">COUNT</span>(<span style="color:#66d9ef">DISTINCT</span> staff_id) <span style="color:#f92672">/</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> staff_id_selectivity,
 <span style="color:#66d9ef">COUNT</span>(<span style="color:#66d9ef">DISTINCT</span> customer_id) <span style="color:#f92672">/</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> customer_id_selectivity,
 <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>)
@@ -376,7 +376,7 @@ customer_id_selectivity: <span style="color:#ae81ff">0</span>.<span style="color
 <p>MySQL 有两种方式可以生成有序的结果：通过排序操作、通过索引顺序扫描。当 EXPLAIN 的 type 列值为「index」时，则说明了 MySQL 使用了索引扫描来做排序。</p>
 <p>MySQL 可以使用同一个索引即满足查询，又满足排序，但当只有索引列的顺序和 <code>ORDER BY</code> 子句完全一致，并且所有列的排序方向都一致时，MySQL 才能够使用索引来对结果进行排序。</p>
 <p><code>ORDER BY</code> 子句和查询语句的限制是一样的：需要满足索引的最左前缀要求。但当 <code>ORDER BY</code> 子句中前导列的值为常量时，即 WHERE 或 JOIN 子句中指定了索引列的前几项值为常量，那么就可以弥补上述限制条件的不足。下面举一个列子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> rental (
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> rental (
   ...
   <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> rental_id,
   <span style="color:#66d9ef">UNIQUE</span> <span style="color:#66d9ef">KEY</span> rental_date (rental_date, inventory_id, customer_id),
@@ -386,7 +386,7 @@ customer_id_selectivity: <span style="color:#ae81ff">0</span>.<span style="color
   ...
 )
 </code></pre></div><p>示例数据表 rental 在列 rental_date, inventory_id, customer_id 上有名为 rental_date 的索引。MySQL 可以使用 rental_date 索引为下面的查询做排序：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> rental_id, staff_id
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> rental_id, staff_id
 <span style="color:#66d9ef">FROM</span> rental
 <span style="color:#66d9ef">WHERE</span> rental_date <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2005-05-25&#39;</span>
 <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> inventory_id, customer_id<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">G</span>

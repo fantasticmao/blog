@@ -21,8 +21,8 @@
 <meta property="og:description" content="本篇文章介绍 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2017/01/02/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2017-01-02T20:12:26+08:00" />
-<meta property="article:modified_time" content="2017-01-02T20:12:26+08:00" />
+<meta property="article:published_time" content="2017-01-02T20:12:26&#43;08:00" />
+<meta property="article:modified_time" content="2017-01-02T20:12:26&#43;08:00" />
 
 
 
@@ -39,7 +39,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.531b74bda2bd1e0562323a98f617314ce9c7cc8c8cffbc609f5f690abf6ac68c.css" integrity="sha256-Uxt0vaK9HgViMjqY9hcxTOnHzIyM/7xgn19pCr9qxow=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -66,7 +66,7 @@
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.82.0" />
   </head>
 
   
@@ -183,7 +183,7 @@
   </a>
 </h3>
 <p>定义泛型类时，需在类名后添加一个尖括号包裹的 <strong>参数类型</strong>，然后在实例化类时，需要使用 <strong>具体类型</strong> 替换 <strong>参数类型</strong>。在代码中 <strong>参数类型</strong> 代表的就是类实例化时的 <strong>具体类型</strong>，如下是一个泛型类：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Generic</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Generic</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> T t<span style="color:#f92672">;</span>
 
     <span style="color:#66d9ef">public</span> T <span style="color:#a6e22e">getT</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -209,19 +209,19 @@
 </h3>
 <p>泛型类／接口对类型的泛化应用于整个类之上，而泛型方法则仅限于当前方法。《Java 编程思想》书中提供了一个编写泛型代码的基本原则：无论何时，只要你能做到，你就应该尽量使用泛型方法。这也意味着我们应该尽可能地缩小类型泛化的应用范围。</p>
 <p>需要注意的一点是，泛型类对于 static 方法是无效的。因为 JVM 在加载类的 static 方法时，此时类还处于初始化状态，类的实例也还未创建，所以类的 static 方法自然也还无法得知类的实例的 <strong>具体类型</strong>。如下例中的类是无法通过编译的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenericStaticMethod</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenericStaticMethod</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span><span style="color:#f92672">(</span>T t<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// error
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>但泛型方法对于 static 方法是生效的，因为方法级别的 <strong>参数类型</strong> 与类的实例无关，static 方法获取 <strong>具体类型</strong> 也并不依赖于类的实例。定义泛型方法，只需将 <strong>参数类型</strong> 放置于方法返回值之前即可，如下是修改上例后的泛型方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenericStaticMethod</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenericStaticMethod</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span><span style="color:#f92672">(</span>T t<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// OK
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>另外，当类中同时存在类级别和方法级别的 <strong>参数类型</strong> 时，此时方法中的参数代表的是泛型方法的 <strong>具体类型</strong>。例如，以下代码的输出结果是 <code>class java.lang.Integer</code>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenericStaticMethod</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenericStaticMethod</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span><span style="color:#f92672">(</span>T t<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>t<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
     <span style="color:#f92672">}</span>
@@ -237,7 +237,7 @@
   </a>
 </h3>
 <p>泛型类／接口／方法均可以声明多个参数类型，如典型 key-value 结构的泛型类 Map：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Map</span><span style="color:#f92672">&lt;</span>K<span style="color:#f92672">,</span>V<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Map</span><span style="color:#f92672">&lt;</span>K<span style="color:#f92672">,</span>V<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
     V <span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>Object key<span style="color:#f92672">);</span>
 
     V <span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>K key<span style="color:#f92672">,</span> V value<span style="color:#f92672">);</span>
@@ -273,7 +273,7 @@
 <p><img src="/images/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/1.png" alt="image"></p>
 <p>由于擦除现象的存在，泛型代码在不指定边界的情况下，其类定义的 <strong>参数类型</strong> 在代码运行时只能被作为 <code>java.lang.Object</code> 使用，我们因此也无法使用反射获取 <strong>具体类型</strong> 的任何信息。</p>
 <p>在 Java 泛型的具体实现中，编译器将会把泛型类在运行时的 <code>java.lang.Object</code> 类型转成编译期的 <strong>具体类型</strong>。Java 泛型的这种实现机制就好似 <a href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB">Generic 泛型类</a> 代码是如下这样编写的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Generic</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Generic</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> Object t<span style="color:#f92672">;</span>
 
     <span style="color:#66d9ef">public</span> T <span style="color:#a6e22e">getT</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -293,7 +293,7 @@
 <p>为了明确类在运行时的 <strong>具体类型</strong>，我们可以使用 Java 泛型的 <a href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%92%8C%E8%BE%B9%E7%95%8C">边界</a> 来指定擦除的边界。将 <a href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB">Generic 泛型类</a> 的 <strong>参数类型</strong> 调整为 <code>&lt;T extends Number&gt;</code> 然后再次进行反编译，结果如下图。可见此时的 <strong>参数类型</strong> 在代码运行时确实仅被擦除到了 <code>java.lang.Number</code> 类型，我们也由此可以在泛型代码中调用 <code>java.lang.Number</code> 的所有属性和方法。</p>
 <p><img src="/images/Java%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/2.png" alt="image"></p>
 <p>除此之外，我们还可以通过显示地传入 <code>java.lang.Class</code> 对象，结合使用反射来弥补一些泛型擦导致的缺陷。以及，数组类型的泛型定义可以通过 <code>List&lt;T&gt;</code> 来替换。如下所示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Erased</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Erased</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> T t<span style="color:#f92672">;</span>
 
     <span style="color:#75715e">// Bad Demo
