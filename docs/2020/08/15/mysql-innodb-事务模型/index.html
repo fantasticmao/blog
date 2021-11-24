@@ -5,14 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Language" content="zh-cn">
+    <meta name="color-scheme" content="light dark">
+
+    
 
     <meta name="author" content="FantasticMao">
     <meta name="description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 事务模型的一些笔记。">
     <meta name="keywords" content="MySQL,InnoDB,Transaction Model,事务模型,Isolation Levels,隔离级别">
-    
-    
-    
-    
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MySQL InnoDB 事务模型"/>
@@ -22,14 +21,11 @@
 <meta property="og:description" content="本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 事务模型的一些笔记。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-08-15T13:11:00&#43;08:00" />
-<meta property="article:modified_time" content="2020-08-15T13:11:00&#43;08:00" />
+<meta property="article:published_time" content="2020-08-15T13:11:00+08:00" />
+<meta property="article:modified_time" content="2020-08-15T13:11:00+08:00" />
 
 
 
-    
-      <base href="https://blog.fantasticmao.cn/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/">
-    
     <title>
   MySQL InnoDB 事务模型 · FantasticMao&#39;s Blog
 </title>
@@ -38,36 +34,60 @@
       <link rel="canonical" href="https://blog.fantasticmao.cn/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/">
     
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.c884c9ebf7b9aeed5fc748f64d6575016297c22227fb677bc4429bbed48d2d9b.css" integrity="sha256-yITJ6/e5ru1fx0j2TWV1AWKXwiIn&#43;2d7xEKbvtSNLZs=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
     
 
     
 
     
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.ccbbada2e264e4fdbf9b2181cccc2cdb289a63dc9520a1e96ac2b9a45778df29.css" integrity="sha256-zLutouJk5P2/myGBzMws2yiaY9yVIKHpasK5pFd43yk=" crossorigin="anonymous" media="screen" />
+      
+    
 
     
-      <link rel="stylesheet" href="/css/custom.css" />
+      
+        
+        <link rel="stylesheet" href="/css/custom.min.2685291725b6d042c0198f421a0525b7848d32a12d1b9820643b45b323a07f66.css" integrity="sha256-JoUpFyW20ELAGY9CGgUlt4SNMqEtG5ggZDtFsyOgf2Y=" crossorigin="anonymous" media="screen" />
+      
+    
+      
+        
+        <link rel="stylesheet" href="/css/iconfont.min.32b99889c89209520626825143ed9241cc4ffbe7b6f911b5a26e6a34c89721da.css" integrity="sha256-MrmYiciSCVIGJoJRQ&#43;2SQcxP&#43;&#43;e2&#43;RG1om5qNMiXIdo=" crossorigin="anonymous" media="screen" />
+      
     
 
     
 
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="shortcut icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="apple-touch-icon" type="image/png" href="https://blog.fantasticmao.cn/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
+
+    <meta name="generator" content="Hugo 0.89.4" />
   </head>
 
   
   
-  <body class="colorscheme-light">
+    
+  
+  <body class="preload-transitions colorscheme-auto">
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
@@ -142,9 +162,13 @@
 
           <div class="tags">
   <i class="fa fa-tag" aria-hidden="true"></i>
-    <a href="/tags/mysql/">MySQL</a>
+    <span class="tag">
+      <a href="/tags/mysql/">MySQL</a>
+    </span>
       <span class="separator">•</span>
-    <a href="/tags/innodb/">InnoDB</a></div>
+    <span class="tag">
+      <a href="/tags/innodb/">InnoDB</a>
+    </span></div>
 
         </div>
       </header>
@@ -187,34 +211,34 @@
 <li>对于 UPDATE 语句，如果行已经被锁定，InnoDB 会执行「半一致性读取」，它会将最新提交的版本返回给 MySQL，以便 MySQL 可以确定该行是否与 UPDATE 语句里的 WHERE 条件匹配。如果该行匹配成功（必须被更新），MySQL 会再次读取该行，并且在这一次中 InnoDB 会锁定该行或者等待锁定该行。</li>
 </ul>
 <p>考虑下面的例子，从表的定义开始：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t (a INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, b INT) ENGINE <span style="color:#f92672">=</span> InnoDB;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t (a INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, b INT) ENGINE <span style="color:#f92672">=</span> InnoDB;
 <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> t <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>),(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>),(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>),(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">2</span>);
 <span style="color:#66d9ef">COMMIT</span>;
 </code></pre></div><p>在这种情况下，该表还没有索引，所以查询和索引扫描会使用隐藏的聚簇索引（更多内容请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-index-types.html">Clustered and Secondary Indexes</a>）而不是索引列来锁定记录。</p>
 <p>假设有一个会话，它使用了这些语句来执行 UPDATE：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">#</span> <span style="color:#66d9ef">Session</span> A
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">#</span> <span style="color:#66d9ef">Session</span> A
 <span style="color:#66d9ef">START</span> <span style="color:#66d9ef">TRANSACTION</span>;
 <span style="color:#66d9ef">UPDATE</span> t <span style="color:#66d9ef">SET</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#66d9ef">WHERE</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
 </code></pre></div><p>同时假设有第二个会话，它在第一个会话之后使用了这些语句来执行 UPDATE：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">#</span> <span style="color:#66d9ef">Session</span> B
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">#</span> <span style="color:#66d9ef">Session</span> B
 <span style="color:#66d9ef">UPDATE</span> t <span style="color:#66d9ef">SET</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span> <span style="color:#66d9ef">WHERE</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
 </code></pre></div><p>InnoDB 在执行每个 UPDATE 的时候，它会首先在各行上获取排它锁，然后再确定是否要对其进行修改。如果 InnoDB 不会修改该行，它将会释放锁。否则，InnoDB 会保留该锁直到事务结束。这会影响事务的处理，如下所示。</p>
 <p>当使用默认的 REPEATABLE READ 隔离级别时，第一个 UPDATE 会在它读取的每行上获取一个 X 锁，并且不会释放其中的任何一个：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">x-lock(1,2); retain x-lock
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">x-lock(1,2); retain x-lock
 x-lock(2,3); update(2,3) to (2,5); retain x-lock
 x-lock(3,2); retain x-lock
 x-lock(4,3); update(4,3) to (4,5); retain x-lock
 x-lock(5,2); retain x-lock
 </code></pre></div><p>第二个 UPDATE 在尝试获取任何一个锁的时候会被阻塞（因为第一个 UPDATE 已经持有了所有行的锁），并且直到第一个 UPDATE 提交或者回滚之前不会继续执行：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">x-lock(1,2); block and wait for first UPDATE to commit or roll back
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">x-lock(1,2); block and wait for first UPDATE to commit or roll back
 </code></pre></div><p>如果改用 READ COMMITTED 隔离级别时，第一个 UPDATE 会在它读取的每行上获取一个 X 锁，并且会释放它不会修改的行上的锁：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">x-lock(1,2); unlock(1,2)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">x-lock(1,2); unlock(1,2)
 x-lock(2,3); update(2,3) to (2,5); retain x-lock
 x-lock(3,2); unlock(3,2)
 x-lock(4,3); update(4,3) to (4,5); retain x-lock
 x-lock(5,2); unlock(5,2)
 </code></pre></div><p>然而，如果 WHERE 条件包括了索引列，并且 InnoDB 使用了索引，那么在设置和保留记录锁的时候，只有索引列才会被考虑。在下面的例子中，第一个 UDPATE 设置和保留了 b = 2 的行上的 X 锁。第二个 UPDATE 会在尝试获取相同记录上的 X 锁时被阻塞，因为它也使用了在 b 列上定义的索引。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t (a INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, b INT, <span style="color:#66d9ef">c</span> INT, <span style="color:#66d9ef">INDEX</span> (b))  ENGINE <span style="color:#f92672">=</span> InnoDB;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t (a INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, b INT, <span style="color:#66d9ef">c</span> INT, <span style="color:#66d9ef">INDEX</span> (b))  ENGINE <span style="color:#f92672">=</span> InnoDB;
 <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> t <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>);
 <span style="color:#66d9ef">COMMIT</span>;
 
@@ -261,7 +285,7 @@ x-lock(5,2); unlock(5,2)
 <p>你可以通过提交你的事务来推进你的时间点，然后执行另一个 SELECT 或者 START TRANSACTION WITH CONSISTENT SNAPSHOT。</p>
 <p>这被称为 <strong>多版本并发控制（multi-versioned concurrency control，MVCC）</strong>。</p>
 <p>在下面的例子中，会话 A 仅会在 B 已经提交了插入操作并且 A 也已经提交时，才能看到 B 插入的行，以便时间点被推进至 B 的提交之后。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">             <span style="color:#66d9ef">Session</span> A              <span style="color:#66d9ef">Session</span> B
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">             <span style="color:#66d9ef">Session</span> A              <span style="color:#66d9ef">Session</span> B
 
            <span style="color:#66d9ef">SET</span> autocommit<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;      <span style="color:#66d9ef">SET</span> autocommit<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
 time
@@ -283,7 +307,7 @@ v          <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672"
 </span><span style="color:#75715e"></span>           <span style="color:#f92672">|</span>    <span style="color:#ae81ff">1</span>    <span style="color:#f92672">|</span>    <span style="color:#ae81ff">2</span>    <span style="color:#f92672">|</span>
            <span style="color:#75715e">---------------------
 </span></code></pre></div><p>如果你希望看到数据库的「最新」状态，那么请使用 READ COMMITTED 隔离级别或者 <a href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_locking_read">锁定读取</a>：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">SHARE</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">SHARE</span>;
 </code></pre></div><p>在 READ COMMITTED 隔离级别中，事务中的每个一致性读取都会设置和读取它自己的新快照。在 FOR SHARE 中，会发生锁定读取：SELECT 会一直阻塞，直到包含最新状态的事务结束（更多内容请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-reads.html">Locking Reads</a>）。</p>
 <p>一致性读取不适用于某些 DDL 语句：</p>
 <ul>
@@ -318,9 +342,9 @@ v          <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672"
 <p>这些子句在单个表或者被拆分的多个表中，处理树状结构或者图状结构的数据时特别有用。当你可以从树的边缘或者分支的一处遍历到另一处，同时还可以保留回退和更改任何这些「指针」值的权利。</p>
 <p>所有通过 FOR SHARE 和 FOR UPDATE 查询设置的锁，会在事务提交或者回滚的时候被释放。</p>
 <p>除非在子查询中也指定了锁定读取的子句，不然外部语句中的锁定读取不会锁定嵌套在子查询中的表中的行。例如，下面的语句不会锁定 t2 表中的行：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t1 <span style="color:#66d9ef">WHERE</span> c1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> c1 <span style="color:#66d9ef">FROM</span> t2) <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t1 <span style="color:#66d9ef">WHERE</span> c1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> c1 <span style="color:#66d9ef">FROM</span> t2) <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>;
 </code></pre></div><p>为了锁定 t2 表中的行，需要在子查询中添加锁定读取的子句：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t1 <span style="color:#66d9ef">WHERE</span> c1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> c1 <span style="color:#66d9ef">FROM</span> t2 <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>) <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t1 <span style="color:#66d9ef">WHERE</span> c1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">SELECT</span> c1 <span style="color:#66d9ef">FROM</span> t2 <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>) <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>;
 </code></pre></div><hr>
 <h2 id="参考资料">
   参考资料
@@ -345,7 +369,7 @@ v          <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672"
         
         
         <script src="https://utteranc.es/client.js"
-    repo= "fantasticmao/blog"
+    repo= "fantasticmao/fantasticmao.github.io"
     issue-term="pathname"
     label="comment"
     theme="github-light"
@@ -360,37 +384,34 @@ v          <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672"
 
       </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-      
-        ©
-        
-          2016 -
-        
-        2021
-         FantasticMao 
-      
-      
-         · 
-        技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
-      
-      
-        · CDN
-        <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
-          <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
-        </a>
-      
-      
-      
-        <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
-      
-    </section>
-  </footer>
-
-
+      <footer class="footer">
+  <section class="container">
+    ©
+    
+      2016 -
+    
+    2021
+     FantasticMao 
+    ·
+    技术支持 <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>
+    
+      · CDN
+      <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">
+        <img src="/images/upyun_logos/又拍云_logo5.png" style="width: 60px; margin-bottom: -8px"></img>
+      </a>
+    
+    
+    
+      <p><a href="https://beian.miit.gov.cn/" target="_blank" ref="nofollow">浙ICP备17009730号</a></p>
+    
+  </section>
+</footer>
     </main>
+
+    
+      
+      <script src="/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js" integrity="sha256-A7F3afT5GuNWZ&#43;HyocqMFvUFYlds&#43;Q/zKzF5kmkU2qU="></script>
+    
 
     
 
@@ -410,6 +431,15 @@ if (!doNotTrack) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
   </body>
 
 </html>
