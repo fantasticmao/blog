@@ -21,8 +21,8 @@
 <meta property="og:description" content="这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-02-21T20:00:00&#43;08:00" />
-<meta property="article:modified_time" content="2020-02-21T20:00:00&#43;08:00" />
+<meta property="article:published_time" content="2020-02-21T20:00:00+08:00" />
+<meta property="article:modified_time" content="2020-02-21T20:00:00+08:00" />
 
 
 
@@ -39,7 +39,7 @@
     
       
       
-      <link rel="stylesheet" href="/css/coder.min.531b74bda2bd1e0562323a98f617314ce9c7cc8c8cffbc609f5f690abf6ac68c.css" integrity="sha256-Uxt0vaK9HgViMjqY9hcxTOnHzIyM/7xgn19pCr9qxow=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css" integrity="sha256-2f3b/&#43;byfmmYXcX&#43;BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -66,7 +66,7 @@
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.82.0" />
+    <meta name="generator" content="Hugo 0.89.4" />
   </head>
 
   
@@ -174,11 +174,11 @@
 </blockquote>
 <p>大部分 Unix / Linux 系统都内置了 <code>ssh</code> 命令，用于在本机启动 SSH 客户端程序，建立与远程主机安全的连接。<code>ssh</code> 命令可以用于登录远程主机，在两台主机之间传输文件，以及在远程主机上执行命令。</p>
 <p>使用 <code>ssh</code> 登录远程主机非常简单，常用形式如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host
 </code></pre></div><p>使用 <code>ssh</code> 第一次连接到某台远程主机时，用户需要遵循提示，将这台远程主机的 host key 保存到本机的 <code>~/.ssh/known_hosts</code> 文件中。</p>
 <p>使用 <code>ssh</code> 与远程主机建立连之后，用户需要输入密码进行身份认证。在身份认证成功之后，用户便会进入远程主机的 shell prompt（即等待用户输入 shell 命令的交互界面）。</p>
 <p><code>ssh</code> 也经常被用于这样的场景：无需登录至远程主机的 shell prompt 进行交互，可以直接执行远程主机上的命令，并返回执行结果至当前主机。在这种场景中，可以使用如下形式的 <code>ssh</code> 命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host <span style="color:#f92672">[</span>command<span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh <span style="color:#f92672">[</span>-p port<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host <span style="color:#f92672">[</span>command<span style="color:#f92672">]</span>
 </code></pre></div><p><code>ssh</code> 默认会从用户级别的 <code>~/.ssh/config</code> 文件和系统级别的 <code>/etc/ssh/ssh_config</code> 文件读取 ssh 配置数据。<code>ssh</code> 命令行中的配置选项优先级最高，其次是用户级别的配置文件，再其次是系统级别的配置文件。<code>ssh</code> 配置文件的语法如下：</p>
 <ul>
 <li>空格和以 <code>#</code> 开头的行会被忽略；</li>
@@ -187,7 +187,7 @@
 <li>可以使用双引号（<code>&quot;</code>）将参数括起来，用于指定包含空格的参数。</li>
 </ul>
 <p><code>ssh</code> 配置文件中包含多台主机的配置以 <strong>Host</strong> 或者 <strong>Match</strong> 关键字分隔，并且每个部分的配置都会只应用于匹配模式成功的主机。<code>ssh</code> 配置文件中的关键字不区分大小写，但参数值区分大小写。一个简单的 <code>ssh</code> 配置文件如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">~$ cat ~/.ssh/config
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">~$ cat ~/.ssh/config
 <span style="color:#75715e"># 阿里云</span>
 Host aliyun
 HostName 11.22.33.44
@@ -224,7 +224,7 @@ Port <span style="color:#ae81ff">22222</span>
 <p>官方文档：<a href="https://www.ssh.com/ssh/copy-id">https://www.ssh.com/ssh/copy-id</a></p>
 </blockquote>
 <p>在 SSH 中为了使用公共密钥认证（public key authentication）技术来对用户进行身份认证，公钥必须被拷贝至服务端，并需要被添加到 <code>./ssh/authorized_keys</code> 文件中。可以使用 <code>ssh-copy-id</code> 命令很方便地完成此操作，如下所示：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh-copy-id -i ~/.ssh/id_rsa user@host
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh-copy-id -i ~/.ssh/id_rsa user@host
 </code></pre></div><p>在服务端配置了公钥之后，服务端将会允许携带密钥的所有正在连接中的用户登录。在登录过程中，客户端通过对 <a href="https://en.wikipedia.org/wiki/Key_exchange">密钥交换（Key Exchange）</a> 进行 <a href="https://en.wikipedia.org/wiki/Digital_signature">数字签名（Digitally Signing）</a> 来证明客户端是拥有密钥的。</p>
 <h2 id="ssh-agent">
   ssh-agent
@@ -238,7 +238,7 @@ Port <span style="color:#ae81ff">22222</span>
 <p><code>ssh-agent</code> 是一个帮助程序，用于跟踪用户的身份密钥（私钥）和密码短语。<code>ssh-agent</code> 可以使用密钥直接登录远程主机，而无需用户再次输入密码短语。<code>ssh-agent</code> 通过这种形式实现了单点登录（single sign-on）。</p>
 <p><code>ssh-agent</code> 被用于 SSH 公共密钥认证，它需要使用 SSH 密钥。用户可以使用 <code>ssh-kengen</code> 命令创建 SSH 密钥，然后使用 <code>ssh-copy-id</code> 命令在远程主机上安装 SSH 密钥。</p>
 <p>在大部分 Linux 系统中，<code>ssh-agent</code> 会被自动配置，并且会在用户登录时自动运行，用户不需要其它操作既可直接使用 <code>ssh-agent</code>。如果 <code>ssh-agent</code> 没有被配置为在登录时运行，它也可以通过以下命令手动运行：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">eval <span style="color:#e6db74">`</span>ssh-agent<span style="color:#e6db74">`</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">eval <span style="color:#e6db74">`</span>ssh-agent<span style="color:#e6db74">`</span>
 </code></pre></div><h2 id="ssh-add">
   ssh-add
   <a class="heading-link" href="#ssh-add">
@@ -262,11 +262,11 @@ Port <span style="color:#ae81ff">22222</span>
 </blockquote>
 <p><code>scp</code> 是一个使用 SSH 协议在多台主机之间复制文件的程序。大部分 Unix / Linux 系统都内置了 <code>scp</code> 命令。</p>
 <p>使用 <code>scp</code> 复制文件至远程主机的命令如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp file ... <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>path<span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp file ... <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>path<span style="color:#f92672">]</span>
 </code></pre></div><p>使用 <code>scp</code> 从远程主机复制文件的命令如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>file<span style="color:#f92672">]</span> ... path
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>file<span style="color:#f92672">]</span> ... path
 </code></pre></div><p>使用 <code>scp</code> 复制整个目录时，需要添加 <code>-r</code> 选项：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp -r <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>path/directory<span style="color:#f92672">]</span> path
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scp -r <span style="color:#f92672">[</span>user@<span style="color:#f92672">]</span>host:<span style="color:#f92672">[</span>path/directory<span style="color:#f92672">]</span> path
 </code></pre></div><h2 id="sftp">
   sftp
   <a class="heading-link" href="#sftp">
