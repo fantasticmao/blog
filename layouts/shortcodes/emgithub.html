@@ -1,9 +1,8 @@
 {{/* DEFAULTS */}}
-{{ $style             := "github" }}
-{{ $showBorder        := "on" }}
-{{ $showLineNumbers   := "on" }}
-{{ $showFileMeta      := "on" }}
-{{ $showCopy          := "on" }}
-{{ $fetchFromJsDelivr := "on" }}
+{{ $style           := "github" }}
+{{ $showBorder      := "on" }}
+{{ $showLineNumbers := "on" }}
+{{ $showFileMeta    := "on" }}
+{{ $showCopy        := "on" }}
 
-<script type="application/javascript" src="https://emgithub.com/embed.js?target={{ .Get "url" }}&style={{ $style }}&showBorder={{ $showBorder }}&showLineNumbers={{ $showLineNumbers }}&showFileMeta={{ $showFileMeta }}&showCopy={{ $showCopy }}&fetchFromJsDelivr={{ $fetchFromJsDelivr }}"></script>
+<script type="application/javascript" src="https://emgithub.com/embed.js?target={{ .Get "url" }}&style={{ $style }}&showBorder={{ $showBorder }}&showLineNumbers={{ $showLineNumbers }}&showFileMeta={{ $showFileMeta }}&showCopy={{ $showCopy }}"></script>
