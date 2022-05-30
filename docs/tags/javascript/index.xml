@@ -16,15 +16,5 @@
       <description>&lt;p&gt;因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 &lt;a href=&#34;https://vuejs.bootcss.com/v2/guide/&#34;&gt;Vue&lt;/a&gt; 和 &lt;a href=&#34;https://element.eleme.cn/#/zh-CN&#34;&gt;Element&lt;/a&gt;，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title>《JavaScript 权威指南》笔记 - jQuery 类库</title>
-      <link>https://blog.fantasticmao.cn/2017/04/21/javascript-%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0-jquery-%E7%B1%BB%E5%BA%93/</link>
-      <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2017/04/21/javascript-%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0-jquery-%E7%B1%BB%E5%BA%93/</guid>
-      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/10549733/&#34;&gt;《JavaScript 权威指南》&lt;/a&gt;第 19 章 jQuery 类库。&lt;/p&gt;
-&lt;p&gt;JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>

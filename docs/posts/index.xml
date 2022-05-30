@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>我玩过的游戏</title>
-      <link>https://blog.fantasticmao.cn/2021/04/10/%E6%88%91%E7%8E%A9%E8%BF%87%E7%9A%84%E6%B8%B8%E6%88%8F/</link>
-      <pubDate>Sat, 10 Apr 2021 01:18:33 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2021/04/10/%E6%88%91%E7%8E%A9%E8%BF%87%E7%9A%84%E6%B8%B8%E6%88%8F/</guid>
-      <description>&lt;p&gt;在哔哩哔哩可以记录我看过的动画，在豆瓣可以记录我看过的电影和书，在 GitHub 可以记录我捣鼓过的代码，但是似乎没有一个地方可以很好地记录我玩过的游戏（Steam 个人资料中不会包含各大主机平台的独占游戏），这就是本篇博客文章诞生的原因了。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>给女朋友科普计算机知识的日常 - 域名和 IP 的关系</title>
       <link>https://blog.fantasticmao.cn/2021/03/24/%E7%BB%99%E5%A5%B3%E6%9C%8B%E5%8F%8B%E7%A7%91%E6%99%AE%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86%E7%9A%84%E6%97%A5%E5%B8%B8-%E5%9F%9F%E5%90%8D%E5%92%8C-ip-%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
       <pubDate>Wed, 24 Mar 2021 14:23:09 +0800</pubDate>
@@ -68,42 +59,6 @@
       
       <guid>https://blog.fantasticmao.cn/2020/09/10/mysql-innodb-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/</guid>
       <description>&lt;p&gt;本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MySQL InnoDB 事务模型</title>
-      <link>https://blog.fantasticmao.cn/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/</link>
-      <pubDate>Sat, 15 Aug 2020 13:11:00 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2020/08/15/mysql-innodb-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B/</guid>
-      <description>&lt;p&gt;本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 事务模型的一些笔记。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MySQL InnoDB 锁</title>
-      <link>https://blog.fantasticmao.cn/2020/07/17/mysql-innodb-%E9%94%81/</link>
-      <pubDate>Fri, 17 Jul 2020 14:02:28 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2020/07/17/mysql-innodb-%E9%94%81/</guid>
-      <description>&lt;p&gt;本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 锁的一些笔记。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MySQL InnoDB 多版本</title>
-      <link>https://blog.fantasticmao.cn/2020/06/26/mysql-innodb-%E5%A4%9A%E7%89%88%E6%9C%AC/</link>
-      <pubDate>Fri, 26 Jun 2020 01:03:00 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2020/06/26/mysql-innodb-%E5%A4%9A%E7%89%88%E6%9C%AC/</guid>
-      <description>&lt;p&gt;本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 多版本的一些笔记。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MySQL InnoDB 和 ACID 模型</title>
-      <link>https://blog.fantasticmao.cn/2020/06/19/mysql-innodb-%E5%92%8C-acid-%E6%A8%A1%E5%9E%8B/</link>
-      <pubDate>Fri, 19 Jun 2020 17:26:26 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2020/06/19/mysql-innodb-%E5%92%8C-acid-%E6%A8%A1%E5%9E%8B/</guid>
-      <description>&lt;p&gt;本篇文章记录自己在阅读 MySQL Reference Manual 时候，关于 InnoDB 和 ACID 模型的一些笔记。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -152,16 +107,6 @@
     </item>
     
     <item>
-      <title>《深入理解 Java 虚拟机》笔记 - Java 内存模型与线程</title>
-      <link>https://blog.fantasticmao.cn/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
-      <pubDate>Sun, 01 Jul 2018 19:16:50 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2018/07/01/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%94%E8%AE%B0-java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
-      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt; 第 12 章 Java 内存模型与线程。&lt;/p&gt;
-&lt;p&gt;并发处理的广泛应用是使得 &lt;a href=&#34;https://en.wikipedia.org/wiki/Amdahl&#39;s_law&#34;&gt;Amdahl 定律&lt;/a&gt; 代替 &lt;a href=&#34;https://en.wikipedia.org/wiki/Moore&#39;s_law&#34;&gt;Moore 定律&lt;/a&gt; 成为计算机性能发展源动力的根本原因，也是人类「压榨」计算机运算能力的最有力武器。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Vim 常用命令</title>
       <link>https://blog.fantasticmao.cn/2018/03/31/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
@@ -190,15 +135,6 @@
     </item>
     
     <item>
-      <title>《写给大家看的设计书》笔记 - 设计原则</title>
-      <link>https://blog.fantasticmao.cn/2017/10/04/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6%E7%AC%94%E8%AE%B0-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</link>
-      <pubDate>Wed, 04 Oct 2017 10:23:57 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2017/10/04/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6%E7%AC%94%E8%AE%B0-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</guid>
-      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/26664522/&#34;&gt;《写给大家看的设计书》&lt;/a&gt;第一部分 —— 设计原则。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>如何快速上手一个框架</title>
       <link>https://blog.fantasticmao.cn/2017/09/14/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
@@ -207,34 +143,6 @@
       <description>&lt;p&gt;大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 &lt;code&gt;System.out.println()&lt;/code&gt; 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。&lt;/p&gt;
 &lt;p&gt;有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。&lt;/p&gt;
 &lt;p&gt;开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的主题 —— 关于使用框架的方法论。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>《JavaScript 权威指南》笔记 - jQuery 类库</title>
-      <link>https://blog.fantasticmao.cn/2017/04/21/javascript-%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0-jquery-%E7%B1%BB%E5%BA%93/</link>
-      <pubDate>Fri, 21 Apr 2017 15:44:01 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2017/04/21/javascript-%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0-jquery-%E7%B1%BB%E5%BA%93/</guid>
-      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/10549733/&#34;&gt;《JavaScript 权威指南》&lt;/a&gt;第 19 章 jQuery 类库。&lt;/p&gt;
-&lt;p&gt;JavaScript 的核心 API 设计的很简单，但由于不同浏览器之间的严重不兼容，导致客户端的 API 过于复杂。使用 JavaScript 框架或工具类库能简化通用操作，能隐藏浏览器之间的差异，这让很多程序员在开发 Web 应用时变得更简单。撰写本书时，最流行和广泛采用的类库之一就是 jQuery。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>《高性能 MySQL》笔记 - 创建高性能的索引</title>
-      <link>https://blog.fantasticmao.cn/2017/02/03/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E7%AC%94%E8%AE%B0-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/</link>
-      <pubDate>Fri, 03 Feb 2017 16:24:07 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2017/02/03/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E7%AC%94%E8%AE%B0-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/</guid>
-      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/23008813/&#34;&gt;《高性能 MySQL》&lt;/a&gt;第 5 章 创建高性能的索引。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>《高性能 MySQL》笔记 - Schema 与数据类型优化</title>
-      <link>https://blog.fantasticmao.cn/2017/01/25/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E7%AC%94%E8%AE%B0-schema-%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Wed, 25 Jan 2017 12:20:03 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2017/01/25/%E9%AB%98%E6%80%A7%E8%83%BD-mysql%E7%AC%94%E8%AE%B0-schema-%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/</guid>
-      <description>&lt;p&gt;摘自&lt;a href=&#34;https://book.douban.com/subject/23008813/&#34;&gt;《高性能 MySQL》&lt;/a&gt;第 4 章 Schema 与数据类型优化。&lt;/p&gt;</description>
     </item>
     
     <item>
