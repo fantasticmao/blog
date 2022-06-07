@@ -13,7 +13,7 @@ enableEmoji = true
 googleAnalytics = "UA-89151446-1"
 
 [permalinks]
-    posts = "/:year/:month/:day/:title/"
+    posts = "/:year/:month/:day/:filename/"
 
 [markup]
     [markup.goldmark]
