@@ -9,137 +9,137 @@
     <lastBuildDate>Tue, 20 Apr 2021 15:00:00 +0800</lastBuildDate><atom:link href="https://blog.fantasticmao.cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>给女朋友科普计算机知识的日常 - 生活中的进位制</title>
-      <link>https://blog.fantasticmao.cn/2021/04/20/%E7%BB%99%E5%A5%B3%E6%9C%8B%E5%8F%8B%E7%A7%91%E6%99%AE%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86%E7%9A%84%E6%97%A5%E5%B8%B8-%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%BF%9B%E4%BD%8D%E5%88%B6/</link>
+      <link>https://blog.fantasticmao.cn/2021/04/20/teach-girlfriend-computer-knowledge-carry-system-in-life/</link>
       <pubDate>Tue, 20 Apr 2021 15:00:00 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2021/04/20/%E7%BB%99%E5%A5%B3%E6%9C%8B%E5%8F%8B%E7%A7%91%E6%99%AE%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86%E7%9A%84%E6%97%A5%E5%B8%B8-%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%BF%9B%E4%BD%8D%E5%88%B6/</guid>
+      <guid>https://blog.fantasticmao.cn/2021/04/20/teach-girlfriend-computer-knowledge-carry-system-in-life/</guid>
       <description>&lt;p&gt;无意间发现自己会时常友好（强行）地和女朋科普（灌输）一些计算机相关概念和知识，今天忽然觉得这些对话还是蛮有意思的，于是准备把这些对话一点点地记录下来，形成一系列长期维护的博客文章。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>给女朋友科普计算机知识的日常 - 域名和 IP 的关系</title>
-      <link>https://blog.fantasticmao.cn/2021/03/24/%E7%BB%99%E5%A5%B3%E6%9C%8B%E5%8F%8B%E7%A7%91%E6%99%AE%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86%E7%9A%84%E6%97%A5%E5%B8%B8-%E5%9F%9F%E5%90%8D%E5%92%8C-ip-%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
+      <link>https://blog.fantasticmao.cn/2021/03/24/teach-girlfriend-computer-knowledge-domain-names-and-ip/</link>
       <pubDate>Wed, 24 Mar 2021 14:23:09 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2021/03/24/%E7%BB%99%E5%A5%B3%E6%9C%8B%E5%8F%8B%E7%A7%91%E6%99%AE%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86%E7%9A%84%E6%97%A5%E5%B8%B8-%E5%9F%9F%E5%90%8D%E5%92%8C-ip-%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
+      <guid>https://blog.fantasticmao.cn/2021/03/24/teach-girlfriend-computer-knowledge-domain-names-and-ip/</guid>
       <description>&lt;p&gt;无意间发现自己会时常友好（强行）地和女朋科普（灌输）一些计算机相关概念和知识，今天忽然觉得这些对话还是蛮有意思的，于是准备把这些对话一点点地记录下来，形成一系列长期维护的博客文章。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Java GC 案例两则</title>
-      <link>https://blog.fantasticmao.cn/2020/11/25/java-gc-%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/</link>
+      <title>Java CMS GC 优化案例两则</title>
+      <link>https://blog.fantasticmao.cn/2020/11/25/java-cms-gc-optimizations/</link>
       <pubDate>Wed, 25 Nov 2020 23:00:00 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2020/11/25/java-gc-%E6%A1%88%E4%BE%8B%E4%B8%A4%E5%88%99/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/11/25/java-cms-gc-optimizations/</guid>
       <description>&lt;p&gt;本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 &lt;code&gt;-XX:+UseConcMarkSweepGC&lt;/code&gt; 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>《Unix 环境高级编程》谈及的几种 IO 模型</title>
-      <link>https://blog.fantasticmao.cn/2020/11/18/unix-%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%B0%88%E5%8F%8A%E7%9A%84%E5%87%A0%E7%A7%8D-io-%E6%A8%A1%E5%9E%8B/</link>
+      <link>https://blog.fantasticmao.cn/2020/11/18/io-models-mentioned-in-apue/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2020/11/18/unix-%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E8%B0%88%E5%8F%8A%E7%9A%84%E5%87%A0%E7%A7%8D-io-%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/11/18/io-models-mentioned-in-apue/</guid>
       <description>&lt;p&gt;本篇文章记录自己在阅读 &lt;a href=&#34;https://book.douban.com/subject/25900403/&#34;&gt;《Unix 环境高级编程》&lt;/a&gt; 时候，关于书中谈及的几种 IO 模型的一些笔记。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Java ThreadPoolExecutor 源码分析</title>
-      <link>https://blog.fantasticmao.cn/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+      <link>https://blog.fantasticmao.cn/2020/10/01/java-source-code-reading-for-threadpoolexecutor/</link>
       <pubDate>Thu, 01 Oct 2020 18:41:53 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2020/10/01/java-threadpoolexecutor-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/10/01/java-source-code-reading-for-threadpoolexecutor/</guid>
       <description>&lt;p&gt;本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 &lt;a href=&#34;#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86&#34;&gt;状态管理&lt;/a&gt;、&lt;a href=&#34;#%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1&#34;&gt;提交任务&lt;/a&gt;、&lt;a href=&#34;#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1&#34;&gt;执行任务&lt;/a&gt;、&lt;a href=&#34;#%E5%9B%9E%E6%94%B6%E7%BA%BF%E7%A8%8B&#34;&gt;回收线程&lt;/a&gt; 和 &lt;a href=&#34;#%E6%8B%92%E7%BB%9D%E4%BB%BB%E5%8A%A1&#34;&gt;拒绝任务&lt;/a&gt; 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>MySQL InnoDB 事务隔离级别实践</title>
-      <link>https://blog.fantasticmao.cn/2020/09/10/mysql-innodb-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/</link>
+      <link>https://blog.fantasticmao.cn/2020/09/10/mysql-innodb-transaction-isolation-level-practice/</link>
       <pubDate>Thu, 10 Sep 2020 15:58:10 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2020/09/10/mysql-innodb-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E8%B7%B5/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/09/10/mysql-innodb-transaction-isolation-level-practice/</guid>
       <description>&lt;p&gt;本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Java JNI 简单实践</title>
-      <link>https://blog.fantasticmao.cn/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</link>
+      <link>https://blog.fantasticmao.cn/2020/05/18/java-jni-practice/</link>
       <pubDate>Mon, 18 May 2020 20:40:21 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2020/05/18/java-jni-%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/05/18/java-jni-practice/</guid>
       <description>&lt;p&gt;本篇文章介绍 Java JNI 的基本概念和技术要点，并开发一个简单的示例程序作为实践。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>这个博客的构建和部署</title>
-      <link>https://blog.fantasticmao.cn/2020/04/08/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</link>
+      <link>https://blog.fantasticmao.cn/2020/04/08/build-and-deploy-of-this-blog/</link>
       <pubDate>Wed, 08 Apr 2020 00:03:00 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2020/04/08/%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/04/08/build-and-deploy-of-this-blog/</guid>
       <description>&lt;p&gt;最近几天打理了荒废很久的博客，从原先的 Hexo 迁移到了 Hugo，添加了 RSS、CDN 以及其它乱七八糟的功能，顺带还给这个博客主题提交了一个 SEO 优化相关的 &lt;a href=&#34;https://github.com/luizdepra/hugo-coder/pull/300&#34;&gt;Pull Requests&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenSSH 相关命令</title>
-      <link>https://blog.fantasticmao.cn/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.fantasticmao.cn/2020/02/21/commands-of-openssh/</link>
       <pubDate>Fri, 21 Feb 2020 20:00:00 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2020/02/21/openssh-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/2020/02/21/commands-of-openssh/</guid>
       <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue 初次体验</title>
-      <link>https://blog.fantasticmao.cn/2019/12/16/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</link>
+      <link>https://blog.fantasticmao.cn/2019/12/16/first-time-using-vue/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2019/12/16/vue-%E5%88%9D%E6%AC%A1%E4%BD%93%E9%AA%8C/</guid>
+      <guid>https://blog.fantasticmao.cn/2019/12/16/first-time-using-vue/</guid>
       <description>&lt;p&gt;因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 &lt;a href=&#34;https://vuejs.bootcss.com/v2/guide/&#34;&gt;Vue&lt;/a&gt; 和 &lt;a href=&#34;https://element.eleme.cn/#/zh-CN&#34;&gt;Element&lt;/a&gt;，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>从数据结构角度看索引</title>
-      <link>https://blog.fantasticmao.cn/2019/02/24/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</link>
+      <link>https://blog.fantasticmao.cn/2019/02/24/indexes-from-a-data-structure-perspective/</link>
       <pubDate>Sun, 24 Feb 2019 13:50:18 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2019/02/24/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%B4%A2%E5%BC%95/</guid>
+      <guid>https://blog.fantasticmao.cn/2019/02/24/indexes-from-a-data-structure-perspective/</guid>
       <description>&lt;p&gt;上周和团队内部的同事分享了一则关于 MySQL 索引相关的知识。这个分享主要是从数据结构角度出发，学习和分析 MySQL 索引相关的一些特性和原理。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vim 常用命令</title>
-      <link>https://blog.fantasticmao.cn/2018/03/31/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>https://blog.fantasticmao.cn/2018/03/31/commands-of-vim/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2018/03/31/vim-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/2018/03/31/commands-of-vim/</guid>
       <description>&lt;p&gt;本篇文章记录我所理解和掌握的 Vim 常用命令。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>二分查找的实现细节</title>
-      <link>https://blog.fantasticmao.cn/2018/03/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</link>
+      <link>https://blog.fantasticmao.cn/2018/03/10/implementation-details-of-binary-search/</link>
       <pubDate>Sat, 10 Mar 2018 14:58:31 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2018/03/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82/</guid>
+      <guid>https://blog.fantasticmao.cn/2018/03/10/implementation-details-of-binary-search/</guid>
       <description>&lt;p&gt;最近留意到关于实现 &lt;a href=&#34;https://en.wikipedia.org/wiki/Binary_search_algorithm&#34;&gt;二分查找算法（Binary Search Algorithm）&lt;/a&gt; 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。&lt;/p&gt;
 &lt;p&gt;本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>设计模式概览</title>
-      <link>https://blog.fantasticmao.cn/2018/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</link>
+      <link>https://blog.fantasticmao.cn/2018/02/14/overview-of-design-patterns/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2018/02/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88/</guid>
+      <guid>https://blog.fantasticmao.cn/2018/02/14/overview-of-design-patterns/</guid>
       <description>&lt;p&gt;本篇文章记录我所理解和掌握的在 &lt;a href=&#34;https://book.douban.com/subject/1436745/&#34;&gt;《Design Patterns》&lt;/a&gt; 书中提及的一些设计模式，及其在 JDK 和 Spring 中的一些实现。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>如何快速上手一个框架</title>
-      <link>https://blog.fantasticmao.cn/2017/09/14/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</link>
+      <link>https://blog.fantasticmao.cn/2017/09/14/how-to-get-started-with-a-framework/</link>
       <pubDate>Thu, 14 Sep 2017 01:10:06 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2017/09/14/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6/</guid>
+      <guid>https://blog.fantasticmao.cn/2017/09/14/how-to-get-started-with-a-framework/</guid>
       <description>&lt;p&gt;大多时候我们总是为寻求成熟可靠的方案，去选择一个框架，解决现有问题。比如使用 &lt;code&gt;System.out.println()&lt;/code&gt; 打印日志很麻烦而且也不规范，于是我们使用 Log4j、Logback 等日志框架；请求的访问量很高，我们则使用 Redis、Memcached 缓存技术（这两个严格意义上不算框架，但情况类似）。&lt;/p&gt;
 &lt;p&gt;有时候也会觉得现有的代码太烂，或是其它原因，我们选用了新的框架替换之。比如抛弃了频发抛安全漏洞的 Struts，而使用 Spring MVC；抛弃了繁琐流程的 JDBC，而使用 ORM 框架。&lt;/p&gt;
 &lt;p&gt;开源潮流如火如荼，开源框架多如牛毛。在这个时代，我们应如何快速上手一个框架，这便是我今天要分享的主题 —— 关于使用框架的方法论。&lt;/p&gt;</description>
@@ -147,10 +147,10 @@
     
     <item>
       <title>Java 泛型的擦除</title>
-      <link>https://blog.fantasticmao.cn/2017/01/02/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</link>
+      <link>https://blog.fantasticmao.cn/2017/01/02/java-generics/</link>
       <pubDate>Mon, 02 Jan 2017 20:12:26 +0800</pubDate>
       
-      <guid>https://blog.fantasticmao.cn/2017/01/02/java-%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%93%A6%E9%99%A4/</guid>
+      <guid>https://blog.fantasticmao.cn/2017/01/02/java-generics/</guid>
       <description>&lt;p&gt;本篇文章介绍 Java 的一个残缺实现，确切地说是 Java SE5 为向后兼容而采取的折中实现 —— 泛型，记录内容包括基本语法、通配符和边界、泛型擦除。&lt;/p&gt;</description>
     </item>
     
@@ -160,9 +160,10 @@
       <pubDate>Wed, 23 Nov 2016 21:42:50 +0800</pubDate>
       
       <guid>https://blog.fantasticmao.cn/about/</guid>
-      <description>我，一个 95 年、黑头发、戴眼镜的小伙子，梦想是写一个躺着就能赚钱的独立游戏 / 开源项目 / C 端产品，然后回到故乡小镇开一家自己驻唱的烧烤店。
+      <description>关于我    我，一个 95 年、黑头发、戴眼镜的小伙子，梦想是写一个躺着就能赚钱的独立游戏 / 开源项目 / C 端产品，然后回到故乡小镇开一家自己驻唱的烧烤店。
 2016 年参加工作，以 Java 谋生，也对 C、Go、JavaScript、Python 感兴趣，想要学习嵌入式、分布式、云原生领域的技术知识，坐标浙江杭州。
-讨论技术可以通过文章底部的评论，或者通过首页的社交链接与我联系，随时欢迎 :)</description>
+讨论技术可以通过文章底部的评论，或者通过首页的社交链接与我联系，随时欢迎 :)
+关于本站     2020-11-05 部分笔记迁移至 语雀 平台 2020-07-30 CDN 切换至 又拍云 平台 2020-04-07 构建工具切换至 Hugo &amp;amp; Coder 2016-12-17 配置域名 blog.fantasticmao.cn 2016-11-19 诞生，构建工具基于 Hexo &amp;amp; Next  </description>
     </item>
     
   </channel>
