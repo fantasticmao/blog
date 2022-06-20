@@ -1,8 +1,8 @@
 ---
-title: "稻禾漫游记 - 河西走廊"
+title: "旅行游记 - 河西走廊"
 date: 2021-05-16T10:22:39+08:00
 categories: ["闲聊"]
-tags: ["Travel"]
+tags: ["Travelogue"]
 keywords: ["旅游", "河西走廊"]
 draft: true
 ---
