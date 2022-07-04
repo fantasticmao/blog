@@ -10,7 +10,7 @@ publishDir = "docs"
 enableRobotsTXT = true
 enableEmoji = true
 
-googleAnalytics = "UA-89151446-1"
+googleAnalytics = "G-FBHKYP5SYE"
 
 [permalinks]
     posts = "/:year/:month/:day/:filename/"
