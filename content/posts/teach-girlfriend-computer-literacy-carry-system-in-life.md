@@ -78,4 +78,4 @@ keywords: ["程序员", "女朋友", "生活", "日常"]
 
 ## 系列文章
 
-- [域名和 IP 的关系](/2021/03/24/给女朋友科普计算机知识的日常-域名和-ip-的关系/)
+- [域名和 IP 的关系](/2021/03/24/teach-girlfriend-computer-literacy-domain-names-and-ip/)
