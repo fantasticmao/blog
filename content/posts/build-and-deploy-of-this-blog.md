@@ -66,10 +66,6 @@ keywords: ["个人博客", "搭建博客", "Hugo", "Hugo-Coder"]
 
   为了更好的用户体验，编写了一些 [Hugo Shortcodes](https://github.com/fantasticmao/fantasticmao.github.io/tree/master/layouts/shortcodes)，用于展示哔哩哔哩中的视频，以及 [codepen](https://codepen.io/) 和 [emgithub](https://emgithub.com/) 中的示例代码。
 
-- 语雀图标
-
-  为了在站点首页中展示语雀的图标，使用阿里的矢量图标库编写了一个 [iconfont.css](https://github.com/fantasticmao/fantasticmao.github.io/blob/master/assets/css/iconfont.css)。
-
 ---
 
 ## 部署
