@@ -25,7 +25,6 @@
 <meta property="article:modified_time" content="2020-05-18T20:40:21+08:00" />
 
 
-
     <title>
   Java JNI 简单实践 · FantasticMao&#39;s Blog
 </title>
@@ -52,11 +51,6 @@
         <link rel="stylesheet" href="/css/custom.min.2685291725b6d042c0198f421a0525b7848d32a12d1b9820643b45b323a07f66.css" integrity="sha256-JoUpFyW20ELAGY9CGgUlt4SNMqEtG5ggZDtFsyOgf2Y=" crossorigin="anonymous" media="screen" />
       
     
-      
-        
-        <link rel="stylesheet" href="/css/iconfont.min.32b99889c89209520626825143ed9241cc4ffbe7b6f911b5a26e6a34c89721da.css" integrity="sha256-MrmYiciSCVIGJoJRQ&#43;2SQcxP&#43;&#43;e2&#43;RG1om5qNMiXIdo=" crossorigin="anonymous" media="screen" />
-      
-    
 
     
 
@@ -66,7 +60,7 @@
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.111.2">
   </head>
 
   
@@ -204,15 +198,15 @@
   </a>
 </h3>
 <p>在 Java 代码中，native methods 是由 <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-"><code>System.loadLibrary()</code></a> 方法来加载的。例如以下例子，该类在初始化方法中加载了一个由 native method <code>f(int, String)</code> 定义的平台相关的 native library：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> pkg<span style="color:#f92672">;</span>
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cls</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">f</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">,</span> String s<span style="color:#f92672">);</span>
-    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pkg_Cls&#34;</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-"><code>System.loadLibrary()</code></a> 方法的参数是由开发者指定的 library 名称。JVM 会依据平台相关的标准，将 library 名称转换成 native library 的名称。例如，在 Solaris 系统中会将 <code>pkg_Cls</code> 转换成 <code>libpkg_Cls.so</code>，在 Win32 系统中会将 <code>pkg_Cls</code> 转换成 <code>pkg_Cls.dll</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> pkg<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cls</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">f</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">,</span> String s<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pkg_Cls&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-"><code>System.loadLibrary()</code></a> 方法的参数是由开发者指定的 library 名称。JVM 会依据平台相关的标准，将 library 名称转换成 native library 的名称。例如，在 Solaris 系统中会将 <code>pkg_Cls</code> 转换成 <code>libpkg_Cls.so</code>，在 Win32 系统中会将 <code>pkg_Cls</code> 转换成 <code>pkg_Cls.dll</code>。</p>
 <p>开发者可以使用一个 native library 存储任意数量的类所需要的所有 native methods，只要这些类是使用同一个 <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html">ClassLoader</a> 加载的即可。虚拟机内部会为每一个 ClassLoader 维护一组已经加载的 native libraries，这也意味着不同的 ClassLoader 会分别加载和使用不同的 native libraries。</p>
 <h3 id="native-methods-名称">
   native methods 名称
@@ -230,11 +224,11 @@
 </ul>
 <p>虚拟机会在 native libraries 的所有方法中检查是否有匹配 native method 名称的方法。虚拟机首先会查找没有参数签名的方法短名称，然后再查找带有参数签名的方法长名称。只有当 native method 被重载的情况下，开发者才需要使用方法的长名称。然而，当 native method 和 nonnative method （即普通的 Java 方法）重名的时候，开发者可以忽略这种情况。因为 nonnative method 不会出现在 native libraries 中。</p>
 <p>例如以下例子，native method <code>g(double)</code> 不需要使用方法的长名称来链接，因为另一个方法 <code>g(int)</code> 是一个 nonnative method：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cls1</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">g</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">);</span>
-    <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">g</span><span style="color:#f92672">(</span><span style="color:#66d9ef">double</span> d<span style="color:#f92672">);</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>JNI 的设计者采用了一种简单的处理方式，确保能将 native methods 名称中所有的 Unicode 字符都转换为有效的 C 函数名称：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cls1</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">g</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">g</span><span style="color:#f92672">(</span><span style="color:#66d9ef">double</span> d<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>JNI 的设计者采用了一种简单的处理方式，确保能将 native methods 名称中所有的 Unicode 字符都转换为有效的 C 函数名称：</p>
 <ul>
 <li>使用下划线 <code>_</code> 代替类的全限定名中的斜杠 <code>/</code> 分隔符；</li>
 <li>由于类名和方法名不会以数字开头，所以可以使用 <code>_0</code> 到 <code>_9</code> 作为转义序列，如下表所示：
@@ -291,22 +285,22 @@
   </a>
 </h3>
 <p>在根目录创建包 <code>cn.fantasticmao.jni</code> 的目录，并在包目录中创建一个含有 native method <code>sum(int, int)</code> 的类 SumNative.java：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> cn.fantasticmao.jni<span style="color:#f92672">;</span>
-
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SumNative</span> <span style="color:#f92672">{</span>
-
-    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sum&#34;</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">);</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SumNative<span style="color:#f92672">().</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span>1<span style="color:#f92672">,</span> 2<span style="color:#f92672">);</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">printf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;1 + 2 = %d%n&#34;</span><span style="color:#f92672">,</span> value<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><h3 id="编译-java-源文件">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> cn.fantasticmao.jni<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SumNative</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">loadLibrary</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sum&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">native</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SumNative<span style="color:#f92672">().</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">printf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;1 + 2 = %d%n&#34;</span><span style="color:#f92672">,</span> value<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="编译-java-源文件">
   编译 Java 源文件
   <a class="heading-link" href="#%e7%bc%96%e8%af%91-java-%e6%ba%90%e6%96%87%e4%bb%b6">
     <i class="fa fa-link" aria-hidden="true"></i>
@@ -320,48 +314,48 @@
   </a>
 </h3>
 <p>在根目录执行 <code>javah cn.fantasticmao.jni.SumNative</code> 命令，生成 cn_fantasticmao_jni_SumNative.h 头文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
-<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;jni.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">/* Header for class cn_fantasticmao_jni_SumNative */</span>
-
-<span style="color:#75715e">#ifndef _Included_cn_fantasticmao_jni_SumNative
-</span><span style="color:#75715e">#define _Included_cn_fantasticmao_jni_SumNative
-</span><span style="color:#75715e">#ifdef __cplusplus
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">extern</span> <span style="color:#e6db74">&#34;C&#34;</span> {
-<span style="color:#75715e">#endif
-</span><span style="color:#75715e"></span><span style="color:#75715e">/*
-</span><span style="color:#75715e"> * Class:     cn_fantasticmao_jni_SumNative
-</span><span style="color:#75715e"> * Method:    sum
-</span><span style="color:#75715e"> * Signature: (II)I
-</span><span style="color:#75715e"> */</span>
-JNIEXPORT jint JNICALL Java_cn_fantasticmao_jni_SumNative_sum
-  (JNIEnv <span style="color:#f92672">*</span>, jobject, jint, jint);
-
-<span style="color:#75715e">#ifdef __cplusplus
-</span><span style="color:#75715e"></span>}
-<span style="color:#75715e">#endif
-</span><span style="color:#75715e">#endif
-</span></code></pre></div><h3 id="实现-native-library">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;jni.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/* Header for class cn_fantasticmao_jni_SumNative */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef _Included_cn_fantasticmao_jni_SumNative
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define _Included_cn_fantasticmao_jni_SumNative
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#ifdef __cplusplus
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">extern</span> <span style="color:#e6db74">&#34;C&#34;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Class:     cn_fantasticmao_jni_SumNative
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Method:    sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Signature: (II)I
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>JNIEXPORT jint JNICALL <span style="color:#a6e22e">Java_cn_fantasticmao_jni_SumNative_sum</span>
+</span></span><span style="display:flex;"><span>  (JNIEnv <span style="color:#f92672">*</span>, jobject, jint, jint);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifdef __cplusplus
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><h3 id="实现-native-library">
   实现 native library
   <a class="heading-link" href="#%e5%ae%9e%e7%8e%b0-native-library">
     <i class="fa fa-link" aria-hidden="true"></i>
   </a>
 </h3>
 <p>在根目录创建 cn_fantasticmao_jni_SumNative.c，导入 cn_fantasticmao_jni_SumNative.h 和 jni.h 头文件，并实现 native method 对应的函数接口：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;jni.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;cn_fantasticmao_jni_SumNative.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">/*
-</span><span style="color:#75715e"> * Class:     cn_fantasticmao_jni_SumNative
-</span><span style="color:#75715e"> * Method:    sum
-</span><span style="color:#75715e"> * Signature: (II)I
-</span><span style="color:#75715e"> */</span>
-JNIEXPORT jint JNICALL <span style="color:#a6e22e">Java_cn_fantasticmao_jni_SumNative_sum</span>
-  (JNIEnv <span style="color:#f92672">*</span>env, jobject obj, jint a, jint b)
-{
-  <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
-}
-</code></pre></div><p>需要注意的是，jni.h 头文件位于 JDK 的 include 目录中，需要在编译时显示指定。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;jni.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;cn_fantasticmao_jni_SumNative.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Class:     cn_fantasticmao_jni_SumNative
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Method:    sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Signature: (II)I
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>JNIEXPORT jint JNICALL <span style="color:#a6e22e">Java_cn_fantasticmao_jni_SumNative_sum</span>
+</span></span><span style="display:flex;"><span>  (JNIEnv <span style="color:#f92672">*</span>env, jobject obj, jint a, jint b)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>需要注意的是，jni.h 头文件位于 JDK 的 include 目录中，需要在编译时显示指定。</p>
 <h3 id="编译-native-library">
   编译 native library
   <a class="heading-link" href="#%e7%bc%96%e8%af%91-native-library">
@@ -459,7 +453,7 @@ JNIEXPORT jint JNICALL <span style="color:#a6e22e">Java_cn_fantasticmao_jni_SumN
 
     
       
-      <script src="/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js" integrity="sha256-A7F3afT5GuNWZ&#43;HyocqMFvUFYlds&#43;Q/zKzF5kmkU2qU="></script>
+      <script src="/js/coder.min.cb0c595e02234420f3ad3886bf4a9bd2874d0e1e78e090138a9ef158b35aaf17.js" integrity="sha256-ywxZXgIjRCDzrTiGv0qb0odNDh544JATip7xWLNarxc="></script>
     
 
     

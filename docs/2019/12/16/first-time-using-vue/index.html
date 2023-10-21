@@ -25,7 +25,6 @@
 <meta property="article:modified_time" content="2019-12-16T00:00:00+08:00" />
 
 
-
     <title>
   Vue 初次体验 · FantasticMao&#39;s Blog
 </title>
@@ -52,11 +51,6 @@
         <link rel="stylesheet" href="/css/custom.min.2685291725b6d042c0198f421a0525b7848d32a12d1b9820643b45b323a07f66.css" integrity="sha256-JoUpFyW20ELAGY9CGgUlt4SNMqEtG5ggZDtFsyOgf2Y=" crossorigin="anonymous" media="screen" />
       
     
-      
-        
-        <link rel="stylesheet" href="/css/iconfont.min.32b99889c89209520626825143ed9241cc4ffbe7b6f911b5a26e6a34c89721da.css" integrity="sha256-MrmYiciSCVIGJoJRQ&#43;2SQcxP&#43;&#43;e2&#43;RG1om5qNMiXIdo=" crossorigin="anonymous" media="screen" />
-      
-    
 
     
 
@@ -66,7 +60,7 @@
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.111.2">
   </head>
 
   
@@ -207,40 +201,40 @@
 </h3>
 <p>在 Vue 中，可以使用 <code>&lt;slot&gt;</code> 元素实现父子组件之间的内容分发，<a href="https://vuejs.bootcss.com/v2/guide/components-slots.html">官方文档</a> 提供了一份精简的代码示例，完善之后的内容如下：</p>
 <p>NavigationLink.vue</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
-  &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
-    &lt;<span style="color:#f92672">slot</span>&gt;&lt;/<span style="color:#f92672">slot</span>&gt;
-  &lt;/<span style="color:#f92672">a</span>&gt;
-&lt;/<span style="color:#f92672">template</span>&gt;
-
-&lt;<span style="color:#f92672">script</span>&gt;
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
-  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;NavigationLink&#34;</span>,
-};
-&lt;/<span style="color:#f92672">script</span>&gt;
-</code></pre></div><p>App.vue</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
-  &lt;<span style="color:#f92672">NavigationLink</span> <span style="color:#a6e22e">url</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/profile&#34;</span>&gt;
-    <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
-  &lt;/<span style="color:#f92672">NavigationLink</span>&gt;
-&lt;/<span style="color:#f92672">template</span>&gt;
-
-&lt;<span style="color:#f92672">script</span>&gt;
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">NavigationLink</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./NavigationLink.vue&#34;</span>;
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
-  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;App&#34;</span>,
-  <span style="color:#a6e22e">compoments</span><span style="color:#f92672">:</span> {
-    <span style="color:#a6e22e">NavigationLink</span>,
-  },
-};
-&lt;/<span style="color:#f92672">script</span>&gt;
-</code></pre></div><p>在示例代码中，App.vue 中使用 NavigationLink.vue 的内容最终会被渲染成</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">template</span>&gt;
-  &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
-    <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
-  &lt;/<span style="color:#f92672">a</span>&gt;
-&lt;/<span style="color:#f92672">template</span>&gt;
-</code></pre></div><h3 id="如何访问元素和组件">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#f92672">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">slot</span>&gt;&lt;/<span style="color:#f92672">slot</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">a</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">template</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;NavigationLink&#34;</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><p>App.vue</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#f92672">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">NavigationLink</span> <span style="color:#a6e22e">url</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/profile&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">NavigationLink</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">template</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">NavigationLink</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./NavigationLink.vue&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;App&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">compoments</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">NavigationLink</span>,
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><p>在示例代码中，App.vue 中使用 NavigationLink.vue 的内容最终会被渲染成</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#f92672">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">a</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">template</span>&gt;
+</span></span></code></pre></div><h3 id="如何访问元素和组件">
   如何访问元素和组件
   <a class="heading-link" href="#%e5%a6%82%e4%bd%95%e8%ae%bf%e9%97%ae%e5%85%83%e7%b4%a0%e5%92%8c%e7%bb%84%e4%bb%b6">
     <i class="fa fa-link" aria-hidden="true"></i>
@@ -255,13 +249,13 @@
 </h3>
 <p>ECMAScript5 定义了一个属性描述符（property descriptor）对象，支持使用 getter / setter 方法替代属性的定义。可以通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor"><code>Object.getOwnPropertyDescriptor()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors"><code>Object.getOwnPropertyDescriptors()</code></a> 获取某个对象的属性描述符，通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><code>Object.defineProperty()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties"><code>Object.defineProperties()</code></a> 设置某个对象的属性和属性描述符。</p>
 <p>《JavaScript 权威指南》第六章中将 JavaScript 普通对象的属性称为 <strong>数据属性</strong>，将由 getter / setter 定义的属性称为 <strong>存储器属性</strong>。数据属性拥有一个名字和四个特性：值（value）、可写（writable）、可枚举（enumerable）、可配置（configurable），存储器属性相对于数据属性缺少了值和可写的特性，但增加了读取（get）、写入（set）的特性。在 ECMAScript5 中使用 getter / setter 方法替代属性定义的示例代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
-  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">name</span>() {
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;MaoMao&#34;</span>;
-  },
-};
-<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">name</span>); <span style="color:#75715e">// MaoMao
-</span></code></pre></div><p>Vue 在内部通过调用 <code>Object.defineProperty()</code> 把 <code>data</code> 定义的 <strong>数据属性</strong> 转换成 <strong>存储器属性</strong>，以此来追踪依赖，实现在属性被访问和修改时通知变化。简单版本的实现代码如下，更多关于响应式原理的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/reactivity.html">官方文档</a>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">name</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;MaoMao&#34;</span>;
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">name</span>); <span style="color:#75715e">// MaoMao
+</span></span></span></code></pre></div><p>Vue 在内部通过调用 <code>Object.defineProperty()</code> 把 <code>data</code> 定义的 <strong>数据属性</strong> 转换成 <strong>存储器属性</strong>，以此来追踪依赖，实现在属性被访问和修改时通知变化。简单版本的实现代码如下，更多关于响应式原理的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/reactivity.html">官方文档</a>。</p>
 
 
 
@@ -377,15 +371,15 @@
 <ul>
 <li>
 <p><code>vue-cli-service serve</code> 命令会启动一个开发服务器（基于 <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a>），并附带开箱即用的模块热重载。可以通过 <code>vue-cli-service serve [options]</code> 选项或者 <code>vue.config.js</code> 配置文件的 <a href="https://cli.vuejs.org/zh/config/#devserver"><code>devServer</code></a> 属性配置开发服务器。简单配置文件的示例如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
-  <span style="color:#a6e22e">devServer</span><span style="color:#f92672">:</span> {
-    <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
-    <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,
-    <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">9090</span>,
-    <span style="color:#a6e22e">https</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
-  },
-};
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">devServer</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">9090</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">https</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
 <li>
 <p><code>vue-cli-service build</code> 命令默认会在 <code>dist/</code> 目录产生一个可用于生产环境的包，并带有 JS / CSS / HTML 的压缩，和为更好地缓存而做的自动的 vendor chunk splitting；</p>
 </li>
@@ -472,7 +466,7 @@
 
     
       
-      <script src="/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js" integrity="sha256-A7F3afT5GuNWZ&#43;HyocqMFvUFYlds&#43;Q/zKzF5kmkU2qU="></script>
+      <script src="/js/coder.min.cb0c595e02234420f3ad3886bf4a9bd2874d0e1e78e090138a9ef158b35aaf17.js" integrity="sha256-ywxZXgIjRCDzrTiGv0qb0odNDh544JATip7xWLNarxc="></script>
     
 
     

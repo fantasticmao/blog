@@ -13,6 +13,7 @@ date: 2016-11-23T21:42:50+08:00
 
 ## 关于本站
 
+- `2023-10-10` [语雀](https://www.yuque.com/fantasticmao/tech) 平台笔记切换至「Obsidian 编辑 + WebDAV & GitHub 存储 + [GitBook](https://gitbook.fantasticmao.cn/tech/) 预览」方案
 - `2020-11-05` 部分笔记迁移至 [语雀](https://www.yuque.com/fantasticmao/tech) 平台
 - `2020-07-30` CDN 切换至 [又拍云](https://www.upyun.com/) 平台
 - `2020-04-07` 构建工具切换至 [Hugo](https://gohugo.io/) & [Coder](https://github.com/luizdepra/hugo-coder/)

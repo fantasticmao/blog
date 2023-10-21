@@ -25,7 +25,6 @@
 <meta property="article:modified_time" content="2020-10-01T18:41:53+08:00" />
 
 
-
     <title>
   Java ThreadPoolExecutor 源码分析 · FantasticMao&#39;s Blog
 </title>
@@ -52,11 +51,6 @@
         <link rel="stylesheet" href="/css/custom.min.2685291725b6d042c0198f421a0525b7848d32a12d1b9820643b45b323a07f66.css" integrity="sha256-JoUpFyW20ELAGY9CGgUlt4SNMqEtG5ggZDtFsyOgf2Y=" crossorigin="anonymous" media="screen" />
       
     
-      
-        
-        <link rel="stylesheet" href="/css/iconfont.min.32b99889c89209520626825143ed9241cc4ffbe7b6f911b5a26e6a34c89721da.css" integrity="sha256-MrmYiciSCVIGJoJRQ&#43;2SQcxP&#43;&#43;e2&#43;RG1om5qNMiXIdo=" crossorigin="anonymous" media="screen" />
-      
-    
 
     
 
@@ -66,7 +60,7 @@
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-icon.png">
 
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.111.2">
   </head>
 
   
@@ -158,36 +152,36 @@
       <div>
         
         <p>本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 <a href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86">状态管理</a>、<a href="#%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1">提交任务</a>、<a href="#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1">执行任务</a>、<a href="#%E5%9B%9E%E6%94%B6%E7%BA%BF%E7%A8%8B">回收线程</a> 和 <a href="#%E6%8B%92%E7%BB%9D%E4%BB%BB%E5%8A%A1">拒绝任务</a> 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。</p>
-<p>ThreadPoolExecutor 的工作机制可以参考我摘记的 <a href="https://www.yuque.com/fantasticmao/tech/qmk0b2">《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor</a> 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">         +------------------------------------------------------------------------+
-runnbale |                                              +-----------------------+ |
---------&gt;|                                 True         | +------+ +------+     | |
-         |--&gt; workerCount &lt; corePoolSize? -------------&gt;| |Worker| |Worker| ... | |
-runnbale |                 |               new Worker() | +------+ +------+     | |
---------&gt;|           False |                            +-----------------------+ |
-         |                 |                               |   |   |         ^    |
-runnbale |                 |                            workQueue.take       |    |
---------&gt;|                 |                               |   |   |         |    |
-         |                 |                               v   v   v         |    |
-         |                 |                 +---------------------------+   |    |
-         |                 v         True    | +--------+ +--------+     |   |    |
-         |         workQueue.offer? --------&gt;| |Runnable| |Runnable| ... |   |    |
-         |                 |                 | +--------+ +--------+     |   |    |
-         |           False |                 +---------------------------+   |    |
-         |                 |                      BlockingQueue&lt;Runnable&gt;    |    |
-         |                 |                                                 |    |
-         |                 V                    True                         |    |
-         |      workerCount &lt; maximumPoolSize? ------------------------------+    |
-         |                 |                    new Worker()                      |
-         |           False |                                                      |
-         |                 |                                                      |
-         |                 v                                                      |
-         |        +-------------+------------+--------------+                     |
-         |        |             |            |              |                     |
-         |        v             v            v              v                     |
-         |  CallerRunsPolicy  AbortPolicy  DiscardPolicy  DiscardOldestPolicy     |
-         +------------------------------------------------------------------------+
-</code></pre></div><hr>
+<p>ThreadPoolExecutor 的工作机制可以参考我摘记的 <a href="https://gitbook.fantasticmao.cn/tech/java/jdk/java-bing-fa-bian-cheng-shi-zhan-bi-ji-xian-cheng-chi-de-shi-yong">《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor</a> 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>         +------------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>runnbale |                                              +-----------------------+ |
+</span></span><span style="display:flex;"><span>--------&gt;|                                 True         | +------+ +------+     | |
+</span></span><span style="display:flex;"><span>         |--&gt; workerCount &lt; corePoolSize? -------------&gt;| |Worker| |Worker| ... | |
+</span></span><span style="display:flex;"><span>runnbale |                 |               new Worker() | +------+ +------+     | |
+</span></span><span style="display:flex;"><span>--------&gt;|           False |                            +-----------------------+ |
+</span></span><span style="display:flex;"><span>         |                 |                               |   |   |         ^    |
+</span></span><span style="display:flex;"><span>runnbale |                 |                            workQueue.take       |    |
+</span></span><span style="display:flex;"><span>--------&gt;|                 |                               |   |   |         |    |
+</span></span><span style="display:flex;"><span>         |                 |                               v   v   v         |    |
+</span></span><span style="display:flex;"><span>         |                 |                 +---------------------------+   |    |
+</span></span><span style="display:flex;"><span>         |                 v         True    | +--------+ +--------+     |   |    |
+</span></span><span style="display:flex;"><span>         |         workQueue.offer? --------&gt;| |Runnable| |Runnable| ... |   |    |
+</span></span><span style="display:flex;"><span>         |                 |                 | +--------+ +--------+     |   |    |
+</span></span><span style="display:flex;"><span>         |           False |                 +---------------------------+   |    |
+</span></span><span style="display:flex;"><span>         |                 |                      BlockingQueue&lt;Runnable&gt;    |    |
+</span></span><span style="display:flex;"><span>         |                 |                                                 |    |
+</span></span><span style="display:flex;"><span>         |                 V                    True                         |    |
+</span></span><span style="display:flex;"><span>         |      workerCount &lt; maximumPoolSize? ------------------------------+    |
+</span></span><span style="display:flex;"><span>         |                 |                    new Worker()                      |
+</span></span><span style="display:flex;"><span>         |           False |                                                      |
+</span></span><span style="display:flex;"><span>         |                 |                                                      |
+</span></span><span style="display:flex;"><span>         |                 v                                                      |
+</span></span><span style="display:flex;"><span>         |        +-------------+------------+--------------+                     |
+</span></span><span style="display:flex;"><span>         |        |             |            |              |                     |
+</span></span><span style="display:flex;"><span>         |        v             v            v              v                     |
+</span></span><span style="display:flex;"><span>         |  CallerRunsPolicy  AbortPolicy  DiscardPolicy  DiscardOldestPolicy     |
+</span></span><span style="display:flex;"><span>         +------------------------------------------------------------------------+
+</span></span></code></pre></div><hr>
 <h2 id="状态管理">
   状态管理
   <a class="heading-link" href="#%e7%8a%b6%e6%80%81%e7%ae%a1%e7%90%86">
@@ -196,11 +190,11 @@ runnbale |                 |                            workQueue.take       |  
 </h2>
 <p>ThreadPoolExecutor 内部共有两个状态：workerCount 和 runState。workerCount 表示线程池中的有效线程数，是已经被允许运行并且还未结束的线程数量。runState 表示线程池在生命周期内的运行状态，具体的枚举值有 RUNNING、SHUTDOWN、STOP、TIDYING、TERMINATED。</p>
 <p>ThreadPoolExecutor 将 workerCount 和 runState 两个状态合并在同一个 <code>AtomicInteger</code> 类型的 <code>ctl</code> 字段中，并会通过一系列位运算来分别获取设置 workerCount 和 runState 的具体值。其中，runState 会占据 <code>ctl</code> 字段中 int 值的高 3 位，workerCount 会占据剩下的 29 位，因此 ThreadPoolExecutor 支持的最大线程数量是 <code>2^29 - 1</code> 个，而不是 <code>2^32 -1</code> 个。将 workerCount 和 runState 两个状态设计成同一个字段的好处是可以使用一次 CAS 操作同时修改两个状态，从而避免 <a href="https://en.wikipedia.org/wiki/Race_condition">竞态条件</a> 的发生和减少锁资源的占用。<code>ctl</code> 字段中具体的位分配如下所示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[000][0 0000 0000 0000 0000 0000 0000 0000]
-  |                    |
-  v                    v
-runState          workerCount
-</code></pre></div><p><code>ctl</code> 字段中包含的 workerCount 初始值为 0，runState 初始值为 RUNNING。ThreadPoolExecutor 源码中定义 <code>ctl</code> 字段，以及通过位运算来获取 workerCount 和 runState 的代码片段如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[000][0 0000 0000 0000 0000 0000 0000 0000]
+</span></span><span style="display:flex;"><span>  |                    |
+</span></span><span style="display:flex;"><span>  v                    v
+</span></span><span style="display:flex;"><span>runState          workerCount
+</span></span></code></pre></div><p><code>ctl</code> 字段中包含的 workerCount 初始值为 0，runState 初始值为 RUNNING。ThreadPoolExecutor 源码中定义 <code>ctl</code> 字段，以及通过位运算来获取 workerCount 和 runState 的代码片段如下：</p>
 
 
 
@@ -275,14 +269,14 @@ runState          workerCount
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
-   |-------&gt;| (调用 shutdown())
-   |---------------&gt;| (调用 shutdownNow())
-            |------&gt;| (调用 shutdownNow())
-            |--------------&gt;| (当池中和队列中的任务都为空)
-                    |------&gt;| (当池中的任务为空)
-                            |--------&gt;| (调用 terminated() 已经完成)
-</code></pre></div><p>将 runState 设计成上述五个枚举值的原因在于 ThreadPoolExecutor 内部的工作机制。首先，ThreadPoolExecutor 包含了一个用于缓冲任务执行的 workQueue，所以在关闭线程池的时候也需要考虑到 workQueue 中的线程状态（是否需要中断线程）。此外，ThreadPoolExecutor 还提供了一些待实现的扩展方法：<code>beforeExecute(Thread, Runnable)</code>、<code>afterExecute(Runnable, Throwable)</code>、<code>terminated()</code>，因此这些方法的执行进度也需要被考虑在线程池的运行状态之内。ThreadPoolExecutor 源码中定义 runState 枚举值，以及判断当前运行状态的代码片段如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
+</span></span><span style="display:flex;"><span>   |-------&gt;| (调用 shutdown())
+</span></span><span style="display:flex;"><span>   |---------------&gt;| (调用 shutdownNow())
+</span></span><span style="display:flex;"><span>            |------&gt;| (调用 shutdownNow())
+</span></span><span style="display:flex;"><span>            |--------------&gt;| (当池中和队列中的任务都为空)
+</span></span><span style="display:flex;"><span>                    |------&gt;| (当池中的任务为空)
+</span></span><span style="display:flex;"><span>                            |--------&gt;| (调用 terminated() 已经完成)
+</span></span></code></pre></div><p>将 runState 设计成上述五个枚举值的原因在于 ThreadPoolExecutor 内部的工作机制。首先，ThreadPoolExecutor 包含了一个用于缓冲任务执行的 workQueue，所以在关闭线程池的时候也需要考虑到 workQueue 中的线程状态（是否需要中断线程）。此外，ThreadPoolExecutor 还提供了一些待实现的扩展方法：<code>beforeExecute(Thread, Runnable)</code>、<code>afterExecute(Runnable, Throwable)</code>、<code>terminated()</code>，因此这些方法的执行进度也需要被考虑在线程池的运行状态之内。ThreadPoolExecutor 源码中定义 runState 枚举值，以及判断当前运行状态的代码片段如下：</p>
 
 
 
@@ -506,7 +500,7 @@ runState          workerCount
 
     
       
-      <script src="/js/coder.min.03b17769f4f91ae35667e1f2a1ca8c16f50562576cf90ff32b3179926914daa5.js" integrity="sha256-A7F3afT5GuNWZ&#43;HyocqMFvUFYlds&#43;Q/zKzF5kmkU2qU="></script>
+      <script src="/js/coder.min.cb0c595e02234420f3ad3886bf4a9bd2874d0e1e78e090138a9ef158b35aaf17.js" integrity="sha256-ywxZXgIjRCDzrTiGv0qb0odNDh544JATip7xWLNarxc="></script>
     
 
     
