@@ -34,7 +34,7 @@ googleAnalytics = "G-FBHKYP5SYE"
 
     colorScheme = "light"
     hideColorSchemeToggle = true
-    customCSS = ["css/custom.css", "css/iconfont.css"]
+    customCSS = ["css/custom.css"]
 
     icpRecord = "浙ICP备17009730号"
 
@@ -50,10 +50,10 @@ googleAnalytics = "G-FBHKYP5SYE"
     weight = 1
     url = "https://github.com/fantasticmao/"
 [[params.social]]
-    name = "语雀"
-    icon = "iconfont iconfont-yuque iconfont-2x"
+    name = "Twitter"
+    icon = "fa fa-twitter fa-2x"
     weight = 2
-    url = "https://www.yuque.com/fantasticmao/tech"
+    url = "https://twitter.com/fantasticmao"
 [[params.social]]
     name = "WeChat"
     icon = "fa fa-weixin fa-2x"

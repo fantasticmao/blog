@@ -160,10 +160,10 @@
       <pubDate>Wed, 23 Nov 2016 21:42:50 +0800</pubDate>
       
       <guid>https://blog.fantasticmao.cn/about/</guid>
-      <description>关于我    我，一个 95 年、黑头发、戴眼镜的小伙子，梦想是写一个躺着就能赚钱的独立游戏 / 开源项目 / C 端产品，然后回到故乡小镇开一家自己驻唱的烧烤店。
+      <description> 关于我 我，一个 95 年、黑头发、戴眼镜的小伙子，梦想是写一个躺着就能赚钱的独立游戏 / 开源项目 / C 端产品，然后回到故乡小镇开一家自己驻唱的烧烤店。
 2016 年参加工作，以 Java 谋生，也对 C、Go、JavaScript、Python 感兴趣，想要学习嵌入式、分布式、云原生领域的技术知识，坐标浙江杭州。
 讨论技术可以通过文章底部的评论，或者通过首页的社交链接与我联系，随时欢迎 :)
-关于本站     2020-11-05 部分笔记迁移至 语雀 平台 2020-07-30 CDN 切换至 又拍云 平台 2020-04-07 构建工具切换至 Hugo &amp;amp; Coder 2016-12-17 配置域名 blog.fantasticmao.cn 2016-11-19 诞生，构建工具基于 Hexo &amp;amp; Next  </description>
+关于本站 2023-10-10 语雀 平台笔记切换至「Obsidian 编辑 + WebDAV &amp;amp; GitHub 存储 + GitBook 预览」方案 2020-11-05 部分笔记迁移至 语雀 平台 2020-07-30 CDN 切换至 又拍云 平台 2020-04-07 构建工具切换至 Hugo &amp;amp; Coder 2016-12-17 配置域名 blog.fantasticmao.cn 2016-11-19 诞生，构建工具基于 Hexo &amp;amp; Next </description>
     </item>
     
   </channel>
