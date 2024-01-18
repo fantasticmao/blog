@@ -3,13 +3,10 @@ title: "Java 集合框架概览"
 date: 2018-10-18T22:00:34+08:00
 categories: ["编程"]
 tags: ["Java", "Data Structure"]
-keywords: ["Java", "集合框架", "数据结构"]
 draft: true
 ---
 
 本篇文章记录我所理解和掌握的在 JDK8 Collection Library 中的常用集合类，及其所涉及的数据结构和实现原理。<!--more-->
-
----
 
 ## Map
 
@@ -96,8 +93,6 @@ HashMap resize 方法的关键步骤：
 
 - [Java 8 系列之重新认识 HashMap](https://tech.meituan.com/java_hashmap.html)
 
----
-
 ### LinkedHashMap
 
 LinkedHashMap 基于 HashMap 实现了双向链表的功能。LinkedHashMap 继承了 HashMap，并添加了 `LinkedHashMap.Entry<K,V> head` 和 `LinkedHashMap.Entry<K,V> tail` 两给字段，用于保存双向链表的头和尾。LinkedHashMap 的内部节点 LinkedHashMap.Entry 继承了 HashMap.Entry，并添加了 `Entry<K,V> before, after` 两个字段，用于保存每个双向链表节点的上下位节点。LinkedHashMap 可以通过 `boolean accessOrder` 构造参数来指定双向链表的排序模型 —— 按访问顺序或按插入顺序，默认是按插入顺序。
@@ -113,8 +108,6 @@ LinkedHashMap 本身并没有对 HashMap 的 get、put 等操作进行修改，�
 关于 LinkedHashMap，有以下几点是需要注意的：
 
 1. LinkedHashMap 按插入顺序的访问模型可以被用于实现 <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)" target="_blank" rel="noopener">LRU</a> 算法，具体实现时仅需重写 `removeEldestEntry(Map.Entry<K,V> eldest)` 方法即可。
-
----
 
 ### TreeMap
 
@@ -150,8 +143,6 @@ TreeMap remove 方法的关键步骤：
 
 - [红黑树深入剖析及 Java 实现](https://tech.meituan.com/redblack_tree.html)
 
----
-
 ### Hashtable
 
 Hashtable 的数据结构与 HashMap 类似，其内部使用 `private transient Entry<?,?>[] table` 字段存储 key-value 键值对的数据，但与 HashMap 不同的是，Hashtable 的内部节点 Hashtable.Entry 只能是链表类型。Hashtable 并没有针对在哈希冲突严重的情况下，使用红黑树类型节点替换过长的链表类型节点。Hashtable 的所有方法都被 synchronized 关键字修饰，这意味着 Hashtable 是属于相对线程安全的类。
@@ -160,11 +151,7 @@ Hashtable 中所涉及的数据结构如下图所示：
 
 ![image](/images/Java集合框架概览/Hashtable.png)
 
----
-
 ### ConcurrentHashMap
-
----
 
 ### ConcurrentSkipListMap
 

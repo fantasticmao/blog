@@ -59,11 +59,8 @@
 <!--
 本篇文章首先简单介绍 InnoDB 中聚簇索引和二级索引的概念和对应的数据结构，然后介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，最后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。
 
----
-
 ## 聚簇索引和二级索引
 -->
-<hr>
 <h2 id="事务和加锁信息">事务和加锁信息</h2>
 <p>依据 MySQL 官方参考手册中的描述，在 MySQL 中可以通过 information_schema.innodb_trx 表、performance_schema.data_locks 表以及 performance_schema.data_lock_waits 表来查看事务信息和事务中加锁信息。参考手册的原文请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-information-schema-transactions.html">InnoDB INFORMATION_SCHEMA Transaction and Locking Information</a>。</p>
 <p>information_schema 数据库的 innodb_trx 表存储了 InnoDB 内部当前正在执行的每个事务的信息，包括事务的执行状态（具体的枚举值有 RUNNING、LOCK WAIT、ROLLING BACK 和 COMMITTING）、事务的开始时间和正在执行的 SQL 语句等等。</p>
@@ -89,7 +86,6 @@
 </ul>
 <p>在下图的示例中，ID 为 271844 的事务请求获取 ID 为 140668958213080:868:4:2:140669205682208 的锁，并且被 ID 为 271843 事务中的 ID 为 140668958212240:868:4:2:140669205601312 的锁所阻塞。</p>
 <p><img src="/images/mysql-innodb-transaction-isolation-level-practice/performance_schema-data_lock_waits.png" alt="image"></p>
-<hr>
 <h2 id="隔离级别实践">隔离级别实践</h2>
 <p>InnoDB 提供了 SQL 1992 标准中全部的四种隔离级别：READ UNCOMMITTED（未提交读）、READ COMMITTED（提交读）、REPEATABLE READ（可重复读）和 SERIALIZABLE（可串行化），并且默认的隔离级别是 REPEATABLE READ。</p>
 <p>MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不同的隔离级别对数据的一致性和查询结果的可重复性有着不同的表现，开发者可以通过设置不同的隔离级别来权衡事务的一致性与可用性。下面通过几个案例来实践和观察各种隔离级别的特性。</p>
@@ -123,7 +119,6 @@
 <p>在 REPEATABLE READ 隔离级别下，SELECT 语句会以锁定读取的方式运行，InnoDB 会隐式地将所有普通的 SELECT 语句转换成 SELECT &hellip; FOR SHARE 语句，当前事务中所读取的数据不会被其它事务所更改。</p>
 <p>在下图的示例中，左半图中的事务在执行普通的 SELECT 语句的时候，会锁定查询所涉及的记录，并且右半图中的事务在更改该记录时会被阻塞。</p>
 <p><img src="/images/mysql-innodb-transaction-isolation-level-practice/serializable.png" alt="image"></p>
-<hr>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-index-types.html">Clustered and Secondary Indexes</a></li>

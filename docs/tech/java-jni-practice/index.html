@@ -56,7 +56,6 @@
     <p class="reading-tips">发表于 2020/05/18，阅读时间 3 分钟</p>
 
     <p>本篇文章介绍 Java JNI 的基本概念和技术要点，并开发一个简单的示例程序作为实践。</p>
-<hr>
 <h2 id="jni-简介">JNI 简介</h2>
 <p>JNI (Java Native Interface) 是 Java 编程语言中的一种本地程序接口，它允许运行在 JVM 中的 Java 代码与基于其它编程语言（例如 C、C++）编写的应用或者类库交互。</p>
 <p>JNI 与 JVM 的底层实现无关，JVM 供应商可以在添加对 JNI 支持的同时，不影响虚拟机的其它部分。开发者可以编写一个基于 JNI 的本地应用或者类库，同时期望它可以运行在所有支持 JNI 的 JVM 中。</p>
@@ -76,7 +75,6 @@
 </ul>
 <p>开发者甚至还可以通过调用 <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/invocation.html">Invocation API</a>，用于把 JVM 内嵌到本地应用中。</p>
 <p>本篇文章主要关注于 Java 中的 native methods 是如何与和其它语言（以 C 为例）的 native libraries 交互的，关于 JNI functions 和 Invocation API 的详细内容请见 Oracle 的 <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html">官方文档</a>。</p>
-<hr>
 <h2 id="native-methods-与-native-libraries">native methods 与 native libraries</h2>
 <h3 id="native-libraries-编译">native libraries 编译</h3>
 <p>native libraries 的编译工作是由该库的语言自己负责的，不过由于 JVM 是支持多线程的，所以 native libraries 也需要使用 multithread aware 的编译器来编译和链接。例如，如果使用 Sun Studio 编译器来编译 C++ 代码的话，需要加上 <code>-mt</code> 选项。如果使用 GUN gcc 编译器来编译的话，需要加上 <code>-D_REENTRANT</code> 或者 <code>-D_POSIX_C_SOURCE</code> 选项。</p>
@@ -143,7 +141,6 @@
 <p>native methods 的第一个参数是 <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/functions.html#interface_function_table"><code>JNIEnv</code></a> 类型的 JNI interface 指针，第二个参数的类型与 native methods 是否静态有关。如果 native methods 是非静态的，第二个参数则是对象实例的引用。如果 native methods 是静态的，第二个参数则是 Class 的引用。</p>
 <p>native methods 的剩余参数与方法的参数列表一一对应，具体的映射关系请见 <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html">JNI Types and Data Structures</a>。</p>
 <p>native methods 通过返回值将方法的执行结果返回给调用程序。</p>
-<hr>
 <h2 id="jni-实践">JNI 实践</h2>
 <p>Java native methods 与 C native libraries 的整体交互流程如下图所示，下例通过实现一个计算两数之合的 native method <code>sum(int, int)</code> 来作具体演示。</p>
 <p><img src="/images/java-jni-practice/1.svg" alt="1.svg"></p>
@@ -210,7 +207,6 @@
 <h3 id="运行-java-程序">运行 Java 程序</h3>
 <p>最后在根目录执行 <code>java cn.fantasticmao.jni.SumNative</code> 命令，便可以验证 SumNative.java 通过调用了基于 C 实现的 libsum.dylib，成功得到了 <code>1 + 2 = 3</code> 的执行结果。</p>
 <p><img src="/images/java-jni-practice/2.png" alt="2.png"></p>
-<hr>
 <h2 id="在-openjdk-中查找-jdk-native-libraries">在 OpenJDK 中查找 JDK native libraries</h2>
 <p>按照 native methods 名称的解析规则，便可以在 OpenJDK 源码工程中快速查找 native methods 对应的实现代码，以 <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#intern--"><code>java.lang.String#intern()</code></a> 方法为例：</p>
 <ol>
@@ -225,7 +221,6 @@
 <p>依据查询结果可知，<code>java.lang.String#intern()</code> 对应的实现源码文件是 <a href="http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/file/72a1a252527b/src/share/native/java/lang/String.c"><code>src/share/native/java/lang/String.c</code></a>。</p>
 </li>
 </ol>
-<hr>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html">Java Native Interface Specification Contents</a></li>

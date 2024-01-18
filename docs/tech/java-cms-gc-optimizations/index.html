@@ -56,7 +56,6 @@
     <p class="reading-tips">发表于 2020/11/25，阅读时间 3 分钟</p>
 
     <p>本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 <code>-XX:+UseConcMarkSweepGC</code> 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。</p>
-<hr>
 <h2 id="知识储备">知识储备</h2>
 <h3 id="heap-空间划分">Heap 空间划分</h3>
 <p>JVM 中采用的分代收集算法有两个假设：绝大多数的对象都是朝生夕灭的，熬过多次 GC 的对象就越难以消亡。基于这种假设，在应用配置了 <code>-XX:+UseConcMarkSweepGC</code> 参数的场景下，JVM 会将 Heap 空间划分为 Young Generation（新生代）和 Old Generation（老年代），并且 Young Generation 空间会再被划分为 Eden、From Survivor 和 To Survivor，如下图所示：</p>
@@ -67,7 +66,6 @@
 <p>在 JVM 的设计中，新对象会优先被分配在 Young Generation 空间内的 Eden 空间。在经历一次 Minor GC 之后还存活的对象会通过「标记-复制」算法，和 From Survivor 空间内的对象一起，被 JVM 复制到 To Survivor 空间，同时 JVM 会直接清空 From Survivor 空间，并将当前使用的 To Survivor 空间作为下次 Minor GC 时的 From Survivor 空间。在经历多次 Minor GC 之后还存活的对象便会从 Young Generation 空间晋升至 Old Generation 空间，该最大晋升阈值可以通过 <code>-XX:MaxTenuringThreshold=${threshold}</code> 参数来调节。</p>
 <p>Old Generation 空间比 Young Generation 空间更大，并且对象填充的速度也更慢，因此 Old Generation 空间发生 Major GC 的频率也会更低，但是在 Old Generation 空间所发生的 Major GC 会比在 Young Generation 空间所发生的 Minor GC 更加耗时。一次 Minor GC 耗时可能只需要几毫秒，然而一次 Major GC 耗时可能需要几十毫秒到几秒（取决于 Old Generation 的大小）。</p>
 <p>在应用配置了 <code>-XX:+UseConcMarkSweepGC</code> 参数的场景下，JVM 会采用 ParNew 收集器来回收 Young Generation 空间内的对象，采用 CMS + Serial Old 收集器来回收 Old Generation 区域的对象。ParNew 收集器是一种多线程并行收集器，它在默认情况下开启的收集器线程数量与处理器的核心数量相同。在处理器核心非常多的环境中，可以通过参数 <code>-XX:ParallelGCThreads=${threads}</code> 参数来限制 ParNew 收集器开启的线程数量。CMS 收集器是一种以获取最短停顿时间为目标的增量式（Incremental）的收集器，GC 过程分为四个阶段：初始标记、并发标记、重新标记、并发清除，其中的初始标记和重新标记阶段需要 Stop The World（即停顿工作线程），并发标记和并发清除阶段则可以和工作线程一起运行。在 CMS 收集器运行期间，可能会由于无法处理「浮动垃圾（Floating Garbage）」而产生的「并发失败（Concurrent Mode Failure）」问题和基于「标记-清除」算法实现而带来的内存空间碎片化问题，导致 JVM 无法继续在 Old Generation 上分配新对象，从而导致 JVM 会采用 Serial Old 收集器来作为 CMS 收集器的备用选项，对整个 Heap 空间执行一次完全 Stop The World 的耗时更久的 Full GC。</p>
-<hr>
 <h2 id="问题案例频繁-major-gc">问题案例：频繁 Major GC</h2>
 <h3 id="问题表现">问题表现</h3>
 <p>钉钉群内收到持续的接口超时报警，全链路后台中查到大量接口调用超时的记录。</p>
@@ -95,7 +93,6 @@
 <p>在明确问题为流量增加而导致服务不堪重负之后，便通知运维对该服务进行扩容，将分配给该服务的 Heap 空间大小从原先的 1G 扩容至了现在的 4G。在对该服务进行扩容之后 GC 回归正常，接口超时问题也得到了解决。</p>
 <p><img src="/images/java-cms-gc-optimizations/1-heap-normal.png" alt="image"></p>
 <p><img src="/images/java-cms-gc-optimizations/1-gc-normal.png" alt="image"></p>
-<hr>
 <h2 id="调优案例优化-minor-gc">调优案例：优化 Minor GC</h2>
 <h3 id="优化目标">优化目标</h3>
 <p>对于一个底层服务的接口，期望该接口的调用耗时尽可能短，保证 99.99% 的耗时少于 10ms。在高峰时间段内对该接口的调用耗时进行统计之后，发现 99.9% 的调用耗时在 8ms 左右，但部分偏高的调用耗时均大于 20ms，因此怀疑可能是由于 GC 停顿导致。</p>
@@ -111,7 +108,6 @@
 <h3 id="优化方式">优化方式</h3>
 <p>在对该服务的 GC 情况进行分析之后，考虑到该服务的 Old Generation 空间内的对象占用量十分稳定，并且几乎不会发生 Major GC，于是便通知运维对该服务的 Young Generation 空间与 Old Generation 空间的大小比例进行调整，在保持整个 Heap 空间大小不变的情况下，下通过 <code>-Xmn${size}</code> 参数增加了 Young Generation 空间的大小。在对该服务进行 GC 参数优化之后，Young Generation 的执行频率从原先的每分钟 5 次降低至了每分钟 3.5 次，每分钟内 GC 停顿的时间也从原先的 100ms 降低至了 50ms。</p>
 <p><img src="/images/java-cms-gc-optimizations/2-gc-after.png" alt="image"></p>
-<hr>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">Launches a Java application</a></li>

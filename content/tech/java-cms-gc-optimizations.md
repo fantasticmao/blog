@@ -3,12 +3,9 @@ title: "Java CMS GC 优化案例两则"
 date: 2020-11-25T23:00:00+08:00
 categories: ["编程"]
 tags: ["Java", "JVM"]
-keywords: ["Java", "GC"]
 ---
 
 本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 `-XX:+UseConcMarkSweepGC` 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。<!--more-->
-
----
 
 ## 知识储备
 
@@ -29,8 +26,6 @@ JVM 中采用的分代收集算法有两个假设：绝大多数的对象都是�
 Old Generation 空间比 Young Generation 空间更大，并且对象填充的速度也更慢，因此 Old Generation 空间发生 Major GC 的频率也会更低，但是在 Old Generation 空间所发生的 Major GC 会比在 Young Generation 空间所发生的 Minor GC 更加耗时。一次 Minor GC 耗时可能只需要几毫秒，然而一次 Major GC 耗时可能需要几十毫秒到几秒（取决于 Old Generation 的大小）。
 
 在应用配置了 `-XX:+UseConcMarkSweepGC` 参数的场景下，JVM 会采用 ParNew 收集器来回收 Young Generation 空间内的对象，采用 CMS + Serial Old 收集器来回收 Old Generation 区域的对象。ParNew 收集器是一种多线程并行收集器，它在默认情况下开启的收集器线程数量与处理器的核心数量相同。在处理器核心非常多的环境中，可以通过参数 `-XX:ParallelGCThreads=${threads}` 参数来限制 ParNew 收集器开启的线程数量。CMS 收集器是一种以获取最短停顿时间为目标的增量式（Incremental）的收集器，GC 过程分为四个阶段：初始标记、并发标记、重新标记、并发清除，其中的初始标记和重新标记阶段需要 Stop The World（即停顿工作线程），并发标记和并发清除阶段则可以和工作线程一起运行。在 CMS 收集器运行期间，可能会由于无法处理「浮动垃圾（Floating Garbage）」而产生的「并发失败（Concurrent Mode Failure）」问题和基于「标记-清除」算法实现而带来的内存空间碎片化问题，导致 JVM 无法继续在 Old Generation 上分配新对象，从而导致 JVM 会采用 Serial Old 收集器来作为 CMS 收集器的备用选项，对整个 Heap 空间执行一次完全 Stop The World 的耗时更久的 Full GC。
-
----
 
 ## 问题案例：频繁 Major GC
 
@@ -80,8 +75,6 @@ Old Generation 空间比 Young Generation 空间更大，并且对象填充的�
 
 ![image](/images/java-cms-gc-optimizations/1-gc-normal.png)
 
----
-
 ## 调优案例：优化 Minor GC
 
 ### 优化目标
@@ -111,8 +104,6 @@ Old Generation 空间比 Young Generation 空间更大，并且对象填充的�
 在对该服务的 GC 情况进行分析之后，考虑到该服务的 Old Generation 空间内的对象占用量十分稳定，并且几乎不会发生 Major GC，于是便通知运维对该服务的 Young Generation 空间与 Old Generation 空间的大小比例进行调整，在保持整个 Heap 空间大小不变的情况下，下通过 `-Xmn${size}` 参数增加了 Young Generation 空间的大小。在对该服务进行 GC 参数优化之后，Young Generation 的执行频率从原先的每分钟 5 次降低至了每分钟 3.5 次，每分钟内 GC 停顿的时间也从原先的 100ms 降低至了 50ms。
 
 ![image](/images/java-cms-gc-optimizations/2-gc-after.png)
-
----
 
 ## 参考资料
 

@@ -16,7 +16,7 @@
       <description>&lt;p&gt;本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 &lt;code&gt;-XX:+UseConcMarkSweepGC&lt;/code&gt; 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>《Unix 环境高级编程》谈及的几种 IO 模型</title>
+      <title>&lt;Unix 环境高级编程&gt; 谈及的几种 IO 模型</title>
       <link>https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
       <guid>https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/</guid>

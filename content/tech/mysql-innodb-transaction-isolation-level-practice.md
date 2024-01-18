@@ -3,11 +3,6 @@ title: "MySQL InnoDB 事务隔离级别实践"
 date: 2020-09-10T15:58:10+08:00
 categories: ["数据库"]
 tags: ["MySQL", "InnoDB"]
-keywords:
-  - "MySQL"
-  - "InnoDB"
-  - "Isolation Levels"
-  - "隔离级别"
 ---
 
 本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。<!--more-->
@@ -15,12 +10,8 @@ keywords:
 <!--
 本篇文章首先简单介绍 InnoDB 中聚簇索引和二级索引的概念和对应的数据结构，然后介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，最后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。
 
----
-
 ## 聚簇索引和二级索引
 -->
-
----
 
 ## 事务和加锁信息
 
@@ -55,8 +46,6 @@ performance_schema 数据库的 data_lock_waits 表存储了被阻塞的事务�
 在下图的示例中，ID 为 271844 的事务请求获取 ID 为 140668958213080:868:4:2:140669205682208 的锁，并且被 ID 为 271843 事务中的 ID 为 140668958212240:868:4:2:140669205601312 的锁所阻塞。
 
 ![image](/images/mysql-innodb-transaction-isolation-level-practice/performance_schema-data_lock_waits.png)
-
----
 
 ## 隔离级别实践
 
@@ -118,8 +107,6 @@ MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不�
 在下图的示例中，左半图中的事务在执行普通的 SELECT 语句的时候，会锁定查询所涉及的记录，并且右半图中的事务在更改该记录时会被阻塞。
 
 ![image](/images/mysql-innodb-transaction-isolation-level-practice/serializable.png)
-
----
 
 ## 参考资料
 

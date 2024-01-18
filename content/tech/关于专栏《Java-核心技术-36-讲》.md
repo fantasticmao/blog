@@ -3,7 +3,6 @@ title: "关于专栏《Java 核心技术 36 讲》"
 date: 2018-05-09T12:39:42+08:00
 categories: ["编程"]
 tags: ["Java"]
-keywords: ["Java", "面试", "找工作"]
 draft: true
 ---
 

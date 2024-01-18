@@ -85,8 +85,7 @@
 </span></span><span style="display:flex;"><span>         |        v             v            v              v                     |
 </span></span><span style="display:flex;"><span>         |  CallerRunsPolicy  AbortPolicy  DiscardPolicy  DiscardOldestPolicy     |
 </span></span><span style="display:flex;"><span>         +------------------------------------------------------------------------+
-</span></span></code></pre></div><hr>
-<h2 id="状态管理">状态管理</h2>
+</span></span></code></pre></div><h2 id="状态管理">状态管理</h2>
 <p>ThreadPoolExecutor 内部共有两个状态：workerCount 和 runState。workerCount 表示线程池中的有效线程数，是已经被允许运行并且还未结束的线程数量。runState 表示线程池在生命周期内的运行状态，具体的枚举值有 RUNNING、SHUTDOWN、STOP、TIDYING、TERMINATED。</p>
 <p>ThreadPoolExecutor 将 workerCount 和 runState 两个状态合并在同一个 <code>AtomicInteger</code> 类型的 <code>ctl</code> 字段中，并会通过一系列位运算来分别获取设置 workerCount 和 runState 的具体值。其中，runState 会占据 <code>ctl</code> 字段中 int 值的高 3 位，workerCount 会占据剩下的 29 位，因此 ThreadPoolExecutor 支持的最大线程数量是 <code>2^29 - 1</code> 个，而不是 <code>2^32 -1</code> 个。将 workerCount 和 runState 两个状态设计成同一个字段的好处是可以使用一次 CAS 操作同时修改两个状态，从而避免 <a href="https://en.wikipedia.org/wiki/Race_condition">竞态条件</a> 的发生和减少锁资源的占用。<code>ctl</code> 字段中具体的位分配如下所示：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[000][0 0000 0000 0000 0000 0000 0000 0000]
@@ -358,7 +357,6 @@
 
 <script type="application/javascript" src="https://emgithub.com/embed.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2059-L2064&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on&fetchFromJsDelivr=on"></script>
 
-<hr>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java">java.util.concurrent.ThreadPoolExecutor</a></li>

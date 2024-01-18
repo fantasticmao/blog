@@ -3,12 +3,9 @@ title: "Java JNI 简单实践"
 date: 2020-05-18T20:40:21+08:00
 categories: ["编程"]
 tags: ["Java"]
-keywords: ["Java", "JNI"]
 ---
 
 本篇文章介绍 Java JNI 的基本概念和技术要点，并开发一个简单的示例程序作为实践。<!--more-->
-
----
 
 ## JNI 简介
 
@@ -33,8 +30,6 @@ JNI 与 JVM 的底层实现无关，JVM 供应商可以在添加对 JNI 支持�
 开发者甚至还可以通过调用 [Invocation API](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/invocation.html)，用于把 JVM 内嵌到本地应用中。
 
 本篇文章主要关注于 Java 中的 native methods 是如何与和其它语言（以 C 为例）的 native libraries 交互的，关于 JNI functions 和 Invocation API 的详细内容请见 Oracle 的 [官方文档](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html)。
-
----
 
 ## native methods 与 native libraries
 
@@ -101,8 +96,6 @@ native methods 的第一个参数是 [`JNIEnv`](https://docs.oracle.com/javase/8
 native methods 的剩余参数与方法的参数列表一一对应，具体的映射关系请见 [JNI Types and Data Structures](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html)。
 
 native methods 通过返回值将方法的执行结果返回给调用程序。
-
----
 
 ## JNI 实践
 
@@ -196,8 +189,6 @@ JNIEXPORT jint JNICALL Java_cn_fantasticmao_jni_SumNative_sum
 
 ![2.png](/images/java-jni-practice/2.png)
 
----
-
 ## 在 OpenJDK 中查找 JDK native libraries
 
 按照 native methods 名称的解析规则，便可以在 OpenJDK 源码工程中快速查找 native methods 对应的实现代码，以 [`java.lang.String#intern()`](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#intern--) 方法为例：
@@ -208,8 +199,6 @@ JNIEXPORT jint JNICALL Java_cn_fantasticmao_jni_SumNative_sum
    ![3.png](/images/java-jni-practice/3.png)
 
 3. 依据查询结果可知，`java.lang.String#intern()` 对应的实现源码文件是 [`src/share/native/java/lang/String.c`](http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/file/72a1a252527b/src/share/native/java/lang/String.c)。
-
----
 
 ## 参考资料
 

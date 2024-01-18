@@ -3,12 +3,9 @@ title: "设计模式概览"
 date: 2018-02-14T23:33:47+08:00
 categories: ["编程"]
 tags: ["Java", "Spring Framework"]
-keywords: ["Java", "Spring Framework", "设计模式"]
 ---
 
 本篇文章记录我所理解和掌握的在 [《Design Patterns》](https://book.douban.com/subject/1436745/) 书中提及的一些设计模式，及其在 JDK 和 Spring 中的一些实现。<!--more-->
-
----
 
 ## 创建型 Creational Patterns
 
@@ -67,8 +64,6 @@ keywords: ["Java", "Spring Framework", "设计模式"]
 实现：
 
 - java.lang.Runtime#getRuntime()
-
----
 
 ## 结构型 Structural Patterns
 
@@ -143,8 +138,6 @@ keywords: ["Java", "Spring Framework", "设计模式"]
 
 - java.lang.reflect.Proxy
 - org.springframework.aop.framework.AopProxy
-
----
 
 ## 行为型 Behavioral Patterns
 

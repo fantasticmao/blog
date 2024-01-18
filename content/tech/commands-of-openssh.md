@@ -3,20 +3,9 @@ title: "OpenSSH 相关命令"
 date: 2020-02-21T20:00:00+08:00
 categories: ["编程"]
 tags: ["Linux", "OpenSSH"]
-keywords:
-  - "Linux"
-  - "OpenSSH"
-  - "ssh"
-  - "ssh-keygen"
-  - "ssh-copy-id"
-  - "ssh-agent"
-  - "ssh-add"
-  - "scp"
 ---
 
 这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。<!--more-->
-
----
 
 ## ssh
 
@@ -64,8 +53,6 @@ Port 22222
 ```
 
 更多关于 `ssh` 配置文件的信息请查看 [man ssh_config](https://man.openbsd.org/OpenBSD-current/man5/ssh_config.5)。
-
----
 
 ## ssh-keygen
 

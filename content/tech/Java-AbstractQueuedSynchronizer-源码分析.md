@@ -3,10 +3,7 @@ title: "Java AbstractQueuedSynchronizer 源码分析"
 date: 2020-11-10T15:19:28+08:00
 categories: ["编程"]
 tags: ["Java"]
-keywords: ["Java", "AQS", "AbstractQueuedSynchronizer", "抽象队列同步器"]
 draft: true
----
-
 ---
 
 ## 数据结构
@@ -32,11 +29,7 @@ NULL <-- | running | <-- | waiting | <-- | waiting |
 
 {{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/locks/AbstractQueuedSynchronizer.java#L516-L533" >}}
 
----
-
 ## 实现细节
-
----
 
 ## 使用案例
 
@@ -47,8 +40,6 @@ NULL <-- | running | <-- | waiting | <-- | waiting |
 ### Semaphore
 
 ### ThreadPoolExecutor.Worker
-
----
 
 ## 参考资料
 
