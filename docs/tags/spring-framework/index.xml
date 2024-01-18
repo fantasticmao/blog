@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Spring Framework on FantasticMao&#39;s Blog</title>
+    <title>Spring Framework on FantasticMao 个人博客</title>
     <link>https://blog.fantasticmao.cn/tags/spring-framework/</link>
-    <description>Recent content in Spring Framework on FantasticMao&#39;s Blog</description>
+    <description>Recent content in Spring Framework on FantasticMao 个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 14 Feb 2018 23:33:47 +0800</lastBuildDate><atom:link href="https://blog.fantasticmao.cn/tags/spring-framework/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Feb 2018 23:33:47 +0800</lastBuildDate>
+    <atom:link href="https://blog.fantasticmao.cn/tags/spring-framework/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>设计模式概览</title>
-      <link>https://blog.fantasticmao.cn/2018/02/14/overview-of-design-patterns/</link>
+      <link>https://blog.fantasticmao.cn/tech/overview-of-design-patterns/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2018/02/14/overview-of-design-patterns/</guid>
+      <guid>https://blog.fantasticmao.cn/tech/overview-of-design-patterns/</guid>
       <description>&lt;p&gt;本篇文章记录我所理解和掌握的在 &lt;a href=&#34;https://book.douban.com/subject/1436745/&#34;&gt;《Design Patterns》&lt;/a&gt; 书中提及的一些设计模式，及其在 JDK 和 Spring 中的一些实现。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

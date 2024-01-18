@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <title>二分查找的实现细节 | FantasticMao 个人博客</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="fantasticmao">
+<meta name="description" content="最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
+本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="二分查找的实现细节"/>
+<meta name="twitter:description" content="最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
+本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。"/>
+
+<meta property="og:title" content="二分查找的实现细节" />
+<meta property="og:description" content="最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
+本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fantasticmao.cn/tech/implementation-details-of-binary-search/" /><meta property="article:section" content="tech" />
+<meta property="article:published_time" content="2018-03-10T14:58:31+08:00" />
+<meta property="article:modified_time" content="2018-03-10T14:58:31+08:00" />
+
+
+<link rel="stylesheet" href="/css/theme.min.3e2812c8be4f167bc4ab4c2e28bcf1d0c602827aaa8a4bd5572bdbac2f8ee9f8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
+
+<link rel="stylesheet" href="/css/custom.min.602fd534bd7c46f70cd7a28744b0da1749115c8eb9bd0ba96deac00e0dea3195.css">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/favicons/site.webmanifest">
+
+
+</head>
+
+<body>
+<header>
+  <p><strong>FantasticMao 个人博客</strong></p>
+  <nav>
+    <p><a href="/">首页</a></p>
+    <p>|</p>
+    <p><a href="/tech">编程</a></p>
+    <p>|</p>
+    <p><a href="/essay">随笔</a></p>
+    <p>|</p>
+    <p><a href="/project">项目</a></p>
+    <p>|</p>
+    <p><a href="/collect">收藏</a></p>
+  </nav>
+</header>
+
+<hr>
+
+<main>
+  <article>
+    <h1 class="title">二分查找的实现细节</h1>
+    <p class="reading-tips">发表于 2018/03/10，阅读时间 2 分钟</p>
+
+    <p>最近留意到关于实现 <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">二分查找算法（Binary Search Algorithm）</a> 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。</p>
+<p>本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。</p>
+<hr>
+<h2 id="简单介绍">简单介绍</h2>
+<p>在计算机科学中，二分查找也被称为折半查找、对数查找，是一种在有序数组中查找目标元素的搜索算法。</p>
+<p>二分查找会将目标元素与数组中间元素进行比较，若不相等，则目标元素不存在的半段数组会被淘汰，并且查询会在目标元素存在的半段数组中继续进行，直到比较成功为止。如果查询以空数组为结束，则表示目标元素不存在。一次二分查找的具体过程可以参考下图（图片来源自维基百科）：</p>
+<p><img src="/images/implementation-details-of-binary-search/1.png" alt="iamge"></p>
+<p>二分查找的最差时间复杂度是 𝑶(log 𝒏)，空间复杂度是 𝑶(1)。相比于最差时间复杂度为 𝑶(𝒏) 的 <a href="https://en.wikipedia.org/wiki/Linear_search">线性查找（Linear Search）</a>，二分查找执行更快、效率更高。相比于为快速查找量身定制的数据结构 <a href="https://en.wikipedia.org/wiki/Hash_table">哈希表（Hash Table）</a>，二分查找的限制更少、应用更广。</p>
+<p>二分查找有许多不同的变种版本，例如 <a href="https://en.wikipedia.org/wiki/Fractional_cascading">Fractional Cascading</a> 加速了二分查找在多个数组中对相同数值的搜索速度，有效解决了计算机几何以及其它领域中的一系列搜索相关问题；<a href="https://en.wikipedia.org/wiki/Exponential_search">Exponential Search</a> 扩展了二分查找算法，使其可以应用于无界列表。</p>
+<p>二分查找的算法思想也衍生出了许多其它数据结构和算法，例如 <a href="https://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree</a> 和 <a href="https://en.wikipedia.org/wiki/B-tree">B-Tree</a>。</p>
+<hr>
+<h2 id="初步实现">初步实现</h2>
+<p>以 Java 语言为例，初步实现一个简单的二分查找算法，演示代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high, <span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 算法退出条件</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (low <span style="color:#f92672">&gt;</span> high) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 计算本次查找的中间值</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> (low <span style="color:#f92672">+</span> high) <span style="color:#f92672">/</span> 2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 二分查找的判断逻辑</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;</span> key) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> binarySearch(arr, mid <span style="color:#f92672">+</span> 1, high, key);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> key) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> binarySearch(arr, low, mid <span style="color:#f92672">-</span> 1, key);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mid;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>依据文章开头的小提醒 review 上例代码，可以发现其中存在着的细节问题：</p>
+<ol>
+<li>
+<p>缺少参数校验</p>
+<p>当输入参数 <code>low</code> 或 <code>high</code> 的数值小于零时，程序会存在逻辑错误。</p>
+</li>
+<li>
+<p>递归查找的栈溢出</p>
+<p>当查找的次数足够多时，程序会抛出 <code>java.lang.StackOverflowError</code> 异常。</p>
+</li>
+<li>
+<p>中值计算的整型溢出</p>
+<p>当查找的数组足够大时，直接使用 <code>(low + high) / 2</code> 计算二分查找过程中的中间数值，程序会存在整型数值溢出的问题。</p>
+</li>
+</ol>
+<hr>
+<h2 id="正确实现">正确实现</h2>
+<p>修复上述提及的三个问题，演示代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high, <span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 参数校验</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (arr <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> arr.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> 0 <span style="color:#f92672">||</span> low <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> high <span style="color:#f92672">&lt;</span> 0) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 算法退出条件</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (low <span style="color:#f92672">&gt;</span> high) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 计算本次查找的中间值</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> low <span style="color:#f92672">+</span> ((high <span style="color:#f92672">-</span> low) <span style="color:#f92672">&gt;&gt;&gt;</span> 1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 二分查找的判断逻辑</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;</span> key) {
+</span></span><span style="display:flex;"><span>            low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> 1;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> key) {
+</span></span><span style="display:flex;"><span>            high <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> 1;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mid;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+  </article>
+</main>
+<hr>
+<footer><div class="comments">
+  <script>
+
+    let getTheme = window.localStorage && window.localStorage.getItem("colorscheme");
+    let themeInParams = 'github-light';
+
+    if (getTheme == null) {
+      if (themeInParams !== '' && themeInParams !== 'auto') {
+        getTheme = themeInParams;
+      } else {
+        getTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+      }
+    }
+
+    let theme = getTheme === 'dark' ? 'github-dark' : 'github-light';
+    let s = document.createElement('script');
+    s.src = 'https://utteranc.es/client.js';
+    s.setAttribute('repo', 'fantasticmao\/fantasticmao.github.io');
+    s.setAttribute('issue-term', 'pathname');
+    s.setAttribute('theme', theme);
+    s.setAttribute('crossorigin', 'anonymous');
+    s.setAttribute('async', '');
+    document.querySelector('div.comments').innerHTML = '';
+    document.querySelector('div.comments').appendChild(s);
+
+  </script>
+</div>
+  <section>
+    <p><a href="https://github.com/fantasticmao">GitHub</a></p>
+    <p>|</p>
+    <p><a href="https://twitter.com/fantasticmao">Twitter</a></p>
+    <p>|</p>
+    <p><a href="https://www.instagram.com/wonderfulmao/">Instagram</a></p>
+    <p>|</p>
+    <p><a href="https://steamcommunity.com/id/fantasticmao/">Steam</a></p>
+    <p>|</p>
+    <p><a href="/index.xml">RSS 订阅</a></p>
+  </section>
+  <section>
+    <p>版权所有 © 2024 fantasticmao</p>
+    <p>|</p>
+    <p>技术支持 <a href="https://gohugo.io/" target="_blank" rel="nofollow">Hugo</a> & <a href="https://github.com/fantasticmao/momo" target="_blank" rel="nofollow">MoMo</a></p>
+    <p>|</p>
+    <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow">浙 ICP 备 17009730 号</a></p>
+  </section>
+</footer>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FBHKYP5SYE"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-FBHKYP5SYE', { 'anonymize_ip': false });
+}
+</script>
+
+</body>
+
+</html>

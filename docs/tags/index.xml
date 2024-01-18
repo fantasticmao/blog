@@ -1,137 +1,110 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>标签 on FantasticMao&#39;s Blog</title>
+    <title>Tags on FantasticMao 个人博客</title>
     <link>https://blog.fantasticmao.cn/tags/</link>
-    <description>Recent content in 标签 on FantasticMao&#39;s Blog</description>
+    <description>Recent content in Tags on FantasticMao 个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 23 Nov 2016 21:41:22 +0800</lastBuildDate><atom:link href="https://blog.fantasticmao.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Apr 2021 15:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.fantasticmao.cn/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Free Talk</title>
       <link>https://blog.fantasticmao.cn/tags/free-talk/</link>
       <pubDate>Tue, 20 Apr 2021 15:00:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/free-talk/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>IP</title>
       <link>https://blog.fantasticmao.cn/tags/ip/</link>
       <pubDate>Wed, 24 Mar 2021 14:23:09 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/ip/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Java</title>
       <link>https://blog.fantasticmao.cn/tags/java/</link>
       <pubDate>Wed, 25 Nov 2020 23:00:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/java/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>JVM</title>
       <link>https://blog.fantasticmao.cn/tags/jvm/</link>
       <pubDate>Wed, 25 Nov 2020 23:00:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/jvm/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>IO</title>
       <link>https://blog.fantasticmao.cn/tags/io/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/io/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Linux</title>
       <link>https://blog.fantasticmao.cn/tags/linux/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/linux/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>InnoDB</title>
       <link>https://blog.fantasticmao.cn/tags/innodb/</link>
       <pubDate>Thu, 10 Sep 2020 15:58:10 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/innodb/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>MySQL</title>
       <link>https://blog.fantasticmao.cn/tags/mysql/</link>
       <pubDate>Thu, 10 Sep 2020 15:58:10 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/mysql/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>OpenSSH</title>
       <link>https://blog.fantasticmao.cn/tags/openssh/</link>
       <pubDate>Fri, 21 Feb 2020 20:00:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/openssh/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>JavaScript</title>
       <link>https://blog.fantasticmao.cn/tags/javascript/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/javascript/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Vue</title>
       <link>https://blog.fantasticmao.cn/tags/vue/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/vue/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Vim</title>
       <link>https://blog.fantasticmao.cn/tags/vim/</link>
       <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/vim/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Algorithm</title>
       <link>https://blog.fantasticmao.cn/tags/algorithm/</link>
       <pubDate>Sat, 10 Mar 2018 14:58:31 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/algorithm/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Spring Framework</title>
       <link>https://blog.fantasticmao.cn/tags/spring-framework/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
-      
       <guid>https://blog.fantasticmao.cn/tags/spring-framework/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

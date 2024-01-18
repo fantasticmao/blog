@@ -1,200 +1,125 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://blog.fantasticmao.cn/</loc>
     <lastmod>2021-04-20T15:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/categories/</loc>
+    <lastmod>2021-04-20T15:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/free-talk/</loc>
     <lastmod>2021-04-20T15:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2021/04/20/teach-girlfriend-computer-literacy-carry-system-in-life/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tags/</loc>
     <lastmod>2021-04-20T15:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/posts/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/</loc>
     <lastmod>2021-04-20T15:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/teach-girlfriend-computer-literacy-carry-system-in-life/</loc>
+    <lastmod>2021-04-20T15:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/categories/%E9%97%B2%E8%81%8A/</loc>
     <lastmod>2021-04-20T15:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/ip/</loc>
     <lastmod>2021-03-24T14:23:09+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2021/03/24/teach-girlfriend-computer-literacy-domain-names-and-ip/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/teach-girlfriend-computer-literacy-domain-names-and-ip/</loc>
     <lastmod>2021-03-24T14:23:09+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/java/</loc>
     <lastmod>2020-11-25T23:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2020/11/25/java-cms-gc-optimizations/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/java-cms-gc-optimizations/</loc>
     <lastmod>2020-11-25T23:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/jvm/</loc>
     <lastmod>2020-11-25T23:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/categories/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2020-11-25T23:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2020/11/18/io-models-mentioned-in-apue/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/</loc>
     <lastmod>2020-11-18T11:14:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/io/</loc>
     <lastmod>2020-11-18T11:14:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/linux/</loc>
     <lastmod>2020-11-18T11:14:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2020/10/01/java-source-code-reading-for-threadpoolexecutor/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/java-source-code-reading-for-threadpoolexecutor/</loc>
     <lastmod>2020-10-01T18:41:53+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/innodb/</loc>
     <lastmod>2020-09-10T15:58:10+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/mysql/</loc>
     <lastmod>2020-09-10T15:58:10+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2020/09/10/mysql-innodb-transaction-isolation-level-practice/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/mysql-innodb-transaction-isolation-level-practice/</loc>
     <lastmod>2020-09-10T15:58:10+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2020-09-10T15:58:10+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2020/05/18/java-jni-practice/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/java-jni-practice/</loc>
     <lastmod>2020-05-18T20:40:21+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2020/04/08/build-and-deploy-of-this-blog/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/build-and-deploy-of-this-blog/</loc>
     <lastmod>2020-04-08T00:03:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/openssh/</loc>
     <lastmod>2020-02-21T20:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2020/02/21/commands-of-openssh/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/commands-of-openssh/</loc>
     <lastmod>2020-02-21T20:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/javascript/</loc>
     <lastmod>2019-12-16T00:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/vue/</loc>
     <lastmod>2019-12-16T00:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2019/12/16/first-time-using-vue/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/first-time-using-vue/</loc>
     <lastmod>2019-12-16T00:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2019/02/24/indexes-from-a-data-structure-perspective/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/indexes-from-a-data-structure-perspective/</loc>
     <lastmod>2019-02-24T13:50:18+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/vim/</loc>
     <lastmod>2018-03-31T21:51:23+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2018/03/31/commands-of-vim/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/commands-of-vim/</loc>
     <lastmod>2018-03-31T21:51:23+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/algorithm/</loc>
     <lastmod>2018-03-10T14:58:31+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2018/03/10/implementation-details-of-binary-search/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/implementation-details-of-binary-search/</loc>
     <lastmod>2018-03-10T14:58:31+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2018-03-10T14:58:31+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.fantasticmao.cn/tags/spring-framework/</loc>
     <lastmod>2018-02-14T23:33:47+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2018/02/14/overview-of-design-patterns/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/overview-of-design-patterns/</loc>
     <lastmod>2018-02-14T23:33:47+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2017/09/14/how-to-get-started-with-a-framework/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/how-to-get-started-with-a-framework/</loc>
     <lastmod>2017-09-14T01:10:06+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/2017/01/02/java-generics/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/tech/java-generics/</loc>
     <lastmod>2017-01-02T20:12:26+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/collect/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/essay/</loc>
+  </url><url>
+    <loc>https://blog.fantasticmao.cn/project/</loc>
   </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/about/</loc>
-    <lastmod>2016-11-23T21:42:50+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/tags/</loc>
-    <lastmod>2016-11-23T21:41:22+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.fantasticmao.cn/categories/</loc>
-    <lastmod>2016-11-23T21:41:22+08:00</lastmod>
-  </url>
-  
 </urlset>

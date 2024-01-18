@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <title>Java CMS GC 优化案例两则 | FantasticMao 个人博客</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="fantasticmao">
+<meta name="description" content="本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 -XX:&#43;UseConcMarkSweepGC 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Java CMS GC 优化案例两则"/>
+<meta name="twitter:description" content="本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 -XX:&#43;UseConcMarkSweepGC 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。"/>
+
+<meta property="og:title" content="Java CMS GC 优化案例两则" />
+<meta property="og:description" content="本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 -XX:&#43;UseConcMarkSweepGC 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fantasticmao.cn/tech/java-cms-gc-optimizations/" /><meta property="article:section" content="tech" />
+<meta property="article:published_time" content="2020-11-25T23:00:00+08:00" />
+<meta property="article:modified_time" content="2020-11-25T23:00:00+08:00" />
+
+
+<link rel="stylesheet" href="/css/theme.min.3e2812c8be4f167bc4ab4c2e28bcf1d0c602827aaa8a4bd5572bdbac2f8ee9f8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
+
+<link rel="stylesheet" href="/css/custom.min.602fd534bd7c46f70cd7a28744b0da1749115c8eb9bd0ba96deac00e0dea3195.css">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/favicons/site.webmanifest">
+
+
+</head>
+
+<body>
+<header>
+  <p><strong>FantasticMao 个人博客</strong></p>
+  <nav>
+    <p><a href="/">首页</a></p>
+    <p>|</p>
+    <p><a href="/tech">编程</a></p>
+    <p>|</p>
+    <p><a href="/essay">随笔</a></p>
+    <p>|</p>
+    <p><a href="/project">项目</a></p>
+    <p>|</p>
+    <p><a href="/collect">收藏</a></p>
+  </nav>
+</header>
+
+<hr>
+
+<main>
+  <article>
+    <h1 class="title">Java CMS GC 优化案例两则</h1>
+    <p class="reading-tips">发表于 2020/11/25，阅读时间 3 分钟</p>
+
+    <p>本篇文章记录和分享自己近期遇到的两个 GC 相关案例。在谈及的两个案例中，应用均是使用 <code>-XX:+UseConcMarkSweepGC</code> 参数来指定了 GC 收集器，因此本文分析和排查问题的前提也是对于该场景而言的。</p>
+<hr>
+<h2 id="知识储备">知识储备</h2>
+<h3 id="heap-空间划分">Heap 空间划分</h3>
+<p>JVM 中采用的分代收集算法有两个假设：绝大多数的对象都是朝生夕灭的，熬过多次 GC 的对象就越难以消亡。基于这种假设，在应用配置了 <code>-XX:+UseConcMarkSweepGC</code> 参数的场景下，JVM 会将 Heap 空间划分为 Young Generation（新生代）和 Old Generation（老年代），并且 Young Generation 空间会再被划分为 Eden、From Survivor 和 To Survivor，如下图所示：</p>
+<p><img src="/images/java-cms-gc-optimizations/java-heap.svg" alt="image"></p>
+<p>在默认情况下，Young Generation 空间与 Old Generation 空间的大小比例为 1:2，即 Young Generation 空间会占用整个 Heap 空间占用 1/3，Old Generation 会占用整个 Heap 空间占用 2/3，该比例可以通过 <code>-XX:NewRatio=${ratio}</code> 参数来调节，同时也可以通过 <code>-Xmn${size}</code> 参数来直接指定 Young Generation 空间的大小。Young Generation 空间内的 Eden 空间与 From Survivor 空间、To Survivor 空间的大小比例为 8:1:1，该比例可以通过 <code>-XX:SurvivorRatio=${ratio}</code> 参数来调节。</p>
+<h3 id="分代-gc-过程">分代 GC 过程</h3>
+<p>基于分代收集算法的假设，JVM 会对 Young Generation 空间和 Old Generation 空间采用不同的 GC 策略，其中对于 Young Generation 空间的 GC 被称为 Minor GC，对于 Old Generation 空间的 GC 被成为 Major GC，对于整个 Heap 空间的 GC 被称为 Full GC。</p>
+<p>在 JVM 的设计中，新对象会优先被分配在 Young Generation 空间内的 Eden 空间。在经历一次 Minor GC 之后还存活的对象会通过「标记-复制」算法，和 From Survivor 空间内的对象一起，被 JVM 复制到 To Survivor 空间，同时 JVM 会直接清空 From Survivor 空间，并将当前使用的 To Survivor 空间作为下次 Minor GC 时的 From Survivor 空间。在经历多次 Minor GC 之后还存活的对象便会从 Young Generation 空间晋升至 Old Generation 空间，该最大晋升阈值可以通过 <code>-XX:MaxTenuringThreshold=${threshold}</code> 参数来调节。</p>
+<p>Old Generation 空间比 Young Generation 空间更大，并且对象填充的速度也更慢，因此 Old Generation 空间发生 Major GC 的频率也会更低，但是在 Old Generation 空间所发生的 Major GC 会比在 Young Generation 空间所发生的 Minor GC 更加耗时。一次 Minor GC 耗时可能只需要几毫秒，然而一次 Major GC 耗时可能需要几十毫秒到几秒（取决于 Old Generation 的大小）。</p>
+<p>在应用配置了 <code>-XX:+UseConcMarkSweepGC</code> 参数的场景下，JVM 会采用 ParNew 收集器来回收 Young Generation 空间内的对象，采用 CMS + Serial Old 收集器来回收 Old Generation 区域的对象。ParNew 收集器是一种多线程并行收集器，它在默认情况下开启的收集器线程数量与处理器的核心数量相同。在处理器核心非常多的环境中，可以通过参数 <code>-XX:ParallelGCThreads=${threads}</code> 参数来限制 ParNew 收集器开启的线程数量。CMS 收集器是一种以获取最短停顿时间为目标的增量式（Incremental）的收集器，GC 过程分为四个阶段：初始标记、并发标记、重新标记、并发清除，其中的初始标记和重新标记阶段需要 Stop The World（即停顿工作线程），并发标记和并发清除阶段则可以和工作线程一起运行。在 CMS 收集器运行期间，可能会由于无法处理「浮动垃圾（Floating Garbage）」而产生的「并发失败（Concurrent Mode Failure）」问题和基于「标记-清除」算法实现而带来的内存空间碎片化问题，导致 JVM 无法继续在 Old Generation 上分配新对象，从而导致 JVM 会采用 Serial Old 收集器来作为 CMS 收集器的备用选项，对整个 Heap 空间执行一次完全 Stop The World 的耗时更久的 Full GC。</p>
+<hr>
+<h2 id="问题案例频繁-major-gc">问题案例：频繁 Major GC</h2>
+<h3 id="问题表现">问题表现</h3>
+<p>钉钉群内收到持续的接口超时报警，全链路后台中查到大量接口调用超时的记录。</p>
+<h3 id="问题排查">问题排查</h3>
+<p>引起服务运行缓慢的原因有很多，诊断这类问题的大致方向如下：</p>
+<ol>
+<li>是否为网络问题；</li>
+<li>是否为该服务自身问题（例如 GC、慢 SQL、死锁）；</li>
+<li>是否为该服务依赖的下游服务问题。</li>
+</ol>
+<p>首先在与运维确认之后排除了网络问题，然后在查看请求的调用链路之后排除了下游服务的问题，最终将问题定位在了该服务自身。</p>
+<p>通过监控看到该服务在出现问题的时间段内对 CPU、网络、磁盘的使用率都突然增加，同时也看到该服务的 JVM 实例中 Heap 空间已经被耗尽，并且频繁地发生 Major GC。为了确定突增流量的来源，于是主动联系了业务方，得知他们最近迁移了一大波老用户数据，因此导致了该服务近期承受的流量急剧增加，最终超出了该服务当前被分配资源的可承受范围。业务方反馈的用户日活数据变化如下：</p>
+<p><img src="/images/java-cms-gc-optimizations/daily-active-user.png" alt="image"></p>
+<p>在确定问题的原因之后，便开始分析该服务的 GC 情况。首先在监控后台中看到该服务被分配了 307.3MB + 38.4MB * 2 + 640MB = 1GB 的 JVM Heap 空间大小，并且 Heap 空间内的 Young Generation 和 Old Generation 均已被耗尽，该服务在 17:00 - 18:00 时间段内平均每分钟内发生 15 次 Major GC 和 5 次 Minor GC，每分钟内 GC 停顿的时间甚至已经达到 20s。</p>
+<p><img src="/images/java-cms-gc-optimizations/1-heap-abnormal.png" alt="image"></p>
+<p><img src="/images/java-cms-gc-optimizations/1-gc-abnormal.png" alt="image"></p>
+<p>然后尝试通过 gc.log 来查看该服务的具体 GC 情况，在登录服务器之后便看到最近一段时间内产生的 gc.log 文件非常大，足足有 310MB。为了方便进一步分析，将该 gc.log 文件复制到了本地，然后对 17:00 - 18:00 时间段内的 GC 情况进行统计，发现在这一个小时之内，该服务共发生了 289 次 Minor GC、764 次 Major GC 和 10 次 Full GC！</p>
+<p><img src="/images/java-cms-gc-optimizations/1-gc-log.png" alt="image"></p>
+<p><img src="/images/java-cms-gc-optimizations/1-gc-times.png" alt="image"></p>
+<p>通过对 gc.log 中的 Minor GC 进行分析，发现该服务在使用 ParNew 收集器执行一次 GC 之后，Young Generation 空间内的对象占用量几乎没变化。</p>
+<p><img src="/images/java-cms-gc-optimizations/1-gc-minor.png" alt="image"></p>
+<p>通过对 gc.log 中的 Major GC 进行分析，发现该服务在使用 CMS 收集器执行一次 GC 时候，需要 Stop The World 的初始标记和重新标记阶段的耗时已经达到 500ms，并且连续发生两次 Major GC 的间隔时间不到 5s。</p>
+<p><img src="/images/java-cms-gc-optimizations/1-gc-major.png" alt="image"></p>
+<h3 id="解决方式">解决方式</h3>
+<p>在明确问题为流量增加而导致服务不堪重负之后，便通知运维对该服务进行扩容，将分配给该服务的 Heap 空间大小从原先的 1G 扩容至了现在的 4G。在对该服务进行扩容之后 GC 回归正常，接口超时问题也得到了解决。</p>
+<p><img src="/images/java-cms-gc-optimizations/1-heap-normal.png" alt="image"></p>
+<p><img src="/images/java-cms-gc-optimizations/1-gc-normal.png" alt="image"></p>
+<hr>
+<h2 id="调优案例优化-minor-gc">调优案例：优化 Minor GC</h2>
+<h3 id="优化目标">优化目标</h3>
+<p>对于一个底层服务的接口，期望该接口的调用耗时尽可能短，保证 99.99% 的耗时少于 10ms。在高峰时间段内对该接口的调用耗时进行统计之后，发现 99.9% 的调用耗时在 8ms 左右，但部分偏高的调用耗时均大于 20ms，因此怀疑可能是由于 GC 停顿导致。</p>
+<p><img src="/images/java-cms-gc-optimizations/2-api-count.png" alt="image"></p>
+<p><img src="/images/java-cms-gc-optimizations/2-api-trace.png" alt="image"></p>
+<h3 id="优化思路">优化思路</h3>
+<p>首先在监控后台中看到该服务被分配了 615MB + 76.8MB * 2 + 1.25GB * 1024 = 2GB 的 JVM Heap 空间大小，并且在服务运行期间主要发生 Minor GC，该服务在 11:00 - 12:00 时间段内平均每分钟内发生 5 次 Minor GC，每分钟内 GC 停顿的时间大约为 100ms。</p>
+<p><img src="/images/java-cms-gc-optimizations/2-heap-before.png" alt="image"></p>
+<p><img src="/images/java-cms-gc-optimizations/2-gc-before.png" alt="image"></p>
+<p>然后尝试通过 gc.log 来查看该服务的具体 GC 情况，发现该服务自启动 20 多天以来没有发生过一次 Major GC，但是平均每 10s 左右会发生一次 Minor GC，每次 Minor GC 的耗时大约为 15ms。</p>
+<p><img src="/images/java-cms-gc-optimizations/2-gc-major.png" alt="image"></p>
+<p><img src="/images/java-cms-gc-optimizations/2-gc-minor.png" alt="image"></p>
+<h3 id="优化方式">优化方式</h3>
+<p>在对该服务的 GC 情况进行分析之后，考虑到该服务的 Old Generation 空间内的对象占用量十分稳定，并且几乎不会发生 Major GC，于是便通知运维对该服务的 Young Generation 空间与 Old Generation 空间的大小比例进行调整，在保持整个 Heap 空间大小不变的情况下，下通过 <code>-Xmn${size}</code> 参数增加了 Young Generation 空间的大小。在对该服务进行 GC 参数优化之后，Young Generation 的执行频率从原先的每分钟 5 次降低至了每分钟 3.5 次，每分钟内 GC 停顿的时间也从原先的 100ms 降低至了 50ms。</p>
+<p><img src="/images/java-cms-gc-optimizations/2-gc-after.png" alt="image"></p>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">Launches a Java application</a></li>
+<li><a href="https://tech.meituan.com/2017/12/29/jvm-optimize.html">从实际案例聊聊 Java 应用的 GC 优化</a></li>
+<li><a href="https://tech.meituan.com/2020/11/12/java-9-cms-gc.html">Java 中 9 种常见的 CMS GC 问题分析与解决</a></li>
+</ul>
+  </article>
+</main>
+<hr>
+<footer><div class="comments">
+  <script>
+
+    let getTheme = window.localStorage && window.localStorage.getItem("colorscheme");
+    let themeInParams = 'github-light';
+
+    if (getTheme == null) {
+      if (themeInParams !== '' && themeInParams !== 'auto') {
+        getTheme = themeInParams;
+      } else {
+        getTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+      }
+    }
+
+    let theme = getTheme === 'dark' ? 'github-dark' : 'github-light';
+    let s = document.createElement('script');
+    s.src = 'https://utteranc.es/client.js';
+    s.setAttribute('repo', 'fantasticmao\/fantasticmao.github.io');
+    s.setAttribute('issue-term', 'pathname');
+    s.setAttribute('theme', theme);
+    s.setAttribute('crossorigin', 'anonymous');
+    s.setAttribute('async', '');
+    document.querySelector('div.comments').innerHTML = '';
+    document.querySelector('div.comments').appendChild(s);
+
+  </script>
+</div>
+  <section>
+    <p><a href="https://github.com/fantasticmao">GitHub</a></p>
+    <p>|</p>
+    <p><a href="https://twitter.com/fantasticmao">Twitter</a></p>
+    <p>|</p>
+    <p><a href="https://www.instagram.com/wonderfulmao/">Instagram</a></p>
+    <p>|</p>
+    <p><a href="https://steamcommunity.com/id/fantasticmao/">Steam</a></p>
+    <p>|</p>
+    <p><a href="/index.xml">RSS 订阅</a></p>
+  </section>
+  <section>
+    <p>版权所有 © 2024 fantasticmao</p>
+    <p>|</p>
+    <p>技术支持 <a href="https://gohugo.io/" target="_blank" rel="nofollow">Hugo</a> & <a href="https://github.com/fantasticmao/momo" target="_blank" rel="nofollow">MoMo</a></p>
+    <p>|</p>
+    <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow">浙 ICP 备 17009730 号</a></p>
+  </section>
+</footer>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FBHKYP5SYE"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-FBHKYP5SYE', { 'anonymize_ip': false });
+}
+</script>
+
+</body>
+
+</html>

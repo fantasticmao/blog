@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <title>MySQL InnoDB 事务隔离级别实践 | FantasticMao 个人博客</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="fantasticmao">
+<meta name="description" content="本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="MySQL InnoDB 事务隔离级别实践"/>
+<meta name="twitter:description" content="本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。"/>
+
+<meta property="og:title" content="MySQL InnoDB 事务隔离级别实践" />
+<meta property="og:description" content="本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.fantasticmao.cn/tech/mysql-innodb-transaction-isolation-level-practice/" /><meta property="article:section" content="tech" />
+<meta property="article:published_time" content="2020-09-10T15:58:10+08:00" />
+<meta property="article:modified_time" content="2020-09-10T15:58:10+08:00" />
+
+
+<link rel="stylesheet" href="/css/theme.min.3e2812c8be4f167bc4ab4c2e28bcf1d0c602827aaa8a4bd5572bdbac2f8ee9f8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
+
+<link rel="stylesheet" href="/css/custom.min.602fd534bd7c46f70cd7a28744b0da1749115c8eb9bd0ba96deac00e0dea3195.css">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/favicons/site.webmanifest">
+
+
+</head>
+
+<body>
+<header>
+  <p><strong>FantasticMao 个人博客</strong></p>
+  <nav>
+    <p><a href="/">首页</a></p>
+    <p>|</p>
+    <p><a href="/tech">编程</a></p>
+    <p>|</p>
+    <p><a href="/essay">随笔</a></p>
+    <p>|</p>
+    <p><a href="/project">项目</a></p>
+    <p>|</p>
+    <p><a href="/collect">收藏</a></p>
+  </nav>
+</header>
+
+<hr>
+
+<main>
+  <article>
+    <h1 class="title">MySQL InnoDB 事务隔离级别实践</h1>
+    <p class="reading-tips">发表于 2020/09/10，阅读时间 2 分钟</p>
+
+    <p>本篇文章首先简单介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，然后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。</p>
+<!--
+本篇文章首先简单介绍 InnoDB 中聚簇索引和二级索引的概念和对应的数据结构，然后介绍在 MySQL 中查看事务信息和事务中加锁信息的方式，最后通过具体案例来实践 InnoDB 事务中各种隔离级别的特性。
+
+---
+
+## 聚簇索引和二级索引
+-->
+<hr>
+<h2 id="事务和加锁信息">事务和加锁信息</h2>
+<p>依据 MySQL 官方参考手册中的描述，在 MySQL 中可以通过 information_schema.innodb_trx 表、performance_schema.data_locks 表以及 performance_schema.data_lock_waits 表来查看事务信息和事务中加锁信息。参考手册的原文请见 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-information-schema-transactions.html">InnoDB INFORMATION_SCHEMA Transaction and Locking Information</a>。</p>
+<p>information_schema 数据库的 innodb_trx 表存储了 InnoDB 内部当前正在执行的每个事务的信息，包括事务的执行状态（具体的枚举值有 RUNNING、LOCK WAIT、ROLLING BACK 和 COMMITTING）、事务的开始时间和正在执行的 SQL 语句等等。</p>
+<p>在下图的示例中，事务当前的执行状态 <code>trx_state</code> 是 RUNNING，事务的开始时间是 <code>trx_started</code> 是 2020-09-10 17:35:35，事务当前正在执行的 SQL 语句 <code>trx_query</code> 是 SELECT SLEEP(5)，事务当前的隔离级别 <code>trx_isolation_level</code> 是 REPEATABLE READ。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/information_schema-innodb_trx.png" alt="image"></p>
+<p>performance_schema 数据库的 data_locks 表存储了每个事务中的加锁相关信息，其中的一些重要字段定义如下：</p>
+<ul>
+<li><code>ENGINE_TRANSACTION_ID</code> 字段表示事务的 ID，与 innodb_trx 表中的 <code>trx_id</code> 字段对应；</li>
+<li><code>ENGINE_LOCK_ID</code> 字段表示事务中持有或者等待的锁的 ID，在指定存储引擎的条件下，该字段的值是唯一的；</li>
+<li><code>LOCK_TYPE</code> 字段表示加锁的类型，对于 InnoDB 来说，<code>LOCK_TYPE</code> 值为 RECORD 表示行级锁，值为 TABLE 表示表级锁；</li>
+<li><code>LOCK_MODE</code> 字段表示加锁的模式，对于 InnoDB 来说，<code>LOCK_MODE</code> 可能的值为 S、X、IS、IX、AUTO_INC 和 UNKNOWN，并且除了 AUTO_INC 和 UNKNOWN 之外的其它模式在默认情况下均表示使用了间隙锁或者后键锁；</li>
+<li><code>LOCK_STATUS</code> 字段表示加锁请求的状态，对于 InnoDB 来说，<code>LOCK_STATUS</code> 值为 GRANTED 表示事务当前正在持有锁，值为 WAITING 表示事务当前正在等待锁；</li>
+<li><code>LOCK_DATA</code> 字段表示与锁关联的数据，对于 InnoDB 来说，该字段只有在加锁的类型为行级锁时才会有值，否则该字段的值显示为 NULL。当加锁是发生在主键索引上时，该字段的值为主键索引上被锁定的索引值。当加锁是发生在二级索引上时，该字段的值为二级索引上被锁定的索引值和该二级索引对应的主键索引上的索引值。如果表中没有定义主键索引的话，那么该字段会选择表中的唯一索引上的索引值或者 InnoDB 的内部行号来显示，具体的使用规则请参考 InnoDB 的聚簇索引和二级索引。</li>
+</ul>
+<p>在下图的示例中，ID 为 271842 的事务在 t 表上持有一个 ID 为 140668958212240:1966:140669201491008 的意向排它锁和一个在主键索引上的 ID 为 140668958212240:868:4:2:140669205601312 的记录锁。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/performance_schema-data_locks.png" alt="image"></p>
+<p>performance_schema 数据库的 data_lock_waits 表存储了被阻塞的事务之间的等待锁相关信息，其中的一些重要字段定义如下：</p>
+<ul>
+<li><code>REQUESTING_ENGINE_LOCK_ID</code> 字段表示请求获取锁的 ID；</li>
+<li><code>REQUESTING_ENGINE_TRANSACTION_ID</code> 字段表示求获取锁的事务的 ID；</li>
+<li><code>BLOCKING_ENGINE_LOCK_ID</code> 字段表示阻塞等待锁的 ID；</li>
+<li><code>BLOCKING_ENGINE_TRANSACTION_ID</code> 字段表示阻塞等待锁的事务的 ID。</li>
+</ul>
+<p>在下图的示例中，ID 为 271844 的事务请求获取 ID 为 140668958213080:868:4:2:140669205682208 的锁，并且被 ID 为 271843 事务中的 ID 为 140668958212240:868:4:2:140669205601312 的锁所阻塞。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/performance_schema-data_lock_waits.png" alt="image"></p>
+<hr>
+<h2 id="隔离级别实践">隔离级别实践</h2>
+<p>InnoDB 提供了 SQL 1992 标准中全部的四种隔离级别：READ UNCOMMITTED（未提交读）、READ COMMITTED（提交读）、REPEATABLE READ（可重复读）和 SERIALIZABLE（可串行化），并且默认的隔离级别是 REPEATABLE READ。</p>
+<p>MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不同的隔离级别对数据的一致性和查询结果的可重复性有着不同的表现，开发者可以通过设置不同的隔离级别来权衡事务的一致性与可用性。下面通过几个案例来实践和观察各种隔离级别的特性。</p>
+<p>在以下所有案例中，演示表的结构和初始数据都如下图中所示，其中 id 字段为自增主键，a 字段具有唯一索引，b 字段具有普通索引，c 字段不具有索引：</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/init-table-and-data.png" alt="image"></p>
+<h3 id="read-uncommitted">READ UNCOMMITTED</h3>
+<p>在 READ UNCOMMITTED 隔离级别下，SELECT 语句会以非阻塞的方式运行，当前事务可能会读取到其它事务中尚未提交的数据。这种现象被称为 <strong>脏读</strong>。</p>
+<p>在下图的示例中，左半图中的事务在执行第二个 SELECT 语句的时候，便可以读取到右半图中的事务所更改的尚未提交的数据。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/read-uncommitted.png" alt="image"></p>
+<h3 id="read-committed">READ COMMITTED</h3>
+<p>在 READ COMMITTED 隔离级别下，SELECT 语句会以一致性非锁定读取的方式运行，当前事务不会读取到其它事务中尚未提交的数据，但可以读取到其它事务中已经提交的数据，因此查询结果是不具有可重复性的。这种现象被称为 <strong>不可重复读</strong>。</p>
+<p>在下图的示例中，左半图中的事务在执行第二个 SELECT 语句的时候，不会读取到右半图中的事务所更改的尚未提交的数据，但是当左半图中的事务在执行第三个 SELECT 语句的时候，便可以读取到右半图中的事务所更改的已经提交的数据。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/read-committed.png" alt="image"></p>
+<p>在 READ COMMITTED 隔离级别下，还需要注意的是，对于锁定读取（带有 FOR UPDATE 或者 FOR SHARE 的 SELECT）、UPDATE、DELETE 语句，InnoDB 只会使用记录锁，而不会使用间隙锁或者后键锁，因此其它事务可以在被锁定的记录范围内随意地插入新的记录。这种问题被称为 <strong>幻行（Phantom Rows）</strong>。</p>
+<p>在下图的示例中，左半图中的事务使用了 SELECT &hellip; FOR UPDATE 语句来锁定读取 a ∈ (25, +∞) 范围内的记录，然而该事务在二级索引上加锁的模式 <code>LOCK_MODE</code> 却是 X 和 REC_NOT_GAP，这说明了该事务并没有使用间隙锁或者后键锁来锁定 a ∈ (25, +∞) 区间，因此此时右半图中的事务便可以在 a ∈ (25, +∞) 范围内任意地执行插入操作（但是不能执行修改或者删除操作，因为现有的数据已经被锁定了），并且不会被阻塞。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/read-committed-phantom-rows-1.png" alt="image"></p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/read-committed-phantom-rows-2.png" alt="image"></p>
+<h3 id="repeatable-read">REPEATABLE READ</h3>
+<p>在 REPEATABLE READ 隔离级别下，SELECT 语句会以一致性非锁定读取的方式运行，会读取事务在被建立时刻的快照数据，当前事务不会读取到其它事务中所更改的数据，其它事务也无法更改当前事务中所读取的数据，因此查询结果是具有可重复性的。但由于当前事务中所读取的仅是快照中的数据，与此同时，其它事务中所更改的数据也的确生效了，因此可能会产生所谓的 <strong>幻读（Phantom Reads）</strong> 问题。</p>
+<p>在下图的示例中，左半图中的事务在执行第二个和第三个 SELECT 语句的时候，均不会读取到右半图中的事务所更改的数据，但是当左半图中的事务在执行 UPDATE 语句的时候，便会受到右半图中的事务所更改的数据带来的影响。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/repeatable-read.png" alt="image"></p>
+<p>在 READ COMMITTED 隔离级别下，还需要注意的是，对于锁定读取（带有 FOR UPDATE 或者 FOR SHARE 的 SELECT）、UPDATE、DELETE 语句，InnoDB 使用锁的行为是根据查询语句的具体条件来决定的：</p>
+<ul>
+<li>对于在唯一索引上查询唯一结果的查询条件，InnoDB 仅会使用记录锁来锁定该条记录；</li>
+<li>对于其它情况下的查询条件，InnoDB 则会使用间隙锁或者后键锁来锁定该查询所扫描的记录。</li>
+</ul>
+<p>在下图的示例中，左半图中的事务使用了 SELECT &hellip; FOR UPDATE 语句来锁定读取 a ∈ (25, +∞) 范围内的记录，并且该事务在二级索引上加锁的模式 <code>LOCK_MODE</code> 是 X，这说明了该事务使用了间隙锁或者后键锁来锁定 a ∈ (25, +∞) 区间，因此此时右半图中的事务在 a ∈ (25, +∞) 范围内执行的插入操作会被阻塞。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/repeatable-read-phantom-reads-1.png" alt="image"></p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/repeatable-read-phantom-reads-2.png" alt="image"></p>
+<h3 id="serializable">SERIALIZABLE</h3>
+<p>在 REPEATABLE READ 隔离级别下，SELECT 语句会以锁定读取的方式运行，InnoDB 会隐式地将所有普通的 SELECT 语句转换成 SELECT &hellip; FOR SHARE 语句，当前事务中所读取的数据不会被其它事务所更改。</p>
+<p>在下图的示例中，左半图中的事务在执行普通的 SELECT 语句的时候，会锁定查询所涉及的记录，并且右半图中的事务在更改该记录时会被阻塞。</p>
+<p><img src="/images/mysql-innodb-transaction-isolation-level-practice/serializable.png" alt="image"></p>
+<hr>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-index-types.html">Clustered and Secondary Indexes</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html">InnoDB Locking</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html">Transaction Isolation Levels</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-information-schema-transactions.html">InnoDB INFORMATION_SCHEMA Transaction and Locking Information</a></li>
+<li><a href="https://developer.ibm.com/zh/technologies/databases/articles/os-mysql-transaction-isolation-levels-and-locks/">MySQL 事务隔离级别和锁</a></li>
+</ul>
+  </article>
+</main>
+<hr>
+<footer><div class="comments">
+  <script>
+
+    let getTheme = window.localStorage && window.localStorage.getItem("colorscheme");
+    let themeInParams = 'github-light';
+
+    if (getTheme == null) {
+      if (themeInParams !== '' && themeInParams !== 'auto') {
+        getTheme = themeInParams;
+      } else {
+        getTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+      }
+    }
+
+    let theme = getTheme === 'dark' ? 'github-dark' : 'github-light';
+    let s = document.createElement('script');
+    s.src = 'https://utteranc.es/client.js';
+    s.setAttribute('repo', 'fantasticmao\/fantasticmao.github.io');
+    s.setAttribute('issue-term', 'pathname');
+    s.setAttribute('theme', theme);
+    s.setAttribute('crossorigin', 'anonymous');
+    s.setAttribute('async', '');
+    document.querySelector('div.comments').innerHTML = '';
+    document.querySelector('div.comments').appendChild(s);
+
+  </script>
+</div>
+  <section>
+    <p><a href="https://github.com/fantasticmao">GitHub</a></p>
+    <p>|</p>
+    <p><a href="https://twitter.com/fantasticmao">Twitter</a></p>
+    <p>|</p>
+    <p><a href="https://www.instagram.com/wonderfulmao/">Instagram</a></p>
+    <p>|</p>
+    <p><a href="https://steamcommunity.com/id/fantasticmao/">Steam</a></p>
+    <p>|</p>
+    <p><a href="/index.xml">RSS 订阅</a></p>
+  </section>
+  <section>
+    <p>版权所有 © 2024 fantasticmao</p>
+    <p>|</p>
+    <p>技术支持 <a href="https://gohugo.io/" target="_blank" rel="nofollow">Hugo</a> & <a href="https://github.com/fantasticmao/momo" target="_blank" rel="nofollow">MoMo</a></p>
+    <p>|</p>
+    <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow">浙 ICP 备 17009730 号</a></p>
+  </section>
+</footer>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FBHKYP5SYE"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-FBHKYP5SYE', { 'anonymize_ip': false });
+}
+</script>
+
+</body>
+
+</html>

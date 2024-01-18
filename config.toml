@@ -1,19 +1,13 @@
 baseURL = "https://blog.fantasticmao.cn"
-title = "FantasticMao's Blog"
-theme = "hugo-coder"
+title = 'FantasticMao 个人博客'
+theme = "momo"
 
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"
-paginate = 20
-
 publishDir = "docs"
-enableRobotsTXT = true
+
 enableEmoji = true
-
 googleAnalytics = "G-FBHKYP5SYE"
-
-[permalinks]
-    posts = "/:year/:month/:day/:filename/"
 
 [markup]
     [markup.goldmark]
@@ -21,77 +15,56 @@ googleAnalytics = "G-FBHKYP5SYE"
             unsafe = true
 
 [params]
-    author = "FantasticMao"
-    info = ""
-    description = "我，一个 95 年、黑头发、戴眼镜的小伙子。2016 年参加工作，以 Java 谋生，也对 C、Go、JavaScript、Python 感兴趣，想要学习嵌入式、分布式、云原生领域的技术知识，坐标浙江杭州。"
-    keywords = "FantasticMao,个人博客,程序员,后端,Java"
+    author = 'fantasticmao'
+    description = "FantasticMao 个人博客"
+    icpRecord = '浙 ICP 备 17009730 号'
 
-    avatarURL = "/images/avatar.jpg"
-    favicon_32 = "/favicons/favicon-32x32.png"
-    favicon_16 = "/favicons/favicon-16x16.png"
-    touchicon = "/favicons/apple-icon.png"
-    since = 2016
-
-    colorScheme = "light"
-    hideColorSchemeToggle = true
     customCSS = ["css/custom.css"]
-
-    icpRecord = "浙ICP备17009730号"
 
 [params.utterances]
     repo = "fantasticmao/fantasticmao.github.io"
     issueTerm = "pathname"
-    label = "comment"
     theme = "github-light"
 
 [[params.social]]
     name = "GitHub"
-    icon = "fa fa-github fa-2x"
     weight = 1
-    url = "https://github.com/fantasticmao/"
+    url = "https://github.com/fantasticmao"
 [[params.social]]
     name = "Twitter"
-    icon = "fa fa-twitter fa-2x"
     weight = 2
     url = "https://twitter.com/fantasticmao"
 [[params.social]]
-    name = "WeChat"
-    icon = "fa fa-weixin fa-2x"
-    weight = 3
-    url = "/images/wechat.png"
-[[params.social]]
     name = "Instagram"
-    icon = "fa fa-instagram fa-2x"
-    weight = 4
+    weight = 3
     url = "https://www.instagram.com/wonderfulmao/"
 [[params.social]]
     name = "Steam"
-    icon = "fa fa-steam-square fa-2x"
-    weight = 5
+    weight = 4
     url = "https://steamcommunity.com/id/fantasticmao/"
 [[params.social]]
-    name = "RSS"
-    icon = "fa fa-rss fa-2x"
-    weight = 6
+    name = "RSS 订阅"
+    weight = 5
     url = "/index.xml"
 
-[[menu.main]]
+[menus]
+[[menus.main]]
     name = "首页"
     weight = 1
     url = "/"
-[[menu.main]]
-    name = "归档"
+[[menus.main]]
+    name = "编程"
     weight = 2
-    url = "/posts/"
-[[menu.main]]
-    name = "分类"
+    url = "/tech"
+[[menus.main]]
+    name = "随笔"
     weight = 3
-    url = "/categories/"
-[[menu.main]]
-    name = "标签"
+    url = "/essay"
+[[menus.main]]
+    name = "项目"
     weight = 4
-    url = "/tags/"
-[[menu.main]]
-    name = "关于"
+    url = "/project"
+[[menus.main]]
+    name = "收藏"
     weight = 5
-    url = "/about/"
+    url = "/collect"

@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on FantasticMao&#39;s Blog</title>
+    <title>Linux on FantasticMao 个人博客</title>
     <link>https://blog.fantasticmao.cn/tags/linux/</link>
-    <description>Recent content in Linux on FantasticMao&#39;s Blog</description>
+    <description>Recent content in Linux on FantasticMao 个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 18 Nov 2020 11:14:00 +0800</lastBuildDate><atom:link href="https://blog.fantasticmao.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 11:14:00 +0800</lastBuildDate>
+    <atom:link href="https://blog.fantasticmao.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《Unix 环境高级编程》谈及的几种 IO 模型</title>
-      <link>https://blog.fantasticmao.cn/2020/11/18/io-models-mentioned-in-apue/</link>
+      <link>https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2020/11/18/io-models-mentioned-in-apue/</guid>
+      <guid>https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/</guid>
       <description>&lt;p&gt;本篇文章记录自己在阅读 &lt;a href=&#34;https://book.douban.com/subject/25900403/&#34;&gt;《Unix 环境高级编程》&lt;/a&gt; 时候，关于书中谈及的几种 IO 模型的一些笔记。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>OpenSSH 相关命令</title>
-      <link>https://blog.fantasticmao.cn/2020/02/21/commands-of-openssh/</link>
+      <link>https://blog.fantasticmao.cn/tech/commands-of-openssh/</link>
       <pubDate>Fri, 21 Feb 2020 20:00:00 +0800</pubDate>
-      
-      <guid>https://blog.fantasticmao.cn/2020/02/21/commands-of-openssh/</guid>
+      <guid>https://blog.fantasticmao.cn/tech/commands-of-openssh/</guid>
       <description>&lt;p&gt;这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
