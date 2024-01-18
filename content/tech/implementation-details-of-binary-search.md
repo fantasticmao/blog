@@ -3,14 +3,11 @@ title: "二分查找的实现细节"
 date: 2018-03-10T14:58:31+08:00
 categories: ["算法"]
 tags: ["Algorithm"]
-keywords: ["二分查找"]
 ---
 
 最近留意到关于实现 [二分查找算法（Binary Search Algorithm）](https://en.wikipedia.org/wiki/Binary_search_algorithm) 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
 
 本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。<!--more-->
-
----
 
 ## 简单介绍
 
@@ -25,8 +22,6 @@ keywords: ["二分查找"]
 二分查找有许多不同的变种版本，例如 [Fractional Cascading](https://en.wikipedia.org/wiki/Fractional_cascading) 加速了二分查找在多个数组中对相同数值的搜索速度，有效解决了计算机几何以及其它领域中的一系列搜索相关问题；[Exponential Search](https://en.wikipedia.org/wiki/Exponential_search) 扩展了二分查找算法，使其可以应用于无界列表。
 
 二分查找的算法思想也衍生出了许多其它数据结构和算法，例如 [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree) 和 [B-Tree](https://en.wikipedia.org/wiki/B-tree)。
-
----
 
 ## 初步实现
 
@@ -66,8 +61,6 @@ public int binarySearch(int[] arr, int low, int high, int key) {
 3. 中值计算的整型溢出
 
    当查找的数组足够大时，直接使用 `(low + high) / 2` 计算二分查找过程中的中间数值，程序会存在整型数值溢出的问题。
-
----
 
 ## 正确实现
 

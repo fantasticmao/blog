@@ -3,7 +3,6 @@ title: "HTTP 必知必会"
 date: 2017-12-15T22:36:26+08:00
 categories: ["网络"]
 tags: ["HTTP"]
-keywords: ["网络", "HTTP"]
 draft: true
 ---
 

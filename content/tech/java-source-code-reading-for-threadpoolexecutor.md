@@ -3,7 +3,6 @@ title: "Java ThreadPoolExecutor 源码分析"
 date: 2020-10-01T18:41:53+08:00
 categories: ["编程"]
 tags: ["Java"]
-keywords: ["Java", "ThreadPoolExecutor", "线程池"]
 ---
 
 本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 [状态管理](#状态管理)、[提交任务](#提交任务)、[执行任务](#执行任务)、[回收线程](#回收线程) 和 [拒绝任务](#拒绝任务) 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。<!--more-->
@@ -40,8 +39,6 @@ runnbale |                 |                            workQueue.take       |  
          |  CallerRunsPolicy  AbortPolicy  DiscardPolicy  DiscardOldestPolicy     |
          +------------------------------------------------------------------------+
 ```
-
----
 
 ## 状态管理
 
@@ -165,8 +162,6 @@ DiscardPolicy 会抛弃当前任务，代码片段如下：
 DiscardOldestPolicy 会抛弃 workQueue 中队首的任务，然后再尝试重新提交任务，代码片段如下：
 
 {{< emgithub url="https://github.com/openjdk/jdk/blob/jdk8-b21/jdk/src/share/classes/java/util/concurrent/ThreadPoolExecutor.java#L2059-L2064" >}}
-
----
 
 ## 参考资料
 

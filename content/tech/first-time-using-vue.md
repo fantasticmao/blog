@@ -3,12 +3,9 @@ title: "Vue 初次体验"
 date: 2019-12-16T00:00:00+08:00
 categories: ["编程"]
 tags: ["JavaScript", "Vue"]
-keywords: ["JavaScript", "Vue", "Vue Devtools", "Vue Router", "Vue CLI"]
 ---
 
 因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 [Vue](https://vuejs.bootcss.com/v2/guide/) 和 [Element](https://element.eleme.cn/#/zh-CN)，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。<!--more-->
-
----
 
 ## Vue 相关
 
@@ -105,8 +102,6 @@ Vue 在内部通过调用 `Object.defineProperty()` 把 `data` 定义的 **数�
 
 {{< codepen id="xxwKbaM" >}}
 
----
-
 ## Vue Devtools 相关
 
 ### 如何查看 Vue 组件
@@ -124,8 +119,6 @@ Vue 在内部通过调用 `Object.defineProperty()` 把 `data` 定义的 **数�
 ### 如何查看 Vue Router 路由
 
 ![image](/images/first-time-using-vue/4.png)
-
----
 
 ## Vue Router 相关
 
@@ -145,8 +138,6 @@ Vue Router 的 history 模式使用 [`history.pushState`](https://developer.mozi
 
 在 Vue Router 中，可以使用 `RouteConfig` 的 [`props` 属性](https://github.com/vuejs/vue-router/blob/ce955d9322d54c9e1f05ea5f8566aaa408587b71/types/router.d.ts#L104) 给组件传递路由参数，代码示例请见 [官方文档](https://router.vuejs.org/zh/guide/essentials/passing-props.html)。
 
----
-
 ## Vuex 相关
 
 ### 理解 Vuex
@@ -156,8 +147,6 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用�
 Vuex 主要为了解决在「多个组件共享状态」场景下，应用状态的「单向数据流」会被破坏的问题。例如当多个组件依赖同一个状态时，组件传参的方式对于多层嵌套组件会非常繁琐，并且无法在兄弟组件的之间传递状态。例如当多个组件的行为需要修改同一个状态时，父子组件直接引用的方式和通过事件触发的方式，都会导致代码变得异常复杂。
 
 Vuex 把组件的共享状态抽取出来，以一个全局单例模式管理，通过定义和隔离状态管理中的各种概念，并通过强制规则维持视图和状态间的独立性，来使代码变得更具结构化和更易维护。更多详细内容请见 [官方文档](https://vuex.vuejs.org/zh/)。
-
----
 
 ## Vue CLI 相关
 

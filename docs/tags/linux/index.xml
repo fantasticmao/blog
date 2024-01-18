@@ -9,7 +9,7 @@
     <lastBuildDate>Wed, 18 Nov 2020 11:14:00 +0800</lastBuildDate>
     <atom:link href="https://blog.fantasticmao.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>《Unix 环境高级编程》谈及的几种 IO 模型</title>
+      <title>&lt;Unix 环境高级编程&gt; 谈及的几种 IO 模型</title>
       <link>https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/</link>
       <pubDate>Wed, 18 Nov 2020 11:14:00 +0800</pubDate>
       <guid>https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/</guid>

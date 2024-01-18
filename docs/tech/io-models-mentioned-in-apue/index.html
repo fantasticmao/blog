@@ -2,16 +2,16 @@
 <html lang="zh-cn">
 
 <head>
-  <title>《Unix 环境高级编程》谈及的几种 IO 模型 | FantasticMao 个人博客</title>
+  <title>&lt;Unix 环境高级编程&gt; 谈及的几种 IO 模型 | FantasticMao 个人博客</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="fantasticmao">
 <meta name="description" content="本篇文章记录自己在阅读 《Unix 环境高级编程》 时候，关于书中谈及的几种 IO 模型的一些笔记。">
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="《Unix 环境高级编程》谈及的几种 IO 模型"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="&lt;Unix 环境高级编程&gt; 谈及的几种 IO 模型"/>
 <meta name="twitter:description" content="本篇文章记录自己在阅读 《Unix 环境高级编程》 时候，关于书中谈及的几种 IO 模型的一些笔记。"/>
 
-<meta property="og:title" content="《Unix 环境高级编程》谈及的几种 IO 模型" />
+<meta property="og:title" content="&lt;Unix 环境高级编程&gt; 谈及的几种 IO 模型" />
 <meta property="og:description" content="本篇文章记录自己在阅读 《Unix 环境高级编程》 时候，关于书中谈及的几种 IO 模型的一些笔记。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.fantasticmao.cn/tech/io-models-mentioned-in-apue/" /><meta property="article:section" content="tech" />
@@ -52,11 +52,10 @@
 
 <main>
   <article>
-    <h1 class="title">《Unix 环境高级编程》谈及的几种 IO 模型</h1>
+    <h1 class="title">&lt;Unix 环境高级编程&gt; 谈及的几种 IO 模型</h1>
     <p class="reading-tips">发表于 2020/11/18，阅读时间 1 分钟</p>
 
     <p>本篇文章记录自己在阅读 <a href="https://book.douban.com/subject/25900403/">《Unix 环境高级编程》</a> 时候，关于书中谈及的几种 IO 模型的一些笔记。</p>
-<hr>
 <h2 id="阻塞-io">阻塞 IO</h2>
 <p>Unix 系统中的文件 IO 函数 <code>open</code>、<code>read</code>、<code>write</code>，以及标准 IO 库中的函数 <code>getc</code> / <code>putc</code>、<code>fgets</code> / <code>fputs</code>、<code>fread</code> / <code>fwrite</code> 都属于阻塞 IO，这些函数可能会使进程永远阻塞，例如在以下场景时：</p>
 <ul>
@@ -90,7 +89,6 @@
 <h2 id="异步-io">异步 IO</h2>
 <p>信号机制提供了一种以异步形式通知某种事件已经发生的方法。由 BSD 和 System V 派生的所有系统都提供了某种形式的异步 IO，支持使用一个信号（在 System V 中是 SIGPOLL，在 BSD 中是 SIGIO）通知进程，对某个描述符所关心的某个事件已经发生。</p>
 <p>但是，这些形式的异步 IO 是受限制的：它们不能用在所有的文件类型上，而且只能使用一个信号。因此如果要对一个以上的描述符进行异步 IO 时，那么进程在接收到该信号时不会知道该信号对应了哪一个描述符。</p>
-<hr>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://book.douban.com/subject/25900403/">《UNIX 环境高级编程》</a>

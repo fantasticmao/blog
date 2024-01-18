@@ -3,14 +3,11 @@ title: "Vim 常用命令"
 date: 2018-03-31T21:51:23+08:00
 categories: ["编程"]
 tags: ["Vim"]
-keywords: ["Vim"]
 ---
 
 本篇文章记录我所理解和掌握的 Vim 常用命令。<!--more-->
 
 在本文中，blank 字符指空格符、制表符、回车符、换行符等等，`$` 表示美元符号，`${}` 表示占位符。
-
----
 
 ## Normal 模式
 
@@ -82,8 +79,6 @@ keywords: ["Vim"]
 | \${n}`command`             | 重复执行 n 次 `command` 命令 |
 | **ZZ**、:wq                | 相当于 `:wq`                 |
 
----
-
 ## Visual 模式
 
 ### 选中内容
@@ -94,8 +89,6 @@ keywords: ["Vim"]
 | V            | 选择行                                                   |
 | Ctrl + v     | 选择块                                                   |
 | **Ctrl + z** | 挂起 Vim（相当于执行 `bg` 命令，使用 `fg` 命令返回 Vim） |
-
----
 
 ## Insert 模式
 
@@ -112,8 +105,6 @@ keywords: ["Vim"]
 | Esc      | 退出 Insert 模式，回到 Normal 模式                  |
 | Ctrl + n | 开启自动补全                                        |
 | Ctrl + p | 开启自动补全，并跳至最后一个选项                    |
-
----
 
 ## Command-line 模式
 
@@ -139,8 +130,6 @@ keywords: ["Vim"]
 | :vsp、:vsplit            | 创建垂直分屏                                                   |
 | :Ctrl + w + [h, j, k, l] | 在分屏窗口中移动光标                                           |
 | :Ctrl + w + [H, J, K, L] | 移动分屏窗口                                                   |
-
----
 
 ## 参考资料
 

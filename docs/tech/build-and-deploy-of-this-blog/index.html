@@ -57,11 +57,9 @@
 
     <p>最近几天打理了荒废很久的博客，从原先的 Hexo 迁移到了 Hugo，添加了 RSS、CDN 以及其它乱七八糟的功能，顺带还给这个博客主题提交了一个 SEO 优化相关的 <a href="https://github.com/luizdepra/hugo-coder/pull/300">Pull Requests</a>。</p>
 <p>整个博客迁移的过程费了挺多时间和精力，所以决定还是写一篇文章，主要记录这个博客构建和部署过程中的一些个性化配置相关内容。</p>
-<hr>
 <h2 id="概览">概览</h2>
 <p>这个博客是以 Markdown 编写的，使用 Hugo 构建并且部署在 Github Pages 上，整个站点的运行架构如下：</p>
 <p><img src="/images/build-and-deploy-of-this-blog/blog-architecture.png" alt="image"></p>
-<hr>
 <h2 id="配置">配置</h2>
 <p>在使用 Hugo 构建博客的静态资源时，主要有以下个性化配置：</p>
 <ul>
@@ -171,12 +169,10 @@
 <p>为了更好的用户体验，编写了一些 <a href="https://github.com/fantasticmao/fantasticmao.github.io/tree/master/layouts/shortcodes">Hugo Shortcodes</a>，用于展示哔哩哔哩中的视频，以及 <a href="https://codepen.io/">codepen</a> 和 <a href="https://emgithub.com/">emgithub</a> 中的示例代码。</p>
 </li>
 </ul>
-<hr>
 <h2 id="部署">部署</h2>
 <p>使用 GitHub Pages 部署站点的详细方式可以参考官方文档 <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages">About GitHub Pages</a>，这个博客选择的方式是将静态文件托管在 <code>&lt;username&gt;.github.io</code> 仓库的 <code>/docs</code> 目录下。</p>
 <p>最终在部署博客时，需要先使用 <code>rm -rf ./docs/</code> 命令清空资源目录，再使用 <code>hugo</code> 命令构建站点，最后使用 <code>git push origin master</code> 命令部署至 GitHub Pages。这一系列命令对应的 Shell Script 是 <a href="https://github.com/fantasticmao/blog/blob/master/deploy.sh">deploy.sh</a>，是我参考 Hugo 官方文档改写的。</p>
 <p>在部署博客至 GitHub Pages 成功，并且可以通过 fantasticmao.github.io 域名访问之后，还需要在又拍云控制台中配置 CDN 服务的加速域名和回源地址。一言概之，就是需要在 DNS 服务商中将 blog.fantasticmao.cn 域名解析至又拍云 CDN 服务中提供的 CNAME，随后需要在又拍云控制台中配置 CDN 服务的回源地址为 fantasticmao.github.io，详细内容可以参考又拍云的 <a href="https://help.upyun.com/knowledge-base/cdn-create-service/">帮助文档</a>。<strong>需要注意的是，在又拍云控制台中配置回源地址时，需要额外配置回源 Host，否则访问站点会显示 404。</strong></p>
-<hr>
 <h2 id="seo">SEO</h2>
 <p>博客部署成功之后，还需要在百度和 Google 两大中文 / 英文搜索引擎中提交站点，便于用户根据关键字搜索。</p>
 <p>百度需要在它的 <a href="https://ziyuan.baidu.com/">资源搜索平台</a> 中提交站点，可以通过 DNS CNAME 解析的方式验证站点拥有权。</p>
