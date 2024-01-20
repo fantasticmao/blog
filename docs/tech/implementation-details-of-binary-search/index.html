@@ -9,8 +9,7 @@
 <meta name="description" content="最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
 本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="二分查找的实现细节"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="二分查找的实现细节"/>
 <meta name="twitter:description" content="最近留意到关于实现 二分查找算法（Binary Search Algorithm） 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。
 本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。"/>
 
@@ -23,7 +22,7 @@
 <meta property="article:modified_time" content="2018-03-10T14:58:31+08:00" />
 
 
-<link rel="stylesheet" href="/css/theme.min.3e2812c8be4f167bc4ab4c2e28bcf1d0c602827aaa8a4bd5572bdbac2f8ee9f8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
+<link rel="stylesheet" href="/css/theme.min.5a71a49ea05b2c3989817b2b38bbab72450c89f27f9d573ba98eb4df98fe86b8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
 
 <link rel="stylesheet" href="/css/custom.min.602fd534bd7c46f70cd7a28744b0da1749115c8eb9bd0ba96deac00e0dea3195.css">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicons/favicon.svg">
@@ -70,25 +69,25 @@
 <p>二分查找的算法思想也衍生出了许多其它数据结构和算法，例如 <a href="https://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree</a> 和 <a href="https://en.wikipedia.org/wiki/B-tree">B-Tree</a>。</p>
 <h2 id="初步实现">初步实现</h2>
 <p>以 Java 语言为例，初步实现一个简单的二分查找算法，演示代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high, <span style="color:#66d9ef">int</span> key) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 算法退出条件</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (low <span style="color:#f92672">&gt;</span> high) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 计算本次查找的中间值</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> (low <span style="color:#f92672">+</span> high) <span style="color:#f92672">/</span> 2;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 二分查找的判断逻辑</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;</span> key) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> binarySearch(arr, mid <span style="color:#f92672">+</span> 1, high, key);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> key) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> binarySearch(arr, low, mid <span style="color:#f92672">-</span> 1, key);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mid;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>依据文章开头的小提醒 review 上例代码，可以发现其中存在着的细节问题：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span><span style="color:#900;font-weight:bold">binarySearch</span>(<span style="color:#458;font-weight:bold">int</span><span style="color:#000;font-weight:bold">[]</span><span style="color:#bbb"> </span>arr,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>low,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>high,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>key)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 算法退出条件</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>(low<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>high)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span>1;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">     </span><span style="color:#998;font-style:italic">// 计算本次查找的中间值</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>mid<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>(low<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>high)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">/</span><span style="color:#bbb"> </span>2;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">     </span><span style="color:#998;font-style:italic">// 二分查找的判断逻辑</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>(arr<span style="color:#000;font-weight:bold">[</span>mid<span style="color:#000;font-weight:bold">]</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span>key)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span>binarySearch(arr,<span style="color:#bbb"> </span>mid<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>1,<span style="color:#bbb"> </span>high,<span style="color:#bbb"> </span>key);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>(arr<span style="color:#000;font-weight:bold">[</span>mid<span style="color:#000;font-weight:bold">]</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>key)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span>binarySearch(arr,<span style="color:#bbb"> </span>low,<span style="color:#bbb"> </span>mid<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>1,<span style="color:#bbb"> </span>key);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span>mid;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><p>依据文章开头的小提醒 review 上例代码，可以发现其中存在着的细节问题：</p>
 <ol>
 <li>
 <p>缺少参数校验</p>
@@ -105,32 +104,32 @@
 </ol>
 <h2 id="正确实现">正确实现</h2>
 <p>修复上述提及的三个问题，演示代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high, <span style="color:#66d9ef">int</span> key) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 参数校验</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (arr <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> arr.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> 0 <span style="color:#f92672">||</span> low <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> high <span style="color:#f92672">&lt;</span> 0) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 算法退出条件</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (low <span style="color:#f92672">&gt;</span> high) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 计算本次查找的中间值</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> low <span style="color:#f92672">+</span> ((high <span style="color:#f92672">-</span> low) <span style="color:#f92672">&gt;&gt;&gt;</span> 1);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 二分查找的判断逻辑</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;</span> key) {
-</span></span><span style="display:flex;"><span>            low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> 1;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> key) {
-</span></span><span style="display:flex;"><span>            high <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> 1;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mid;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span><span style="color:#900;font-weight:bold">binarySearch</span>(<span style="color:#458;font-weight:bold">int</span><span style="color:#000;font-weight:bold">[]</span><span style="color:#bbb"> </span>arr,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>low,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>high,<span style="color:#bbb"> </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>key)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#998;font-style:italic">// 参数校验</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>(arr<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">null</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">||</span><span style="color:#bbb"> </span>arr.<span style="color:#008080">length</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">==</span><span style="color:#bbb"> </span>0<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">||</span><span style="color:#bbb"> </span>low<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span>0<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">||</span><span style="color:#bbb"> </span>high<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span>0)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span>1;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000;font-weight:bold">while</span><span style="color:#bbb"> </span>(<span style="color:#000;font-weight:bold">true</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// 算法退出条件</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>(low<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>high)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span>1;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// 计算本次查找的中间值</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#458;font-weight:bold">int</span><span style="color:#bbb"> </span>mid<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>low<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>((high<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>low)<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;&gt;&gt;</span><span style="color:#bbb"> </span>1);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#998;font-style:italic">// 二分查找的判断逻辑</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>(arr<span style="color:#000;font-weight:bold">[</span>mid<span style="color:#000;font-weight:bold">]</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#bbb"> </span>key)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>low<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>mid<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">+</span><span style="color:#bbb"> </span>1;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">if</span><span style="color:#bbb"> </span>(arr<span style="color:#000;font-weight:bold">[</span>mid<span style="color:#000;font-weight:bold">]</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">&gt;</span><span style="color:#bbb"> </span>key)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>high<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">=</span><span style="color:#bbb"> </span>mid<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">-</span><span style="color:#bbb"> </span>1;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#000;font-weight:bold">return</span><span style="color:#bbb"> </span>mid;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div>
   </article>
 </main>
 <hr>

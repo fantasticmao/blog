@@ -8,8 +8,7 @@
 <meta name="author" content="fantasticmao">
 <meta name="description" content="因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Vue 初次体验"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Vue 初次体验"/>
 <meta name="twitter:description" content="因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 Vue 和 Element，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。"/>
 
 <meta property="og:title" content="Vue 初次体验" />
@@ -20,7 +19,7 @@
 <meta property="article:modified_time" content="2019-12-16T00:00:00+08:00" />
 
 
-<link rel="stylesheet" href="/css/theme.min.3e2812c8be4f167bc4ab4c2e28bcf1d0c602827aaa8a4bd5572bdbac2f8ee9f8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
+<link rel="stylesheet" href="/css/theme.min.5a71a49ea05b2c3989817b2b38bbab72450c89f27f9d573ba98eb4df98fe86b8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
 
 <link rel="stylesheet" href="/css/custom.min.602fd534bd7c46f70cd7a28744b0da1749115c8eb9bd0ba96deac00e0dea3195.css">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicons/favicon.svg">
@@ -71,50 +70,50 @@
 <h3 id="如何使用-slot-分发内容">如何使用 &lt;slot&gt; 分发内容</h3>
 <p>在 Vue 中，可以使用 <code>&lt;slot&gt;</code> 元素实现父子组件之间的内容分发，<a href="https://vuejs.bootcss.com/v2/guide/components-slots.html">官方文档</a> 提供了一份精简的代码示例，完善之后的内容如下：</p>
 <p>NavigationLink.vue</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#f92672">template</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">slot</span>&gt;&lt;/<span style="color:#f92672">slot</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">a</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">template</span>&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#000080">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#000080">a</span> <span style="color:#008080">v</span><span style="color:#000080">-bind:href</span><span style="color:#d14">=&#34;url&#34;</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;nav-link&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#000080">slot</span>&gt;&lt;/<span style="color:#000080">slot</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#000080">a</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000080">template</span>&gt;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;NavigationLink&#34;</span>,
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#000080">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+</span></span><span style="display:flex;"><span>  name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;NavigationLink&#34;</span>,
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000080">script</span>&gt;
 </span></span></code></pre></div><p>App.vue</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#f92672">template</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">NavigationLink</span> <span style="color:#a6e22e">url</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/profile&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
-</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">NavigationLink</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">template</span>&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#000080">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#000080">NavigationLink</span> <span style="color:#008080">url</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;/profile&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    Your Profile
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#000080">NavigationLink</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000080">template</span>&gt;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">NavigationLink</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./NavigationLink.vue&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;App&#34;</span>,
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">compoments</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">NavigationLink</span>,
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#000080">script</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> NavigationLink from <span style="color:#d14">&#34;./NavigationLink.vue&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+</span></span><span style="display:flex;"><span>  name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;App&#34;</span>,
+</span></span><span style="display:flex;"><span>  compoments<span style="color:#000;font-weight:bold">:</span> {
+</span></span><span style="display:flex;"><span>    NavigationLink,
 </span></span><span style="display:flex;"><span>  },
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000080">script</span>&gt;
 </span></span></code></pre></div><p>在示例代码中，App.vue 中使用 NavigationLink.vue 的内容最终会被渲染成</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#f92672">template</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-bind:href</span><span style="color:#e6db74">=&#34;url&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav-link&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Your</span> <span style="color:#a6e22e">Profile</span>
-</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">a</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">template</span>&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span>&lt;<span style="color:#000080">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#000080">a</span> <span style="color:#008080">v</span><span style="color:#000080">-bind:href</span><span style="color:#d14">=&#34;url&#34;</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;nav-link&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    Your Profile
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#000080">a</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000080">template</span>&gt;
 </span></span></code></pre></div><h3 id="如何访问元素和组件">如何访问元素和组件</h3>
 <p>在 Vue 中，可以使用 <a href="https://vuejs.bootcss.com/api/#vm-root"><code>$root</code></a> 属性访问根实例，使用 <a href="https://vuejs.bootcss.com/api/#vm-parent"><code>$parent</code></a> 属性从子组件访问父组件，使用 <a href="https://vuejs.bootcss.com/api/#vm-refs"><code>$refs</code></a> 属性从父组件访问子组件。更多访问元素和组件的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/components-edge-cases.html#%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0-amp-%E7%BB%84%E4%BB%B6">官方文档</a>。</p>
 <h3 id="响应式实现原理">响应式实现原理</h3>
 <p>ECMAScript5 定义了一个属性描述符（property descriptor）对象，支持使用 getter / setter 方法替代属性的定义。可以通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor"><code>Object.getOwnPropertyDescriptor()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors"><code>Object.getOwnPropertyDescriptors()</code></a> 获取某个对象的属性描述符，通过调用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><code>Object.defineProperty()</code></a> 和 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties"><code>Object.defineProperties()</code></a> 设置某个对象的属性和属性描述符。</p>
 <p>《JavaScript 权威指南》第六章中将 JavaScript 普通对象的属性称为 <strong>数据属性</strong>，将由 getter / setter 定义的属性称为 <strong>存储器属性</strong>。数据属性拥有一个名字和四个特性：值（value）、可写（writable）、可枚举（enumerable）、可配置（configurable），存储器属性相对于数据属性缺少了值和可写的特性，但增加了读取（get）、写入（set）的特性。在 ECMAScript5 中使用 getter / setter 方法替代属性定义的示例代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">name</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;MaoMao&#34;</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> obj <span style="color:#000;font-weight:bold">=</span> {
+</span></span><span style="display:flex;"><span>  get name() {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> <span style="color:#d14">&#34;MaoMao&#34;</span>;
 </span></span><span style="display:flex;"><span>  },
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">name</span>); <span style="color:#75715e">// MaoMao
+</span></span><span style="display:flex;"><span>console.log(obj.name); <span style="color:#998;font-style:italic">// MaoMao
 </span></span></span></code></pre></div><p>Vue 在内部通过调用 <code>Object.defineProperty()</code> 把 <code>data</code> 定义的 <strong>数据属性</strong> 转换成 <strong>存储器属性</strong>，以此来追踪依赖，实现在属性被访问和修改时通知变化。简单版本的实现代码如下，更多关于响应式原理的内容请见 <a href="https://vuejs.bootcss.com/v2/guide/reactivity.html">官方文档</a>。</p>
 
 
@@ -162,12 +161,12 @@ src="//codepen.io/assets/embed/ei.js"
 <ul>
 <li>
 <p><code>vue-cli-service serve</code> 命令会启动一个开发服务器（基于 <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a>），并附带开箱即用的模块热重载。可以通过 <code>vue-cli-service serve [options]</code> 选项或者 <code>vue.config.js</code> 配置文件的 <a href="https://cli.vuejs.org/zh/config/#devserver"><code>devServer</code></a> 属性配置开发服务器。简单配置文件的示例如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">devServer</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">9090</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">https</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>module.exports <span style="color:#000;font-weight:bold">=</span> {
+</span></span><span style="display:flex;"><span>  devServer<span style="color:#000;font-weight:bold">:</span> {
+</span></span><span style="display:flex;"><span>    open<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span>,
+</span></span><span style="display:flex;"><span>    host<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;0.0.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    port<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">9090</span>,
+</span></span><span style="display:flex;"><span>    https<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">false</span>,
 </span></span><span style="display:flex;"><span>  },
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div></li>

@@ -1,5 +1,5 @@
 baseURL = "https://blog.fantasticmao.cn"
-title = 'FantasticMao 个人博客'
+title = "FantasticMao 个人博客"
 theme = "momo"
 
 languageCode = "zh-cn"
@@ -13,11 +13,13 @@ googleAnalytics = "G-FBHKYP5SYE"
     [markup.goldmark]
         [markup.goldmark.renderer]
             unsafe = true
+    [markup.highlight]
+        style = "github"
 
 [params]
-    author = 'fantasticmao'
+    author = "fantasticmao"
     description = "FantasticMao 个人博客"
-    icpRecord = '浙 ICP 备 17009730 号'
+    icpRecord = "浙 ICP 备 17009730 号"
 
     customCSS = ["css/custom.css"]
 

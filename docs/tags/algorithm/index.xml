@@ -13,8 +13,7 @@
       <link>https://blog.fantasticmao.cn/tech/implementation-details-of-binary-search/</link>
       <pubDate>Sat, 10 Mar 2018 14:58:31 +0800</pubDate>
       <guid>https://blog.fantasticmao.cn/tech/implementation-details-of-binary-search/</guid>
-      <description>&lt;p&gt;最近留意到关于实现 &lt;a href=&#34;https://en.wikipedia.org/wiki/Binary_search_algorithm&#34;&gt;二分查找算法（Binary Search Algorithm）&lt;/a&gt; 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。&lt;/p&gt;
-&lt;p&gt;本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。&lt;/p&gt;</description>
+      <description>&lt;p&gt;最近留意到关于实现 &lt;a href=&#34;https://en.wikipedia.org/wiki/Binary_search_algorithm&#34;&gt;二分查找算法（Binary Search Algorithm）&lt;/a&gt; 的一个小提醒，内容大致意思是：尽管算法思想很简单，但我们在正确实现二分查找的时候，仍需注意一下关于算法退出条件和中间值计算的相关细节。&lt;/p&gt;&#xA;&lt;p&gt;本篇文章简单介绍二分查找算法，围绕相关的实现细节问题，做些浅显的分析。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

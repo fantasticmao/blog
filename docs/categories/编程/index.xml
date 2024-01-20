@@ -51,13 +51,6 @@
       <description>&lt;p&gt;因为工作需要写一个简单的 CRUD 后台页面，就简单学习了一下 &lt;a href=&#34;https://vuejs.bootcss.com/v2/guide/&#34;&gt;Vue&lt;/a&gt; 和 &lt;a href=&#34;https://element.eleme.cn/#/zh-CN&#34;&gt;Element&lt;/a&gt;，学完之后之后便匆匆上手，也逐渐适应。这篇文章记录自己在学习和使用 Vue 期间的一些问题和解答。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Vim 常用命令</title>
-      <link>https://blog.fantasticmao.cn/tech/commands-of-vim/</link>
-      <pubDate>Sat, 31 Mar 2018 21:51:23 +0800</pubDate>
-      <guid>https://blog.fantasticmao.cn/tech/commands-of-vim/</guid>
-      <description>&lt;p&gt;本篇文章记录我所理解和掌握的 Vim 常用命令。&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>设计模式概览</title>
       <link>https://blog.fantasticmao.cn/tech/overview-of-design-patterns/</link>
       <pubDate>Wed, 14 Feb 2018 23:33:47 +0800</pubDate>
