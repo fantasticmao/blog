@@ -24,7 +24,7 @@ googleAnalytics = "G-FBHKYP5SYE"
     customCSS = ["css/custom.css"]
 
 [params.utterances]
-    repo = "fantasticmao/fantasticmao.github.io"
+    repo = "fantasticmao/blog"
     issueTerm = "pathname"
     theme = "github-light"
 
