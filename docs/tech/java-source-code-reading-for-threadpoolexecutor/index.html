@@ -4,7 +4,7 @@
 <head>
   <title>Java ThreadPoolExecutor 源码分析 | FantasticMao 个人博客</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=0.7">
 <meta name="author" content="fantasticmao">
 <meta name="description" content="本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 状态管理、提交任务、执行任务、回收线程 和 拒绝任务 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。">
 
@@ -19,7 +19,7 @@
 <meta property="article:modified_time" content="2020-10-01T18:41:53+08:00" />
 
 
-<link rel="stylesheet" href="/css/theme.min.5a71a49ea05b2c3989817b2b38bbab72450c89f27f9d573ba98eb4df98fe86b8.css"><link rel="stylesheet" href="/css/emgithub.min.e887de6b7c2b93767ef9fe8a2e7241020c8a9f6c8447f17ebdc9b191eca9bc0a.css">
+<link rel="stylesheet" href="/css/theme.min.c08528059aed0d09aadf3a99f359981364dc2449786343d903cc711a163b7131.css"><link rel="stylesheet" href="/css/emgithub.min.6e0886396003b69922ec0639aa41406d041dd2bba359241b268f02a27eb4e78c.css">
 
 <link rel="stylesheet" href="/css/custom.min.602fd534bd7c46f70cd7a28744b0da1749115c8eb9bd0ba96deac00e0dea3195.css">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicons/favicon.svg">
@@ -48,7 +48,6 @@
   </nav>
 </header>
 
-<hr>
 
 <main>
   <article>
@@ -102,7 +101,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L373-L375&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L373-L375&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 
 
@@ -113,7 +112,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L384-L387&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L384-L387&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <h3 id="workercount">workerCount</h3>
 <p>workerCount 表示线程池中的有效线程数，会占据 <code>ctl</code> 字段中 int 值的低位，只需使用 <code>AtomicInteger</code> 的 CAS 操作即可线程安全地修改其值。ThreadPoolExecutor 源码中修改 workerCount 的代码片段如下：</p>
@@ -126,7 +125,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L406-L427&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L406-L427&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <h3 id="runstate">runState</h3>
 <p>runState 表示线程池在生命周期内的运行状态，各个枚举值以及其对应的状态描述和状态之间的转换流程如下所示：</p>
@@ -183,7 +182,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L377-L382&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L377-L382&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 
 
@@ -194,7 +193,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L389-L404&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L389-L404&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <h2 id="提交任务">提交任务</h2>
 <p>ThreadPoolExecutor 继承了 ExecutorService 接口，对外提供了四种提交任务的方法：<code>execute(Runnable)</code>、<code>submit(Callable&lt;T&gt;)</code>、<code>submit(Runnable, T)</code>、<code>submit(Runnable)</code>。然而，后三种方法均是先将任务封装成 RunnableFuture，然后再通过 <code>execute(Runnable)</code> 将任务提交至线程池中。因此从实现层面来看，ThreadPoolExecutor 所提供的提交任务的方法其实只有一种：<code>execute(Runnable)</code>。</p>
@@ -215,7 +214,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1323-L1337&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1323-L1337&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <p>ThreadPoolExecutor 执行任务的最小单元是对 Thread 进行了一层封装的 ThreadPoolExecutor.Worker，更多关于 Worker 的分析请见 <a href="#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1">执行任务</a>。ThreadPoolExecutor 通过使用 <code>addWorker(Runnable, boolean)</code> 方法来创建一个新的 Worker 线程，通过第二个布尔类型的参数来判断待创建 Worker 是属于核心范围内的线程还是属于最大范围内的线程（是应受到 <code>corePoolSize</code> 条件的限制，还是应受到 <code>maximumPoolSize</code> 条件的限制）。</p>
 <p>ThreadPoolExecutor 先会在 <code>addWorker(Runnable, boolean)</code> 方法内部校验线程池的状态，例如 runState 当前是否为 RUNNING 枚举值、workerCount 是否符合 <code>corePoolSize</code> 条件的限制。在校验状态通过之后，ThreadPoolExecutor 则会创建一个 Worker 实例，并且会将这个实例添加到 HashSet&lt;Worker&gt; 类型的 <code>workers</code> 中的。值得注意的是，ThreadPoolExecutor 正是使用此处的 <code>workers</code> 来存放线程池中所有的 Worker 实例，并且 ThreadPoolExecutor 在访问 <code>workers</code> 时都会使用一个 ReentrantLock 类型的 <code>mainLock</code> 锁，以此来保证并发安全。ThreadPoolExecutor 源码中创建 Worker 实例的方法 <code>addWorker(Runnable, boolean)</code> 的代码片段如下：</p>
@@ -228,7 +227,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L887-L911&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L887-L911&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 
 
@@ -239,7 +238,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L913-L943&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L913-L943&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <h2 id="执行任务">执行任务</h2>
 <p>ThreadPoolExecutor.Worker 继承了 AbstractQueuedSynchronizer，并且实现了 Runnable 接口，是 ThreadPoolExecutor 用于执行线程池中的任务的最小单元。</p>
@@ -253,7 +252,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L586-L590&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L586-L590&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 
 
@@ -264,7 +263,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L596-L599&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L596-L599&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 
 
@@ -275,7 +274,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L602-L604&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L602-L604&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <p>Worker 内部的 <code>run()</code> 方法是开启 Worker 线程的入口，它会将 Worker 线程的主循环委托给 ThreadPoolExecutor 的 <code>runWorker(Worker)</code> 方法。在 <code>runWorker(Worker)</code> 方法中，Worker 线程会首先执行 Worker 内部的 <code>firstTask</code> 任务，在这之后 Worker 线程会重复执行使用 <code>getTask()</code> 方法从 workQueue 中获取的任务。Worker 会在每个任务执行之前调用 <code>beforeExecute(Thread, Runnable)</code> 方法，在任务执行之后调用 <code>afterExecute(Runnable, Throwable)</code> 方法，这种设计使得 ThreadPoolExecutor 对外提供了更多的扩展能力。ThreadPoolExecutor 源码中运行 Worker 线程的方法 <code>runWorker(Worker)</code> 的代码片段如下：</p>
 
@@ -287,7 +286,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1098-L1130&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1098-L1130&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <h2 id="回收线程">回收线程</h2>
 <p>在 ThreadPoolExecutor 的 <code>runWorker(Worker)</code> 方法中，当 Worker 线程使用 <code>getTask()</code> 方法获取的任务为 NULL 时，Worker 线程便会退出主循环，继而该 Worker 线程便会结束和被回收。导致 <code>getTask()</code> 方法返回 NULL 的情况有以下两种：</p>
@@ -305,7 +304,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1012-L1053&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1012-L1053&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <h2 id="拒绝任务">拒绝任务</h2>
 <p>ThreadPoolExecutor 的拒绝策略由 RejectedExecutionHandler 接口定义，并且 ThreadPoolExecutor 在内部提供了四种适用于不同场景的拒绝策略：CallerRunsPolicy、AbortPolicy（默认）、DiscardPolicy、DiscardOldestPolicy。</p>
@@ -319,7 +318,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1988-L1992&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L1988-L1992&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <p>AbortPolicy 是 ThreadPoolExecutor 默认的拒绝策略，会直接抛出一个异常，代码片段如下：</p>
 
@@ -331,7 +330,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2012-L2017&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2012-L2017&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <p>DiscardPolicy 会抛弃当前任务，代码片段如下：</p>
 
@@ -343,7 +342,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2035-L2036&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2035-L2036&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <p>DiscardOldestPolicy 会抛弃 workQueue 中队首的任务，然后再尝试重新提交任务，代码片段如下：</p>
 
@@ -355,7 +354,7 @@
 
 
 
-<script type="application/javascript" src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2059-L2064&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
+<script type="application/javascript" async src="https://emgithub.com/embed-v2.js?target=https%3a%2f%2fgithub.com%2fopenjdk%2fjdk%2fblob%2fjdk8-b21%2fjdk%2fsrc%2fshare%2fclasses%2fjava%2futil%2fconcurrent%2fThreadPoolExecutor.java%23L2059-L2064&style=github&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=off&showCopy=off&fetchFromJsDelivr=on"></script>
 
 <h2 id="参考资料">参考资料</h2>
 <ul>
@@ -364,7 +363,6 @@
 </ul>
   </article>
 </main>
-<hr>
 <footer><div class="comments">
   <script>
 
