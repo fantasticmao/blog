@@ -1,12 +1,14 @@
 ---
 title: "Java CMS GC 优化案例两则"
 date: 2020-11-25T23:00:00+08:00
-description: "本篇文章简单记录和分享自己近期在工作中遇到的两个 GC 相关的线上问题案例"
+description: "记录近期工作中遇到的两个 GC 相关的线上问题"
 ---
 
 ## 前言
 
-本篇文章简单记录和分享自己近期在工作中遇到的两个 GC 相关的线上问题案例。在谈及的两个案例中，应用均是使用 `-XX:+UseConcMarkSweepGC` 参数来指定使用了 CMS 收集器，因此本文对问题的分析和排查，也是基于该场景而言的。<!--more-->
+本篇文章简单记录自己在近期工作中遇到的两个 GC 相关的线上问题。
+
+在谈及的两个案例中，应用均是使用 `-XX:+UseConcMarkSweepGC` 参数来指定使用了 CMS 收集器，因此本文对问题的分析和排查，也是基于该场景而言的。<!--more-->
 
 ## 知识储备
 
@@ -36,57 +38,55 @@ CMS 收集器是一种以获取最短停顿时间为目标的增量式（Increme
 
 ### 问题现象
 
-钉钉群内收到持续的接口超时报警，全链路后台中查到大量接口调用超时的记录。
+在钉钉告警群内，间歇性地收到为某租户定制的应用接口超时告警，并且能在链路后台中统计到该时间段内的大量接口调用超时记录。
 
-### 问题排查
+### 排查过程
 
-引起服务运行缓慢的原因有很多，诊断这类问题的大致方向如下：
+在监控大盘中，我们看到应用在出现问题的时间段内，CPU 和磁盘的使用率指标都有明显飙升，更重要的，我们看到应用的 Heap 空间已经被占满，并且 Survivor 区域的使用率存在着大量峰刺形的波动。
 
-1. 是否为网络问题；
-2. 是否为该服务自身问题（例如 GC、慢 SQL、死锁）；
-3. 是否为该服务依赖的下游服务问题。
+![image](/images/java-cms-gc-optimizations/1-heap-abnormal.png)
 
-首先在与运维确认之后排除了网络问题，然后在查看请求的调用链路之后，排除了下游服务的问题，最终将问题定位在了该服务自身。
+在 GC 方面，应用平均每分钟发生着 15 次 Major GC 和 5 次 Minor GC，并且每分钟的 GC 停顿时间甚至已经达到离谱的 20s。
 
-通过监控看到该服务在出现问题的时间段内对 CPU、网络、磁盘的使用率都突然增加，同时也看到该服务的 JVM 实例中 Heap 空间已经被耗尽，并且频繁地发生 Major GC。为了确定突增流量的来源，于是主动联系了业务方，得知他们最近迁移了一大波老用户数据，因此导致了该服务近期承受的流量急剧增加，最终超出了该服务当前资源配置的可承受范围。
+![image](/images/java-cms-gc-optimizations/1-gc-abnormal.png)
+
+为了确定应用新增负载的来源，于是主动联系了业务方，得知他们最近迁移了一大波老用户数据，因此导致了应用近期承受的流量激增，最终超出了当前资源配置的可承受能力范围。
 
 业务方反馈的近期用户日活数据变化如下：
 
 ![image](/images/java-cms-gc-optimizations/daily-active-user.png)
 
-在确定问题的原因之后，我们便开始详细分析该服务的 GC 情况。首先在监控后台中看到该服务被分配了 307.3MB + 38.4MB \* 2 + 640MB = 1GB 的 JVM Heap 空间大小，其中 Heap 空间内的 Young Generation 和 Old Generation 均已被耗尽，该服务在 17:00 - 18:00 时间段内平均每分钟内发生 15 次 Major GC 和 5 次 Minor GC，每分钟内 GC 停顿的时间甚至已经达到 20s。
+### 问题解决
 
-![image](/images/java-cms-gc-optimizations/1-heap-abnormal.png)
-
-![image](/images/java-cms-gc-optimizations/1-gc-abnormal.png)
-
-然后尝试通过 gc.log 来查看该服务的具体 GC 情况，在登录服务器之后便看到最近一段时间内产生的 gc.log 文件非常大，足足有 310MB。为了方便进一步分析，将该 gc.log 文件下载到了本地，然后对 17:00 - 18:00 时间段内的 GC 情况进行统计，发现在这一个小时之内，该服务共发生了 289 次 Minor GC、764 次 Major GC 和 10 次 Full GC！
-
-![image](/images/java-cms-gc-optimizations/1-gc-log.png)
-
-![image](/images/java-cms-gc-optimizations/1-gc-times.png)
-
-通过对 gc.log 中的 Minor GC 进行分析，发现该服务在使用 ParNew 收集器执行一次 GC 之后，Young Generation 空间内的对象占用量几乎没变化。
-
-![image](/images/java-cms-gc-optimizations/1-gc-minor.png)
-
-通过对 gc.log 中的 Major GC 进行分析，发现该服务在使用 CMS 收集器执行一次 GC 时候，需要 Stop The World 的初始标记和重新标记阶段的耗时已经达到 500ms，并且连续发生两次 Major GC 的间隔时间不到 5s。
-
-![image](/images/java-cms-gc-optimizations/1-gc-major.png)
-
-### 解决方案
-
-在明确问题为流量增加而导致服务不堪重负之后，便通知运维对该服务进行扩容，将分配给该服务的 Heap 空间大小从原先的 1G 扩容至了现在的 4G。在对该服务进行扩容之后 GC 回归正常，接口超时问题也得到了解决。
+在明确问题根因为流量增加而导致应用不堪重负之后，我们紧急配合运维对该应用进行了升配：将 Heap 空间的大小从 1G 扩容至了 4G。在扩容之后，应用 GC 情况已经回归正常（Major GC 从 15opm 降低到了 0opm，Minor GC 从 5opm 降低到了 1opm，每分钟 GC 停顿时间从 20s 降低到了 40ms），接口超时问题也顺利得到解决。
 
 ![image](/images/java-cms-gc-optimizations/1-heap-normal.png)
 
 ![image](/images/java-cms-gc-optimizations/1-gc-normal.png)
 
+### 后续复盘
+
+在问题解决之后的复盘期间，我们还额外详细分析了应用在问题期间的具体 GC 情况。
+
+在登录服务器之后，看到最近一段时间内产生的 gc.log 文件非常之大，足足有 310MB，对 17:00 - 18:00 时间段内的 GC 情况进行统计，发现在这一个小时之内，应用共发生了 289 次 Minor GC、764 次 Major GC 和 10 次 Full GC。
+
+![image](/images/java-cms-gc-optimizations/1-gc-log.png)
+
+![image](/images/java-cms-gc-optimizations/1-gc-times.png)
+
+通过对 gc.log 中的 Minor GC 进行分析，发现应用在使用 ParNew 收集器执行一次 GC 之后，Young Generation 空间内的对象占用量几乎没变化。
+
+![image](/images/java-cms-gc-optimizations/1-gc-minor.png)
+
+通过对 gc.log 中的 Major GC 进行分析，发现应用在使用 CMS 收集器执行一次 GC 时候，需要 Stop The World 的初始标记和重新标记阶段的耗时已经达到 500ms，并且连续发生两次 Major GC 的间隔时间不到 5s。
+
+![image](/images/java-cms-gc-optimizations/1-gc-major.png)
+
 ## 案例二：优化 Minor GC
 
 ### 问题背景
 
-对于一个底层服务的接口，我们期望该接口的调用耗时尽可能短，保证 99.99% 的耗时少于 10ms。在高峰时间段内对该接口的调用耗时进行统计之后，发现 99.9% 的调用耗时在 8ms 左右，但部分偏高的调用耗时均大于 20ms，因此怀疑可能是由于 GC 停顿导致。
+对于一个底层应用的接口，我们期望它的调用耗时尽可能短，最好可以保证 99.99% 的耗时少于 10ms。在高峰时间段内对该接口的调用耗时进行统计之后，却发现 99.9% 的调用耗时在 8ms 左右，但部分偏高的调用耗时均大于 20ms，两者之间存在一个较大的断层，因此怀疑可能是由于应用 GC 停顿导致。
 
 ![image](/images/java-cms-gc-optimizations/2-api-count.png)
 
@@ -94,13 +94,13 @@ CMS 收集器是一种以获取最短停顿时间为目标的增量式（Increme
 
 ### 优化思路
 
-首先在监控后台中看到该服务被分配了 615MB + 76.8MB \* 2 + 1.25GB \* 1024 = 2GB 的 JVM Heap 空间大小，并且在服务运行期间主要发生 Minor GC，该服务在 11:00 - 12:00 时间段内平均每分钟内发生 5 次 Minor GC，每分钟内 GC 停顿的时间大约为 100ms。
+首先在监控后台中看到该应用被分配了 615MB + 76.8MB \* 2 + 1.25GB \* 1024 = 2GB 的 JVM Heap 空间大小，并且在应用运行期间主要发生 Minor GC，该应用在 11:00 - 12:00 时间段内平均每分钟内发生 5 次 Minor GC，每分钟内 GC 停顿的时间大约为 100ms。
 
 ![image](/images/java-cms-gc-optimizations/2-heap-before.png)
 
 ![image](/images/java-cms-gc-optimizations/2-gc-before.png)
 
-然后尝试通过 gc.log 来查看该服务的具体 GC 情况，发现该服务自启动 20 多天以来没有发生过一次 Major GC，但是平均每 10s 左右会发生一次 Minor GC，每次 Minor GC 的耗时大约为 15ms。
+然后尝试通过 gc.log 来查看该应用的具体 GC 情况，发现该应用自启动 20 多天以来没有发生过一次 Major GC，但是平均每 10s 左右会发生一次 Minor GC，每次 Minor GC 的耗时大约为 15ms。
 
 ![image](/images/java-cms-gc-optimizations/2-gc-major.png)
 
@@ -108,7 +108,7 @@ CMS 收集器是一种以获取最短停顿时间为目标的增量式（Increme
 
 ### 优化方案
 
-在对该服务的 GC 情况进行分析之后，考虑到该服务的 Old Generation 空间内的对象占用量十分稳定，并且几乎不会发生 Major GC，于是便配合运维对该服务的 Young Generation 空间与 Old Generation 空间的大小比例进行调整，在保持整个 Heap 空间大小不变的情况下，下通过 `-Xmn${size}` 参数增加了 Young Generation 空间的大小。在对该服务进行 GC 参数优化之后，Young Generation 的执行频率从原先的每分钟 5 次降低至了每分钟 3.5 次，每分钟内 GC 停顿的时间也从原先的 100ms 降低至了 50ms。
+在对该应用的 GC 情况进行分析之后，考虑到该应用的 Old Generation 空间内的对象占用量十分稳定，并且几乎不会发生 Major GC，于是便配合运维对该应用的 Young Generation 空间与 Old Generation 空间的大小比例进行调整，在保持整个 Heap 空间大小不变的情况下，下通过 `-Xmn${size}` 参数增加了 Young Generation 空间的大小。在对该应用进行 GC 参数优化之后，Young Generation 的执行频率从原先的每分钟 5 次降低至了每分钟 3.5 次，每分钟内 GC 停顿的时间也从原先的 100ms 降低至了 50ms。
 
 ![image](/images/java-cms-gc-optimizations/2-gc-after.png)
 
