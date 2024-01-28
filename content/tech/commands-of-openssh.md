@@ -5,6 +5,8 @@ categories: ["编程"]
 tags: ["Linux", "OpenSSH"]
 ---
 
+## 前言
+
 这篇文章记录自己在系统性地学习 OpenSSH 相关命令过程中的一些零碎笔记，SSH 协议不在本篇文章记录的范围之内。<!--more-->
 
 ## ssh

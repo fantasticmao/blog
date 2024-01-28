@@ -5,6 +5,8 @@ categories: ["闲聊"]
 tags: ["Free Talk"]
 ---
 
+## 前言
+
 最近几天打理了荒废很久的博客，从原先的 Hexo 迁移到了 Hugo，添加了 RSS、CDN 以及其它乱七八糟的功能，顺带还给这个博客主题提交了一个 SEO 优化相关的 [Pull Requests](https://github.com/luizdepra/hugo-coder/pull/300)。<!--more-->
 
 整个博客迁移的过程费了挺多时间和精力，所以决定还是写一篇文章，主要记录这个博客构建和部署过程中的一些个性化配置相关内容。

@@ -5,6 +5,8 @@ categories: ["编程"]
 tags: ["Linux", "IO"]
 ---
 
+## 前言
+
 本篇文章记录自己在阅读 [《Unix 环境高级编程》](https://book.douban.com/subject/25900403/) 时候，关于书中谈及的几种 IO 模型的一些笔记。<!--more-->
 
 ## 阻塞 IO
