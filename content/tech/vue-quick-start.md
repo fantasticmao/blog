@@ -1,5 +1,5 @@
 ---
-title: "Vue 初次体验"
+title: "Vue 快速上手"
 date: 2019-12-16T00:00:00+08:00
 categories: ["编程"]
 tags: ["JavaScript", "Vue"]
