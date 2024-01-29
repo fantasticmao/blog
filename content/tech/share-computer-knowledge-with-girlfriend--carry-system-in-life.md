@@ -1,5 +1,5 @@
 ---
-title: "给女朋友科普计算机知识的日常 —— 生活中的进位制"
+title: "和女朋友分享计算机知识的日常 —— 生活中的进位制"
 date: 2021-04-20T15:00:00+08:00
 categories: ["闲聊"]
 tags: ["Free Talk"]
@@ -75,4 +75,4 @@ tags: ["Free Talk"]
 
 ## 系列文章
 
-- [域名和 IP 的关系](/2021/03/24/teach-girlfriend-computer-literacy-domain-names-and-ip/)
+- [域名和 IP 的关系](/tech/share-computer-knowledge-with-girlfriend--domain-names-and-ip)

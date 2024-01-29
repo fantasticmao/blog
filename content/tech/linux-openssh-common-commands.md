@@ -1,5 +1,5 @@
 ---
-title: "OpenSSH 相关命令"
+title: "OpenSSH 常用命令"
 date: 2020-02-21T20:00:00+08:00
 categories: ["编程"]
 tags: ["Linux", "OpenSSH"]
