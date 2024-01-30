@@ -39,7 +39,7 @@ tags: ["Free Talk"]
 
 在对框架的使用流程有所了解之后，这时候就需要开始进行系统的学习了。可以通过阅读一本业界公认的经典书籍，也可以通过阅读开源框架的官方文档，这些都是进阶掌握一个框架的好方法（当然也有其它方法）。在阅读官方文档的时候，会发现自己之前学习的地方有很多纰漏或者不规范的地方，这也是为什么我们需要系统性地学习知识的原因。
 
-大多数官方文档都是英文的，这会让一些同学阅读起来比较费力，包括我也是。但这是不可避免的，自己要尽量去克服这个问题，多花一些时间，多积赞一些词汇量（其实专业词汇也没有几个）。可以随意举例几个官方文档，我觉得是一个合格的 Java 开发者应该有阅读过的：[Spring](https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/)、[MySQL](https://dev.mysql.com/doc/refman/5.7/en/)、[Reids](https://redis.io/)。
+大多数官方文档都是英文的，这会让一些同学阅读起来比较费力，包括我也是。但这是不可避免的，自己要尽量去克服这个问题，多花一些时间，多积赞一些词汇量（其实专业词汇也没有几个）。可以随意举例几篇官方文档，我觉得是一个优秀的 Java 开发者应该有阅读过的：[《Spring Framework Core Technologies》](https://docs.spring.io/spring-framework/reference/core.html)、[《MySQL InnoDB Architecture》](https://dev.mysql.com/doc/refman/8.0/en/innodb-architecture.html)、[《Scale with Redis Cluster》](https://redis.io/docs/management/scaling/)、[《Kafka Design》](https://kafka.apache.org/documentation/#design)。
 
 ## 第四阶段
 

@@ -20,7 +20,7 @@ math: true
 
 一次二分查找的具体过程可以参考下图：
 
-![iamge](/images/binary-search-impl/binary-search.png)
+![binary-search.png](/images/algorithm-binary-search-impl/binary-search.png)
 
 二分查找的最差时间复杂度是 $O(log\ n)$，空间复杂度是 $O(1)$。相比于最差时间复杂度为 $O(n)$ 的 [线性查找（Linear Search）](https://en.wikipedia.org/wiki/Linear_search)，二分查找执行更快、效率更高。相比于为快速查找量身定制的数据结构 [哈希表（Hash Table）](https://en.wikipedia.org/wiki/Hash_table)，二分查找的限制更少、应用更广。
 

@@ -9,38 +9,9 @@ tags: ["Java"]
 
 本篇文章对 JDK8 线程池框架中 ThreadPoolExecutor 类进行源码分析，将会从 ThreadPoolExecutor 工作机制角度分析它在 [状态管理](#状态管理)、[提交任务](#提交任务)、[执行任务](#执行任务)、[回收线程](#回收线程) 和 [拒绝任务](#拒绝任务) 阶段的设计思路和代码实现。线程池框架的介绍和使用不在本篇文章涵盖的范围之内。<!--more-->
 
-ThreadPoolExecutor 的工作机制可以参考我摘记的 [《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor](https://gitbook.fantasticmao.cn/tech/java/jdk/java-bing-fa-bian-cheng-shi-zhan-bi-ji-xian-cheng-chi-de-shi-yong) 篇章，文末有张图可以概览任务在提交至 ThreadPoolExecutor 时的大致流程：
+ThreadPoolExecutor 的工作机制可以参考我摘记的 [《Java 并发编程实战》笔记 - 线程池的使用 - 配置 ThreadPoolExecutor](https://gitbook.fantasticmao.cn/tech/java/jdk/java-bing-fa-bian-cheng-shi-zhan-bi-ji-xian-cheng-chi-de-shi-yong) 篇章。
 
-```text
-         +------------------------------------------------------------------------+
-runnbale |                                              +-----------------------+ |
--------->|                                 True         | +------+ +------+     | |
-         |--> workerCount < corePoolSize? ------------->| |Worker| |Worker| ... | |
-runnbale |                 |               new Worker() | +------+ +------+     | |
--------->|           False |                            +-----------------------+ |
-         |                 |                               |   |   |         ^    |
-runnbale |                 |                            workQueue.take       |    |
--------->|                 |                               |   |   |         |    |
-         |                 |                               v   v   v         |    |
-         |                 |                 +---------------------------+   |    |
-         |                 v         True    | +--------+ +--------+     |   |    |
-         |         workQueue.offer? -------->| |Runnable| |Runnable| ... |   |    |
-         |                 |                 | +--------+ +--------+     |   |    |
-         |           False |                 +---------------------------+   |    |
-         |                 |                      BlockingQueue<Runnable>    |    |
-         |                 |                                                 |    |
-         |                 V                    True                         |    |
-         |      workerCount < maximumPoolSize? ------------------------------+    |
-         |                 |                    new Worker()                      |
-         |           False |                                                      |
-         |                 |                                                      |
-         |                 v                                                      |
-         |        +-------------+------------+--------------+                     |
-         |        |             |            |              |                     |
-         |        v             v            v              v                     |
-         |  CallerRunsPolicy  AbortPolicy  DiscardPolicy  DiscardOldestPolicy     |
-         +------------------------------------------------------------------------+
-```
+![threadpoolexecutor-workflow.png](/images/java-source-code-in-threadpoolexecutor/threadpoolexecutor-workflow.png)
 
 ## 状态管理
 
@@ -83,15 +54,7 @@ runState 表示线程池在生命周期内的运行状态，其初始值为 RUNN
 | TIDYING    | 010  | 所有任务已经终止，workerCount 已经为零，准备调用 `terminated()` 钩子方法 |
 | TERMINATED | 011  | 调用 `terminated()` 钩子方法已经完成                                     |
 
-```text
-RUNNING  SHUTDOWN  STOP  TIDYING  TERMINATED
-   |------->| 调用 shutdown()
-   |--------------->| 调用 shutdownNow()
-            |------>| 调用 shutdownNow()
-            |-------------->| 当池中和队列中的任务都为空
-                    |------>| 当池中的任务为空
-                            |-------->| 调用 terminated() 已经完成
-```
+![threadpoolexecutor-state-machine.png](/images/java-source-code-in-threadpoolexecutor/threadpoolexecutor-state-machine.png)
 
 将 runState 设计成上述五个枚举值的原因在于 ThreadPoolExecutor 内部的工作机制。首先，ThreadPoolExecutor 包含了一个用于缓冲任务执行的 workQueue，所以在关闭线程池的时候也需要考虑到 workQueue 中的线程状态（是否需要中断线程）。此外，ThreadPoolExecutor 还提供了一些待实现的扩展方法：`beforeExecute(Thread, Runnable)`、`afterExecute(Runnable, Throwable)`、`terminated()`，因此这些方法的执行进度也需要被考虑在线程池的运行状态之内。
 

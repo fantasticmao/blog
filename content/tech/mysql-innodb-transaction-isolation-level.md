@@ -23,7 +23,7 @@ information_schema 数据库的 innodb_trx 表存储了 InnoDB 内部当前正�
 
 在下图的示例中，事务当前的执行状态 `trx_state` 是 RUNNING，事务的开始时间是 `trx_started` 是 2020-09-10 17:35:35，事务当前正在执行的 SQL 语句 `trx_query` 是 SELECT SLEEP(5)，事务当前的隔离级别 `trx_isolation_level` 是 REPEATABLE READ。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/information_schema-innodb_trx.png)
+![image](/images/mysql-innodb-transaction-isolation-level/information_schema-innodb_trx.png)
 
 performance_schema 数据库的 data_locks 表存储了每个事务中的加锁相关信息，其中的一些重要字段定义如下：
 
@@ -36,7 +36,7 @@ performance_schema 数据库的 data_locks 表存储了每个事务中的加锁�
 
 在下图的示例中，ID 为 271842 的事务在 t 表上持有一个 ID 为 140668958212240:1966:140669201491008 的意向排它锁和一个在主键索引上的 ID 为 140668958212240:868:4:2:140669205601312 的记录锁。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/performance_schema-data_locks.png)
+![image](/images/mysql-innodb-transaction-isolation-level/performance_schema-data_locks.png)
 
 performance_schema 数据库的 data_lock_waits 表存储了被阻塞的事务之间的等待锁相关信息，其中的一些重要字段定义如下：
 
@@ -47,7 +47,7 @@ performance_schema 数据库的 data_lock_waits 表存储了被阻塞的事务�
 
 在下图的示例中，ID 为 271844 的事务请求获取 ID 为 140668958213080:868:4:2:140669205682208 的锁，并且被 ID 为 271843 事务中的 ID 为 140668958212240:868:4:2:140669205601312 的锁所阻塞。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/performance_schema-data_lock_waits.png)
+![image](/images/mysql-innodb-transaction-isolation-level/performance_schema-data_lock_waits.png)
 
 ## 隔离级别实践
 
@@ -57,7 +57,7 @@ MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不�
 
 在以下所有案例中，演示表的结构和初始数据都如下图中所示，其中 id 字段为自增主键，a 字段具有唯一索引，b 字段具有普通索引，c 字段不具有索引：
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/init-table-and-data.png)
+![image](/images/mysql-innodb-transaction-isolation-level/init-table-and-data.png)
 
 ### READ UNCOMMITTED
 
@@ -65,7 +65,7 @@ MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不�
 
 在下图的示例中，左半图中的事务在执行第二个 SELECT 语句的时候，便可以读取到右半图中的事务所更改的尚未提交的数据。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/read-uncommitted.png)
+![image](/images/mysql-innodb-transaction-isolation-level/read-uncommitted.png)
 
 ### READ COMMITTED
 
@@ -73,15 +73,15 @@ MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不�
 
 在下图的示例中，左半图中的事务在执行第二个 SELECT 语句的时候，不会读取到右半图中的事务所更改的尚未提交的数据，但是当左半图中的事务在执行第三个 SELECT 语句的时候，便可以读取到右半图中的事务所更改的已经提交的数据。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/read-committed.png)
+![image](/images/mysql-innodb-transaction-isolation-level/read-committed.png)
 
 在 READ COMMITTED 隔离级别下，还需要注意的是，对于锁定读取（带有 FOR UPDATE 或者 FOR SHARE 的 SELECT）、UPDATE、DELETE 语句，InnoDB 只会使用记录锁，而不会使用间隙锁或者后键锁，因此其它事务可以在被锁定的记录范围内随意地插入新的记录。这种问题被称为 **幻行（Phantom Rows）**。
 
 在下图的示例中，左半图中的事务使用了 SELECT ... FOR UPDATE 语句来锁定读取 a ∈ (25, +∞) 范围内的记录，然而该事务在二级索引上加锁的模式 `LOCK_MODE` 却是 X 和 REC_NOT_GAP，这说明了该事务并没有使用间隙锁或者后键锁来锁定 a ∈ (25, +∞) 区间，因此此时右半图中的事务便可以在 a ∈ (25, +∞) 范围内任意地执行插入操作（但是不能执行修改或者删除操作，因为现有的数据已经被锁定了），并且不会被阻塞。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/read-committed-phantom-rows-1.png)
+![image](/images/mysql-innodb-transaction-isolation-level/read-committed-phantom-rows-1.png)
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/read-committed-phantom-rows-2.png)
+![image](/images/mysql-innodb-transaction-isolation-level/read-committed-phantom-rows-2.png)
 
 ### REPEATABLE READ
 
@@ -89,7 +89,7 @@ MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不�
 
 在下图的示例中，左半图中的事务在执行第二个和第三个 SELECT 语句的时候，均不会读取到右半图中的事务所更改的数据，但是当左半图中的事务在执行 UPDATE 语句的时候，便会受到右半图中的事务所更改的数据带来的影响。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/repeatable-read.png)
+![image](/images/mysql-innodb-transaction-isolation-level/repeatable-read.png)
 
 在 READ COMMITTED 隔离级别下，还需要注意的是，对于锁定读取（带有 FOR UPDATE 或者 FOR SHARE 的 SELECT）、UPDATE、DELETE 语句，InnoDB 使用锁的行为是根据查询语句的具体条件来决定的：
 
@@ -98,9 +98,9 @@ MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不�
 
 在下图的示例中，左半图中的事务使用了 SELECT ... FOR UPDATE 语句来锁定读取 a ∈ (25, +∞) 范围内的记录，并且该事务在二级索引上加锁的模式 `LOCK_MODE` 是 X，这说明了该事务使用了间隙锁或者后键锁来锁定 a ∈ (25, +∞) 区间，因此此时右半图中的事务在 a ∈ (25, +∞) 范围内执行的插入操作会被阻塞。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/repeatable-read-phantom-reads-1.png)
+![image](/images/mysql-innodb-transaction-isolation-level/repeatable-read-phantom-reads-1.png)
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/repeatable-read-phantom-reads-2.png)
+![image](/images/mysql-innodb-transaction-isolation-level/repeatable-read-phantom-reads-2.png)
 
 ### SERIALIZABLE
 
@@ -108,7 +108,7 @@ MySQL 在内部通过不同的加锁策略来实现不同的隔离级别，不�
 
 在下图的示例中，左半图中的事务在执行普通的 SELECT 语句的时候，会锁定查询所涉及的记录，并且右半图中的事务在更改该记录时会被阻塞。
 
-![image](/images/mysql-innodb-transaction-isolation-level-practice/serializable.png)
+![image](/images/mysql-innodb-transaction-isolation-level/serializable.png)
 
 ## 参考资料
 

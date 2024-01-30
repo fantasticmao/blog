@@ -75,4 +75,4 @@ tags: ["Free Talk"]
 
 ## 系列文章
 
-- [域名和 IP 的关系](/tech/share-computer-knowledge-with-girlfriend--domain-names-and-ip)
+- [域名和 IP 的关系](/tech/share-computer-knowledge-with-girlfriend--domain-names-and-ip/)
