@@ -37,7 +37,7 @@ Unix 系统中的文件 IO 函数 `open`、`read`、`write`，以及标准 IO �
 2. 远程机器上的 telnetd 守护进程会将用户的输入发送给 shell，并且会将 shell 的输出写回到网络连接，然后发送给本地的 telnet 命令；
 3. 本地机器上的 telnet 命令从网络连接中读取 shell 的输出，将所读的数据写回到终端（标准输出）。
 
-![image](/images/io-models-mentioned-in-apue/telnet.svg)
+![image](/images/read-io-models-in-apue/telnet.svg)
 
 从 telnet 命令的工作机制可以得知，telnet 命令在工作时会有两个输入和两个输出。在实现 telnet 命令时，对于 IO 模型的选择应该考虑以下几点：
 

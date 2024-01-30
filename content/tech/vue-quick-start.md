@@ -108,19 +108,19 @@ Vue 在内部通过调用 `Object.defineProperty()` 把 `data` 定义的 **数�
 
 ### 如何查看 Vue 组件
 
-![image](/images/first-time-using-vue/1.png)
+![image](/images/vue-quick-start/1.png)
 
 ### 如何查看 Vuex 管理的状态
 
-![image](/images/first-time-using-vue/2.png)
+![image](/images/vue-quick-start/2.png)
 
 ### 如何查看 Vue 自定义事件
 
-![image](/images/first-time-using-vue/3.png)
+![image](/images/vue-quick-start/3.png)
 
 ### 如何查看 Vue Router 路由
 
-![image](/images/first-time-using-vue/4.png)
+![image](/images/vue-quick-start/4.png)
 
 ## Vue Router 相关
 

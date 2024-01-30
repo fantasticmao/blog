@@ -103,7 +103,7 @@ native methods 通过返回值将方法的执行结果返回给调用程序。
 
 Java native methods 与 C native libraries 的整体交互流程如下图所示，下例通过实现一个计算两数之合的 native method `sum(int, int)` 来作具体演示。
 
-![1.svg](/images/java-jni-practice/1.svg)
+![1.svg](/images/java-jni-quick-start/1.svg)
 
 ### 定义 native method
 
@@ -189,7 +189,7 @@ JNIEXPORT jint JNICALL Java_cn_fantasticmao_jni_SumNative_sum
 
 最后在根目录执行 `java cn.fantasticmao.jni.SumNative` 命令，便可以验证 SumNative.java 通过调用了基于 C 实现的 libsum.dylib，成功得到了 `1 + 2 = 3` 的执行结果。
 
-![2.png](/images/java-jni-practice/2.png)
+![2.png](/images/java-jni-quick-start/2.png)
 
 ## 在 OpenJDK 中查找 JDK native libraries
 
@@ -198,7 +198,7 @@ JNIEXPORT jint JNICALL Java_cn_fantasticmao_jni_SumNative_sum
 1. 由于 `intern()` 没有被重载，所以 `java.lang.String#intern()` 在 native libraries 中对应的方法名称为固定字符串：`Java_java_lang_String_intern`；
 2. 使用 `find` 命令和 `grep` 命令，查找源码工程目录下内容包含字符串 `Java_java_lang_String_intern` 的所有文件：`find . -name '*.c' | xargs grep -n 'Java_java_lang_String_intern'`;
 
-   ![3.png](/images/java-jni-practice/3.png)
+   ![3.png](/images/java-jni-quick-start/3.png)
 
 3. 依据查询结果可知，`java.lang.String#intern()` 对应的实现源码文件是 [`src/share/native/java/lang/String.c`](http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/file/72a1a252527b/src/share/native/java/lang/String.c)。
 

@@ -11,16 +11,16 @@ tags: ["MySQL"]
 
 ## 演讲稿
 
-浏览器内在线查看：<a href="/images/indexes-from-a-data-structure-perspective/从数据结构角度看索引.pdf" target="_blank">从数据结构角度看索引.pdf</a>。
+浏览器内在线查看：<a href="/images/database-learn-index-from-data-structure/从数据结构角度看索引.pdf" target="_blank">从数据结构角度看索引.pdf</a>。
 
 ## B-Tree 插入元素
 
-<p><video src="/images/indexes-from-a-data-structure-perspective/B-Tree-Insert.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
+<p><video src="/images/database-learn-index-from-data-structure/B-Tree-Insert.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
 
 ## B-Tree 删除元素
 
-<p><video src="/images/indexes-from-a-data-structure-perspective/B-Tree-Remove.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
+<p><video src="/images/database-learn-index-from-data-structure/B-Tree-Remove.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
 
 ## B-Tree 查找元素
 
-<p><video src="/images/indexes-from-a-data-structure-perspective/B-Tree-Search.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
+<p><video src="/images/database-learn-index-from-data-structure/B-Tree-Search.mov" controls="controls" width="100%">您的浏览器不支持 video 标签</video></p>
