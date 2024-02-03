@@ -1,3 +1,8 @@
+---
+title: "首页"
+description: "FantasticMao 的个人博客"
+---
+
 你好，我是 _fantasticmao_，直译中文为「极好的毛」，这是我在网络上的惯用昵称。这个昵称的由来非常简单，一是我的中学英语老师说 _fantastic_ 是个高级词汇，二是我的姓氏为 _mao_。
 
 我是一名软件工程师，以写 Java 为主，也对 C、Go、JavaScript、Python 感兴趣。
