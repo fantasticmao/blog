@@ -31,7 +31,7 @@ googleAnalytics = "G-FBHKYP5SYE"
 
 [params.utterances]
     repo = "fantasticmao/blog"
-    issueTerm = "pathname"
+    issueTerm = "og:title"
     theme = "github-light"
 
 [[params.social]]
