@@ -25,7 +25,7 @@ googleAnalytics = "G-FBHKYP5SYE"
 [params]
     author = "fantasticmao"
     description = "FantasticMao 个人博客"
-    icpRecord = "浙 ICP 备 17009730 号"
+    icpRecord = "浙ICP备17009730号"
 
     customCSS = ["css/custom.css"]
 
