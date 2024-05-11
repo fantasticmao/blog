@@ -61,18 +61,10 @@ googleAnalytics = "G-FBHKYP5SYE"
     weight = 1
     url = "/"
 [[menus.main]]
-    name = "编程"
+    name = "编程技术"
     weight = 2
     url = "/tech"
 [[menus.main]]
-    name = "随笔"
+    name = "生活随笔"
     weight = 3
-    url = "/essay"
-[[menus.main]]
-    name = "项目"
-    weight = 4
-    url = "/project"
-[[menus.main]]
-    name = "收藏"
-    weight = 5
-    url = "/collect"
+    url = "/life"
