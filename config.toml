@@ -68,3 +68,7 @@ googleAnalytics = "G-FBHKYP5SYE"
     name = "生活随笔"
     weight = 3
     url = "/life"
+[[menus.main]]
+    name = "关于我"
+    weight = 4
+    url = "/about"
