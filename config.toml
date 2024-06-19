@@ -34,27 +34,6 @@ googleAnalytics = "G-FBHKYP5SYE"
     issueTerm = "og:title"
     theme = "github-light"
 
-[[params.social]]
-    name = "GitHub"
-    weight = 1
-    url = "https://github.com/fantasticmao"
-[[params.social]]
-    name = "Twitter"
-    weight = 2
-    url = "https://twitter.com/fantasticmao"
-[[params.social]]
-    name = "Instagram"
-    weight = 3
-    url = "https://www.instagram.com/wonderfulmao/"
-[[params.social]]
-    name = "Steam"
-    weight = 4
-    url = "https://steamcommunity.com/id/fantasticmao/"
-[[params.social]]
-    name = "RSS 订阅"
-    weight = 5
-    url = "/index.xml"
-
 [menus]
 [[menus.main]]
     name = "首页"
