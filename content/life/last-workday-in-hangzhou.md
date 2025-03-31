@@ -14,4 +14,4 @@ description: "早上通勤，没再去捎顺路的同事，到公司比以往提
 
 心里默默，也和这眨眼三年的经历，说道再见，说道安好。
 
-![sitting-in-my-car.png](/images/last-working-day-in-hangzhou/sitting-in-my-car.png)
+![sitting-in-my-car.png](/images/last-workday-in-hangzhou/sitting-in-my-car.png)

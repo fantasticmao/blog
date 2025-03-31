@@ -12,4 +12,4 @@ description: "今日午饭，同事不知道吃啥，就干脆学我，也点了
 
 如此接受他人照顾的事情，已经好久没有发生了。仔细一想，距离上次还有这种暖心感受的时候，还是在大二寒假回家，和妈妈说想吃青蟹面那次吧。
 
-![rice-soup.png](/images/thanks-to-my-colleague/rice-soup.png)
+![rice-soup.png](/images/kindness-from-my-colleague/rice-soup.png)

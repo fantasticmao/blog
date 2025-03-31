@@ -10,7 +10,7 @@ description: "收藏生活之中自己所珍视的物件，其中的大多数，
 
 工作之后，觉得生活平淡无味，便留了两年的及肩长发。但在新鲜感褪去之后，又觉得洗护和打理着实麻烦，最终剃去之时，拜托理发师傅剪下了这完整的一束，以为青春留作纪念。
 
-![hair.png](/images/my-collect/hair.png)
+![hair.png](/images/my-things/hair.png)
 
 ## 侄女的画
 
@@ -18,7 +18,7 @@ description: "收藏生活之中自己所珍视的物件，其中的大多数，
 
 画中的内容略显抽象，似乎是一辆停在乡间小路上装满货物的拖拉机，应当是她某天的外出写生之作。
 
-![tractor.png](/images/my-collect/tractor.png)
+![tractor.png](/images/my-things/tractor.png)
 
 ## 大白兔奶糖
 
@@ -26,7 +26,7 @@ description: "收藏生活之中自己所珍视的物件，其中的大多数，
 
 之后的四年时间里，与这位女生相依相恋，成婚成家，这糖可以算是我俩最初的定情信物。
 
-![rabbit-candy.png](/images/my-collect/rabbit-candy.png)
+![rabbit-candy.png](/images/my-things/rabbit-candy.png)
 
 ## 围巾
 
@@ -34,13 +34,13 @@ description: "收藏生活之中自己所珍视的物件，其中的大多数，
 
 围巾宽厚舒适，不过我担心过多使用之后会逐渐变脏，就一直没舍得正式戴过。
 
-![scarf.png](/images/my-collect/scarf.png)
+![scarf.png](/images/my-things/scarf.png)
 
 ## 牙罐
 
 初一入学时候，学校发的牙罐，用来在刷牙时候接水漱口用的，上面印有学校名称以及全校唯一的数字编号，体积大得惊人，甚至可以用来泡泡面。
 
-![wash-cup.png](/images/my-collect/wash-cup.png)
+![wash-cup.png](/images/my-things/wash-cup.png)
 
 ## 鹅软石
 
@@ -48,4 +48,4 @@ description: "收藏生活之中自己所珍视的物件，其中的大多数，
 
 这颗鹅软石整体圆润光滑，背部略微硌手，虽然看着没啥特色，但却代表了那位同学对我的深厚情谊。石头一直被我留在身边，保存至今，完好如初。
 
-![cobblestone.png](/images/my-collect/cobblestone.png)
+![cobblestone.png](/images/my-things/cobblestone.png)
