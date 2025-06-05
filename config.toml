@@ -1,5 +1,5 @@
 baseURL = "https://blog.fantasticmao.cn"
-title = "FantasticMao 的博客"
+title = "FantasticMao"
 theme = "momo"
 
 languageCode = "zh-cn"
