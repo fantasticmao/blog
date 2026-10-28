@@ -2,8 +2,8 @@ baseURL = "https://blog.fantasticmao.cn"
 title = "FantasticMao"
 theme = "momo"
 
-languageCode = "zh-cn"
-defaultContentLanguage = "zh-cn"
+locale = "zh-hans"
+defaultContentLanguage = "zh-hans"
 publishDir = "docs"
 
 enableEmoji = true
