@@ -61,7 +61,7 @@ jobs:
           password: ${{ secrets.ECS_PASSWORD }}
           port: ${{ secrets.ECS_PORT }}
           source: ${{ needs.build.outputs.release_id }}.tar.gz
-          target: /opt/maomao/blog/releases/
+          target: /opt/maomao/blog/artifacts/
       - name: Deploy
         uses: appleboy/ssh-action@v1
         with:
