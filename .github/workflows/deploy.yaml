@@ -1,0 +1,54 @@
+name: Hugo Blog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    name: Continuous Integration and Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+      - name: Load .env
+        run: grep -v '^#' .env | grep -v '^$' >> "${GITHUB_ENV}"
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+      - name: Hugo Build
+        run: |
+          hugo version
+          hugo --cleanDestinationDir --destination public
+      - name: Validate
+        run: |
+          test -f public/index.html
+          test -f public/sitemap.xml
+      - name: Package
+        run: |
+          RELEASE_ID="${GITHUB_RUN_NUMBER}-${GITHUB_SHA::8}"
+          echo "RELEASE_ID=${RELEASE_ID}" >> "${GITHUB_ENV}"
+          tar -czf ${RELEASE_ID}.tar.gz -C public .
+      - name: Upload
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.ECS_HOST }}
+          username: ${{ secrets.ECS_USERNAME }}
+          password: ${{ secrets.ECS_PASSWORD }}
+          port: ${{ secrets.ECS_PORT }}
+          source: ${{ env.RELEASE_ID }}.tar.gz
+          target: /opt/maomao/blog/
+      - name: Deploy
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.ECS_HOST }}
+          username: ${{ secrets.ECS_USERNAME }}
+          password: ${{ secrets.ECS_PASSWORD }}
+          port: ${{ secrets.ECS_PORT }}
+          script: /opt/maomao/blog/deploy.sh ${{ env.RELEASE_ID }}
+      - name: Health check
+        run: curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-connrefused 'https://blog.fantasticmao.cn'
