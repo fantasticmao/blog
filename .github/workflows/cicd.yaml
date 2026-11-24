@@ -6,9 +6,11 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
-    name: Continuous Integration and Deployment
+  build:
+    name: Continuous Integration
     runs-on: ubuntu-latest
+    outputs:
+      release_id: ${{ steps.package.outputs.release_id }}
     steps:
       - name: Checkout Project
         uses: actions/checkout@v6
@@ -29,10 +31,28 @@ jobs:
           test -f public/index.html
           test -f public/sitemap.xml
       - name: Package
+        id: package
         run: |
           RELEASE_ID="${GITHUB_RUN_NUMBER}-${GITHUB_SHA::8}"
-          echo "RELEASE_ID=${RELEASE_ID}" >> "${GITHUB_ENV}"
-          tar -czf ${RELEASE_ID}.tar.gz -C public .
+          echo "release_id=${RELEASE_ID}" >> "${GITHUB_OUTPUT}"
+          tar -czf "${RELEASE_ID}.tar.gz" -C public .
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-${{ steps.package.outputs.release_id }}
+          path: ${{ steps.package.outputs.release_id }}.tar.gz
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy:
+    name: Continuous Deployment
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: site-${{ needs.build.outputs.release_id }}
       - name: Upload
         uses: appleboy/scp-action@v1
         with:
@@ -40,8 +60,8 @@ jobs:
           username: ${{ secrets.ECS_USERNAME }}
           password: ${{ secrets.ECS_PASSWORD }}
           port: ${{ secrets.ECS_PORT }}
-          source: ${{ env.RELEASE_ID }}.tar.gz
-          target: /opt/maomao/blog/
+          source: ${{ needs.build.outputs.release_id }}.tar.gz
+          target: /opt/maomao/blog/releases/
       - name: Deploy
         uses: appleboy/ssh-action@v1
         with:
@@ -49,6 +69,6 @@ jobs:
           username: ${{ secrets.ECS_USERNAME }}
           password: ${{ secrets.ECS_PASSWORD }}
           port: ${{ secrets.ECS_PORT }}
-          script: /opt/maomao/blog/deploy.sh ${{ env.RELEASE_ID }}
+          script: /opt/maomao/blog/deploy.sh ${{ needs.build.outputs.release_id }}
       - name: Health check
         run: curl --fail --silent --show-error --retry 5 --retry-delay 3 --retry-connrefused 'https://blog.fantasticmao.cn'
